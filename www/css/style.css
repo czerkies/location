@@ -1,0 +1,63 @@
+*{
+  box-sizing:border-box;
+  font-family:helvetica, arial;
+}
+body{
+  width:100%;
+  margin:0 auto;
+  float:left;
+}
+#nav{
+  height:100px;
+  position:fixed;
+  border-bottom:1px solid #888;
+  background:rgba(255, 255, 255, 0.9);
+  width:100%;
+}
+ul{
+  width:960px;
+  margin:auto;
+}
+ul li{
+  list-style:square;
+  float:left;
+  margin:10px;
+}
+#cont {
+  width:960px;
+  margin:100px auto 0;
+}
+footer {
+  width:960px;
+  margin:50px auto;
+  font-size:14px;
+}
+table {
+  width:100%;
+}
+table.affichageSalles ,
+table.affichageSalles td,
+table.panier,
+table.panier td,
+table.panier th{
+  border:1px solid #444;
+}
+.gestion_produit_afficher table,
+.gestion_produit_afficher table td, {
+  border:1px solid #444;
+}
+form {
+  width:100%;
+  float:left;
+}
+img {
+  width:250px;
+}
+
+.gestion_produit_modifier{
+  margin:50px 0;
+}
+.menu_admin {
+  float:left;
+  width:100%;
+}
