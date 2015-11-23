@@ -34,7 +34,7 @@
     <?php } ?>
     <?php if($afficher){ ?>
       <div class="gestion_produit_afficher">
-        <table>
+        <table border="1">
           <thead>
             <tr>
               <th>Produit</th>
@@ -54,7 +54,7 @@
               </th>
               <th>État</th>
               <th>Modifier</th>
-              <th>Supprimer<th>
+              <th>Supprimer</th>
             </tr>
           </thead>
           <tbody>

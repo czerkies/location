@@ -14,11 +14,13 @@
 </div>
 <div id="details_avis">
   <h2>Avis</h2>
-  <?php while ($donnees = $affichageAvis->fetch(PDO::FETCH_ASSOC)) {
-    echo $donnees['commentaire'].'<br>';
-    echo $donnees['prenom'];
-    echo "<hr>";
-  } ?>
+  <?php while ($donnees = $affichageAvis->fetch(PDO::FETCH_ASSOC)) { ?>
+    <div class="un_avis">
+      <p class="un_avis_note"><?= $donnees['note']; ?>/10</p>
+      <p class="un_avis_commentaire"><?= $donnees['commentaire']; ?></p>
+      <p class="un_avis_prenom">Posté par <?= $donnees['prenom']; ?> le <?= $donnees['date']; ?>.</p>
+    <div>
+  <?php } ?>
   <?php
   if($userConnect){
     if($form){
@@ -42,6 +44,6 @@
     <?php } ?>
   </form>
 </div>
-<div id="dateils_sugg">
+<div id="details_sugg">
 <h2>Autres suggestion</h2>
 </div>

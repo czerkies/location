@@ -6,7 +6,8 @@ class modelesAvis extends modelesSuper {
   public function recuperationAvisSalle($id_salle){
 
     $recupById = $this->connect_central_bdd();
-    $avis = $recupById->query("SELECT a.*, m.prenom
+    $avis = $recupById->query("SELECT a.commentaire, a.note,
+      DATE_FORMAT(a.date, '%d %M %Y') AS date, m.prenom
       FROM avis a, membre m
       WHERE a.id_membre = m.id_membre
       AND a.id_salle = $id_salle
