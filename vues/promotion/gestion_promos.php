@@ -40,6 +40,15 @@
           </tbody>
         </table>
       </div>
+      <?php if($dialogue) { ?>
+      <div class="dialogue">
+        <p>
+          Ce code promo est associés à des produits,<br>
+          Êtes-vous sur de vouloir le supprimer ?<br>
+          <a href="routeur.php?controleurs=promotion&action=afficherPromotion&confirm=oui">Oui</a> | <a href="routeur.php?controleurs=promotion&action=afficherPromotion">Non</a>
+        </p>
+      </div>
+      <?php } ?>
     <?php } ?>
   </ul>
 </div>

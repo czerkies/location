@@ -67,6 +67,7 @@ class controleursPromotion extends controleursSuper {
     $afficher = FALSE;
     $ajouter = FALSE;
     $donnees = NULL;
+    $dialogue = FALSE;
 
     if($userConnectAdmin){
 
@@ -79,9 +80,26 @@ class controleursPromotion extends controleursSuper {
 
         $id_promo = htmlentities($_GET['supprimer']);
 
-        $bdd->SuppPromo($id_promo);
-        $msg .= "Votre code promo a bien été supprimé.";
+        $confirmSiProduit = $bdd->VerifPromoProduit($id_promo);
+        $confirmSiProduit->fetchAll(PDO::FETCH_ASSOC);
 
+        if($confirmSiProduit->rowCount() === 0){
+
+          $bdd->SuppPromo($id_promo);
+          $msg .= "Votre code promo a bien été supprimé.";
+
+        } else {
+
+          $dialogue = TRUE;
+
+          if(isset($_GET['confirm']) && !empty($_GET['confirm']) && $_GET['confirm'] === 'oui'){
+
+            $bdd->SuppPromo($id_promo);
+            $msg .= "Votre code promo a bien été supprimé.";
+            $dialogue = FALSE;
+
+          }
+        }
       }
 
       $affichagePromosAdmin = $bdd->affichageCodePromo();
@@ -89,7 +107,7 @@ class controleursPromotion extends controleursSuper {
 
     }
 
-    $this->Render('../vues/promotion/gestion_promos.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'afficher' => $afficher, 'donnees' => $donnees));
+    $this->Render('../vues/promotion/gestion_promos.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'afficher' => $afficher, 'donnees' => $donnees, 'dialogue' => $dialogue));
 
   }
 
