@@ -10,6 +10,7 @@
   <?= $ProduitIDSalle['adresse'].' - '.$ProduitIDSalle['cp'].' - '.$ProduitIDSalle['ville'].' <br> '.$ProduitIDSalle['pays'];?>
   <img src="<?= $ProduitIDSalle['photo'] ?>" alt="<?= $ProduitIDSalle['titre']; ?>">
   Prix : <?= $ProduitIDSalle['prix'] = $ProduitIDSalle['prix'] * 1.2; ?> € TTC.
+  Date : Du <?= $ProduitIDSalle['date_arrivee']; ?> au <?= $ProduitIDSalle['date_depart']; ?>.
 
 </div>
 <div id="details_avis">
@@ -45,5 +46,12 @@
   </form>
 </div>
 <div id="details_sugg">
-<h2>Autres suggestion</h2>
+  <h2>Autres suggestion</h2>
+  <?php foreach ($suggestions as $value) { ?>
+    <div class="suggestion">
+      <?= $value['titre']; ?>
+      <?= $value['ville']; ?>
+      <?= $value['date_arrivee']; ?>
+    </div>
+  <?php } ?>
 </div>

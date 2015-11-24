@@ -143,4 +143,24 @@ class modelesProduit extends modelesSuper {
 
   }
 
+  // ********** Affichage Suggestion sur un Détail Produit ********** //
+  public function searchSuggestionProduit($id_produit, $ville, $date){
+
+    $pdo = $this->connect_central_bdd();
+
+    $recherche = $pdo->query("SELECT s.*,
+      DATE_FORMAT(p.date_arrivee, '%d/%m/%Y %H:%i') AS date_arrivee,
+      DATE_FORMAT(p.date_depart, '%d/%m/%Y %H:%i') AS date_depart,
+      p.prix, p.id_produit, p.etat, p.id_promo
+      FROM produit p, salle s
+      WHERE s.id_salle = p.id_salle
+      AND id_produit != $id_produit
+      AND s.ville = '$ville'
+      OR date_arrivee = '$date'
+    ");
+
+    return $recherche;
+
+  }
+
 }

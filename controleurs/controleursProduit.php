@@ -260,7 +260,7 @@ class controleursProduit extends controleursSuper {
 
   }
 
-  // ********** Page d'affichage réservation d'un produit ********** //
+  // ********** Page d'affichage réservation détail d'un produit ********** //
   public function reservationDetails(){
 
     session_start();
@@ -319,7 +319,14 @@ class controleursProduit extends controleursSuper {
       }
     }
 
-    $this->Render('../vues/produit/reservation_details.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form));
+    // Traitement des suggestions par produit
+    $suggestionsVille = $ProduitIDSalle['ville'];
+    $suggestionsDate = $ProduitIDSalle['date_arrivee'];
+
+    $suggestionProduits = $modProduit->searchSuggestionProduit($id_produit, $suggestionsVille, $suggestionsDate);
+    $suggestions = $suggestionProduits->fetchAll(PDO::FETCH_ASSOC);
+
+    $this->Render('../vues/produit/reservation_details.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));
 
   }
 
