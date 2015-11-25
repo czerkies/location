@@ -108,15 +108,16 @@ class controleursProduit extends controleursSuper {
 
     $msg = '';
 
+    $pdo = new modelesSalles();
+    $listePromo = new modelesPromotion();
+
     if($userConnectAdmin){
 
       $afficher = (isset($_GET['action']) && ($_GET['action']) == 'afficherProduits') ? TRUE : FALSE;
       $ajouter = (isset($_GET['action']) && ($_GET['action']) == 'ajouterProduits') ? TRUE : FALSE;
 
-      $pdo = new modelesSalles();
       $affichageSalles = $pdo->affichageSalles();
 
-      $listePromo = new modelesPromotion();
       $affichagePromo = $listePromo->affichageCodePromo();
 
       if($_POST){
@@ -241,7 +242,7 @@ class controleursProduit extends controleursSuper {
                 $modifProduit = new modelesProduit();
                 $modifProduit->updateProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo, $id_produit);
 
-                $msg .= 'Le produit a bien été ajouté.';
+                $msg .= 'Le produit a bien été modifié.';
 
                 $affichageProduitsAdmin = $pdo->affichageProduitsAdmin();
 
@@ -320,10 +321,7 @@ class controleursProduit extends controleursSuper {
     }
 
     // Traitement des suggestions par produit
-    $suggestionsVille = $ProduitIDSalle['ville'];
-    $suggestionsDate = $ProduitIDSalle['date_arrivee'];
-
-    $suggestionProduits = $modProduit->searchSuggestionProduit($id_produit, $suggestionsVille, $suggestionsDate);
+    $suggestionProduits = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);
     $suggestions = $suggestionProduits->fetchAll(PDO::FETCH_ASSOC);
 
     $this->Render('../vues/produit/reservation_details.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));

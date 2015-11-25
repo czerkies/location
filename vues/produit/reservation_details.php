@@ -51,7 +51,7 @@
     <div class="suggestion">
       <?= $value['titre']; ?>
       <?= $value['ville']; ?>
-      <?= $value['date_arrivee']; ?>
+      <?= $value['date_arrivee']; ?> | <?= $value['date_depart']; ?>
     </div>
   <?php } ?>
 </div>
