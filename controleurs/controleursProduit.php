@@ -349,7 +349,7 @@ class controleursProduit extends controleursSuper {
         $produitPanier = new modelesProduit();
         $data = $produitPanier->recupProduitParID($id_produit);
         $donneesSession = $data->fetch(PDO::FETCH_ASSOC);
-        //////
+
         if(!isset($_SESSION['panier'])) // si le panier n'existe pas
         {
           $_SESSION['panier'] = array();
@@ -365,22 +365,17 @@ class controleursProduit extends controleursSuper {
           $userCart = TRUE;
 
         }
+
         $verifProduit = array_search($id_produit, $_SESSION['panier']['id_produit']);
       	if($verifProduit !== FALSE){
-      		$msg .= 'Salut fils de pute, tu as déjà ce produit dans le panier.';
+      		$msg .= 'Salut, tu as déjà ce produit dans le panier.';
       	} else {
-          //if(is_array($donneesSession)){
             foreach ($donneesSession as $key => $value) {
               $_SESSION['panier'][$key][] = $value;
             }
-            $verifProduit = TRUE;
-          // }
+          $verifProduit = TRUE;
       	}
       }
-
-      //for ($i=0;$i < $_SESSION['panier']['prix'];$i++) {
-      //  $prixTotal =+ $_SESSION['panier']['prix'];
-      //}
 
       if(isset($_GET['suppId_produit']) && !empty($_GET['suppId_produit'])){
         if($_GET['suppId_produit'] === 'panier'){
@@ -395,7 +390,6 @@ class controleursProduit extends controleursSuper {
             foreach ($_SESSION['panier'] as $key => $value) {
               array_splice($_SESSION['panier'][$key], $position_article, 1);
             }
-            // array_splice (à ne pas conforndre avec array_slice) permet de retirer un élément d'un tableau ARRAY et de réordonner les indices du tableau afin de ne pas avoir de trou dans le tableau.
             $msg .= 'Votre article a été supprimé.';
           }
         }
@@ -419,53 +413,35 @@ class controleursProduit extends controleursSuper {
           $rechercheProduit = $reCodeID->VerifPromoProduit($id_promo);
           $prod = $rechercheProduit->fetchAll(PDO::FETCH_ASSOC);
 
-          // echo "<pre>";
-          // var_dump($nbCode['id_promo']);
-          // var_dump($_SESSION['panier']['id_produit']);
-          // echo "<br>";
-          // print_r($prod[0]['id_produit']);
-          // echo "</pre>";
-
           $produit = 0;
-          //$testG = $reCodeID->VerifTest($nbCode['id_promo'], 19);
-          // $testH = $testG->fetch(PDO::FETCH_ASSOC);
+
           foreach ($prod as $key => $value) {
-            var_dump($produit .= array_search($prod[$key]['id_produit'], $_SESSION['panier']['id_produit']));
+            $produit .= array_search($prod[$key]['id_produit'], $_SESSION['panier']['id_produit']);
           }
-          // $produit = array_search($prod, $_SESSION['panier']['id_produit']);
 
-          var_dump($produit);
-
-          //if($testG->rowCount() != 0){
           if($produit != FALSE){
             $msg .= 'Trouvé.';
+            $codeProduitOk = TRUE;
           } else {
             $msg .= 'Non trouve';
+            $codeProduitOk = FALSE;
           }
         }
       }
     }
-    // POST > $_POST code promo
-    // Requete pour reupere code promo.
-    // fet pdp::FETCH_ASSOC
-    // variable egale $infos id_promo
 
-    // Seconde requete en fonction de
-
-    // array_search();
-
-    // if(recherhce != FALSE)
-
-    if(isset($_POST['panier'])){
-
-      if(empty($_POST['cgv'])){
-        $msg .= 'Vous devez accepter les conditions général d\'utilisation.';
+      if(isset($_POST['panier'])){
+        if(empty($_POST['cgv'])){
+          $msg .= 'Vous devez accepter les conditions général d\'utilisation.';
+        }
       }
-
     }
-  }
 
     $prixTotal = 0;
+
+    foreach ($_SESSION['panier']['prix'] as $key => $value) {
+      $prixTotal += $_SESSION['panier']['prix'][$key];
+    }
 
     $this->Render('../vues/produit/panier.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'userCart' => $userCart, 'msg' => $msg, 'prixTotal' => $prixTotal));
 
