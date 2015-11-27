@@ -44,7 +44,7 @@
         </form>
         <form class="" action="/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier" method="post">
           <label for="cgv">J'accepte les conditions générales de vente (<a href="#">Voir</a>)</label>
-          <input id="cgv" type="checkbox" name="cgv" value="">
+          <input id="cgv" type="checkbox" name="cgv">
         </td>
         <td colspan="2">
           <input type="submit" name="payer" value="Payer">

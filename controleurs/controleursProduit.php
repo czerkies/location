@@ -456,10 +456,17 @@ class controleursProduit extends controleursSuper {
 
       }
 
+      // Paiement du Panier
+      if(isset($_POST['payer'])){
 
-      if(isset($_POST['panier'])){
+        // Vérification que les CGV on été acceptés
         if(empty($_POST['cgv'])){
           $msg .= 'Vous devez accepter les conditions général d\'utilisation.';
+        } else {
+
+          $msg .= 'La vente est validée.';
+          // mail('roman.czerkies@gmail.com', 'Test', 'C\'est validé !');
+
         }
       }
 
