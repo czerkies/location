@@ -6,7 +6,6 @@ class modelesPromotion extends modelesSuper {
   public function affichageCodePromo(){
 
     $pdo = $this->connect_central_bdd();
-
     $promos = $pdo->query("SELECT * FROM promotion");
     return $promos;
 
@@ -53,6 +52,15 @@ class modelesPromotion extends modelesSuper {
     $produitAssoc = $pdo->query("SELECT p.id_produit, p.id_promo, o.id_promo FROM produit p, promotion o WHERE o.id_promo = p.id_promo AND o.id_promo = $id_promo");
     // $produitAssoc = $pdo->query("SELECT id_promo FROM promotion WHERE id_promo IN(SELECT id_promo FROM produit WHERE id_promo = $id_promo)");
     return $produitAssoc;
+
+  }
+
+  // ********** Récupération valeur de réduction code promo panier ********* //
+  public function RecupValeurCodePromo($codePromo){
+
+    $pdo = $this->connect_central_bdd();
+    $codePromo = $pdo->query("SELECT reduction FROM promotion WHERE code_promo = '$codePromo'");
+    return $codePromo;
 
   }
 

@@ -352,6 +352,7 @@ class controleursProduit extends controleursSuper {
 
         if(!isset($_SESSION['panier'])) // si le panier n'existe pas
         {
+
           $_SESSION['panier'] = array();
           $_SESSION['panier']['id_produit'] = array();
           $_SESSION['panier']['titre'] = array();
@@ -395,52 +396,67 @@ class controleursProduit extends controleursSuper {
         }
       }
 
-    if(isset($_POST['promo'])){
+      if(isset($_POST['promo'])){
 
-      if(!isset($_POST['code_promo']) || empty($_POST['code_promo'])){
-        $msg .= 'Veuillez saisir une code promo.';
-      } else {
-        $code_promo = $_POST['code_promo'];
-        $reCodeID = new modelesPromotion();
-        $rechercheID = $reCodeID->verifPresencePromo($code_promo);
-        $nbCode = $rechercheID->fetch(PDO::FETCH_ASSOC);
-
-        if($rechercheID->rowCount() === 0){
-          $msg .= 'Votre code n\'existe pas.';
+        if(!isset($_POST['code_promo']) || empty($_POST['code_promo'])){
+          $msg .= 'Veuillez saisir une code promo.';
         } else {
+          $code_promo = $_POST['code_promo'];
+          $reCodeID = new modelesPromotion();
+          $rechercheID = $reCodeID->verifPresencePromo($code_promo);
+          $nbCode = $rechercheID->fetch(PDO::FETCH_ASSOC);
 
-          $id_promo = $nbCode['id_promo'];
-          $rechercheProduit = $reCodeID->VerifPromoProduit($id_promo);
-          $prod = $rechercheProduit->fetchAll(PDO::FETCH_ASSOC);
-
-          $produit = 0;
-
-          foreach ($prod as $key => $value) {
-            $produit .= array_search($prod[$key]['id_produit'], $_SESSION['panier']['id_produit']);
-          }
-
-          if($produit != FALSE){
-            $msg .= 'Trouvé.';
-            $codeProduitOk = TRUE;
+          if($rechercheID->rowCount() === 0){
+            $msg .= 'Votre code n\'existe pas.';
           } else {
-            $msg .= 'Non trouve';
-            $codeProduitOk = FALSE;
+
+            $id_promo = $nbCode['id_promo'];
+            $rechercheProduit = $reCodeID->VerifPromoProduit($id_promo);
+            $prod = $rechercheProduit->fetchAll(PDO::FETCH_ASSOC);
+
+            $produit = 0;
+
+            foreach ($prod as $key => $value) {
+              $produit .= array_search($prod[$key]['id_produit'], $_SESSION['panier']['id_produit']);
+            }
+
+            if($produit != FALSE){
+              $msg .= 'Trouvé.';
+              $codeProduitOk = TRUE;
+            } else {
+              $msg .= 'Non trouve';
+              $codeProduitOk = FALSE;
+            }
           }
         }
       }
-    }
+
+      if(isset($_SESSION['panier']) && !empty($_SESSION['panier'])){
+
+        $prixTotal = 0;
+
+        foreach ($_SESSION['panier']['prix'] as $key => $value) {
+          $prixTotal += $_SESSION['panier']['prix'][$key];
+        }
+
+        if($codeProduitOk){
+
+          $valeurPromo = $reCodeID->RecupValeurCodePromo($code_promo);
+          $reductionTotal = $valeurPromo->fetch(PDO::FETCH_ASSOC);
+          
+          $prixTotal -= $reductionTotal['reduction'];
+
+        }
+
+      }
+
 
       if(isset($_POST['panier'])){
         if(empty($_POST['cgv'])){
           $msg .= 'Vous devez accepter les conditions général d\'utilisation.';
         }
       }
-    }
 
-    $prixTotal = 0;
-
-    foreach ($_SESSION['panier']['prix'] as $key => $value) {
-      $prixTotal += $_SESSION['panier']['prix'][$key];
     }
 
     $this->Render('../vues/produit/panier.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'userCart' => $userCart, 'msg' => $msg, 'prixTotal' => $prixTotal));
