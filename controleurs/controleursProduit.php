@@ -441,6 +441,9 @@ class controleursProduit extends controleursSuper {
           $prixTotal += $_SESSION['panier']['prix'][$key];
         }
 
+        // Calcule de la TVA
+        $prixTotal *= 1.21;
+
         // Application de la promotion sur le total
         if($codeProduitOk){
 
@@ -450,9 +453,6 @@ class controleursProduit extends controleursSuper {
           $prixTotal -= $reductionTotal['reduction'];
 
         }
-
-        // Calcule de la TVA
-        // $prixTotal = $prixTotal * 0.2;
 
       }
 

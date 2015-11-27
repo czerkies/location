@@ -33,7 +33,7 @@
     <?php } ?>
     <tr>
       <th colspan="8">Prix Total TTC :</th>
-      <th colspan="2"><?= $prixTotal; ?> €</th>
+      <th colspan="2"><?= $prixTotal; ?> € TTC</th>
     </tr>
     <tr>
       <td colspan="8">
