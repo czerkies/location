@@ -335,6 +335,7 @@ class controleursProduit extends controleursSuper {
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $userCart = (isset($_SESSION['panier'])) ? TRUE : FALSE;
+    $codeProduitOk = FALSE;
 
     $msg = '';
 
@@ -433,20 +434,25 @@ class controleursProduit extends controleursSuper {
 
       if(isset($_SESSION['panier']) && !empty($_SESSION['panier'])){
 
+        // Calcule du prix total sur le panier.
         $prixTotal = 0;
 
         foreach ($_SESSION['panier']['prix'] as $key => $value) {
           $prixTotal += $_SESSION['panier']['prix'][$key];
         }
 
+        // Application de la promotion sur le total
         if($codeProduitOk){
 
           $valeurPromo = $reCodeID->RecupValeurCodePromo($code_promo);
           $reductionTotal = $valeurPromo->fetch(PDO::FETCH_ASSOC);
-          
+
           $prixTotal -= $reductionTotal['reduction'];
 
         }
+
+        // Calcule de la TVA
+        // $prixTotal = $prixTotal * 0.2;
 
       }
 
