@@ -169,4 +169,15 @@ class modelesProduit extends modelesSuper {
 
   }
 
+  // ********** Mise a jour "Etat" du produit après validation du panier ********** //
+  public function majEtatProduit($id_produit){
+
+    $pdo = $this->connect_central_bdd();
+
+    $insertion = $pdo->prepare("UPDATE produit SET etat = 1 WHERE id_produit = $id_produit");
+
+    $insertion->execute();
+
+  }
+
 }

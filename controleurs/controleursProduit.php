@@ -339,6 +339,8 @@ class controleursProduit extends controleursSuper {
 
     $msg = '';
 
+    $produitPanier = new modelesProduit();
+
     if($userConnect){
 
       $id_membre = $_SESSION['membre']['id_membre'];
@@ -347,7 +349,6 @@ class controleursProduit extends controleursSuper {
 
         $id_produit = $_GET['id_produit'];
 
-        $produitPanier = new modelesProduit();
         $data = $produitPanier->recupProduitParID($id_produit);
         $donneesSession = $data->fetch(PDO::FETCH_ASSOC);
 
@@ -466,6 +467,13 @@ class controleursProduit extends controleursSuper {
 
           $msg .= 'La vente est validée.';
           // mail('roman.czerkies@gmail.com', 'Test', 'C\'est validé !');
+
+          // Mise à jour des produits en "Etat" = 1
+          foreach ($_SESSION['panier']['id_produit'] as $value) {
+
+            $produitPanier->majEtatProduit($value);
+
+          }
 
         }
       }
