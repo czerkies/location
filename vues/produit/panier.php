@@ -28,12 +28,15 @@
         <td><?= $_SESSION['panier']['date_depart'][$i]; ?></td>
         <td><a href="/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier&suppId_produit=<?= $_SESSION['panier']['id_produit'][$i]; ?>">X</a></td>
         <td><?= $_SESSION['panier']['prix'][$i]; ?> €</td>
-        <td>19.6%</td>
+        <td>20 %</td>
       </tr>
     <?php } ?>
     <tr>
       <th colspan="8">Prix Total TTC :</th>
-      <th colspan="2"><?= $prixTotal; ?> € TTC</th>
+      <th colspan="2"><?= $prixTotal; ?> €
+      <?php if($prixTotalReduit != 0) { ?>
+      <br> Prix avec réduction : <?= $prixTotalReduit; ?> €</th>
+      <?php } ?>
     </tr>
     <tr>
       <td colspan="8">
@@ -47,6 +50,7 @@
           <input id="cgv" type="checkbox" name="cgv">
         </td>
         <td colspan="2">
+          <input type="hidden" name="reduction" value="<?php if(isset($_POST['code_promo'])) {echo $_POST['code_promo'];}?>">
           <input type="submit" name="payer" value="Payer">
         </td>
       </form>

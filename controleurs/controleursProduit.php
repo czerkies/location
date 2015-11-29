@@ -336,6 +336,8 @@ class controleursProduit extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $userCart = (isset($_SESSION['panier'])) ? TRUE : FALSE;
     $codeProduitOk = FALSE;
+    $prixTotal = 0;
+    $prixTotalReduit = 0;
 
     $msg = '';
 
@@ -423,10 +425,10 @@ class controleursProduit extends controleursSuper {
             }
 
             if($produit != FALSE){
-              $msg .= 'Trouvé.';
+              $msg .= 'Code promotion appliqué sur le panier.<br>';
               $codeProduitOk = TRUE;
             } else {
-              $msg .= 'Non trouve';
+              $msg .= 'Code promotion non trouvé.<br>';
               $codeProduitOk = FALSE;
             }
           }
@@ -443,7 +445,7 @@ class controleursProduit extends controleursSuper {
         }
 
         // Calcule de la TVA
-        $prixTotal *= 1.21;
+        $prixTotal *= 1.20;
 
         // Application de la promotion sur le total
         if($codeProduitOk){
@@ -451,7 +453,7 @@ class controleursProduit extends controleursSuper {
           $valeurPromo = $reCodeID->RecupValeurCodePromo($code_promo);
           $reductionTotal = $valeurPromo->fetch(PDO::FETCH_ASSOC);
 
-          $prixTotal -= $reductionTotal['reduction'];
+          $prixTotalReduit = $prixTotal - $reductionTotal['reduction'];
 
         }
 
@@ -462,11 +464,56 @@ class controleursProduit extends controleursSuper {
 
         // Vérification que les CGV on été acceptés
         if(empty($_POST['cgv'])){
+
           $msg .= 'Vous devez accepter les conditions général d\'utilisation.';
+
         } else {
 
-          $msg .= 'La vente est validée.';
-          // mail('roman.czerkies@gmail.com', 'Test', 'C\'est validé !');
+          if(!empty($_POST['reduction'])){
+
+            $code_promo = $_POST['reduction'];
+            $reCodeID = new modelesPromotion();
+            $rechercheID = $reCodeID->verifPresencePromo($code_promo);
+            $nbCode = $rechercheID->fetch(PDO::FETCH_ASSOC);
+
+            if($rechercheID->rowCount() === 0){
+              $msg .= 'Votre code n\'existe pas.';
+            } else {
+
+              $id_promo = $nbCode['id_promo'];
+              $rechercheProduit = $reCodeID->VerifPromoProduit($id_promo);
+              $prod = $rechercheProduit->fetchAll(PDO::FETCH_ASSOC);
+
+              $produit = 0;
+
+              foreach ($prod as $key => $value) {
+                $produit .= array_search($prod[$key]['id_produit'], $_SESSION['panier']['id_produit']);
+              }
+
+              if($produit != FALSE){
+                $msg .= '<br>Le code de réduction a bien été appliqué à votre commande.<br>';
+                $codeProduitOk = TRUE;
+              } else {
+                $msg .= "<br>Le code de réduction n'est plus valable car un de vos produits n'est plus dans le panier.<br>";
+                $codeProduitOk = FALSE;
+              }
+
+            }
+          }
+
+          if($codeProduitOk){
+
+            $valeurPromo = $reCodeID->RecupValeurCodePromo($code_promo);
+            $reductionTotal = $valeurPromo->fetch(PDO::FETCH_ASSOC);
+
+            $prixTotalReduit = $prixTotal - $reductionTotal['reduction'];
+
+          }
+
+          $total = ($prixTotalReduit != 0) ? $prixTotalReduit : $prixTotal;
+
+          $commande = new modelesCommande();
+          $nouvelleCommande = $commande->insertionCommande($total, $_SESSION['membre']['id_membre']);
 
           // Mise à jour des produits en "Etat" = 1
           foreach ($_SESSION['panier']['id_produit'] as $value) {
@@ -475,12 +522,18 @@ class controleursProduit extends controleursSuper {
 
           }
 
+          // Vider le Panier
+          unset($_SESSION['panier']);
+          $userCart = FALSE;
+
+          $msg .= "La vente est validée.<br>Vous avez reçus votre facture par Email à l'adresse suivante : ".$_SESSION['membre']['email'];
+
         }
       }
 
     }
 
-    $this->Render('../vues/produit/panier.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'userCart' => $userCart, 'msg' => $msg, 'prixTotal' => $prixTotal));
+    $this->Render('../vues/produit/panier.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'userCart' => $userCart, 'msg' => $msg, 'prixTotal' => $prixTotal, 'prixTotalReduit' => $prixTotalReduit));
 
   }
 
