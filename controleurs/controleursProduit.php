@@ -335,10 +335,12 @@ class controleursProduit extends controleursSuper {
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $userCart = (isset($_SESSION['panier'])) ? TRUE : FALSE;
+
     $codeProduitOk = FALSE;
     $prixTotal = 0;
     $prixTotalReduit = 0;
-
+    $diffTotalPromo = 0;
+    $pourcentageTotalPromo = 0;
     $msg = '';
 
     $produitPanier = new modelesProduit();
@@ -455,6 +457,10 @@ class controleursProduit extends controleursSuper {
 
           $prixTotalReduit = $prixTotal - $reductionTotal['reduction'];
 
+          $diffTotalPromo = $prixTotal - $prixTotalReduit;
+
+          $pourcentageTotalPromo = round((100*$diffTotalPromo) / $prixTotalReduit, 2);
+
         }
 
       }
@@ -526,6 +532,9 @@ class controleursProduit extends controleursSuper {
           unset($_SESSION['panier']);
           $userCart = FALSE;
 
+          // Mail de confirmation
+          //mail($_SESSION['membre']['email'], 'Confirmation de commande N :', 'C\'est validé !');
+
           $msg .= "La vente est validée.<br>Vous avez reçus votre facture par Email à l'adresse suivante : ".$_SESSION['membre']['email'];
 
         }
@@ -533,7 +542,7 @@ class controleursProduit extends controleursSuper {
 
     }
 
-    $this->Render('../vues/produit/panier.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'userCart' => $userCart, 'msg' => $msg, 'prixTotal' => $prixTotal, 'prixTotalReduit' => $prixTotalReduit));
+    $this->Render('../vues/produit/panier.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'userCart' => $userCart, 'msg' => $msg, 'prixTotal' => $prixTotal, 'prixTotalReduit' => $prixTotalReduit, 'diffTotalPromo' => $diffTotalPromo, 'pourcentageTotalPromo' => $pourcentageTotalPromo));
 
   }
 

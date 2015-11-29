@@ -31,13 +31,24 @@
         <td>20 %</td>
       </tr>
     <?php } ?>
-    <tr>
-      <th colspan="8">Prix Total TTC :</th>
-      <th colspan="2"><?= $prixTotal; ?> €
+      <tr>
+        <th colspan="8">Prix Total TTC :</th>
+        <th colspan="2"><?= $prixTotal; ?> €</th>
+      </tr>
       <?php if($prixTotalReduit != 0) { ?>
-      <br> Prix avec réduction : <?= $prixTotalReduit; ?> €</th>
+        <tr>
+          <th colspan="8">Prix avec le code promotion :</th>
+          <th colspan="2"><?= $prixTotalReduit; ?> € </th>
+        </tr>
+        <tr>
+          <th colspan="8">Économie de :</th>
+          <th colspan="2"><?= $diffTotalPromo; ?> € </th>
+        </tr>
+        <tr>
+          <th colspan="8">Soit :</th>
+          <th colspan="2"><?= $pourcentageTotalPromo; ?> %</th>
+        </tr>
       <?php } ?>
-    </tr>
     <tr>
       <td colspan="8">
         <form class="" action="/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier" method="post">
