@@ -521,12 +521,36 @@ class controleursProduit extends controleursSuper {
           $commande = new modelesCommande();
           $nouvelleCommande = $commande->insertionCommande($total, $_SESSION['membre']['id_membre']);
 
-          // Mise à jour des produits en "Etat" = 1
+          $details_commande = new modelesDetails_commande();
+
+          $idCommande = $commande->idCommande($_SESSION['membre']['id_membre']);
+
+          $numeroCommande = $idCommande->fetch(PDO::FETCH_ASSOC);
+
+          // Mise à jour des produits en "Etat" = 1 et insersion d'une commande en détail
           foreach ($_SESSION['panier']['id_produit'] as $value) {
+
+            $details_commande->insertionDetails_commande($numeroCommande['id_commande'], $value);
 
             $produitPanier->majEtatProduit($value);
 
           }
+
+          $details = $details_commande->detailsCommande($numeroCommande['id_commande']);
+
+          $data = $details->fetchAll(PDO::FETCH_ASSOC);
+
+          echo "<pre>";
+          var_dump($data);
+          echo "</pre>";
+
+          $detailsproduits = $details_commande->detailsCommandeProduits($numeroCommande['id_commande']);
+
+          $produits = $detailsproduits->fetchAll(PDO::FETCH_ASSOC);
+
+          echo "<pre>";
+          var_dump($produits);
+          echo "</pre>";
 
           // Vider le Panier
           unset($_SESSION['panier']);

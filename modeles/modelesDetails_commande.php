@@ -1,52 +1,50 @@
 <?php
 
-class modelesCommande extends modelesSuper {
+class modelesDetails_commande extends modelesSuper {
 
-  // ********** Insertion d'une commande ********** //
-  public function insertionCommande($montant, $id_membre){
+  // ********** Insertion d'une commande en détails ********** //
+  public function insertionDetails_commande($id_commande, $id_produit){
 
     $pdo = $this->connect_central_bdd();
 
-    $insertion = $pdo->prepare("INSERT INTO commande(montant, id_membre, date) VALUES(:montant, :id_membre, NOW())");
+    $insertion = $pdo->prepare("INSERT INTO details_commande(id_commande, id_produit) VALUES(:id_commande, :id_produit)");
 
-    $insertion->bindValue(':montant', $montant, PDO::PARAM_INT);
-    $insertion->bindValue(':id_membre', $id_membre, PDO::PARAM_INT);
+    $insertion->bindValue(':id_commande', $id_commande, PDO::PARAM_INT);
+    $insertion->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
 
     $insertion->execute();
 
   }
 
-  // ********** Numéroe de commande ne cours *********** //
-  public function idCommande($id_membre){
-
-    $pdo = $this->connect_central_bdd();
-
-    $idCommande = $pdo->query("SELECT id_commande FROM commande WHERE id_membre = $id_membre ORDER BY id_commande DESC LIMIT 1");
-
-    return $idCommande;
-
-  }
-  // ********** Récupération d'une commande ********** //
+  // ********** Récupération détails d'une commande en détail ********** //
   public function detailsCommande($id_commande){
 
     $pdo = $this->connect_central_bdd();
 
-    $commande = $pdp->query("SELECT c.id_commande, c.montant, d.id_produit
-      FROM commande c, details_commande d
-      WHERE s.id_commande = p.id_commande
-      AND id_commande = $id_commande
+    $detailsCommande = $pdo->query("SELECT c.id_membre, c.id_commande, c.montant, m.prenom, m.nom, m.adresse, DATE_FORMAT(c.date, '%d/%m/%Y à %H:%i') as date_commande
+    FROM commande c, membre m
+    WHERE c.id_membre = m.id_membre
+    AND c.id_commande = $id_commande
     ");
 
-    return $commande;
+    return $detailsCommande;
 
   }
 
-  /* // ********** Récupération d'une commande ********** //
-  public function recupCommande($commande){
+  // ********** Récupération produits d'une commande en détail ********** //
+  public function detailsCommandeProduits($id_commande){
 
-    $pdo = $this->connect_central_bdd()
+    $pdo = $this->connect_central_bdd();
 
-    $commande = $pdo->query("SELECT id_commande FROM commande WHERE id");
+    $detailsCommande = $pdo->query("SELECT p.id_produit, p.date_arrivee, p.date_depart, s.titre, s.ville, p.prix
+    FROM commande c, details_commande d, produit p, salle s
+    WHERE c.id_commande = d.id_commande
+    AND d.id_produit = p.id_produit
+    AND p.id_salle = s.id_salle
+    AND c.id_commande = $id_commande
+    ");
+
+    return $detailsCommande;
 
   }
 
