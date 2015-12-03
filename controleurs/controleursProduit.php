@@ -536,21 +536,57 @@ class controleursProduit extends controleursSuper {
 
           }
 
+          // Récupération de la commande et coordonnées client
           $details = $details_commande->detailsCommande($numeroCommande['id_commande']);
+          $client = $details->fetch(PDO::FETCH_ASSOC);
 
-          $data = $details->fetchAll(PDO::FETCH_ASSOC);
-
-          echo "<pre>";
-          var_dump($data);
-          echo "</pre>";
-
+          // Récupération des produits de la commande
           $detailsproduits = $details_commande->detailsCommandeProduits($numeroCommande['id_commande']);
-
           $produits = $detailsproduits->fetchAll(PDO::FETCH_ASSOC);
 
-          echo "<pre>";
-          var_dump($produits);
-          echo "</pre>";
+          $header = "N° de commande Lokisalle : ".$numeroCommande['id_commande'];
+
+          $message = "Bonjour, merci Voici de votre achat sur Lokisalle. Voici le récapitulatif de votre commande.";
+
+          $message .= "Vos coordonnées : ".ucfirst($client['prenom'])." ".($client['nom'])."<br>";
+          $message .= "Votre adresse de facturation : ".$client['adresse']." ".$client['cp']." ".$client['ville'].".";
+
+          $message .= "Votre commande a été passée le ".$client['date_commande'].".";
+
+          $message .= "Vos produits commandés :";
+
+          $message .= '<table border="1" style="width:90%;margin:25px auto;">
+            <thead>
+            <tr><th colspan="10">Récapitulsatif de votre commande</th></tr>
+            <tr>
+              <th>Produit</th>
+              <th>Salle</th>
+              <th>Photo</th>
+              <th>Ville</th>
+              <th>Capacité</th>
+              <th>Date Arrivée</th>
+              <th>Date Départ</th>
+            </tr>
+            </thead>
+            <tbody>';
+            foreach ($produits as $value) {
+              $message .=
+              '<tr>
+                <td>'. $value['id_produit'] .'</td>
+                <td>'. $value['titre'] .'</td>
+                <td><img src="'. $value['photo'] .'" alt="'. $value['photo'] .'"></td>
+                <td>'. $value['ville'] .'</td>
+                <td>'. $value['capacite'] .'</td>
+                <td>'. $value['date_arrivee'] .'</td>
+                <td>'. $value['date_depart'] .'</td>
+              </tr>';
+            }
+
+          $message .= '</tbody></table>';
+
+          echo $header;
+          echo "<br>";
+          echo $message;
 
           // Vider le Panier
           unset($_SESSION['panier']);

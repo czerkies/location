@@ -16,7 +16,7 @@ class modelesCommande extends modelesSuper {
 
   }
 
-  // ********** Numéroe de commande ne cours *********** //
+  // ********** Numéro de commande en cours *********** //
   public function idCommande($id_membre){
 
     $pdo = $this->connect_central_bdd();

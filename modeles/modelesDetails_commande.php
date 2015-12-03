@@ -21,13 +21,13 @@ class modelesDetails_commande extends modelesSuper {
 
     $pdo = $this->connect_central_bdd();
 
-    $detailsCommande = $pdo->query("SELECT c.id_membre, c.id_commande, c.montant, m.prenom, m.nom, m.adresse, DATE_FORMAT(c.date, '%d/%m/%Y à %H:%i') as date_commande
+    $client = $pdo->query("SELECT c.id_membre, c.id_commande, c.montant, m.*, DATE_FORMAT(c.date, '%d/%m/%Y à %Hh%i') as date_commande
     FROM commande c, membre m
     WHERE c.id_membre = m.id_membre
     AND c.id_commande = $id_commande
     ");
 
-    return $detailsCommande;
+    return $client;
 
   }
 
@@ -36,7 +36,7 @@ class modelesDetails_commande extends modelesSuper {
 
     $pdo = $this->connect_central_bdd();
 
-    $detailsCommande = $pdo->query("SELECT p.id_produit, p.date_arrivee, p.date_depart, s.titre, s.ville, p.prix
+    $produits = $pdo->query("SELECT p.id_produit, p.prix, DATE_FORMAT(p.date_arrivee, '%d/%m/%Y à %Hh%i') as date_arrivee, DATE_FORMAT(p.date_depart, '%d/%m/%Y à %Hh%i') as date_depart, s.photo, s.capacite, s.titre, s.ville
     FROM commande c, details_commande d, produit p, salle s
     WHERE c.id_commande = d.id_commande
     AND d.id_produit = p.id_produit
@@ -44,7 +44,7 @@ class modelesDetails_commande extends modelesSuper {
     AND c.id_commande = $id_commande
     ");
 
-    return $detailsCommande;
+    return $produits;
 
   }
 
