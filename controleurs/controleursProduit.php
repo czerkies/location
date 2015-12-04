@@ -514,6 +514,8 @@ class controleursProduit extends controleursSuper {
 
             $prixTotalReduit = $prixTotal - $reductionTotal['reduction'];
 
+            $diffTotalPromo = $prixTotal - $prixTotalReduit;
+
           }
 
           $total = ($prixTotalReduit != 0) ? $prixTotalReduit : $prixTotal;
@@ -527,7 +529,7 @@ class controleursProduit extends controleursSuper {
 
           $numeroCommande = $idCommande->fetch(PDO::FETCH_ASSOC);
 
-          // Mise à jour des produits en "Etat" = 1 et insersion d'une commande en détail
+          // Mise à jour des produits en "Etat" = 1 et insertion d'une commande en détail
           foreach ($_SESSION['panier']['id_produit'] as $value) {
 
             $details_commande->insertionDetails_commande($numeroCommande['id_commande'], $value);
@@ -544,20 +546,19 @@ class controleursProduit extends controleursSuper {
           $detailsproduits = $details_commande->detailsCommandeProduits($numeroCommande['id_commande']);
           $produits = $detailsproduits->fetchAll(PDO::FETCH_ASSOC);
 
-          $header = "N° de commande Lokisalle : ".$numeroCommande['id_commande'];
+          // Formatage du mail avec les données
+          $header = $headers = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
+          $headers .= 'FROM: Lokisalle <contact@lokisalle.romanczerkies.fr>' . "\r\n";
 
-          $message = "Bonjour, merci Voici de votre achat sur Lokisalle. Voici le récapitulatif de votre commande.";
+          $sujet = "N° de commande Lokisalle : ".$numeroCommande['id_commande'];
 
-          $message .= "Vos coordonnées : ".ucfirst($client['prenom'])." ".($client['nom'])."<br>";
-          $message .= "Votre adresse de facturation : ".$client['adresse']." ".$client['cp']." ".$client['ville'].".";
-
-          $message .= "Votre commande a été passée le ".$client['date_commande'].".";
-
-          $message .= "Vos produits commandés :";
-
-          $message .= '<table border="1" style="width:90%;margin:25px auto;">
+          $message = '<div style="width:90%;margin:25px auto;">Bonjour, merci de votre achat sur Lokisalle. Vous retrouverez ci-dessous le récapitulatif de votre commande.<br>';
+          $message .= "Vos coordonnées : ".ucfirst($client['prenom'])." ".strtoupper($client['nom'])."<br>";
+          $message .= "Votre adresse de facturation : ".$client['adresse'].", ".$client['cp']." ".$client['ville'].".<br>";
+          $message .= "Votre commande a été effectuée le ".$client['date_commande'].".</p>";
+          $message .= '<table border="1">
             <thead>
-            <tr><th colspan="10">Récapitulsatif de votre commande</th></tr>
+            <tr><th colspan="8">Récapitulatif</th></tr>
             <tr>
               <th>Produit</th>
               <th>Salle</th>
@@ -566,6 +567,7 @@ class controleursProduit extends controleursSuper {
               <th>Capacité</th>
               <th>Date Arrivée</th>
               <th>Date Départ</th>
+              <th>Montant</th>
             </tr>
             </thead>
             <tbody>';
@@ -579,13 +581,31 @@ class controleursProduit extends controleursSuper {
                 <td>'. $value['capacite'] .'</td>
                 <td>'. $value['date_arrivee'] .'</td>
                 <td>'. $value['date_depart'] .'</td>
+                <td>'. $value['prix'] .' € HT</td>
               </tr>';
             }
 
-          $message .= '</tbody></table>';
+          $message .= '
+          <tr>
+            <td colspan="7">Montant total :</td>
+            <td colspan="1">'. $client['montant'] .' € TTC</td>
+          </tr>';
+            if($prixTotalReduit != 0){
+              $message .= '
+              <tr>
+                <td colspan="8">Sur un motant total de '.$prixTotal.' €, une réduction de '.$diffTotalPromo.' € a été appliqué grâce au code promo : "'.$code_promo.'".</td>
+              </tr>';
+            }
+          // Mettre les différents montant.
 
-          echo $header;
-          echo "<br>";
+          $message .= '
+          </tbody>
+          </table>';
+
+          $message .= 'Lokisalle '.date('Y').'.
+          </div>';
+
+          echo $sujet;
           echo $message;
 
           // Vider le Panier
@@ -593,7 +613,7 @@ class controleursProduit extends controleursSuper {
           $userCart = FALSE;
 
           // Mail de confirmation
-          //mail($_SESSION['membre']['email'], 'Confirmation de commande N :', 'C\'est validé !');
+          //mail($_SESSION['membre']['email'], $sujet, $message, $headers);
 
           $msg .= "La vente est validée.<br>Vous avez reçus votre facture par Email à l'adresse suivante : ".$_SESSION['membre']['email'];
 
