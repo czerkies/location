@@ -41,6 +41,16 @@ class modelesCommande extends modelesSuper {
 
   }
 
+  public function commandesMembres($id_membre){
+
+    $pdo = $this->connect_central_bdd();
+
+    $commandes = $pdo->query("SELECT id_commande, DATE_FORMAT(date, '%d/%m/%Y') as date_commande FROM commande WHERE id_membre = $id_membre ORDER BY date DESC LIMIT 6");
+
+    return $commandes;
+
+  }
+
   /* // ********** Récupération d'une commande ********** //
   public function recupCommande($commande){
 

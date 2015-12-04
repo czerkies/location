@@ -44,4 +44,28 @@
   <a href="../www/routeur.php?controleurs=membre&action=profilMembre&modif=true">Mettre à jour mes informations</a>
   <?php } ?>
 </div>
+<div id="last_commande">
+  <h2>Vos 6 dernières commandes</h2>
+  <?php if(!$commandes){ ?>
+    <p>Vous n'avez encore jamais passé de commande.</p>
+  <?php } else { ?>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Numéro de commande</th>
+        <th>Date de la commande</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($commandes as $value) { ?>
+        <tr>
+          <td><?= $value['id_commande']; ?></td>
+          <td><?= $value['date_commande']; ?></td>
+        </tr>
+      <?php } ?>
+    </tbody>
+  </table>
+  <?php } ?>
+</div>
 <?php } ?>

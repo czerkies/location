@@ -297,9 +297,16 @@ class controleursMembre extends controleursSuper {
 
         }
       }
+
+      // Récupération des commandes par id_membre
+
+      $commandesIdMembres = new modelesCommande();
+      $donnees = $commandesIdMembres->commandesMembres($_SESSION['membre']['id_membre']);
+      $commandes = $donnees->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
-    $this->render('../vues/membre/profil.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
+    $this->render('../vues/membre/profil.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'commandes' => $commandes));
 
   }
 
