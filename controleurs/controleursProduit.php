@@ -77,7 +77,6 @@ class controleursProduit extends controleursSuper {
 
     $cont = new modelesProduit();
     $lesProduits = $cont->affichageACC();
-    // $lesProduits = $produit->fetchAll(PDO::FETCH_ASSOC);
 
     $this->Render('../vues/produit/accueil.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'lesProduits' => $lesProduits));
 
@@ -92,8 +91,7 @@ class controleursProduit extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
     $cont = new modelesProduit();
-    $produit = $cont->affichageReservation();
-    $lesProduits = $produit->fetchAll(PDO::FETCH_ASSOC);
+    $lesProduits = $cont->affichageReservation();
 
     $this->Render('../vues/produit/reservation.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'lesProduits' => $lesProduits));
 
@@ -206,14 +204,13 @@ class controleursProduit extends controleursSuper {
       } else {
 
         // Modification d'un produit Admin
-
         $affichageProduitsAdmin = $pdo->affichageProduitsAdmin();
+
         if(isset($_GET['modif'])) {
 
           $modifSalle = TRUE;
           $id_produit_modif = $_GET['modif'];
-          $produitModif = $pdo->recupProduitParID($id_produit_modif);
-          $idProduitModif = $produitModif->fetch(PDO::FETCH_ASSOC);
+          $idProduitModif = $pdo->recupProduitParID($id_produit_modif);
 
           if(isset($_POST) && !empty($_POST)){
 
@@ -274,8 +271,7 @@ class controleursProduit extends controleursSuper {
     $id_produit = $_GET['id_produit'];
 
     $modProduit = new modelesProduit();
-    $affichageProduit = $modProduit->recupProduitParID($id_produit);
-    $ProduitIDSalle = $affichageProduit->fetch(PDO::FETCH_ASSOC);
+    $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);
 
     $id_salle = $ProduitIDSalle['id_salle'];
     $modAvis = new modelesAvis();
@@ -321,8 +317,7 @@ class controleursProduit extends controleursSuper {
     }
 
     // Traitement des suggestions par produit
-    $suggestionProduits = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);
-    $suggestions = $suggestionProduits->fetchAll(PDO::FETCH_ASSOC);
+    $suggestions = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);
 
     $this->Render('../vues/produit/reservation_details.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));
 
@@ -353,8 +348,7 @@ class controleursProduit extends controleursSuper {
 
         $id_produit = $_GET['id_produit'];
 
-        $data = $produitPanier->recupProduitParID($id_produit);
-        $donneesSession = $data->fetch(PDO::FETCH_ASSOC);
+        $donneesSession = $produitPanier->recupProduitParID($id_produit);
 
         if(!isset($_SESSION['panier'])) // si le panier n'existe pas
         {
@@ -452,8 +446,7 @@ class controleursProduit extends controleursSuper {
         // Application de la promotion sur le total
         if($codeProduitOk){
 
-          $valeurPromo = $reCodeID->RecupValeurCodePromo($code_promo);
-          $reductionTotal = $valeurPromo->fetch(PDO::FETCH_ASSOC);
+          $reductionTotal = $reCodeID->RecupValeurCodePromo($code_promo);
 
           $prixTotalReduit = $prixTotal - $reductionTotal['reduction'];
 
@@ -509,8 +502,7 @@ class controleursProduit extends controleursSuper {
 
           if($codeProduitOk){
 
-            $valeurPromo = $reCodeID->RecupValeurCodePromo($code_promo);
-            $reductionTotal = $valeurPromo->fetch(PDO::FETCH_ASSOC);
+            $reductionTotal = $reCodeID->RecupValeurCodePromo($code_promo);
 
             $prixTotalReduit = $prixTotal - $reductionTotal['reduction'];
 
@@ -525,9 +517,7 @@ class controleursProduit extends controleursSuper {
 
           $details_commande = new modelesDetails_commande();
 
-          $idCommande = $commande->idCommande($_SESSION['membre']['id_membre']);
-
-          $numeroCommande = $idCommande->fetch(PDO::FETCH_ASSOC);
+          $numeroCommande = $commande->idCommande($_SESSION['membre']['id_membre']);
 
           // Mise à jour des produits en "Etat" = 1 et insertion d'une commande en détail
           foreach ($_SESSION['panier']['id_produit'] as $value) {
@@ -539,16 +529,14 @@ class controleursProduit extends controleursSuper {
           }
 
           // Récupération de la commande et coordonnées client
-          $details = $details_commande->detailsCommande($numeroCommande['id_commande']);
-          $client = $details->fetch(PDO::FETCH_ASSOC);
-
+          $client = $details_commande->detailsCommande($numeroCommande['id_commande']);
+          var_dump($client);
           // Récupération des produits de la commande
-          $detailsproduits = $details_commande->detailsCommandeProduits($numeroCommande['id_commande']);
-          $produits = $detailsproduits->fetchAll(PDO::FETCH_ASSOC);
+          $produits = $details_commande->detailsCommandeProduits($numeroCommande['id_commande']);
 
           // Formatage du mail avec les données
-          $header = $headers = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
-          $headers .= 'FROM: Lokisalle <contact@lokisalle.romanczerkies.fr>' . "\r\n";
+          $header = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
+          $header .= 'FROM: Lokisalle <contact@lokisalle.romanczerkies.fr>' . "\r\n";
 
           $sujet = "N° de commande Lokisalle : ".$numeroCommande['id_commande'];
 

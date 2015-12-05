@@ -10,7 +10,7 @@
       <div class="gestion_produit_ajouter">
         <form class="" action="" method="post">
           <select name="id_salle">
-            <?php while ($donneesSalles = $affichageSalles->fetch()) { ?>
+            <?php foreach ($affichageSalles as $donneesSalles) { ?>
               <option value="<?= $donneesSalles['id_salle']; ?>" <?php if(isset($_POST['id_salle']) && $_POST['id_salle'] == $donneesSalles['id_salle']) {echo 'selected';} ?>><?= $donneesSalles['titre'].' - '.$donneesSalles['pays'];?></option>
             <?php } ?>
           </select>
@@ -24,8 +24,8 @@
           <select name="id_promo">
             <option disabled>Choisissez votre code promo</option>
             <option value="NULL">Aucun code promo</option>
-            <?php while ($donneesPromo = $affichagePromo->fetch()) { ?>
-              <option value="<?= $donneesPromo['id_promo']; ?>" <?php if(isset($_POST['id_promo']) && $_POST['id_promo'] == $donneesPromo['id_promo']) {echo 'selected';} ?>>Code : <?= $donneesPromo['code_promo'].' | Réduction : '.$donneesPromo['reduction'];?> €</option>
+            <?php foreach ($affichagePromo as $value) { ?>
+              <option value="<?= $value['id_promo']; ?>" <?php if(isset($_POST['id_promo']) && $_POST['id_promo'] == $value['id_promo']) {echo 'selected';} ?>>Code : <?= $value['code_promo'].' | Réduction : '.$value['reduction'];?> €</option>
             <?php } ?>
           </select>
           <input type="submit" value="Créer le produit">
@@ -59,8 +59,7 @@
           </thead>
           <tbody>
             <?php
-            $donnees = $affichageProduitsAdmin->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($donnees as $value) {
+            foreach ($affichageProduitsAdmin as $value) {
             ?>
             <tr>
               <td><?= $value['id_produit']; ?></td>
@@ -87,13 +86,13 @@
         <div class="gestion_produit_modifier">
           <form class="" action="" method="post">
             <select name="id_salle">
-              <?php while ($donneesSalles = $affichageSalles->fetch()) { ?>
+              <?php foreach ($affichageSalles as $donneesSalles) { ?>
                 <option value="<?= $donneesSalles['id_salle']; ?>" <?php if(isset($_POST['id_salle']) && $_POST['id_salle'] == $donneesSalles['id_salle']) {echo 'selected';}
                 elseif(isset($idProduitModif['id_salle']) && $idProduitModif['id_salle'] == $donneesSalles['id_salle']) {echo 'selected';} ?>><?= $donneesSalles['titre'].' - '.$donneesSalles['pays'];?></option>
               <?php } ?>
             </select>
             <label for="date_arrivee">Date d'arrivée :</label>
-            <?php var_dump($idProduitModif['date_arrivee']); ?>
+            <?php var_dump($idProduitModif['date_arrivee']); // A SUPPRIMER EN PROD // ?>
             <?php controleursProduit::champs_date('date_arrivee', 'date_arrivee', $idProduitModif['date_arrivee']); ?>
             <label for="date_arrivee">Date d'arrivée :</label>
             <?php controleursProduit::champs_date('date_depart', 'date_depart', $idProduitModif['date_depart']); ?>
@@ -103,9 +102,9 @@
             <select name="id_promo">
               <option disabled>Choisissez votre code promo</option>
               <option value="NULL">Aucun code promo</option>
-              <?php while ($donneesPromo = $affichagePromo->fetch()) { ?>
-                <option value="<?= $donneesPromo['id_promo']; ?>" <?php if(isset($_POST['id_promo']) && $_POST['id_promo'] == $donneesPromo['id_promo']) {echo 'selected';}
-                elseif(isset($idProduitModif['id_promo']) && $idProduitModif['id_promo'] == $donneesPromo['id_promo']) {echo 'selected';} ?>>Code : <?= $donneesPromo['code_promo'].' | Réduction : '.$donneesPromo['reduction'];?> €</option>
+              <?php foreach ($affichagePromo as $value) { ?>
+                <option value="<?= $value['id_promo']; ?>" <?php if(isset($_POST['id_promo']) && $_POST['id_promo'] == $value['id_promo']) {echo 'selected';}
+                elseif(isset($idProduitModif['id_promo']) && $idProduitModif['id_promo'] == $value['id_promo']) {echo 'selected';} ?>>Code : <?= $value['code_promo'].' | Réduction : '.$value['reduction'];?> €</option>
               <?php } ?>
             </select>
             <input type="hidden" name="id_produit" value="<?= $idProduitModif['id_produit']; ?>">

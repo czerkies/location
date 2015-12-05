@@ -36,9 +36,11 @@ class modelesMembre extends modelesSuper {
   // *********** Récupération Mailadmin ********** //
   public function recupMailAdmin(){
 
-    $mailAdmin = $this->connect_central_bdd()->query("SELECT email FROM membre WHERE statut = 1");
+    $emailAdmin = $this->connect_central_bdd()->query("SELECT email FROM membre WHERE statut = 1");
 
-    return $mailAdmin;
+    $email = $emailAdmin->fetch(PDO::FETCH_ASSOC);
+
+    return $email;
 
   }
 
@@ -47,7 +49,9 @@ class modelesMembre extends modelesSuper {
 
     $pseudo = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo'");
 
-    return $pseudo;
+    $nbPseudo = $pseudo->rowCount();
+
+    return $nbPseudo;
 
   }
 
@@ -56,38 +60,38 @@ class modelesMembre extends modelesSuper {
 
     $mail = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE email = '$email'");
 
-    return $mail;
+    $nbMail = $mail->rowCount();
+
+    return $nbMail;
 
   }
 
   // *********** Vérification Pseudo pour MAJ ********** //
   public function verifPseudoMAJ($pseudo, $id_membre){
 
-    $pdo = $this->connect_central_bdd();
+    $pseudo = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND id_membre != '$id_membre'");
 
-    $pseudo = $pdo->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND id_membre != '$id_membre'");
+    $nbPseudo = $pseudo->rowCount();
 
-    return $pseudo;
+    return $nbPseudo;
 
   }
 
   // *********** Vérification Mail pour MAJ ********** //
   public function verifMailMAJ($email, $id_membre){
 
-    $pdo = $this->connect_central_bdd();
+    $mail = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE email = '$email' AND id_membre != '$id_membre'");
 
-    $mail = $pdo->query("SELECT * FROM membre WHERE email = '$email' AND id_membre != '$id_membre'");
+    $nbMailUp = $mail->rowCount();
 
-    return $mail;
+    return $nbMailUp;
 
   }
 
   // *********** Mot de passe perdu ********** //
   public function nouveauMdp($mdp, $email){
 
-    $pdo = $this->connect_central_bdd();
-
-    $insertion = $pdo->prepare("UPDATE membre SET mdp = :mdp WHERE email = '$email'");
+    $insertion = $this->connect_central_bdd()->prepare("UPDATE membre SET mdp = :mdp WHERE email = '$email'");
     $insertion->bindValue(':mdp', $mdp, PDO::PARAM_STR);
 
     $insertion->execute();
@@ -97,9 +101,7 @@ class modelesMembre extends modelesSuper {
   // ********** Mise à jour profil membre ********* //
   public function updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $id_membre){
 
-    $pdo = $this->connect_central_bdd();
-
-    $insertion = $pdo->prepare("UPDATE membre SET pseudo = :pseudo, email = :email, sexe = :sexe, nom = :nom, prenom = :prenom, ville = :ville, cp = :cp, adresse = :adresse WHERE id_membre = '$id_membre'");
+    $insertion = $this->connect_central_bdd()->prepare("UPDATE membre SET pseudo = :pseudo, email = :email, sexe = :sexe, nom = :nom, prenom = :prenom, ville = :ville, cp = :cp, adresse = :adresse WHERE id_membre = '$id_membre'");
 
     $insertion->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
     $insertion->bindValue(':nom', $nom, PDO::PARAM_STR);

@@ -19,11 +19,13 @@ class modelesCommande extends modelesSuper {
 
     $idCommande = $this->connect_central_bdd()->query("SELECT id_commande FROM commande WHERE id_membre = $id_membre ORDER BY id_commande DESC LIMIT 1");
 
-    return $idCommande;
+    $numeroCommande = $idCommande->fetch(PDO::FETCH_ASSOC);
+
+    return $numeroCommande;
 
   }
   // ********** Récupération d'une commande ********** //
-  public function detailsCommande($id_commande){
+  /*public function detailsCommande($id_commande){
 
     $commande = $this->connect_central_bdd()->query("SELECT c.id_commande, c.montant, d.id_produit
       FROM commande c, details_commande d
@@ -31,13 +33,17 @@ class modelesCommande extends modelesSuper {
       AND id_commande = $id_commande
     ");
 
-    return $commande;
+    $client = $commande->fetch(PDO::FETCH_ASSOC);
 
-  }
+    return $client;
+
+  }*/ // A supprimer ?
 
   public function commandesMembres($id_membre){
 
-    $commandes = $this->connect_central_bdd()->query("SELECT id_commande, DATE_FORMAT(date, '%d/%m/%Y') as date_commande FROM commande WHERE id_membre = $id_membre ORDER BY date DESC LIMIT 6");
+    $donnees = $this->connect_central_bdd()->query("SELECT id_commande, DATE_FORMAT(date, '%d/%m/%Y') as date_commande FROM commande WHERE id_membre = $id_membre ORDER BY date DESC LIMIT 6");
+
+    $commandes = $donnees->fetchAll(PDO::FETCH_ASSOC);
 
     return $commandes;
 

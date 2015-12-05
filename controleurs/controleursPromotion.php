@@ -29,7 +29,7 @@ class controleursPromotion extends controleursSuper {
         } else {
           $cont = new modelesPromotion();
           $verifCodePromo = $cont->verifPresencePromo($code_promo);
-          if($verifCodePromo->rowCount() != 0){
+          if($verifCodePromo != 0){
             $msg .= "Le code promotion que vous avez saisis est déjà existante.<br>";
           }
         }
@@ -81,9 +81,8 @@ class controleursPromotion extends controleursSuper {
         $id_promo = htmlentities($_GET['supprimer']);
 
         $confirmSiProduit = $bdd->VerifPromoProduit($id_promo);
-        $confirmSiProduit->fetchAll(PDO::FETCH_ASSOC);
 
-        if($confirmSiProduit->rowCount() === 0){
+        if($confirmSiProduit === 0){
 
           $bdd->SuppPromo($id_promo);
           $msg .= "Votre code promo a bien été supprimé.";
@@ -102,8 +101,7 @@ class controleursPromotion extends controleursSuper {
         }
       }
 
-      $affichagePromosAdmin = $bdd->affichageCodePromo();
-      $donnees = $affichagePromosAdmin->fetchAll(PDO::FETCH_ASSOC);
+      $donnees = $bdd->affichageCodePromo();
 
     }
 

@@ -15,11 +15,10 @@ class controleursNewsletter extends controleursSuper {
 
     if($userConnectAdmin){
 
-      $bdd = new modelesNewsletter();
-      $mail = $bdd->recupMailMembre();
-      $mailAbonne = $mail->fetchAll(PDO::FETCH_ASSOC);
+      $mail = new modelesNewsletter();
+      $donneesNews = $mail->recupMailMembre();
 
-      $nbAbonne = $mail->rowCount();
+      $nbAbonne = $donneesNews['nbMail'];
 
       $mailAdmin = $_SESSION['membre']['email'];
 
@@ -29,7 +28,7 @@ class controleursNewsletter extends controleursSuper {
         $message = $_POST['message'];
 
         $mail = '';
-        foreach ($mailAbonne as $value) {
+        foreach ($donneesNews['mailAbonne'] as $value) {
           $mail .= $value['email'].', ';
         }
         mail($mail, $sujet, $message);
@@ -60,7 +59,7 @@ class controleursNewsletter extends controleursSuper {
       $cont = new modelesNewsletter();
       $verifNews = $cont->verifNewsletter($id_membre);
 
-      if($verifNews->rowCount() == 0){
+      if($verifNews == 0){
 
         $affichage = TRUE;
 

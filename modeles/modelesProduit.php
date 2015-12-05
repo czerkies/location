@@ -4,7 +4,7 @@ class modelesProduit extends modelesSuper {
 
   // ********** Affichage produit offres pages d'accueil ********** //
   public function affichageACC(){
-    
+
     // Faire ça a tout les modeles
     $produitACC = $this->connect_central_bdd()->query("SELECT s.titre, s.photo, s.ville, s.capacite,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
@@ -27,9 +27,7 @@ class modelesProduit extends modelesSuper {
   // ********** Affichage produit toutes nos offres ********** //
   public function affichageReservation(){
 
-    $pdo = $this->connect_central_bdd();
-
-    $produitOffre = $pdo->query("SELECT s.titre, s.photo, s.ville, s.capacite,
+    $produitOffre = $this->connect_central_bdd()->query("SELECT s.titre, s.photo, s.ville, s.capacite,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
       p.prix, p.id_produit
@@ -46,9 +44,7 @@ class modelesProduit extends modelesSuper {
   // ********** Insertion d'un produit depuis l'admin ********** //
   public function InsertionProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo){
 
-    $select = $this->connect_central_bdd();
-
-    $insertion = $select->prepare("INSERT INTO produit(date_arrivee, date_depart, id_salle, id_promo, prix) VALUES(:date_arrivee, :date_depart, :id_salle, :id_promo, :prix)");
+    $insertion = $this->connect_central_bdd()->prepare("INSERT INTO produit(date_arrivee, date_depart, id_salle, id_promo, prix) VALUES(:date_arrivee, :date_depart, :id_salle, :id_promo, :prix)");
 
     $insertion->bindValue(':date_arrivee', $date_arrivee, PDO::PARAM_STR);
     $insertion->bindValue(':date_depart', $date_depart, PDO::PARAM_STR);
@@ -63,9 +59,7 @@ class modelesProduit extends modelesSuper {
   // *********** Affichage produit administateur ********** //
   public function affichageProduitsAdmin(){
 
-    $recupProduitsAdmin = $this->connect_central_bdd();
-
-    $produitsAdmin = $recupProduitsAdmin->query("SELECT p.id_produit,
+    $produitsAdmin = $this->connect_central_bdd()->query("SELECT p.id_produit,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
       p.prix, p.id_produit, p.etat, s.id_salle, s.ville, s.pays, o.code_promo
@@ -83,9 +77,7 @@ class modelesProduit extends modelesSuper {
   // ********** Affichage produit administateur par date_arrivee DESC ********** //
   public function affichageProduitsAdminTypeOrder($type, $order){
 
-    $recupProduitsAdmin = $this->connect_central_bdd();
-
-    $typeOrder = $recupProduitsAdmin->query("SELECT p.id_produit,
+    $typeOrder = $this->connect_central_bdd()->query("SELECT p.id_produit,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
       p.prix, p.id_produit, p.etat, s.id_salle, s.ville, s.pays, o.code_promo
@@ -104,8 +96,8 @@ class modelesProduit extends modelesSuper {
   // ********** Suppréssion d'un produit Administrateur ********** //
   public function suppressionProduitAdmin($id_produit){
 
-    $del_sql = $this->connect_central_bdd();
-    $del = $del_sql->prepare("DELETE FROM produit WHERE id_produit = $id_produit");
+    $del = $this->connect_central_bdd()->prepare("DELETE FROM produit WHERE id_produit = $id_produit");
+
     $del->execute();
 
   }
@@ -113,9 +105,7 @@ class modelesProduit extends modelesSuper {
   // ********** Récupération produit par ID Administrateur ********** //
   public function recupProduitParID($id_produit){ // Récupérer les secondes SVP !
 
-    $recupProduitParID = $this->connect_central_bdd();
-
-    $produitID = $recupProduitParID->query("SELECT s.*,
+    $produitID = $this->connect_central_bdd()->query("SELECT s.*,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y %H:%i') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y %H:%i') AS date_depart,
       DATE_FORMAT(p.date_arrivee, '%Y-%m-%d') AS date_arriveeSQL,
@@ -126,16 +116,16 @@ class modelesProduit extends modelesSuper {
       AND p.id_produit = $id_produit
     ");
 
-    return $produitID;
+    $recupProduitParID = $produitID->fetch(PDO::FETCH_ASSOC);
+
+    return $recupProduitParID;
 
   }
 
   // ********** Mondification d'un Produit par Admin ********** //
   public function updateProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo, $id_produit){
 
-    $pdo = $this->connect_central_bdd();
-
-    $insertion = $pdo->prepare("UPDATE produit SET id_salle = :id_salle, date_arrivee = :date_arrivee, date_depart = :date_depart, prix = :prix, id_promo = :id_promo WHERE id_produit = $id_produit");
+    $insertion = $this->connect_central_bdd()->prepare("UPDATE produit SET id_salle = :id_salle, date_arrivee = :date_arrivee, date_depart = :date_depart, prix = :prix, id_promo = :id_promo WHERE id_produit = $id_produit");
 
     $insertion->bindValue(':id_salle', $id_salle, PDO::PARAM_INT);
     $insertion->bindValue(':date_arrivee', $date_arrivee, PDO::PARAM_STR);
@@ -150,9 +140,7 @@ class modelesProduit extends modelesSuper {
   // ********** Affichage Suggestion sur un Détail Produit ********** //
   public function searchSuggestionProduit($id_produit, $ville, $date_arrivee, $date_depart){
 
-    $pdo = $this->connect_central_bdd();
-
-    $recherche = $pdo->query("SELECT s.*,
+    $recherche = $this->connect_central_bdd()->query("SELECT s.*,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
       p.prix, p.id_produit, p.etat, p.id_promo
@@ -165,18 +153,16 @@ class modelesProduit extends modelesSuper {
       OR p.date_depart BETWEEN '$date_arrivee' AND '$date_depart')
       ");
 
-    return $recherche;
+    $suggestionsProduits = $recherche->fetchAll(PDO::FETCH_ASSOC);
 
-    #AND s.ville = '$ville'#
+    return $suggestionsProduits;
 
   }
 
   // ********** Mise a jour "Etat" du produit après validation du panier ********** //
   public function majEtatProduit($id_produit){
 
-    $pdo = $this->connect_central_bdd();
-
-    $insertion = $pdo->prepare("UPDATE produit SET etat = 1 WHERE id_produit = $id_produit");
+    $insertion = $this->connect_central_bdd()->prepare("UPDATE produit SET etat = 1 WHERE id_produit = $id_produit");
 
     $insertion->execute();
 

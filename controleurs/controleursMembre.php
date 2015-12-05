@@ -61,7 +61,7 @@ class controleursMembre extends controleursSuper {
         $msg .= "Veuillez saisir un Pseudo.<br>";
       } else {
         $verifPseudo = $cont->verifPseudo($_POST['pseudo']);
-        if($verifPseudo->rowCount() != 0){
+        if($verifPseudo != 0){
           $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
         }
       }
@@ -78,7 +78,7 @@ class controleursMembre extends controleursSuper {
         $msg .= "Veuillez saisir une adresse Email.<br>";
       } else {
         $verifMail = $cont->verifMail($_POST['email']);
-        if($verifMail->rowCount() != 0){
+        if($verifMail != 0){
           $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
         }
       }
@@ -151,7 +151,7 @@ class controleursMembre extends controleursSuper {
       } else {
         $cont = new modelesMembre();
         $verifeMail = $cont->verifMail($_POST['email']);
-        if($verifeMail->rowCount() == 0){
+        if($verifeMail == 0){
           $msg .= 'Cet email existe n\'existe pas.';
         } else {
 
@@ -212,9 +212,9 @@ class controleursMembre extends controleursSuper {
         $message .= '<br>De la part de '.$emailContact;
 
         $pdo = new modelesMembre();
-        $emailAdmin = $pdo->recupMailAdmin(PDO::FETCH_ASSOC);
-        $email = $emailAdmin->fetch();
-        mail($email['email'], $sujet, $message);
+        $emailAdmin = $pdo->recupMailAdmin();
+
+        mail($emailAdmin['email'], $sujet, $message);
         // CHECK = Demander à cecile sa requete pour mail pour voir si plus simple.
         // CHECK = Ajouter une condition pour l'envoie du message.
       }
@@ -246,7 +246,7 @@ class controleursMembre extends controleursSuper {
           $msg .= "Veuillez saisir un Pseudo.<br>";
         } else {
           $verifPseudoMAJ = $cont->verifPseudoMAJ($_POST['pseudo'], $id_membre);
-          if($verifPseudoMAJ->rowCount() != 0){
+          if($verifPseudoMAJ != 0){
             $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
           }
         }
@@ -260,7 +260,7 @@ class controleursMembre extends controleursSuper {
           $msg .= "Veuillez saisir une adresse Email.<br>";
         } else {
           $verifMailMAJ = $cont->verifMailMAJ($_POST['email'], $id_membre);
-          if($verifMailMAJ->rowCount() != 0){
+          if($verifMailMAJ != 0){
             $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
           }
         }
@@ -301,8 +301,7 @@ class controleursMembre extends controleursSuper {
       // Récupération des commandes par id_membre
 
       $commandesIdMembres = new modelesCommande();
-      $donnees = $commandesIdMembres->commandesMembres($_SESSION['membre']['id_membre']);
-      $commandes = $donnees->fetchAll(PDO::FETCH_ASSOC);
+      $commandes = $commandesIdMembres->commandesMembres($_SESSION['membre']['id_membre']);
 
     }
 

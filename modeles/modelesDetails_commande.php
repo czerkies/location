@@ -17,11 +17,13 @@ class modelesDetails_commande extends modelesSuper {
   // ********** Récupération détails d'une commande en détail ********** //
   public function detailsCommande($id_commande){
 
-    $client = $this->connect_central_bdd()->query("SELECT c.id_membre, c.id_commande, c.montant, m.*, DATE_FORMAT(c.date, '%d/%m/%Y à %Hh%i') as date_commande
+    $commande = $this->connect_central_bdd()->query("SELECT c.id_membre, c.id_commande, c.montant, m.*, DATE_FORMAT(c.date, '%d/%m/%Y à %Hh%i') as date_commande
     FROM commande c, membre m
     WHERE c.id_membre = m.id_membre
     AND c.id_commande = $id_commande
     ");
+
+    $client = $commande->fetch(PDO::FETCH_ASSOC);
 
     return $client;
 
@@ -38,7 +40,9 @@ class modelesDetails_commande extends modelesSuper {
     AND c.id_commande = $id_commande
     ");
 
-    return $produits;
+    $detailsProduits = $produits->fetchAll(PDO::FETCH_ASSOC);
+
+    return $detailsProduits;
 
   }
 

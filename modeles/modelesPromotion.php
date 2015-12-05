@@ -6,7 +6,10 @@ class modelesPromotion extends modelesSuper {
   public function affichageCodePromo(){
 
     $promos = $this->connect_central_bdd()->query("SELECT * FROM promotion");
-    return $promos;
+
+    $affichagePromosAdmin = $promos->fetchAll(PDO::FETCH_ASSOC);
+
+    return $affichagePromosAdmin;
 
   }
 
@@ -36,7 +39,10 @@ class modelesPromotion extends modelesSuper {
   public function verifPresencePromo($code_promo){
 
     $codeVerif = $this->connect_central_bdd()->query("SELECT id_promo FROM promotion WHERE code_promo = '$code_promo'");
-    return $codeVerif;
+
+    $nbCodeVerif = $codeVerif->rowCount();
+
+    return $nbCodeVerif;
 
   }
 
@@ -48,7 +54,9 @@ class modelesPromotion extends modelesSuper {
       WHERE o.id_promo = p.id_promo
       AND o.id_promo = $id_promo");
 
-    return $produitAssoc;
+    $nbProduitAssoc = $produitAssoc->rowCount();
+
+    return $nbProduitAssoc;
 
   }
 
@@ -56,7 +64,10 @@ class modelesPromotion extends modelesSuper {
   public function RecupValeurCodePromo($codePromo){
 
     $codePromo = $this->connect_central_bdd()->query("SELECT reduction FROM promotion WHERE code_promo = '$codePromo'");
-    return $codePromo;
+
+    $valeurPromo = $codePromo->fetch(PDO::FETCH_ASSOC);
+
+    return $valeurPromo;
 
   }
 
