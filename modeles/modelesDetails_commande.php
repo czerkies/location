@@ -5,9 +5,7 @@ class modelesDetails_commande extends modelesSuper {
   // ********** Insertion d'une commande en détails ********** //
   public function insertionDetails_commande($id_commande, $id_produit){
 
-    $pdo = $this->connect_central_bdd();
-
-    $insertion = $pdo->prepare("INSERT INTO details_commande(id_commande, id_produit) VALUES(:id_commande, :id_produit)");
+    $insertion = $this->connect_central_bdd()->prepare("INSERT INTO details_commande(id_commande, id_produit) VALUES(:id_commande, :id_produit)");
 
     $insertion->bindValue(':id_commande', $id_commande, PDO::PARAM_INT);
     $insertion->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
@@ -19,9 +17,7 @@ class modelesDetails_commande extends modelesSuper {
   // ********** Récupération détails d'une commande en détail ********** //
   public function detailsCommande($id_commande){
 
-    $pdo = $this->connect_central_bdd();
-
-    $client = $pdo->query("SELECT c.id_membre, c.id_commande, c.montant, m.*, DATE_FORMAT(c.date, '%d/%m/%Y à %Hh%i') as date_commande
+    $client = $this->connect_central_bdd()->query("SELECT c.id_membre, c.id_commande, c.montant, m.*, DATE_FORMAT(c.date, '%d/%m/%Y à %Hh%i') as date_commande
     FROM commande c, membre m
     WHERE c.id_membre = m.id_membre
     AND c.id_commande = $id_commande
@@ -34,9 +30,7 @@ class modelesDetails_commande extends modelesSuper {
   // ********** Récupération produits d'une commande en détail ********** //
   public function detailsCommandeProduits($id_commande){
 
-    $pdo = $this->connect_central_bdd();
-
-    $produits = $pdo->query("SELECT p.id_produit, p.prix, DATE_FORMAT(p.date_arrivee, '%d/%m/%Y à %Hh%i') as date_arrivee, DATE_FORMAT(p.date_depart, '%d/%m/%Y à %Hh%i') as date_depart, s.photo, s.capacite, s.titre, s.ville
+    $produits = $this->connect_central_bdd()->query("SELECT p.id_produit, p.prix, DATE_FORMAT(p.date_arrivee, '%d/%m/%Y à %Hh%i') as date_arrivee, DATE_FORMAT(p.date_depart, '%d/%m/%Y à %Hh%i') as date_depart, s.photo, s.capacite, s.titre, s.ville
     FROM commande c, details_commande d, produit p, salle s
     WHERE c.id_commande = d.id_commande
     AND d.id_produit = p.id_produit

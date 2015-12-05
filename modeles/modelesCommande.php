@@ -5,9 +5,7 @@ class modelesCommande extends modelesSuper {
   // ********** Insertion d'une commande ********** //
   public function insertionCommande($montant, $id_membre){
 
-    $pdo = $this->connect_central_bdd();
-
-    $insertion = $pdo->prepare("INSERT INTO commande(montant, id_membre, date) VALUES(:montant, :id_membre, NOW())");
+    $insertion = $this->connect_central_bdd()->prepare("INSERT INTO commande(montant, id_membre, date) VALUES(:montant, :id_membre, NOW())");
 
     $insertion->bindValue(':montant', $montant, PDO::PARAM_INT);
     $insertion->bindValue(':id_membre', $id_membre, PDO::PARAM_INT);
@@ -19,9 +17,7 @@ class modelesCommande extends modelesSuper {
   // ********** Numéro de commande en cours *********** //
   public function idCommande($id_membre){
 
-    $pdo = $this->connect_central_bdd();
-
-    $idCommande = $pdo->query("SELECT id_commande FROM commande WHERE id_membre = $id_membre ORDER BY id_commande DESC LIMIT 1");
+    $idCommande = $this->connect_central_bdd()->query("SELECT id_commande FROM commande WHERE id_membre = $id_membre ORDER BY id_commande DESC LIMIT 1");
 
     return $idCommande;
 
@@ -29,9 +25,7 @@ class modelesCommande extends modelesSuper {
   // ********** Récupération d'une commande ********** //
   public function detailsCommande($id_commande){
 
-    $pdo = $this->connect_central_bdd();
-
-    $commande = $pdp->query("SELECT c.id_commande, c.montant, d.id_produit
+    $commande = $this->connect_central_bdd()->query("SELECT c.id_commande, c.montant, d.id_produit
       FROM commande c, details_commande d
       WHERE s.id_commande = p.id_commande
       AND id_commande = $id_commande
@@ -43,9 +37,7 @@ class modelesCommande extends modelesSuper {
 
   public function commandesMembres($id_membre){
 
-    $pdo = $this->connect_central_bdd();
-
-    $commandes = $pdo->query("SELECT id_commande, DATE_FORMAT(date, '%d/%m/%Y') as date_commande FROM commande WHERE id_membre = $id_membre ORDER BY date DESC LIMIT 6");
+    $commandes = $this->connect_central_bdd()->query("SELECT id_commande, DATE_FORMAT(date, '%d/%m/%Y') as date_commande FROM commande WHERE id_membre = $id_membre ORDER BY date DESC LIMIT 6");
 
     return $commandes;
 

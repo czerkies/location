@@ -5,9 +5,7 @@ class modelesMembre extends modelesSuper {
   // ********** Récupérations de ID du membre pour la connexion ********** //
   public function recupMembre($pseudo, $mdp){
 
-    $pdo = $this->connect_central_bdd();
-
-    $connexion = $pdo->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND mdp = '$mdp'");
+    $connexion = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND mdp = '$mdp'");
     $donnees = $connexion->fetch(PDO::FETCH_ASSOC);
 
     return $donnees;
@@ -17,9 +15,7 @@ class modelesMembre extends modelesSuper {
   // ********** Insertion d'un nouveau membre ********** //
   public function insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse){
 
-    $select = $this->connect_central_bdd();
-
-    $insertion = $select->prepare("INSERT INTO membre(pseudo, mdp, nom, prenom, email, sexe, ville, cp, adresse) VALUES(:pseudo, :mdp, :nom, :prenom, :email, :sexe, :ville, :cp, :adresse)");
+    $insertion = $this->connect_central_bdd()->prepare("INSERT INTO membre(pseudo, mdp, nom, prenom, email, sexe, ville, cp, adresse) VALUES(:pseudo, :mdp, :nom, :prenom, :email, :sexe, :ville, :cp, :adresse)");
 
     $insertion->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
     $insertion->bindValue(':mdp', $mdp, PDO::PARAM_STR);
@@ -40,9 +36,7 @@ class modelesMembre extends modelesSuper {
   // *********** Récupération Mailadmin ********** //
   public function recupMailAdmin(){
 
-    $pdo = $this->connect_central_bdd();
-
-    $mailAdmin = $pdo->query("SELECT email FROM membre WHERE statut = 1");
+    $mailAdmin = $this->connect_central_bdd()->query("SELECT email FROM membre WHERE statut = 1");
 
     return $mailAdmin;
 
@@ -51,9 +45,7 @@ class modelesMembre extends modelesSuper {
   // *********** Vérification Pseudo ********** //
   public function verifPseudo($pseudo){
 
-    $pdo = $this->connect_central_bdd();
-
-    $pseudo = $pdo->query("SELECT * FROM membre WHERE pseudo = '$pseudo'");
+    $pseudo = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo'");
 
     return $pseudo;
 
@@ -62,9 +54,7 @@ class modelesMembre extends modelesSuper {
   // *********** Vérification Mail ********** //
   public function verifMail($email){
 
-    $pdo = $this->connect_central_bdd();
-
-    $mail = $pdo->query("SELECT * FROM membre WHERE email = '$email'");
+    $mail = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE email = '$email'");
 
     return $mail;
 

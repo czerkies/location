@@ -4,10 +4,9 @@ class modelesProduit extends modelesSuper {
 
   // ********** Affichage produit offres pages d'accueil ********** //
   public function affichageACC(){
-
-    $pdo = $this->connect_central_bdd();
-
-    $produitACC = $pdo->query("SELECT s.titre, s.photo, s.ville, s.capacite,
+    
+    // Faire ça a tout les modeles
+    $produitACC = $this->connect_central_bdd()->query("SELECT s.titre, s.photo, s.ville, s.capacite,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
       p.prix, p.id_produit
@@ -18,7 +17,10 @@ class modelesProduit extends modelesSuper {
       LIMIT 0,3
     ");
 
-    return $produitACC;
+    // Faire ça a tout les modeles
+    $produitsAccFetch = $produitACC->fetchAll(PDO::FETCH_ASSOC);
+
+    return $produitsAccFetch;
 
   }
 

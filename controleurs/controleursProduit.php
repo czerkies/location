@@ -76,8 +76,8 @@ class controleursProduit extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
     $cont = new modelesProduit();
-    $produit = $cont->affichageACC();
-    $lesProduits = $produit->fetchAll(PDO::FETCH_ASSOC);
+    $lesProduits = $cont->affichageACC();
+    // $lesProduits = $produit->fetchAll(PDO::FETCH_ASSOC);
 
     $this->Render('../vues/produit/accueil.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'lesProduits' => $lesProduits));
 
