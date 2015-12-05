@@ -15,7 +15,7 @@
 </div>
 <div id="details_avis">
   <h2>Avis</h2>
-  <?php while ($donnees = $affichageAvis->fetch(PDO::FETCH_ASSOC)) { ?>
+  <?php foreach($affichageAvis as $donnees) { ?>
     <div class="un_avis">
       <p class="un_avis_note"><?= $donnees['note']; ?>/10</p>
       <p class="un_avis_commentaire"><?= $donnees['commentaire']; ?></p>

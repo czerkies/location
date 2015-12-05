@@ -5,13 +5,15 @@ class modelesAvis extends modelesSuper {
   // ********** Récupere les avis de la salle du produit ********** //
   public function recuperationAvisSalle($id_salle){
 
-    $avis = $this->connect_central_bdd()->query("SELECT a.commentaire, a.note,
+    $donnees = $this->connect_central_bdd()->query("SELECT a.commentaire, a.note,
       DATE_FORMAT(a.date, '%d %M %Y') AS date, m.prenom
       FROM avis a, membre m
       WHERE a.id_membre = m.id_membre
       AND a.id_salle = $id_salle
     ");
-    //$avis = $recupById->query("SELECT * FROM avis WHERE id_salle IN(SELECT id_salle FROM salle WHERE id_salle IN(SELECT id_salle FROM produit WHERE id_salle = $id_salle))");
+
+    $avis = $donnees->fetchAll(PDO::FETCH_ASSOC);
+
     return $avis;
 
   }
@@ -32,8 +34,10 @@ class modelesAvis extends modelesSuper {
 
   // ********** Vérification présence avis ********* //
   public function verifAvisProduit($id_salle, $id_membre){
-    
-      $nbAvis = $this->connect_central_bdd()->query("SELECT id_avis, id_membre FROM avis WHERE id_salle = $id_salle AND id_membre = $id_membre");
+
+      $donnees = $this->connect_central_bdd()->query("SELECT id_avis, id_membre FROM avis WHERE id_salle = $id_salle AND id_membre = $id_membre");
+
+      $nbAvis = $donnees->rowCount();
 
       return $nbAvis;
 

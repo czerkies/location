@@ -4,7 +4,7 @@
     echo "Vous êtes déjà inscrit.";
   } else {
 ?>
-<?= $msg ?>
+<?= $msg; ?>
 <div id="inscription">
   <form class="" action="" method="post">
     <label for="mdpperdu">Afin de pouvoir réinitialiser votre mot de passe, vous devez nous fournir votre adresse email :</label>

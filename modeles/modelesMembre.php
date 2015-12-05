@@ -5,10 +5,11 @@ class modelesMembre extends modelesSuper {
   // ********** Récupérations de ID du membre pour la connexion ********** //
   public function recupMembre($pseudo, $mdp){
 
-    $connexion = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND mdp = '$mdp'");
-    $donnees = $connexion->fetch(PDO::FETCH_ASSOC);
+    $donnees = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND mdp = '$mdp'");
 
-    return $donnees;
+    $connexion = $donnees->fetch(PDO::FETCH_ASSOC);
+
+    return $connexion;
 
   }
 

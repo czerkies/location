@@ -144,8 +144,7 @@ class controleursSalles extends controleursSuper {
     if(isset($_GET['action']) && $_GET['action'] == 'ajouterSalle' || $_GET['action'] == 'modifierSalle'){
       $form = TRUE;
       $pdo_recup = new modelesSalles();
-      $salle = $pdo_recup->modifSalleID($id_salle);
-      $recupPourModif = $salle->fetch(PDO::FETCH_ASSOC);
+      $recupPourModif = $pdo_recup->modifSalleID($id_salle);
       $photo_bdd = $recupPourModif['photo'];
     } else {
       $form = FALSE;
@@ -210,8 +209,7 @@ class controleursSalles extends controleursSuper {
     }
 
     $pdo = new modelesSalles();
-    $salle = $pdo->modifSalleID($id_salle);
-    $recupPourModif = $salle->fetch(PDO::FETCH_ASSOC);
+    $recupPourModif = $pdo->modifSalleID($id_salle);
 
     $this->Render('../vues/salle/gestion_salles.php', array('recupPourModif' => $recupPourModif, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'tableau' => $tableau, 'form' => $form, 'msg' => $msg));
 
@@ -233,8 +231,7 @@ class controleursSalles extends controleursSuper {
       $id_salle = $_GET['id_salle'];
 
       $pdo = new modelesSalles();
-      $salle = $pdo->modifSalleID($id_salle);
-      $recupPourModif = $salle->fetch(PDO::FETCH_ASSOC);
+      $recupPourModif = $pdo->modifSalleID($id_salle);
     }
 
     $msg = '';
@@ -244,8 +241,7 @@ class controleursSalles extends controleursSuper {
     define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
 
     $supp = new modelesSalles();
-    $reqSalleActuelle = $supp->modifSalleID($id_salle);
-    $salleASupprimer = $reqSalleActuelle->fetch(PDO::FETCH_ASSOC);
+    $salleASupprimer = $supp->modifSalleID($id_salle);
     $chemin_photo = RACINE_SERVER . RACINE_SITE . $salleASupprimer['photo']; // nous avons besoin du chemin depuis la racine serveur pour supprimer la photo du serveur.
 
     if(!empty($salleASupprimer['photo']) && file_exists($chemin_photo)){

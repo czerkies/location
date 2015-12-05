@@ -14,7 +14,9 @@ class modelesSalles extends modelesSuper {
   // ********** Récupération salle par ID pour modification ********** //
   public function modifSalleID($id_salle){
 
-    $modifRecup = $this->connect_central_bdd()->query("SELECT * FROM salle WHERE id_salle = $id_salle");
+    $donnees = $this->connect_central_bdd()->query("SELECT * FROM salle WHERE id_salle = $id_salle");
+
+    $modifRecup = $donnees->fetch(PDO::FETCH_ASSOC);
 
     return $modifRecup;
 
@@ -65,6 +67,7 @@ class modelesSalles extends modelesSuper {
   public function suppressionSalle($id_salle){
 
     $del = $this->connect_central_bdd()->prepare("DELETE FROM salle WHERE id_salle = $id_salle");
+
     $del->execute();
 
   }

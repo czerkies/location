@@ -284,7 +284,7 @@ class controleursProduit extends controleursSuper {
       $id_membre = $_SESSION['membre']['id_membre'];
 
       $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
-      $form = ($nbAvis->rowCount() != 0) ? FALSE : TRUE;
+      $form = ($nbAvis != 0) ? FALSE : TRUE;
 
       if($form){
 
@@ -403,21 +403,19 @@ class controleursProduit extends controleursSuper {
         } else {
           $code_promo = $_POST['code_promo'];
           $reCodeID = new modelesPromotion();
-          $rechercheID = $reCodeID->verifPresencePromo($code_promo);
-          $nbCode = $rechercheID->fetch(PDO::FETCH_ASSOC);
+          $codeVerif = $reCodeID->verifPresencePromo($code_promo);
 
-          if($rechercheID->rowCount() === 0){
+          if($codeVerif['nbCodeVerif'] === 0){
             $msg .= 'Votre code n\'existe pas.';
           } else {
 
-            $id_promo = $nbCode['id_promo'];
-            $rechercheProduit = $reCodeID->VerifPromoProduit($id_promo);
-            $prod = $rechercheProduit->fetchAll(PDO::FETCH_ASSOC);
+            $id_promo = $codeVerif['dataCodeVerif']['id_promo'];
+            $produitAssoc = $reCodeID->VerifPromoProduit($id_promo);
 
             $produit = 0;
 
-            foreach ($prod as $key => $value) {
-              $produit .= array_search($prod[$key]['id_produit'], $_SESSION['panier']['id_produit']);
+            foreach ($produitAssoc as $key => $value) {
+              $produit .= array_search($produitAssoc[$key]['id_produit'], $_SESSION['panier']['id_produit']);
             }
 
             if($produit != FALSE){
@@ -472,28 +470,26 @@ class controleursProduit extends controleursSuper {
 
             $code_promo = $_POST['reduction'];
             $reCodeID = new modelesPromotion();
-            $rechercheID = $reCodeID->verifPresencePromo($code_promo);
-            $nbCode = $rechercheID->fetch(PDO::FETCH_ASSOC);
+            $codeVerif = $reCodeID->verifPresencePromo($code_promo);
 
-            if($rechercheID->rowCount() === 0){
+            if($codeVerif['nbCodeVerif'] === 0){
               $msg .= 'Votre code n\'existe pas.';
             } else {
 
-              $id_promo = $nbCode['id_promo'];
-              $rechercheProduit = $reCodeID->VerifPromoProduit($id_promo);
-              $prod = $rechercheProduit->fetchAll(PDO::FETCH_ASSOC);
+              $id_promo = $codeVerif['dataCodeVerif']['id_promo'];
+              $produitAssoc = $reCodeID->VerifPromoProduit($id_promo);
 
               $produit = 0;
 
-              foreach ($prod as $key => $value) {
-                $produit .= array_search($prod[$key]['id_produit'], $_SESSION['panier']['id_produit']);
+              foreach ($produitAssoc as $key => $value) {
+                $produit .= array_search($produitAssoc[$key]['id_produit'], $_SESSION['panier']['id_produit']);
               }
 
               if($produit != FALSE){
-                $msg .= '<br>Le code de réduction a bien été appliqué à votre commande.<br>';
+                $msg .= 'Code promotion appliqué sur le panier.<br>';
                 $codeProduitOk = TRUE;
               } else {
-                $msg .= "<br>Le code de réduction n'est plus valable car un de vos produits n'est plus dans le panier.<br>";
+                $msg .= 'Code promotion non trouvé.<br>';
                 $codeProduitOk = FALSE;
               }
 
@@ -530,7 +526,7 @@ class controleursProduit extends controleursSuper {
 
           // Récupération de la commande et coordonnées client
           $client = $details_commande->detailsCommande($numeroCommande['id_commande']);
-          var_dump($client);
+
           // Récupération des produits de la commande
           $produits = $details_commande->detailsCommandeProduits($numeroCommande['id_commande']);
 
