@@ -46,6 +46,24 @@ class modelesDetails_commande extends modelesSuper {
 
   }
 
+  // ********** Affichage details d'une commande Admin ********** //
+  public function detailsCommandeGestionAdmin($id_commande){
+
+    $donnees = $this->connect_central_bdd()->query("SELECT c.id_commande, c.montant, c.date, c.id_membre, m.pseudo, d.id_produit, s.id_salle, s.ville
+    FROM commande c, details_commande d, produit p, salle s, membre m
+    WHERE c.id_commande = d.id_commande
+    AND d.id_produit = p.id_produit
+    AND p.id_salle = s.id_salle
+    AND c.id_membre = m.id_membre
+    AND c.id_commande = $id_commande
+    ");
+
+    $detailsCommandeGestion = $donnees->fetchAll(PDO::FETCH_ASSOC);
+
+    return $detailsCommandeGestion;
+
+  }
+
   // ********** Affichage produit offres pages d'accueil ********** //
   /* public function affichageACC(){
 

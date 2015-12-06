@@ -9,6 +9,8 @@ class controleursCommande extends controleursSuper {
 
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $detailsCommandeDisplay = FALSE;
+    $detailsCommandeID = FALSE;
     $msg = '';
 
     $pdo = new modelesCommande();
@@ -22,7 +24,20 @@ class controleursCommande extends controleursSuper {
       $totalCA += $value['montant'];
     }
 
-    $this->Render('../vues/commande/gestion_commandes.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA));
+    // Affichage d'une commande en détail.
+    if(isset($_GET['details_commande']) && !empty($_GET['details_commande'])){
+
+      $idDetailsCommande = htmlentities($_GET['details_commande']);
+
+      $details = new modelesDetails_commande();
+
+      $detailsCommandeID = $details->detailsCommandeGestionAdmin($idDetailsCommande);
+
+      $detailsCommandeDisplay = TRUE;
+
+    }
+
+    $this->Render('../vues/commande/gestion_commandes.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA, 'detailsCommandeID' => $detailsCommandeID, 'detailsCommandeDisplay' => $detailsCommandeDisplay));
 
   }
 
