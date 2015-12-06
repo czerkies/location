@@ -2,6 +2,21 @@
 
 class modelesAvis extends modelesSuper {
 
+  // ********** Récupere tout les les avis ********** //
+  public function lesAvis(){
+
+    $donnees = $this->connect_central_bdd()->query("SELECT a.commentaire, a.note, a.id_salle,
+      DATE_FORMAT(a.date, '%d %M %Y à %Hh%i') AS date, m.prenom
+      FROM avis a, membre m
+      WHERE a.id_membre = m.id_membre
+    ");
+
+    $lesAvis = $donnees->fetchAll(PDO::FETCH_ASSOC);
+
+    return $lesAvis;
+
+  }
+
   // ********** Récupere les avis de la salle du produit ********** //
   public function recuperationAvisSalle($id_salle){
 
