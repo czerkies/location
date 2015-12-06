@@ -5,10 +5,11 @@ class modelesAvis extends modelesSuper {
   // ********** Récupere tout les les avis ********** //
   public function lesAvis(){
 
-    $donnees = $this->connect_central_bdd()->query("SELECT a.commentaire, a.note, a.id_salle,
+    $donnees = $this->connect_central_bdd()->query("SELECT a.id_avis, a.commentaire, a.note, a.id_salle,
       DATE_FORMAT(a.date, '%d %M %Y à %Hh%i') AS date, m.prenom
       FROM avis a, membre m
       WHERE a.id_membre = m.id_membre
+      ORDER BY date
     ");
 
     $lesAvis = $donnees->fetchAll(PDO::FETCH_ASSOC);

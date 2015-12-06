@@ -7,6 +7,7 @@
       <th>Commentaire</th>
       <th>Note</th>
       <th>Date de l'avis</th>
+      <th>Supprimer</th>
     </thead>
     <tbody>
       <?php foreach ($listeAvis as $value) { ?>
@@ -16,6 +17,7 @@
           <td><?= $value['commentaire']; ?></td>
           <td><?= $value['note']; ?>/10</td>
           <td><?= $value['date']; ?></td>
+          <td><a href="routeur.php?controleurs=avis&action=gestionAvis&supp=<?= $value['id_avis']; ?>">X</a></td>
         </tr>
       <?php } ?>
     </tbody>
