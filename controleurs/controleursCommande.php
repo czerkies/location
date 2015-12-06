@@ -31,13 +31,14 @@ class controleursCommande extends controleursSuper {
 
       $details = new modelesDetails_commande();
 
+      $client = $details->detailsCommande($idDetailsCommande);
       $detailsCommandeID = $details->detailsCommandeGestionAdmin($idDetailsCommande);
 
       $detailsCommandeDisplay = TRUE;
 
     }
 
-    $this->Render('../vues/commande/gestion_commandes.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA, 'detailsCommandeID' => $detailsCommandeID, 'detailsCommandeDisplay' => $detailsCommandeDisplay));
+    $this->Render('../vues/commande/gestion_commandes.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA, 'client' => $client, 'detailsCommandeID' => $detailsCommandeID, 'detailsCommandeDisplay' => $detailsCommandeDisplay));
 
   }
 

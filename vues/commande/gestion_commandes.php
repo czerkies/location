@@ -1,29 +1,32 @@
 <div class="">
   <h1>Gestions des commandes</h1>
   <?php if($detailsCommandeDisplay){ ?>
+    <div class="">
+      <p>Numéro de commande : <?= $client['id_commande']; ?>.</p>
+      <p>Client : <?= strtoupper($client['nom']); ?> <?= ucfirst($client['prenom']); ?>.</p>
+      <p>Adresse : <?= $client['adresse']; ?>, <?= $client['cp']; ?> <?= $client['ville']; ?>.</p>
+      <p>Commande passé le <?= $client['date_commande']; ?>.</p>
+      <p>Montant : <?= $client['montant']; ?> € TTC.</p>
+    </div>
     <table border="1">
       <thead>
-        <th>ID Commande</th>
-        <th>Montant</th>
-        <th>Date</th>
-        <th>ID Membre</th>
-        <th>Pseudo</th>
         <th>ID Produit</th>
+        <th>Prix</th>
+        <th>Date</th>
         <th>ID Salle</th>
+        <th>Titre</th>
         <th>Ville</th>
       </thead>
-        <tbody>
+      <tbody>
       <?php foreach ($detailsCommandeID as $value) { ?>
-          <tr>
-            <td><?= $value['id_commande']; ?></td>
-            <td><?= $value['montant']; ?></td>
-            <td><?= $value['date']; ?></td>
-            <td><?= $value['id_membre']; ?></td>
-            <td><?= $value['pseudo']; ?></td>
-            <td><?= $value['id_produit']; ?></td>
-            <td><?= $value['id_salle']; ?></td>
-            <td><?= $value['ville']; ?></td>
-          <tr>
+        <tr>
+          <td><?= $value['id_produit']; ?></td>
+          <td><?= $value['prix']*= 1.20; ?> € TTC</td>
+          <td><?= $value['date']; ?></td>
+          <td><?= $value['id_salle']; ?></td>
+          <td><?= $value['titre']; ?></td>
+          <td><?= $value['ville']; ?></td>
+        <tr>
       <?php } ?>
       </tbody>
     </table>
