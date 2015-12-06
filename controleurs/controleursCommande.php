@@ -11,6 +11,7 @@ class controleursCommande extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $detailsCommandeDisplay = FALSE;
     $detailsCommandeID = FALSE;
+    $client = FALSE;
     $msg = '';
 
     $pdo = new modelesCommande();
