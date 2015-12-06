@@ -2,8 +2,8 @@
 
 class modelesAvis extends modelesSuper {
 
-  // ********** Récupere tout les les avis ********** //
-  public function lesAvis(){
+  // ********** Récupere tout les les avis Admin ********** //
+  public function lesAvisAdmin(){
 
     $donnees = $this->connect_central_bdd()->query("SELECT a.id_avis, a.commentaire, a.note, a.id_salle,
       DATE_FORMAT(a.date, '%d %M %Y à %Hh%i') AS date, m.prenom
@@ -15,6 +15,15 @@ class modelesAvis extends modelesSuper {
     $lesAvis = $donnees->fetchAll(PDO::FETCH_ASSOC);
 
     return $lesAvis;
+
+  }
+
+  // ********** Suppresion Avis Admin ********** //
+  public function suppressionAvisAdmin($id_avis){
+
+    $del = $this->connect_central_bdd()->prepare("DELETE FROM avis WHERE id_avis = $id_avis");
+
+    $del->execute();
 
   }
 
