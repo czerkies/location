@@ -1,4 +1,5 @@
 <div class="">
+  <?php if($userConnectAdmin){ ?>
   <h1>Gestions des commandes</h1>
   <?php if($detailsCommandeDisplay){ ?>
     <div class="">
@@ -50,4 +51,5 @@
   <div class="">
     <p>Le chiffre d'affaires (CA) de notre société est de : <?= $totalCA; ?> €.</p>
   </div>
+  <?php } ?>
 </div>
