@@ -49,7 +49,7 @@ class modelesDetails_commande extends modelesSuper {
   // ********** Affichage details d'une commande Admin ********** //
   public function detailsCommandeGestionAdmin($id_commande){
 
-    $donnees = $this->connect_central_bdd()->query("SELECT p.id_produit, p.prix, DATE_FORMAT(c.date, '%d/%m/%Y') as date, s.id_salle, s.titre, s.ville
+    $donnees = $this->connect_central_bdd()->query("SELECT p.id_produit, p.prix, DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') as date_arrivee, DATE_FORMAT(p.date_depart, '%d/%m/%Y') as date_depart, s.id_salle, s.titre, s.ville
     FROM commande c, details_commande d, produit p, salle s
     WHERE c.id_commande = d.id_commande
     AND d.id_produit = p.id_produit

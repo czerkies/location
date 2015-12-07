@@ -22,11 +22,11 @@
         <tr>
           <td><?= $value['id_produit']; ?></td>
           <td><?= $value['prix']*= 1.20; ?> € TTC</td>
-          <td><?= $value['date']; ?></td>
+          <td>Du <?= $value['date_arrivee']; ?> au <?= $value['date_depart']; ?></td>
           <td><?= $value['id_salle']; ?></td>
           <td><?= $value['titre']; ?></td>
           <td><?= $value['ville']; ?></td>
-        <tr>
+        </tr>
       <?php } ?>
       </tbody>
     </table>
