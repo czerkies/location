@@ -327,9 +327,7 @@ class controleursMembre extends controleursSuper {
 
       $id_membre = htmlentities($_GET['suppMembre']);
 
-      $suppMembre = $pdo->supprimerMembreAdmin($id_membre);
-
-      if($suppMembre){
+      if($pdo->supprimerMembreAdmin($id_membre)){
 
         $msg .= 'Le membre a bien été supprimé.';
 

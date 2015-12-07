@@ -3,11 +3,13 @@
   <h1>Gestions des commandes</h1>
   <?php if($detailsCommandeDisplay){ ?>
     <div class="">
-      <p>Numéro de commande : <?= $client['id_commande']; ?>.</p>
+      <p>Numéro de commande : <?php if(isset($_GET['details_commande'])) echo $_GET['details_commande']; ?>.</p>
+      <?php if($client) { ?>
       <p>Client : <?= strtoupper($client['nom']); ?> <?= ucfirst($client['prenom']); ?>.</p>
       <p>Adresse : <?= $client['adresse']; ?>, <?= $client['cp']; ?> <?= $client['ville']; ?>.</p>
       <p>Commande passé le <?= $client['date_commande']; ?>.</p>
       <p>Montant : <?= $client['montant']; ?> € TTC.</p>
+      <?php } ?>
     </div>
     <table border="1">
       <thead>
