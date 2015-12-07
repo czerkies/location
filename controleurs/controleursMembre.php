@@ -327,10 +327,19 @@ class controleursMembre extends controleursSuper {
 
       $id_membre = htmlentities($_GET['suppMembre']);
 
-      $pdo->supprimerMembreAdmin($id_membre);
-      $listeMembres = $pdo->lesMembresAdmin();
+      $suppMembre = $pdo->supprimerMembreAdmin($id_membre);
 
-      $msg .= 'Le membre a bien été supprimé.';
+      if($suppMembre){
+
+        $msg .= 'Le membre a bien été supprimé.';
+
+      } else {
+
+        $msg .= 'Vous ne pouvez pas supprimer ce membre';
+
+      }
+
+      $listeMembres = $pdo->lesMembresAdmin();
 
     }
 

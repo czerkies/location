@@ -131,9 +131,20 @@ class modelesMembre extends modelesSuper {
   // ********** Supprésion d'un membre Admin ********** //
   public function supprimerMembreAdmin($id_membre){
 
-    $suppressionMembre = $this->connect_central_bdd()->prepare("DELETE FROM membre WHERE statut = 0 AND id_membre = $id_membre");
+    $donnees = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE statut = 0 AND id_membre = $id_membre");
 
-    $suppressionMembre->execute();
+    $suppMembre = ($donnees->rowCount() != 0) ? TRUE : FALSE;
+
+    // Si aucun membre admin n'est trouvés alors la suppréssion sera effectué.
+    if($suppMembre){
+
+      $suppressionMembre = $this->connect_central_bdd()->prepare("DELETE FROM membre WHERE statut = 0 AND id_membre = $id_membre");
+
+      $suppressionMembre->execute();
+
+    }
+
+    return $suppMembre;
 
   }
 

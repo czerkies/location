@@ -20,8 +20,8 @@
           <td><?= $value['statut']; ?></td>
           <td><?= $value['sexe']; ?></td>
           <td><?php if($value['statut'] == 0) { ?>
-            <a href="routeur.php?controleurs=membre&action=gestionMembres&suppMembre=<?= $value['id_membre']; ?>">X</a></td>
-            <?php } ?>
+            <a href="routeur.php?controleurs=membre&action=gestionMembres&suppMembre=<?= $value['id_membre']; ?>">X</a>
+          <?php } ?></td>
         </tr>
       <?php } ?>
     </tbody>
