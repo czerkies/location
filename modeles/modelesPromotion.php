@@ -42,7 +42,7 @@ class modelesPromotion extends modelesSuper {
 
     $dataCodeVerif = $donnees->fetch(PDO::FETCH_ASSOC);
 
-    $nbCodeVerif = $donnees->rowCount();
+    $nbCodeVerif = ($donnees->rowCount() === 0) ? FALSE : TRUE;
 
     return $codeVerif = array('dataCodeVerif' => $dataCodeVerif, 'nbCodeVerif' => $nbCodeVerif);
 

@@ -323,6 +323,22 @@ class controleursProduit extends controleursSuper {
 
   }
 
+  // ********** Controle présence d'un code produit dans le panier ********** //
+  public function verifPromoPanier($id_promo){
+
+    $reCodeID = new modelesPromotion();
+    $produitAssoc = $reCodeID->VerifPromoProduit($id_promo);
+
+    $produit = 0;
+
+    foreach ($produitAssoc as $key => $value) {
+      $produit .= array_search($produitAssoc[$key]['id_produit'], $_SESSION['panier']['id_produit']);
+    }
+
+    return $produit;
+
+  }
+
   // ********** Page d'affichage réservation d'un produit ********** //
   public function affichagePanier(){
 
@@ -396,29 +412,23 @@ class controleursProduit extends controleursSuper {
         }
       }
 
+      // Si un code produit est appliqué
       if(isset($_POST['promo'])){
 
-        if(!isset($_POST['code_promo']) || empty($_POST['code_promo'])){
+        if(empty($_POST['code_promo'])){
           $msg .= 'Veuillez saisir une code promo.';
         } else {
           $code_promo = $_POST['code_promo'];
           $reCodeID = new modelesPromotion();
           $codeVerif = $reCodeID->verifPresencePromo($code_promo);
 
-          if($codeVerif['nbCodeVerif'] === 0){
+          if(!$codeVerif['nbCodeVerif']){
             $msg .= 'Votre code n\'existe pas.';
           } else {
 
             $id_promo = $codeVerif['dataCodeVerif']['id_promo'];
-            $produitAssoc = $reCodeID->VerifPromoProduit($id_promo);
 
-            $produit = 0;
-
-            foreach ($produitAssoc as $key => $value) {
-              $produit .= array_search($produitAssoc[$key]['id_produit'], $_SESSION['panier']['id_produit']);
-            }
-
-            if($produit != FALSE){
+            if($this->verifPromoPanier($id_promo)){
               $msg .= 'Code promotion appliqué sur le panier.<br>';
               $codeProduitOk = TRUE;
             } else {
@@ -472,7 +482,7 @@ class controleursProduit extends controleursSuper {
             $reCodeID = new modelesPromotion();
             $codeVerif = $reCodeID->verifPresencePromo($code_promo);
 
-            if($codeVerif['nbCodeVerif'] === 0){
+            if(!$codeVerif['nbCodeVerif']){
               $msg .= 'Votre code n\'existe pas.';
             } else {
 
@@ -485,7 +495,7 @@ class controleursProduit extends controleursSuper {
                 $produit .= array_search($produitAssoc[$key]['id_produit'], $_SESSION['panier']['id_produit']);
               }
 
-              if($produit != FALSE){
+              if($this->verifPromoPanier($id_promo)){
                 $msg .= 'Code promotion appliqué sur le panier.<br>';
                 $codeProduitOk = TRUE;
               } else {
