@@ -309,4 +309,33 @@ class controleursMembre extends controleursSuper {
 
   }
 
+  // ********* Gestions des Membres ********** //
+  public function gestionMembres(){
+
+    session_start();
+
+    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
+    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $msg = '';
+
+    $pdo = new modelesMembre();
+
+    $listeMembres = $pdo->lesMembresAdmin();
+
+    // Suppréssion d'un membre
+    if(isset($_GET['suppMembre']) && !empty($_GET['suppMembre'])){
+
+      $id_membre = htmlentities($_GET['suppMembre']);
+
+      $pdo->supprimerMembreAdmin($id_membre);
+      $listeMembres = $pdo->lesMembresAdmin();
+
+      $msg .= 'Le membre a bien été supprimé.';
+
+    }
+
+    $this->Render('../vues/membre/gestion_membres.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres));
+
+  }
+
 }

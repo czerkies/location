@@ -117,4 +117,24 @@ class modelesMembre extends modelesSuper {
 
   }
 
+  // *********** Récupération liste membres Admin ********** //
+  public function lesMembresAdmin(){
+
+    $donnees = $this->connect_central_bdd()->query("SELECT * FROM membre");
+
+    $listeMembres = $donnees->fetchAll(PDO::FETCH_ASSOC);
+
+    return $listeMembres;
+
+  }
+
+  // ********** Supprésion d'un membre Admin ********** //
+  public function supprimerMembreAdmin($id_membre){
+
+    $suppressionMembre = $this->connect_central_bdd()->prepare("DELETE FROM membre WHERE statut = 0 AND id_membre = $id_membre");
+
+    $suppressionMembre->execute();
+
+  }
+
 }
