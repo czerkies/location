@@ -28,8 +28,8 @@ class controleursPromotion extends controleursSuper {
           $msg .= "Veuillez saisir un code promo à 6 chiffre maximum<br>";
         } else {
           $cont = new modelesPromotion();
-          $verifCodePromo = $cont->verifPresencePromo($code_promo);
-          if($verifCodePromo != 0){
+
+          if($cont->verifPresencePromo($code_promo)){
             $msg .= "Le code promotion que vous avez saisis est déjà existante.<br>";
           }
         }
@@ -80,9 +80,7 @@ class controleursPromotion extends controleursSuper {
 
         $id_promo = htmlentities($_GET['supprimer']);
 
-        $confirmSiProduit = $bdd->VerifPromoProduit($id_promo);
-
-        if($confirmSiProduit === 0){
+        if($bdd->VerifPromoProduit($id_promo)){
 
           $bdd->SuppPromo($id_promo);
           $msg .= "Votre code promo a bien été supprimé.";

@@ -31,6 +31,7 @@ class modelesPromotion extends modelesSuper {
   public function SuppPromo($id_promo){
 
     $del = $this->connect_central_bdd()->prepare("DELETE FROM promotion WHERE id_promo = $id_promo");
+
     $del->execute();
 
   }
@@ -40,11 +41,9 @@ class modelesPromotion extends modelesSuper {
 
     $donnees = $this->connect_central_bdd()->query("SELECT id_promo FROM promotion WHERE code_promo = '$code_promo'");
 
-    $dataCodeVerif = $donnees->fetch(PDO::FETCH_ASSOC);
-
     $nbCodeVerif = ($donnees->rowCount() === 0) ? FALSE : TRUE;
 
-    return $codeVerif = array('dataCodeVerif' => $dataCodeVerif, 'nbCodeVerif' => $nbCodeVerif);
+    return $nbCodeVerif;
 
   }
 
@@ -56,7 +55,7 @@ class modelesPromotion extends modelesSuper {
       WHERE o.id_promo = p.id_promo
       AND o.id_promo = $id_promo");
 
-    $ProduitAssoc = $donnees->fetchAll(PDO::FETCH_ASSOC);
+    $ProduitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
 
     return $ProduitAssoc;
 
