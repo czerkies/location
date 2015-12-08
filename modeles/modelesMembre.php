@@ -14,9 +14,9 @@ class modelesMembre extends modelesSuper {
   }
 
   // ********** Insertion d'un nouveau membre ********** //
-  public function insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse){
+  public function insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $statut){
 
-    $insertion = $this->connect_central_bdd()->prepare("INSERT INTO membre(pseudo, mdp, nom, prenom, email, sexe, ville, cp, adresse) VALUES(:pseudo, :mdp, :nom, :prenom, :email, :sexe, :ville, :cp, :adresse)");
+    $insertion = $this->connect_central_bdd()->prepare("INSERT INTO membre(pseudo, mdp, nom, prenom, email, sexe, ville, cp, adresse, statut) VALUES(:pseudo, :mdp, :nom, :prenom, :email, :sexe, :ville, :cp, :adresse, :statut)");
 
     $insertion->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
     $insertion->bindValue(':mdp', $mdp, PDO::PARAM_STR);
@@ -27,6 +27,7 @@ class modelesMembre extends modelesSuper {
     $insertion->bindValue(':ville', $ville, PDO::PARAM_STR);
     $insertion->bindValue(':cp', $cp, PDO::PARAM_STR);
     $insertion->bindValue(':adresse', $adresse, PDO::PARAM_STR);
+    $insertion->bindValue(':statut', $statut, PDO::PARAM_INT);
 
     $insertion->execute();
 

@@ -5,7 +5,7 @@
   } else {
 ?>
 <?= $msg ?>
-<div id="inscription">
+<div class="inscription">
   <form class="" action="" method="post">
     <input type="text" name="pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} ?>" placeholder="Pseudo" required>
     <input type="password" name="mdp" value="" placeholder="Mot de passe" required>

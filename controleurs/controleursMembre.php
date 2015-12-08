@@ -2,6 +2,55 @@
 
 class controleursMembre extends controleursSuper {
 
+  // ********** Controle du formulaire de la création de membre ********** //
+  public function verifFormMembre($value){
+
+    $msg = '';
+
+    $cont = new modelesMembre();
+
+    if(empty($value['pseudo'])){
+      $msg .= "Veuillez saisir un Pseudo.<br>";
+    } else {
+      $verifPseudo = $cont->verifPseudo($value['pseudo']);
+      if($verifPseudo != 0){
+        $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
+      }
+    }
+    if(empty($value['mdp'])){
+      $msg .= "Veuillez saisir un Mot de passe.<br>";
+    }
+    if(empty($value['nom'])){
+      $msg .= "Veuillez saisir un Nom.<br>";
+    }
+    if(empty($value['prenom'])){
+      $msg .= "Veuillez saisir un Prénom.<br>";
+    }
+    if(empty($value['email'])){
+      $msg .= "Veuillez saisir une adresse Email.<br>";
+    } else {
+      $verifMail = $cont->verifMail($value['email']);
+      if($verifMail != 0){
+        $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
+      }
+    }
+    if(empty($value['sexe'])){
+      $msg .= "Veuillez saisir votre Sexe.<br>";
+    }
+    if(empty($value['ville'])){
+      $msg .= "Veuillez saisir une Ville.<br>";
+    }
+    if(empty($value['cp'])){
+      $msg .= "Veuillez saisir votre Code Postal.<br>";
+    }
+    if(empty($value['adresse'])){
+      $msg .= "Veuillez saisir une Adresse.<br>";
+    }
+
+    return $msg;
+
+  }
+
   // ********** Affichage des produits sur la page d'accueil ********** //
   public function connexionMembre(){
 
@@ -53,47 +102,9 @@ class controleursMembre extends controleursSuper {
     $msg = '';
     $insert = '';
 
-    $cont = new modelesMembre();
-
     if(isset($_POST) && !empty($_POST)){
 
-      if(empty($_POST['pseudo'])){
-        $msg .= "Veuillez saisir un Pseudo.<br>";
-      } else {
-        $verifPseudo = $cont->verifPseudo($_POST['pseudo']);
-        if($verifPseudo != 0){
-          $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
-        }
-      }
-      if(empty($_POST['mdp'])){
-        $msg .= "Veuillez saisir un Mot de passe.<br>";
-      }
-      if(empty($_POST['nom'])){
-        $msg .= "Veuillez saisir un Nom.<br>";
-      }
-      if(empty($_POST['prenom'])){
-        $msg .= "Veuillez saisir un Prénom.<br>";
-      }
-      if(empty($_POST['email'])){
-        $msg .= "Veuillez saisir une adresse Email.<br>";
-      } else {
-        $verifMail = $cont->verifMail($_POST['email']);
-        if($verifMail != 0){
-          $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
-        }
-      }
-      if(empty($_POST['sexe'])){
-        $msg .= "Veuillez saisir votre Sexe.<br>";
-      }
-      if(empty($_POST['ville'])){
-        $msg .= "Veuillez saisir une Ville.<br>";
-      }
-      if(empty($_POST['cp'])){
-        $msg .= "Veuillez saisir votre Code Postal.<br>";
-      }
-      if(empty($_POST['adresse'])){
-        $msg .= "Veuillez saisir une Adresse.<br>";
-      }
+      $msg = $this->verifFormMembre($_POST);
 
       if(empty($msg)){
 
@@ -104,7 +115,7 @@ class controleursMembre extends controleursSuper {
 
         $cont = new modelesMembre();
 
-        $insertion = $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse);
+        $insertion = $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 0);
 
       }
 
@@ -309,13 +320,14 @@ class controleursMembre extends controleursSuper {
 
   }
 
-  // ********* Gestions des Membres ********** //
+  // ********* Gestions des Membres Admin ********** //
   public function gestionMembres(){
 
     session_start();
 
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $ajouterMembre = FALSE;
     $msg = '';
 
     $pdo = new modelesMembre();
@@ -341,7 +353,35 @@ class controleursMembre extends controleursSuper {
 
     }
 
-    $this->Render('../vues/membre/gestion_membres.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres));
+    // Ajout membre Administrateur
+    if(isset($_GET['ajouter']) && !empty($_GET['ajouter'])){
+
+      $ajouterMembre = TRUE;
+
+      if(isset($_POST) && !empty($_POST)){
+
+        $msg = $this->verifFormMembre($_POST);
+
+        if(empty($msg)){
+
+          foreach ($_POST as $key => $value){
+            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+          }
+          extract($_POST);
+
+          $cont = new modelesMembre();
+
+          $insertion = $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 1);
+
+          $listeMembres = $pdo->lesMembresAdmin();
+
+        }
+
+      }
+
+    }
+
+    $this->Render('../vues/membre/gestion_membres.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres, 'ajouterMembre' => $ajouterMembre));
 
   }
 
