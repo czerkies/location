@@ -11,6 +11,7 @@
       <ul>
         <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=produit&action=produitACC">Accueil</a></li>
         <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=produit&action=produitReservation">Réservations</a></li>
+        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=produit&action=rechercheProduit">Recherche</a></li>
         <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=connexionMembre">Connexion</a></li>
         <?php if($userConnect || $userConnectAdmin){ ?>
         <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=profilMembre">Profil</a></li>

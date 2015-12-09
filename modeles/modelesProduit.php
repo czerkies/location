@@ -168,4 +168,26 @@ class modelesProduit extends modelesSuper {
 
   }
 
+  // ********** Recherche de produits ********** //
+  public function requeteRecherche($date){
+
+    $donnees = $this->connect_central_bdd()->query("SELECT s.titre, s.photo, s.ville, s.capacite,
+      DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
+      DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
+      p.prix, p.id_produit
+      FROM salle s, produit p
+      WHERE s.id_salle = p.id_salle
+      AND p.etat = 0
+      AND p.date_arrivee >= NOW()
+      AND p.date_arrivee > '$date'
+      ORDER BY p.date_arrivee");
+
+    $listeProduits = $donnees->fetchAll(PDO::FETCH_ASSOC);
+
+    $nbProduits = $donnees->rowCount();
+
+    return $produits = array('listeProduits' => $listeProduits, 'nbProduits' => $nbProduits);
+
+  }
+
 }

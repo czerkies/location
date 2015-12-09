@@ -620,4 +620,34 @@ class controleursProduit extends controleursSuper {
 
   }
 
+  // ********** Recherche de produit *********** //
+  public function rechercheProduit(){
+
+    session_start();
+    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
+    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $form = (!$userConnect) ? FALSE : TRUE;
+    $produits = FALSE;
+    $msg = '';
+
+    if(isset($_POST) && !empty($_POST)){
+
+      foreach ($_POST as $key => $value){
+        $_POST[$key] = htmlentities($value, ENT_QUOTES);
+      }
+
+      extract($_POST);
+
+      $date_arrivee = $_POST['recherche_date_A'].'-'.$_POST['recherche_date_M'].'-'.$_POST['recherche_date_J'];
+
+      $donnees = new modelesProduit();
+
+      $produits = $donnees->requeteRecherche($date_arrivee);
+
+    }
+
+    $this->Render('../vues/produit/recherche.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'produits' => $produits));
+
+  }
+
 }
