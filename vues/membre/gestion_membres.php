@@ -5,6 +5,7 @@
   <table border="1">
     <thead>
       <th>ID Membre</th>
+      <th>Pseudo</th>
       <th>Nom</th>
       <th>Prénom</th>
       <th>Statut</th>
@@ -15,6 +16,7 @@
       <?php foreach ($listeMembres as $value) { ?>
         <tr>
           <td><?= $value['id_membre']; ?></td>
+          <td><?= $value['pseudo']; ?></td>
           <td><?= strtoupper($value['nom']); ?></td>
           <td><?= ucfirst($value['prenom']); ?></td>
           <td><?= $value['statut']; ?></td>

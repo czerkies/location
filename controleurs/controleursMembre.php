@@ -12,8 +12,7 @@ class controleursMembre extends controleursSuper {
     if(empty($value['pseudo'])){
       $msg .= "Veuillez saisir un Pseudo.<br>";
     } else {
-      $verifPseudo = $cont->verifPseudo($value['pseudo']);
-      if($verifPseudo != 0){
+      if(!$cont->verifPseudo($value['pseudo'])){
         $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
       }
     }
@@ -29,8 +28,7 @@ class controleursMembre extends controleursSuper {
     if(empty($value['email'])){
       $msg .= "Veuillez saisir une adresse Email.<br>";
     } else {
-      $verifMail = $cont->verifMail($value['email']);
-      if($verifMail != 0){
+      if(!$cont->verifMail($value['email'])){
         $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
       }
     }
@@ -115,7 +113,7 @@ class controleursMembre extends controleursSuper {
 
         $cont = new modelesMembre();
 
-        $insertion = $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 0);
+        $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 0);
 
       }
 
@@ -161,8 +159,7 @@ class controleursMembre extends controleursSuper {
         $msg .= 'Vous devez saisir une adresse email.';
       } else {
         $cont = new modelesMembre();
-        $verifeMail = $cont->verifMail($_POST['email']);
-        if($verifeMail == 0){
+        if($cont->verifMail($_POST['email'])){
           $msg .= 'Cet email existe n\'existe pas.';
         } else {
 
@@ -172,7 +169,7 @@ class controleursMembre extends controleursSuper {
           $mdp = substr($mdp_sch, 0, 12);
 
           $nouveauMdp = new modelesMembre();
-          $insertion = $nouveauMdp->nouveauMdp($mdp, $_POST['email']);
+          $nouveauMdp->nouveauMdp($mdp, $_POST['email']);
 
           $message = 'Voici votre nouveau mot de passe pour accéder à Lokisalle : ' . $mdp;
 
@@ -256,8 +253,7 @@ class controleursMembre extends controleursSuper {
         if(empty($_POST['pseudo'])){
           $msg .= "Veuillez saisir un Pseudo.<br>";
         } else {
-          $verifPseudoMAJ = $cont->verifPseudoMAJ($_POST['pseudo'], $id_membre);
-          if($verifPseudoMAJ != 0){
+          if(!$cont->verifPseudoMAJ($_POST['pseudo'], $id_membre)){
             $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
           }
         }
@@ -270,8 +266,7 @@ class controleursMembre extends controleursSuper {
         if(empty($_POST['email'])){
           $msg .= "Veuillez saisir une adresse Email.<br>";
         } else {
-          $verifMailMAJ = $cont->verifMailMAJ($_POST['email'], $id_membre);
-          if($verifMailMAJ != 0){
+          if(!$cont->verifMailMAJ($_POST['email'], $id_membre)){
             $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
           }
         }
@@ -304,7 +299,7 @@ class controleursMembre extends controleursSuper {
 
           $cont = new modelesMembre();
 
-          $insertion = $cont->updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre);
+          $cont->updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre);
 
         }
       }
@@ -371,7 +366,7 @@ class controleursMembre extends controleursSuper {
 
           $cont = new modelesMembre();
 
-          $insertion = $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 1);
+          $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 1);
 
           $listeMembres = $pdo->lesMembresAdmin();
 

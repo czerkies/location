@@ -51,7 +51,7 @@ class modelesMembre extends modelesSuper {
 
     $pseudo = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo'");
 
-    $nbPseudo = $pseudo->rowCount();
+    $nbPseudo = ($pseudo->rowCount() != 0) ? FALSE : TRUE;
 
     return $nbPseudo;
 
@@ -62,7 +62,7 @@ class modelesMembre extends modelesSuper {
 
     $mail = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE email = '$email'");
 
-    $nbMail = $mail->rowCount();
+    $nbMail = ($mail->rowCount() != 0) ? FALSE : TRUE;
 
     return $nbMail;
 
@@ -73,7 +73,7 @@ class modelesMembre extends modelesSuper {
 
     $pseudo = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND id_membre != '$id_membre'");
 
-    $nbPseudo = $pseudo->rowCount();
+    $nbPseudo = ($pseudo->rowCount() != 0) ? FALSE : TRUE;
 
     return $nbPseudo;
 
@@ -84,7 +84,7 @@ class modelesMembre extends modelesSuper {
 
     $mail = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE email = '$email' AND id_membre != '$id_membre'");
 
-    $nbMailUp = $mail->rowCount();
+    $nbMailUp = ($mail->rowCount() != 0) ? FALSE : TRUE;
 
     return $nbMailUp;
 
