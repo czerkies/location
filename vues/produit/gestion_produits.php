@@ -15,9 +15,9 @@
             <?php } ?>
           </select>
           <label for="date_arrivee">Date d'arrivée :</label>
-          <?php controleursProduit::champs_date('date_arrivee', 'date_arrivee', NULL); ?>
+          <?= controleursProduit::champs_date('date_arrivee', 'date_arrivee', NULL); ?>
           <label for="date_arrivee">Date d'arrivée :</label>
-          <?php controleursProduit::champs_date('date_depart', 'date_depart', NULL); ?>
+          <?= controleursProduit::champs_date('date_depart', 'date_depart', NULL); ?>
           <label for="prix">Prix :</label>
           <input type="text" name="prix" id="prix" value="<?php if(isset($_POST['prix'])) {echo $_POST['prix'];} ?>" placeholder="Prix" required> €
           <label for="code_promo">Attribution remise parmi les codes promots existant : </label>
@@ -93,9 +93,9 @@
             </select>
             <label for="date_arrivee">Date d'arrivée :</label>
             <?php var_dump($idProduitModif['date_arrivee']); // A SUPPRIMER EN PROD // ?>
-            <?php controleursProduit::champs_date('date_arrivee', 'date_arrivee', $idProduitModif['date_arrivee']); ?>
+            <?= controleursProduit::champs_date('date_arrivee', 'date_arrivee', $idProduitModif['date_arrivee']); ?>
             <label for="date_arrivee">Date d'arrivée :</label>
-            <?php controleursProduit::champs_date('date_depart', 'date_depart', $idProduitModif['date_depart']); ?>
+            <?= controleursProduit::champs_date('date_depart', 'date_depart', $idProduitModif['date_depart']); ?>
             <label for="prix">Prix :</label>
             <input type="text" name="prix" id="prix" value="<?php if(isset($_POST['prix'])) {echo $_POST['prix'];} elseif(isset($idProduitModif['prix'])) {echo $idProduitModif['prix'];} ?>" placeholder="Prix" required> €
             <label for="code_promo">Attribution remise parmi les codes promots existant : </label>

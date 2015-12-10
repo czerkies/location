@@ -61,7 +61,7 @@ class controleursProduit extends controleursSuper {
     $select .= '>'.$i.'</select>';
     }
 
-    echo $select;
+    return $select;
 
     // Récupérer la date au format normal en add : _J + _M + _A;
     // S'il y'a un argument heure rentré, récupérer l'heure : _H + _M;
@@ -642,7 +642,7 @@ class controleursProduit extends controleursSuper {
 
       $donnees = new modelesProduit();
 
-      $produits = $donnees->requeteRecherche($date_arrivee);
+      $produits = $donnees->requeteRecherche($date_arrivee, $_POST['keyword']);
 
     }
 

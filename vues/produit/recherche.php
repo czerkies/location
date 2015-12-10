@@ -2,8 +2,10 @@
 <div class="form_recherche">
   <h2>Zone de recherche</h2>
   <form class="" action="" method="post">
-    <?php controleursProduit::champs_date('recherche_date', '', NULL); ?>
-    <input type="submit" name="name" value="Rechercher">
+    <?= controleursProduit::champs_date('recherche_date', '', NULL); ?>
+    <label for="keyword">Affiner la recherche avec un mot clef :</label>
+    <input type="text" name="keyword" id="keyword" placeholder="Mot clef" value="<?php if(isset($_POST['keyword'])) echo $_POST['keyword']; ?>">
+    <input type="submit" value="Rechercher">
   </form>
   <div class="reponse-recherche">
   <?php if($produits){ ?>
@@ -25,6 +27,6 @@
     <?php } ?>
 
   <?php }
-      } ?>  
+      } ?>
   </div>
 </div>
