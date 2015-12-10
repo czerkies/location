@@ -630,7 +630,12 @@ class controleursProduit extends controleursSuper {
     $produits = FALSE;
     $msg = '';
 
+    $categories = new modelesSalles();
+    $listeCategories = $categories->categoriesSalle();
+
     if(isset($_POST) && !empty($_POST)){
+
+      // if(isset($_POST['recherche_date_A']) && !empty($_POST...)) Vérifier toutes les conditions si existentes et non vide.
 
       foreach ($_POST as $key => $value){
         $_POST[$key] = htmlentities($value, ENT_QUOTES);
@@ -640,13 +645,16 @@ class controleursProduit extends controleursSuper {
 
       $date_arrivee = $_POST['recherche_date_A'].'-'.$_POST['recherche_date_M'].'-'.$_POST['recherche_date_J'];
 
+      $keyword = (!empty($_POST['keyword'])) ? $_POST['keyword'] : FALSE;
+      $categorie = ($_POST['categorie'] === 'all') ? FALSE : $_POST['categorie'];
+
       $donnees = new modelesProduit();
 
-      $produits = $donnees->requeteRecherche($date_arrivee, $_POST['keyword']);
+      $produits = $donnees->requeteRecherche($date_arrivee, $keyword, $categorie);
 
     }
 
-    $this->Render('../vues/produit/recherche.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'produits' => $produits));
+    $this->Render('../vues/produit/recherche.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCategories' => $listeCategories, 'produits' => $produits));
 
   }
 

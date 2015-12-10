@@ -72,4 +72,18 @@ class modelesSalles extends modelesSuper {
 
   }
 
+  // *********** Récupération des categories de salles ********** //
+  public function categoriesSalle(){
+
+    $donnees = $this->connect_central_bdd()->query("SHOW COLUMNS FROM salle LIKE 'categorie'");
+
+    $categories = $donnees->fetch(PDO::FETCH_ASSOC);
+
+    preg_match('/enum\(\'(.*)\'\)$/', $categories['Type'], $matches);
+    $values = explode('\',\'', $matches[1]);
+
+    return $values;
+
+  }
+
 }

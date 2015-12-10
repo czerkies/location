@@ -169,54 +169,35 @@ class modelesProduit extends modelesSuper {
   }
 
   // ********** Recherche de produits ********** //
-  public function requeteRecherche($date, $keyword){
+  public function requeteRecherche($date, $keyword, $categorie){
 
-    $date = (string) $date;
-    $keyword = (string) $keyword;
+    $req = "SELECT s.*,
+      DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
+      DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
+      p.prix, p.id_produit
+      FROM salle s, produit p
+      WHERE s.id_salle = p.id_salle
+      AND p.etat = 0
+      AND p.date_arrivee >= NOW()
+      AND p.date_arrivee >= '$date'";
 
-    if(!$keyword){
+      if($keyword){
+        $req .= " AND (s.ville LIKE '%$keyword%'
+        OR s.titre LIKE '%$keyword%'
+        OR s.pays LIKE '%$keyword%')";
+      }
 
-      $req = "SELECT s.titre, s.photo, s.ville, s.capacite,
-        DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
-        DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
-        p.prix, p.id_produit
-        FROM salle s, produit p
-        WHERE s.id_salle = p.id_salle
-        AND p.etat = 0
-        AND p.date_arrivee >= NOW()
-        AND p.date_arrivee > :date
-        ORDER BY p.date_arrivee";
+      if($categorie){
+        $req .= " AND categorie = '$categorie'";
+      }
 
-        $donnees = modelesSuper::connect_central_bdd()->prepare($req);
+    $req .= " ORDER BY p.date_arrivee";
 
-        $donnees->bindParam(':date', $date, PDO::PARAM_STR);
 
-    } else {
-
-      $req = "SELECT s.titre, s.photo, s.ville, s.capacite,
-        DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
-        DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
-        p.prix, p.id_produit
-        FROM salle s, produit p
-        WHERE s.id_salle = p.id_salle
-        AND p.etat = 0
-        AND p.date_arrivee >= NOW()
-        AND p.date_arrivee > :date
-        AND (s.ville LIKE '%' :keyword '%'
-        OR s.titre LIKE '%' :keyword '%')
-        ORDER BY p.date_arrivee";
-
-        $donnees = modelesSuper::connect_central_bdd()->prepare($req);
-
-        $donnees->bindParam(':date', $date, PDO::PARAM_STR);
-        $donnees->bindParam(':keyword', $keyword, PDO::PARAM_STR);
-
-    }
-
+    $donnees = modelesSuper::connect_central_bdd()->prepare($req);
     $donnees->execute();
 
     $produits['listeProduits'] = $donnees->fetchAll(PDO::FETCH_ASSOC);
-
     $produits['nbProduits'] = $donnees->rowCount();
 
     return $produits;
