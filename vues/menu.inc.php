@@ -6,7 +6,7 @@
     <li><a href="routeur.php?controleurs=commande&action=gestionCommandes">Gestion des commandes</a></li>
     <li><a href="routeur.php?controleurs=avis&action=gestionAvis">Gestion des avis</a></li>
     <li><a href="routeur.php?controleurs=promotion&action=afficherPromotion">Gestion codes promo</a></li>
-    <li>Statistiques</li>
+    <li><a href="routeur.php?controleurs=statistiques&action=affichageStatistiques">Statistiques</li>
     <li><a href="routeur.php?controleurs=newsletter&action=envoiNews">Envoyer la newsletter</a></li>
   </ul>
 </div>

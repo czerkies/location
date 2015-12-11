@@ -2,7 +2,7 @@
 <div class="form_recherche">
   <h2>Zone de recherche</h2>
   <form class="" action="" method="post">
-    <?= controleursProduit::champs_date('recherche_date', '', NULL); ?>
+    <?= $date->champs_date('recherche_date', '', NULL); ?>
     <label for="categorie">Rechercher par categorie</label>
     <select id="categorie" name="categorie">
       <option value="all">Toutes categories</option>

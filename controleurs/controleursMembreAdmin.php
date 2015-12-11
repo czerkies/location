@@ -1,6 +1,6 @@
 <?php
 
-class controleursMembre extends controleursSuper {
+class controleursMembreAdmin extends controleursSuper {
 
   // ********* Gestions des Membres Admin ********** //
   public function gestionMembres(){
@@ -42,7 +42,8 @@ class controleursMembre extends controleursSuper {
 
       if(isset($_POST) && !empty($_POST)){
 
-        $msg = $this->verifFormMembre($_POST);
+        $controleFormulaire = new controleursFonctions();
+        $msg = $controleFormulaire->verifFormMembre($_POST);
 
         if(empty($msg)){
 

@@ -89,7 +89,7 @@ class controleursPanier extends controleursSuper {
             $msg .= 'Votre code n\'existe pas.';
           } else {
 
-            $id_promo = $codeVerif['dataCodeVerif']['id_promo'];
+            $id_promo = $codeVerif['codeVerif']['id_promo'];
 
             if($this->verifPromoPanier($id_promo)){
               $msg .= 'Code promotion appliqué sur le panier.<br>';
@@ -146,17 +146,12 @@ class controleursPanier extends controleursSuper {
             $codeVerif = $reCodeID->verifPresencePromo($code_promo);
 
             if(!$codeVerif['nbCodeVerif']){
+
               $msg .= 'Votre code n\'existe pas.';
+
             } else {
 
-              $id_promo = $codeVerif['dataCodeVerif']['id_promo'];
-              $produitAssoc = $reCodeID->VerifPromoProduit($id_promo);
-
-              $produit = 0;
-
-              foreach ($produitAssoc as $key => $value) {
-                $produit .= array_search($produitAssoc[$key]['id_produit'], $_SESSION['panier']['id_produit']);
-              }
+              $id_promo = $codeVerif['codeVerif']['id_promo'];
 
               if($this->verifPromoPanier($id_promo)){
                 $msg .= 'Code promotion appliqué sur le panier.<br>';

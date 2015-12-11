@@ -22,14 +22,14 @@
           <td><?= $value['statut']; ?></td>
           <td><?= $value['sexe']; ?></td>
           <td><?php if($value['statut'] == 0) { ?>
-            <a href="routeur.php?controleurs=membre&action=gestionMembres&suppMembre=<?= $value['id_membre']; ?>">X</a>
+            <a href="routeur.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=<?= $value['id_membre']; ?>">X</a>
           <?php } ?></td>
         </tr>
       <?php } ?>
     </tbody>
   </table>
   <div class="">
-    <p><a href="routeur.php?controleurs=membre&action=gestionMembres&ajouter=membre">Création d'un compte admin</a></p>
+    <p><a href="routeur.php?controleurs=membreAdmin&action=gestionMembres&ajouter=membre">Création d'un compte admin</a></p>
     <?php if($ajouterMembre){ ?>
       <div class="inscription">
         <form class="" action="" method="post">

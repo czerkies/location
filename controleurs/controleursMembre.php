@@ -2,53 +2,6 @@
 
 class controleursMembre extends controleursSuper {
 
-  // ********** Controle du formulaire de la création de membre ********** //
-  public function verifFormMembre($value){
-
-    $msg = '';
-
-    $cont = new modelesMembre();
-
-    if(empty($value['pseudo'])){
-      $msg .= "Veuillez saisir un Pseudo.<br>";
-    } else {
-      if(!$cont->verifPseudo($value['pseudo'])){
-        $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
-      }
-    }
-    if(empty($value['mdp'])){
-      $msg .= "Veuillez saisir un Mot de passe.<br>";
-    }
-    if(empty($value['nom'])){
-      $msg .= "Veuillez saisir un Nom.<br>";
-    }
-    if(empty($value['prenom'])){
-      $msg .= "Veuillez saisir un Prénom.<br>";
-    }
-    if(empty($value['email'])){
-      $msg .= "Veuillez saisir une adresse Email.<br>";
-    } else {
-      if(!$cont->verifMail($value['email'])){
-        $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
-      }
-    }
-    if(empty($value['sexe'])){
-      $msg .= "Veuillez saisir votre Sexe.<br>";
-    }
-    if(empty($value['ville'])){
-      $msg .= "Veuillez saisir une Ville.<br>";
-    }
-    if(empty($value['cp'])){
-      $msg .= "Veuillez saisir votre Code Postal.<br>";
-    }
-    if(empty($value['adresse'])){
-      $msg .= "Veuillez saisir une Adresse.<br>";
-    }
-
-    return $msg;
-
-  }
-
   // ********** Affichage des produits sur la page d'accueil ********** //
   public function connexionMembre(){
 
@@ -102,7 +55,8 @@ class controleursMembre extends controleursSuper {
 
     if(isset($_POST) && !empty($_POST)){
 
-      $msg = $this->verifFormMembre($_POST);
+      $controleFormulaire = new controleursFonctions();
+      $msg = $controleFormulaire->verifFormMembre($_POST);
 
       if(empty($msg)){
 

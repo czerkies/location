@@ -41,9 +41,11 @@ class modelesPromotion extends modelesSuper {
 
     $donnees = $this->connect_central_bdd()->query("SELECT id_promo FROM promotion WHERE code_promo = '$code_promo'");
 
-    $nbCodeVerif = ($donnees->rowCount() === 0) ? FALSE : TRUE;
+    $codeVerif['codeVerif'] = $donnees->fetch(PDO::FETCH_ASSOC);
 
-    return $nbCodeVerif;
+    $codeVerif['nbCodeVerif'] = ($donnees->rowCount() === 0) ? FALSE : TRUE;
+
+    return $codeVerif;
 
   }
 
@@ -55,14 +57,16 @@ class modelesPromotion extends modelesSuper {
       WHERE o.id_promo = p.id_promo
       AND o.id_promo = $id_promo");
 
-    $ProduitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
+    //$ProduitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
 
-    return $ProduitAssoc;
+    $produitAssoc = $donnees->fetchAll(PDO::FETCH_ASSOC);
+
+    return $produitAssoc;
 
   }
 
   // ********** Récupération valeur de réduction code promo panier ********* //
-  public function RecupValeurCodePromo($codePromo){
+  public function recupValeurCodePromo($codePromo){
 
     $codePromo = $this->connect_central_bdd()->query("SELECT reduction FROM promotion WHERE code_promo = '$codePromo'");
 

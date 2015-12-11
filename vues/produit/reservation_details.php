@@ -1,9 +1,12 @@
 <h1>Reservation en détails</h1>
 <div id="details_salle">
   <h2>Nom de la salle</h2>
-  <a href="/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier&id_produit=<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
-  </form>
-</div>
+  <?php if($userConnect) { ?>
+  <a href="/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier&id_produit=<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
+<?php } else { ?>
+  <a href="routeur.php?controleurs=membre&action=connexionMembre">Connectez vous pour l'ajouter au panier</a>
+<?php } ?>
+  </div>
 <div id="datails_complémentaire">
   <h2>Informations complémentaires</h2>
   <?= $ProduitIDSalle['titre'].' | '.$ProduitIDSalle['capacite'].' | '.$ProduitIDSalle['categorie']; ?>
@@ -11,7 +14,6 @@
   <img src="<?= $ProduitIDSalle['photo'] ?>" alt="<?= $ProduitIDSalle['titre']; ?>">
   Prix : <?= $ProduitIDSalle['prix'] = $ProduitIDSalle['prix'] * 1.2; ?> € TTC.
   Date : Du <?= $ProduitIDSalle['date_arrivee']; ?> au <?= $ProduitIDSalle['date_depart']; ?>.
-
 </div>
 <div id="details_avis">
   <h2>Avis</h2>

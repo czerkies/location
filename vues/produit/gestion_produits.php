@@ -15,9 +15,9 @@
             <?php } ?>
           </select>
           <label for="date_arrivee">Date d'arrivée :</label>
-          <?= controleursProduitAdmin::champs_date('date_arrivee', 'date_arrivee', NULL); ?>
+          <?= $date->champs_date('date_arrivee', 'date_arrivee', NULL); ?>
           <label for="date_arrivee">Date d'arrivée :</label>
-          <?= controleursProduitAdmin::champs_date('date_depart', 'date_depart', NULL); ?>
+          <?= $date->champs_date('date_depart', 'date_depart', NULL); ?>
           <label for="prix">Prix :</label>
           <input type="text" name="prix" id="prix" value="<?php if(isset($_POST['prix'])) {echo $_POST['prix'];} ?>" placeholder="Prix" required> €
           <label for="code_promo">Attribution remise parmi les codes promots existant : </label>
@@ -39,18 +39,18 @@
             <tr>
               <th>Produit</th>
               <th>Date arrivée
-                <a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits&type=date_arrivee&order=asc">^</a>
-                <a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits&type=date_arrivee&order=desc">v</a>
+                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=date_arrivee&order=asc">^</a>
+                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=date_arrivee&order=desc">v</a>
               </th>
               <th>Date départ
-                <a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits&type=date_depart&order=asc">^</a>
-                <a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits&type=date_depart&order=desc">v</a>
+                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=date_depart&order=asc">^</a>
+                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=date_depart&order=desc">v</a>
               </th>
               <th>Salle</th>
               <th>Promo</th>
               <th>Prix
-                <a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits&type=prix&order=asc">^</a>
-                <a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits&type=prix&order=desc">V</a>
+                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=prix&order=asc">^</a>
+                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=prix&order=desc">V</a>
               </th>
               <th>État</th>
               <th>Modifier</th>
@@ -73,8 +73,8 @@
               <?php } ?>
               <td><?= $value['prix']; ?> €</td>
               <td><?= $value['etat']; ?></td>
-              <td><a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits&modif=<?= $value['id_produit']; ?>">Modifier</a></td>
-              <td><a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits&supp=<?= $value['id_produit']; ?>">Supprimer</a></td>
+              <td><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&modif=<?= $value['id_produit']; ?>">Modifier</a></td>
+              <td><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&supp=<?= $value['id_produit']; ?>">Supprimer</a></td>
             </tr>
             <?php
             }
@@ -93,9 +93,9 @@
             </select>
             <label for="date_arrivee">Date d'arrivée :</label>
             <?php var_dump($idProduitModif['date_arrivee']); // A SUPPRIMER EN PROD // ?>
-            <?= controleursProduit::champs_date('date_arrivee', 'date_arrivee', $idProduitModif['date_arrivee']); ?>
+            <?= $date->champs_date('date_arrivee', 'date_arrivee', $idProduitModif['date_arrivee']); ?>
             <label for="date_arrivee">Date d'arrivée :</label>
-            <?= controleursProduit::champs_date('date_depart', 'date_depart', $idProduitModif['date_depart']); ?>
+            <?= $date->champs_date('date_depart', 'date_depart', $idProduitModif['date_depart']); ?>
             <label for="prix">Prix :</label>
             <input type="text" name="prix" id="prix" value="<?php if(isset($_POST['prix'])) {echo $_POST['prix'];} elseif(isset($idProduitModif['prix'])) {echo $idProduitModif['prix'];} ?>" placeholder="Prix" required> €
             <label for="code_promo">Attribution remise parmi les codes promots existant : </label>

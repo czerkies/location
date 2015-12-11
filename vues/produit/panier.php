@@ -51,17 +51,17 @@
       <?php } ?>
     <tr>
       <td colspan="8">
-        <form class="" action="/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier" method="post">
+        <form class="" action="/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier" method="post">
           <label for="code_promo">Utiliser un code de promotion :</label>
           <input id="code_promo" type="text" name="code_promo" value="<?php if(isset($_POST['code_promo'])) {echo $_POST['code_promo'];}?>" placeholder="Code promo">
           <input type="submit" name="promo" value="Appliquer mon code promotion">
         </form>
-        <form class="" action="/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier" method="post">
+        <form class="" action="/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier" method="post">
           <label for="cgv">J'accepte les conditions générales de vente (<a href="#">Voir</a>)</label>
           <input id="cgv" type="checkbox" name="cgv">
         </td>
         <td colspan="2">
-          <input type="hidden" name="reduction" value="<?php if(isset($_POST['code_promo'])) {echo $_POST['code_promo'];}?>">
+          <input type="hidden" name="reduction" value="<?php if(isset($_POST['code_promo'])) echo $_POST['code_promo']; ?>">
           <input type="submit" name="payer" value="Payer">
         </td>
       </form>
