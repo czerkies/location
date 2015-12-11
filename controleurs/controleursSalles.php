@@ -6,7 +6,7 @@
 class controleursSalles extends controleursSuper {
 
   // ********** Affichage des salles sur la gestion Admin ********** //
-  public function gestionSalles(){
+  /*public function gestionSalles(){
 
     session_start();
     $userConnect = FALSE;
@@ -20,7 +20,7 @@ class controleursSalles extends controleursSuper {
 
     $this->Render('../vues/salle/gestion_salles.php', array('affichageSalles' => $affichageSalles, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'form' => $form, 'tableau' => $tableau));
 
-  }
+  }*/
 
   // ********** Affichage de la salle par ID ********** //
   public function afficherSalles(){

@@ -26,11 +26,17 @@
       <hr>
       <div class="une-salle">
         <p><?= $value['titre']; ?></p>
-        <p><?= $value['ville']; ?></p>
+        <p><?= $value['ville']; ?> - <?= $value['pays']; ?></p>
+        <p><?= $value['categorie']; ?></p>
         <p><?= $value['capacite']; ?></p>
         <p><?= $value['date_arrivee']; ?></p>
         <p><?= $value['date_depart']; ?></p>
-        <p><img src="<?= $value['date_arrive']; ?>"></p>
+        <p><img src="<?= $value["photo"]; ?>"></p>
+        <?php if($userConnect){ ?>
+          <p><a href="routeur.php?controleurs=produit&action=affichagePanier&id_produit=<?= $value['id_produit']; ?>">Ajouter au panier</a></p>
+        <?php } else { ?>
+          <p><a href="routeur.php?controleurs=membre&action=connexionMembre">Connectez vous pour l'ajouter au panier</a></p>
+        <?php } ?>
       </div>
       <hr>
     <?php } ?>

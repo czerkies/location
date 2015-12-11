@@ -626,7 +626,6 @@ class controleursProduit extends controleursSuper {
     session_start();
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-    $form = (!$userConnect) ? FALSE : TRUE;
     $produits = FALSE;
     $msg = '';
 
@@ -635,23 +634,29 @@ class controleursProduit extends controleursSuper {
 
     if(isset($_POST) && !empty($_POST)){
 
-      // if(isset($_POST['recherche_date_A']) && !empty($_POST...)) Vérifier toutes les conditions si existentes et non vide.
+      if(
+        isset($_POST['recherche_date_A']) && !empty($_POST['recherche_date_A']) &&
+        isset($_POST['recherche_date_M']) && !empty($_POST['recherche_date_M']) &&
+        isset($_POST['recherche_date_J']) && !empty($_POST['recherche_date_J']) &&
+        isset($_POST['categorie']) && !empty($_POST['categorie']) &&
+        isset($_POST['keyword'])) {
 
-      foreach ($_POST as $key => $value){
-        $_POST[$key] = htmlentities($value, ENT_QUOTES);
-      }
+          foreach ($_POST as $key => $value){
+            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+          }
 
-      extract($_POST);
+          extract($_POST);
 
-      $date_arrivee = $_POST['recherche_date_A'].'-'.$_POST['recherche_date_M'].'-'.$_POST['recherche_date_J'];
+          $date_arrivee = $_POST['recherche_date_A'].'-'.$_POST['recherche_date_M'].'-'.$_POST['recherche_date_J'];
 
-      $keyword = (!empty($_POST['keyword'])) ? $_POST['keyword'] : FALSE;
-      $categorie = ($_POST['categorie'] === 'all') ? FALSE : $_POST['categorie'];
+          $keyword = (!empty($_POST['keyword'])) ? $_POST['keyword'] : FALSE;
+          $categorie = ($_POST['categorie'] === 'all') ? FALSE : $_POST['categorie'];
 
-      $donnees = new modelesProduit();
+          $donnees = new modelesProduit();
 
-      $produits = $donnees->requeteRecherche($date_arrivee, $keyword, $categorie);
+          $produits = $donnees->requeteRecherche($date_arrivee, $keyword, $categorie);
 
+        }
     }
 
     $this->Render('../vues/produit/recherche.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCategories' => $listeCategories, 'produits' => $produits));
