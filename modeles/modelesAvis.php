@@ -31,7 +31,7 @@ class modelesAvis extends modelesSuper {
   public function recuperationAvisSalle($id_salle){
 
     $donnees = $this->connect_central_bdd()->query("SELECT a.commentaire, a.note,
-      DATE_FORMAT(a.date, '%d %M %Y') AS date, m.prenom
+      DATE_FORMAT(a.date, '%e %M %Y') AS date, m.prenom
       FROM avis a, membre m
       WHERE a.id_membre = m.id_membre
       AND a.id_salle = $id_salle

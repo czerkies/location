@@ -21,7 +21,7 @@
     <div class="un_avis">
       <p class="un_avis_note"><?= $donnees['note']; ?>/10</p>
       <p class="un_avis_commentaire"><?= $donnees['commentaire']; ?></p>
-      <p class="un_avis_prenom">Posté par <?= $donnees['prenom']; ?> le <?= $donnees['date']; ?>.</p>
+      <p class="un_avis_prenom">Posté par <?= $donnees['prenom']; ?> le <?= ucwords($donnees['date']); ?>.</p>
     <div>
   <?php } ?>
   <?php
