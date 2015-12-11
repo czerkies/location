@@ -15,7 +15,7 @@
         <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=connexionMembre">Connexion</a></li>
         <?php if($userConnect || $userConnectAdmin){ ?>
         <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=profilMembre">Profil</a></li>
-        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier">Mon panier</a></li>
+        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier">Mon panier</a></li>
         <li><a onclick="confirm('Voulez-vous vraiment vous déconnecter ?');" href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=deconnexionMembre&deconnexion=true">Se déconnecter</a></li>
         <?php } ?>
       </ul>

@@ -31,6 +31,7 @@
     <input type="text" name="capacite" id="capacite" value="<?php if(isset($_POST['capacite'])) {echo $_POST['capacite'];} elseif(isset($recupPourModif['capacite'])) {echo $recupPourModif['capacite'];} ?>" placeholder="Capacité" required>
     <label for="categorie">Catégorie</label>
     <select id="categorie" class="" name="categorie">
+        Boucle !
       <option value="conference">Conférence</option>
   		<option value="reunion" <?php if(isset($_POST['categorie']) && $_POST['categorie'] == 'reunion') {echo "selected";} elseif(isset($recupPourModif['categorie']) && $recupPourModif['categorie'] == 'reunion') {echo "selected";}?> >Réunion</option>
     </select>

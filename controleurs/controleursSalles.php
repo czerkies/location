@@ -5,23 +5,6 @@
 
 class controleursSalles extends controleursSuper {
 
-  // ********** Affichage des salles sur la gestion Admin ********** //
-  /*public function gestionSalles(){
-
-    session_start();
-    $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-
-    $form = (isset($_GET['action']) && $_GET['action'] == 'ajouterSalle') ? TRUE : FALSE;
-    $tableau = TRUE;
-
-    $pdo = new modelesSalles();
-    $affichageSalles = $pdo->affichageSalles();
-
-    $this->Render('../vues/salle/gestion_salles.php', array('affichageSalles' => $affichageSalles, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'form' => $form, 'tableau' => $tableau));
-
-  }*/
-
   // ********** Affichage de la salle par ID ********** //
   public function afficherSalles(){
 

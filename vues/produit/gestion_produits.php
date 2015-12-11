@@ -3,8 +3,8 @@
 <div id="gestion_produit">
   <?= $msg; ?>
   <ul>
-    <li><a href="/lokisalle/www/routeur.php?controleurs=produit&action=ajouterProduits">Ajouter un produit</a></li>
-    <li><a href="/lokisalle/www/routeur.php?controleurs=produit&action=afficherProduits">Affichage des produits</a></li>
+    <li><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=ajouterProduits">Ajouter un produit</a></li>
+    <li><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits">Affichage des produits</a></li>
   </ul>
     <?php if($ajouter){ ?>
       <div class="gestion_produit_ajouter">
@@ -15,9 +15,9 @@
             <?php } ?>
           </select>
           <label for="date_arrivee">Date d'arrivée :</label>
-          <?= controleursProduit::champs_date('date_arrivee', 'date_arrivee', NULL); ?>
+          <?= controleursProduitAdmin::champs_date('date_arrivee', 'date_arrivee', NULL); ?>
           <label for="date_arrivee">Date d'arrivée :</label>
-          <?= controleursProduit::champs_date('date_depart', 'date_depart', NULL); ?>
+          <?= controleursProduitAdmin::champs_date('date_depart', 'date_depart', NULL); ?>
           <label for="prix">Prix :</label>
           <input type="text" name="prix" id="prix" value="<?php if(isset($_POST['prix'])) {echo $_POST['prix'];} ?>" placeholder="Prix" required> €
           <label for="code_promo">Attribution remise parmi les codes promots existant : </label>
