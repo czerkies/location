@@ -41,9 +41,7 @@ class modelesPromotion extends modelesSuper {
 
     $donnees = $this->connect_central_bdd()->query("SELECT id_promo FROM promotion WHERE code_promo = '$code_promo'");
 
-    $codeVerif['codeVerif'] = $donnees->fetch(PDO::FETCH_ASSOC);
-
-    $codeVerif['nbCodeVerif'] = ($donnees->rowCount() === 0) ? FALSE : TRUE;
+    $codeVerif = ($donnees->rowCount() === 0) ? TRUE : FALSE;
 
     return $codeVerif;
 
@@ -57,9 +55,9 @@ class modelesPromotion extends modelesSuper {
       WHERE o.id_promo = p.id_promo
       AND o.id_promo = $id_promo");
 
-    //$ProduitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
+    $produitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
 
-    $produitAssoc = $donnees->fetchAll(PDO::FETCH_ASSOC);
+    //$produitAssoc = $donnees->fetchAll(PDO::FETCH_ASSOC);
 
     return $produitAssoc;
 

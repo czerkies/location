@@ -17,8 +17,6 @@ class controleursSalles extends controleursSuper {
     $ajouter = FALSE;
 
     $pdo = new modelesSalles();
-    $salles = $pdo->affichageSalles();
-    $listeCategories = $pdo->categoriesSalle();
 
     // Si le lien modifier est actif
     if(isset($_GET['modif']) && !empty($_GET['modif'])){
@@ -28,8 +26,6 @@ class controleursSalles extends controleursSuper {
       $recupPourModif = $pdo->modifSalleID($id_salle);
       $photo_bdd = $recupPourModif['photo'];
 
-    } else {
-      $ajouter = FALSE;
     }
 
     if(isset($_POST) && !empty($_POST)){
@@ -55,7 +51,7 @@ class controleursSalles extends controleursSuper {
       if(empty($_POST['capacite'])){
         $msg .= "Veuillez saisir une Capacite.<br>";
       }
-      if(empty($_POST['categorie'])){
+      if(empty($_POST['categorie']) || $_POST['categorie'] === 'NULL'){
         $msg .= "Veuillez saisir votre Categorie.<br>";
       }
 
@@ -112,6 +108,9 @@ class controleursSalles extends controleursSuper {
 
     }
 
+    $salles = $pdo->affichageSalles();
+    $listeCategories = $pdo->categoriesSalle();
+
 
     $this->Render('../vues/salle/gestion_salles.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'recupPourModif' => $recupPourModif, 'salles' => $salles, 'listeCategories' => $listeCategories));
 
@@ -161,7 +160,7 @@ class controleursSalles extends controleursSuper {
       if(empty($_POST['description'])){
         $msg .= "Veuillez saisir votre Description.<br>";
       }
-      if(empty($_POST['capacite'])){
+      if(empty($_POST['capacite']) || $_POST['categorie'] === 'NULL'){
         $msg .= "Veuillez saisir une Capacite.<br>";
       }
       if(empty($_POST['categorie'])){
@@ -201,6 +200,7 @@ class controleursSalles extends controleursSuper {
         $salle->ajouterSalle($pays, $ville, $adresse, $cp, $titre, $description, $photo_bdd, $capacite, $categorie);
 
         $msg .= 'La salle a bien été ajouté.';
+        $ajouter = FALSE;
 
       }
     }

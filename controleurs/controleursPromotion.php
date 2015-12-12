@@ -29,7 +29,7 @@ class controleursPromotion extends controleursSuper {
         } else {
           $cont = new modelesPromotion();
 
-          if($cont->verifPresencePromo($code_promo)){
+          if(!$cont->verifPresencePromo($code_promo)){
             $msg .= "Le code promotion que vous avez saisis est déjà existante.<br>";
           }
         }
