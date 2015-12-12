@@ -12,16 +12,14 @@ class controleursMembreAdmin extends controleursSuper {
     $ajouterMembre = FALSE;
     $msg = '';
 
-    $pdo = new modelesMembre();
-
-    $listeMembres = $pdo->lesMembresAdmin();
+    $membre = new modelesMembre();
 
     // Suppréssion d'un membre
     if(isset($_GET['suppMembre']) && !empty($_GET['suppMembre'])){
 
       $id_membre = htmlentities($_GET['suppMembre']);
 
-      if($pdo->supprimerMembreAdmin($id_membre)){
+      if($membre->supprimerMembreAdmin($id_membre)){
 
         $msg .= 'Le membre a bien été supprimé.';
 
@@ -30,8 +28,6 @@ class controleursMembreAdmin extends controleursSuper {
         $msg .= 'Vous ne pouvez pas supprimer ce membre';
 
       }
-
-      $listeMembres = $pdo->lesMembresAdmin();
 
     }
 
@@ -52,17 +48,16 @@ class controleursMembreAdmin extends controleursSuper {
           }
           extract($_POST);
 
-          $cont = new modelesMembre();
-
           $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 1);
-
-          $listeMembres = $pdo->lesMembresAdmin();
 
         }
 
       }
 
     }
+
+    $listeMembres = $membre->lesMembresAdmin();
+
 
     $this->Render('../vues/membre/gestion_membres.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres, 'ajouterMembre' => $ajouterMembre));
 
