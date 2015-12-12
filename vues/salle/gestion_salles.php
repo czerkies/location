@@ -27,7 +27,7 @@
     <input type="text" name="capacite" id="capacite" value="<?php if(isset($_POST['capacite'])) {echo $_POST['capacite'];} elseif(isset($recupPourModif['capacite'])) {echo $recupPourModif['capacite'];} ?>" placeholder="Capacité" required>
     <label for="categorie">Catégorie</label>
     <select id="categorie" name="categorie">
-      <option value="all">Toutes categories</option>
+      <option value="null">Toutes categories</option>
       <?php foreach ($listeCategories as $value) { ?>
         <option value="<?= $value; ?>" <?php if(isset($_POST['categorie']) && $_POST['categorie'] === $value) echo 'selected'?>>
           <?= ucfirst($value); ?>

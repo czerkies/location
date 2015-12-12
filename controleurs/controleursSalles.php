@@ -51,7 +51,7 @@ class controleursSalles extends controleursSuper {
       if(empty($_POST['capacite'])){
         $msg .= "Veuillez saisir une Capacite.<br>";
       }
-      if(empty($_POST['categorie']) || $_POST['categorie'] === 'NULL'){
+      if(empty($_POST['categorie']) || $_POST['categorie'] === 'null'){
         $msg .= "Veuillez saisir votre Categorie.<br>";
       }
 
@@ -167,10 +167,10 @@ class controleursSalles extends controleursSuper {
       if(empty($_POST['description'])){
         $msg .= "Veuillez saisir votre Description.<br>";
       }
-      if(empty($_POST['capacite']) || $_POST['categorie'] === 'NULL'){
+      if(empty($_POST['capacite'])){
         $msg .= "Veuillez saisir une Capacite.<br>";
       }
-      if(empty($_POST['categorie'])){
+      if(empty($_POST['categorie']) || $_POST['categorie'] === 'null'){
         $msg .= "Veuillez saisir votre Categorie.<br>";
       }
 
