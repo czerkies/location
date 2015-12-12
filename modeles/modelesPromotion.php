@@ -57,8 +57,6 @@ class modelesPromotion extends modelesSuper {
 
     $produitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
 
-    //$produitAssoc = $donnees->fetchAll(PDO::FETCH_ASSOC);
-
     return $produitAssoc;
 
   }

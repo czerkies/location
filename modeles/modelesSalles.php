@@ -63,6 +63,20 @@ class modelesSalles extends modelesSuper {
 
   }
 
+  // ********** Vérification produit existant pour modeles ********** //
+  public function VerifSalleProduit($id_salle){
+
+    $donnees = $this->connect_central_bdd()->query("SELECT p.id_produit, p.id_salle, s.id_salle
+      FROM produit p, salle s
+      WHERE p.id_salle = s.id_salle
+      AND s.id_salle = $id_salle");
+
+    $produitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
+
+    return $produitAssoc;
+
+  }
+
   // ********** Suppréssion d'une salle ********** //
   public function suppressionSalle($id_salle){
 

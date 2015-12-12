@@ -90,21 +90,28 @@ class controleursSalles extends controleursSuper {
     if(isset($_GET['supp']) && !empty($_GET['supp'])){
 
       $id_salle = htmlentities($_GET['supp']);
-      $recupPourModif = $pdo->modifSalleID($id_salle);
 
-      define("RACINE_SITE", "/lokisalle/www/");
-      define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
+      if($pdo->VerifSalleProduit($id_salle)){
 
-      $salleASupprimer = $pdo->modifSalleID($id_salle);
-      $chemin_photo = RACINE_SERVER . RACINE_SITE . $salleASupprimer['photo']; // nous avons besoin du chemin depuis la racine serveur pour supprimer la photo du serveur.
+        define("RACINE_SITE", "/lokisalle/www/");
+        define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
 
-      if(!empty($salleASupprimer['photo']) && file_exists($chemin_photo)){
-        unlink($chemin_photo);
+        $salleASupprimer = $pdo->modifSalleID($id_salle);
+        $chemin_photo = RACINE_SERVER . RACINE_SITE . $salleASupprimer['photo']; // nous avons besoin du chemin depuis la racine serveur pour supprimer la photo du serveur.
+
+        if(!empty($salleASupprimer['photo']) && file_exists($chemin_photo)){
+          unlink($chemin_photo);
+        }
+
+        $pdo->suppressionSalle($id_salle);
+        $gestionSalles = TRUE;
+        $msg .= '<div class="success"><p>Suppression effectuée.</p></div>';
+
+      } else {
+
+        $msg .= 'Vous ne pouvez pas supprimer cette salle car des produits y sont rattachés.';
+
       }
-
-      $pdo->suppressionSalle($id_salle);
-      $gestionSalles = TRUE;
-      $msg .= '<div class="success"><p>Suppression effectuée.</p></div>';
 
     }
 
