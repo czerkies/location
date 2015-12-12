@@ -6,7 +6,7 @@ class modelesAvis extends modelesSuper {
   public function lesAvisAdmin(){
 
     $donnees = $this->connect_central_bdd()->query("SELECT a.id_avis, a.commentaire, a.note, a.id_salle,
-      DATE_FORMAT(a.date, '%d %M %Y à %Hh%i') AS date, m.prenom
+      DATE_FORMAT(a.date, '%e %M %Y à %Hh%i') AS date, m.prenom
       FROM avis a, membre m
       WHERE a.id_membre = m.id_membre
       ORDER BY date
