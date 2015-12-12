@@ -41,7 +41,7 @@ class controleursProduit extends controleursSuper {
 
     $msg = '';
 
-    $id_produit = $_GET['id_produit'];
+    $id_produit = htmlentities($_GET['id_produit']);
 
     $modProduit = new modelesProduit();
     $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);

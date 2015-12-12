@@ -1,18 +1,14 @@
-<?php
-  if($userConnectAdmin){
-?>
+<?php if($userConnectAdmin){ ?>
+<?= $msg; ?>
 <h1>Gestion des salles</h1>
 <div class="menu_page_active">
   <ul>
     <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=ajouterSalle">Ajouter une salle</a></li>
-    <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=afficherSalles">Affichage des salles</a></li>
+    <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=gestionSalles">Affichage des salles</a></li>
   </ul>
 </div>
-<?php
-  if($form){
-?>
+<?php if($ajouter){ ?>
   <h2>Ajouter une salle</h2>
-  <?= $msg; ?>
   <form class="" action="" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id_salle" id="id_salle" value="<?php if(isset($recupPourModif['id_salle'])) { echo $recupPourModif['id_salle'];} ?>" />
     <label for="pays">Pays</label>
@@ -30,10 +26,13 @@
     <label for="capacite">Capacité</label>
     <input type="text" name="capacite" id="capacite" value="<?php if(isset($_POST['capacite'])) {echo $_POST['capacite'];} elseif(isset($recupPourModif['capacite'])) {echo $recupPourModif['capacite'];} ?>" placeholder="Capacité" required>
     <label for="categorie">Catégorie</label>
-    <select id="categorie" class="" name="categorie">
-        Boucle !
-      <option value="conference">Conférence</option>
-  		<option value="reunion" <?php if(isset($_POST['categorie']) && $_POST['categorie'] == 'reunion') {echo "selected";} elseif(isset($recupPourModif['categorie']) && $recupPourModif['categorie'] == 'reunion') {echo "selected";}?> >Réunion</option>
+    <select id="categorie" name="categorie">
+      <option value="all">Toutes categories</option>
+      <?php foreach ($listeCategories as $value) { ?>
+        <option value="<?= $value; ?>" <?php if(isset($_POST['categorie']) && $_POST['categorie'] === $value) echo 'selected'?>>
+          <?= ucfirst($value); ?>
+        </option>
+      <?php } ?>
     </select>
 
     <label for="photo">Photo</label>
@@ -44,11 +43,10 @@
     <p>Il n'y a pas de photo.</p>
     <label for="photo">Photo</label>
     <?php } ?>
-    <!-- CHECK = Rajouter les jpg dans le input -->
-    <input type="file" id="photo" name="photo">
+    <input type="file" id="photo" name="photo" accept="image/jpeg" required>
     <input type="submit" name="name" value="Valider la saisie">
   </form>
-  <?php } if($tableau){ ?>
+  <?php } if($salles) { ?>
   <h2>Afficher les salles</h2>
   <table class="affichageSalles">
     <thead>
@@ -66,7 +64,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach($affichageSalles as $donnees){ ?>
+      <?php foreach($salles as $donnees){ ?>
       <tr>
         <td><img src="<?= $donnees['photo']; ?>" alt="<?= $donnees['titre']; ?>"></td>
         <td><?= $donnees['pays']; ?></td>
@@ -76,13 +74,13 @@
         <td><?= $donnees['description']; ?></td>
         <td><?= $donnees['capacite']; ?> Personnes</td>
         <td><?= ucfirst($donnees['categorie']); ?></td>
-        <td><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=modifierSalle&id_salle=<?= $donnees['id_salle']; ?>">Modifier</a></td>
-        <td><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=supprimerSalle&id_salle=<?= $donnees['id_salle']; ?>">Supprimer</a></td>
+        <td><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=gestionSalles&modif=<?= $donnees['id_salle']; ?>">Modifier</a></td>
+        <td><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=gestionSalles&supp=<?= $donnees['id_salle']; ?>">Supprimer</a></td>
       </tr>
       <? } ?>
     </tbody>
   </table>
-<?php } ?>
+  <?php } ?>
 <?php } else { ?>
 <p>Vous n'avez pas accès à cette page</p>
 <?php

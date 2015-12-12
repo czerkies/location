@@ -1,7 +1,7 @@
 <?php if($userConnectAdmin){ ?>
+<?= $msg; ?>
 <h1>Gestion des produits</h1>
 <div id="gestion_produit">
-  <?= $msg; ?>
   <ul>
     <li><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=ajouterProduits">Ajouter un produit</a></li>
     <li><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits">Affichage des produits</a></li>
@@ -31,8 +31,7 @@
           <input type="submit" value="Créer le produit">
         </form>
       </div>
-    <?php } ?>
-    <?php if($afficher){ ?>
+    <?php } if($affichageProduitsAdmin) { ?>
       <div class="gestion_produit_afficher">
         <table border="1">
           <thead>
@@ -82,7 +81,7 @@
           </tbody>
         </table>
       </div>
-      <?php if($modifSalle){ ?>
+      <?php if($idProduitModif){ ?>
         <div class="gestion_produit_modifier">
           <form class="" action="" method="post">
             <select name="id_salle">
