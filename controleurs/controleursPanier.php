@@ -17,6 +17,7 @@ class controleursPanier extends controleursSuper {
     $pourcentageTotalPromo = 0;
     $msg = '';
 
+    $reCodeID = new modelesPromotion();
     $produitPanier = new modelesProduit();
 
     if($userConnect){
@@ -81,15 +82,16 @@ class controleursPanier extends controleursSuper {
         if(empty($_POST['code_promo'])){
           $msg .= 'Veuillez saisir une code promo.';
         } else {
-          $code_promo = $_POST['code_promo'];
-          $reCodeID = new modelesPromotion();
+
+          $code_promo = htmlentities($_POST['code_promo']);
+
           $codeVerif = $reCodeID->verifPresencePromo($code_promo);
 
           if(!$codeVerif['nbCodeVerif']){
             $msg .= 'Votre code n\'existe pas.';
           } else {
 
-            $id_promo = $codeVerif['codeVerif']['id_promo'];
+            $id_promo = $codeVerif['donnees']['id_promo'];
 
             if($this->verifPromoPanier($id_promo)){
               $msg .= 'Code promotion appliqué sur le panier.<br>';
@@ -141,8 +143,8 @@ class controleursPanier extends controleursSuper {
 
           if(!empty($_POST['reduction'])){
 
-            $code_promo = $_POST['reduction'];
-            $reCodeID = new modelesPromotion();
+            $code_promo = htmlentities($_POST['reduction']);
+
             $codeVerif = $reCodeID->verifPresencePromo($code_promo);
 
             if(!$codeVerif['nbCodeVerif']){
@@ -151,7 +153,7 @@ class controleursPanier extends controleursSuper {
 
             } else {
 
-              $id_promo = $codeVerif['codeVerif']['id_promo'];
+              $id_promo = $codeVerif['donnees']['id_promo'];
 
               if($this->verifPromoPanier($id_promo)){
                 $msg .= 'Code promotion appliqué sur le panier.<br>';
@@ -180,7 +182,6 @@ class controleursPanier extends controleursSuper {
           $nouvelleCommande = $commande->insertionCommande($total, $_SESSION['membre']['id_membre']);
 
           $details_commande = new modelesDetails_commande();
-
           $numeroCommande = $commande->idCommande($_SESSION['membre']['id_membre']);
 
           // Mise à jour des produits en "Etat" = 1 et insertion d'une commande en détail
@@ -282,12 +283,12 @@ class controleursPanier extends controleursSuper {
   public function verifPromoPanier($id_promo){
 
     $reCodeID = new modelesPromotion();
-    $produitAssoc = $reCodeID->VerifPromoProduit($id_promo);
+    $produitAssoc = $reCodeID->verifPromoProduit($id_promo);
 
     $produit = 0;
 
-    foreach ($produitAssoc as $key => $value) {
-      $produit .= array_search($produitAssoc[$key]['id_produit'], $_SESSION['panier']['id_produit']);
+    foreach ($produitAssoc['produitsAssoc'] as $key => $value) {
+      $produit .= array_search($produitAssoc['produitsAssoc'][$key]['id_produit'], $_SESSION['panier']['id_produit']);
     }
 
     return $produit;

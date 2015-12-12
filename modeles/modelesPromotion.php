@@ -41,21 +41,25 @@ class modelesPromotion extends modelesSuper {
 
     $donnees = $this->connect_central_bdd()->query("SELECT id_promo FROM promotion WHERE code_promo = '$code_promo'");
 
-    $codeVerif = ($donnees->rowCount() === 0) ? TRUE : FALSE;
+    $codeVerif['nbCodeVerif'] = ($donnees->rowCount() != 0) ? TRUE : FALSE;
+
+    $codeVerif['donnees'] = $donnees->fetch(PDO::FETCH_ASSOC);
 
     return $codeVerif;
 
   }
 
   // ********** Vérification code existant pour produit ********** //
-  public function VerifPromoProduit($id_promo){
+  public function verifPromoProduit($id_promo){
 
     $donnees = $this->connect_central_bdd()->query("SELECT p.id_produit, p.id_promo, o.id_promo
       FROM produit p, promotion o
       WHERE o.id_promo = p.id_promo
-      AND o.id_promo = $id_promo");
+      AND o.id_promo = '$id_promo'");
 
-    $produitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
+    $produitAssoc['nbProduitAssoc'] = ($donnees->rowCount() === 0) ? TRUE : FALSE;
+
+    $produitAssoc['produitsAssoc'] = $donnees->fetchAll(PDO::FETCH_ASSOC);
 
     return $produitAssoc;
 

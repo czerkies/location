@@ -6,7 +6,7 @@
     <li><a href="/lokisalle/www/routeur.php?controleurs=promotion&action=ajouterPromotion">Ajouter un code promotion</a></li>
     <li><a href="/lokisalle/www/routeur.php?controleurs=promotion&action=afficherPromotion">Affichage des codes promos</a></li>
   </ul>
-    <?php if($afficher){ ?>
+    <?php if($donnees){ ?>
       <div class="gestion_produit_afficher">
         <table border="1">
           <thead>

@@ -8,52 +8,51 @@ class controleursPromotion extends controleursSuper {
     session_start();
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-
     $msg = '';
-    $afficher = FALSE;
-    $ajouter = FALSE;
+    $ajouter = TRUE;
+    $donnees = FALSE;
 
-    if($userConnectAdmin){
+    if(isset($_POST) && !empty($_POST)){
 
-      $afficher = (isset($_GET['action']) && ($_GET['action']) == 'afficherPromotion') ? TRUE : FALSE;
-      $ajouter = (isset($_GET['action']) && ($_GET['action']) == 'ajouterPromotion') ? TRUE : FALSE;
+      $code_promo = $_POST['code_promo'];
 
-      if($_POST){
+      if(empty($_POST['code_promo'])){
+        $msg .= "Veuillez saisir un code promo.<br>";
+      } elseif(strlen($_POST['code_promo']) > 6){
+        $msg .= "Veuillez saisir un code promo à 6 chiffre maximum<br>";
+      } else {
 
-        $code_promo = $_POST['code_promo'];
+        $cont = new modelesPromotion();
+        $promos = $cont->verifPresencePromo($code_promo);
 
-        if(empty($_POST['code_promo'])){
-          $msg .= "Veuillez saisir un code promo.<br>";
-        } elseif(strlen($_POST['code_promo']) > 6){
-          $msg .= "Veuillez saisir un code promo à 6 chiffre maximum<br>";
-        } else {
-          $cont = new modelesPromotion();
+        if($promos['nbCodeVerif']){
 
-          if(!$cont->verifPresencePromo($code_promo)){
-            $msg .= "Le code promotion que vous avez saisis est déjà existante.<br>";
-          }
+          $msg .= "Le code promotion que vous avez saisis est déjà existante.<br>";
+
         }
-        if(empty($_POST['reduction'])){
-          $msg .= "Veuillez saisir un montant de réduction.<br>";
+      }
+
+      if(empty($_POST['reduction'])){
+        $msg .= "Veuillez saisir un montant de réduction.<br>";
+      }
+
+      if(empty($msg)){
+
+        foreach ($_POST as $key => $value){
+          $_POST[$key] = htmlentities($value, ENT_QUOTES);
         }
 
-        if(empty($msg)){
+        extract($_POST);
 
-          foreach ($_POST as $key => $value){
-            $_POST[$key] = htmlentities($value, ENT_QUOTES);
-          }
+        $pdo = new modelesPromotion();
+        $pdo->ajouterCodePromo($code_promo, $reduction);
 
-          extract($_POST);
-
-          $pdo = new modelesPromotion();
-          $pdo->ajouterCodePromo($code_promo, $reduction);
-
-          $msg .= 'Votre code promo a bien été ajouté.';
-        }
+        $msg .= 'Votre code promo a bien été ajouté.';
+        $ajouter = FALSE;
       }
     }
 
-    $this->Render('../vues/promotion/gestion_promos.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'afficher' => $afficher));
+    $this->Render('../vues/promotion/gestion_promos.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees));
 
   }
   // ********** Afficher les code promotions Administrateur ********** //
@@ -62,48 +61,40 @@ class controleursPromotion extends controleursSuper {
     session_start();
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-
-    $msg = '';
-    $afficher = FALSE;
     $ajouter = FALSE;
-    $donnees = NULL;
     $dialogue = FALSE;
 
-    if($userConnectAdmin){
+    $msg = '';
 
-      $afficher = (isset($_GET['action']) && ($_GET['action']) == 'afficherPromotion') ? TRUE : FALSE;
-      $ajouter = (isset($_GET['action']) && ($_GET['action']) == 'ajouterPromotion') ? TRUE : FALSE;
+    $bdd = new modelesPromotion();
 
-      $bdd = new modelesPromotion();
+    if(isset($_GET['supprimer']) && !empty($_GET['supprimer'])){
 
-      if(isset($_GET['supprimer'])){
+      $id_promo = htmlentities($_GET['supprimer']);
+      $VerifPromoProduit = $bdd->VerifPromoProduit($id_promo);
 
-        $id_promo = htmlentities($_GET['supprimer']);
+      if($VerifPromoProduit['nbProduitAssoc']){
 
-        if($bdd->VerifPromoProduit($id_promo)){
+        $bdd->SuppPromo($id_promo);
+        $msg .= "Votre code promo a bien été supprimé.";
+
+      } else {
+
+        $dialogue = TRUE;
+
+        if(isset($_GET['confirm']) && !empty($_GET['confirm']) && $_GET['confirm'] === 'oui'){
 
           $bdd->SuppPromo($id_promo);
           $msg .= "Votre code promo a bien été supprimé.";
+          $dialogue = FALSE;
 
-        } else {
-
-          $dialogue = TRUE;
-
-          if(isset($_GET['confirm']) && !empty($_GET['confirm']) && $_GET['confirm'] === 'oui'){
-
-            $bdd->SuppPromo($id_promo);
-            $msg .= "Votre code promo a bien été supprimé.";
-            $dialogue = FALSE;
-
-          }
         }
       }
-
-      $donnees = $bdd->affichageCodePromo();
-
     }
 
-    $this->Render('../vues/promotion/gestion_promos.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'afficher' => $afficher, 'donnees' => $donnees, 'dialogue' => $dialogue));
+    $donnees = $bdd->affichageCodePromo();
+
+    $this->Render('../vues/promotion/gestion_promos.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees, 'dialogue' => $dialogue));
 
   }
 
