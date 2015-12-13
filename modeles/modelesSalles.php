@@ -5,7 +5,9 @@ class modelesSalles extends modelesSuper {
   // ********** AffichageSalles ********* //
   public function affichageSalles(){
 
-    $salles = $this->connect_central_bdd()->query("SELECT * FROM salle");
+    $donnees = $this->connect_central_bdd()->query("SELECT * FROM salle");
+
+    $salles = $donnees->fetchAll(PDO::FETCH_ASSOC);
 
     return $salles;
 
