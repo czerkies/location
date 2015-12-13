@@ -4,7 +4,7 @@
     echo "Vous êtes déjà inscrit.";
   } else {
 ?>
-<?= $msg ?>
+<?= $msg; ?>
 <div class="inscription">
   <form class="" action="" method="post">
     <input type="text" name="pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} ?>" placeholder="Pseudo" required>

@@ -51,7 +51,6 @@ class controleursMembre extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
     $msg = '';
-    $insert = '';
 
     if(isset($_POST) && !empty($_POST)){
 
@@ -73,7 +72,7 @@ class controleursMembre extends controleursSuper {
 
     }
 
-    $this->render('../vues/membre/inscription.php', array('insert' => $insert, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
+    $this->render('../vues/membre/inscription.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
 
   }
 
@@ -194,76 +193,69 @@ class controleursMembre extends controleursSuper {
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
-    if($userConnect){
+    //$idMembre = $_SESSION['membre']['id_membre'];
 
-      $userConnect = TRUE;
-      $idMembre = $_SESSION['membre']['id_membre'];
+    $cont = new modelesMembre();
+    $idMembre = isset($_SESSION['membre']['id_membre']);
 
-      $cont = new modelesMembre();
-      $id_membre = $_SESSION['membre']['id_membre'];
+    if(isset($_POST) && !empty($_POST)){
 
-      if(isset($_POST) && !empty($_POST)){
-
-        if(empty($_POST['pseudo'])){
-          $msg .= "Veuillez saisir un Pseudo.<br>";
-        } else {
-          if(!$cont->verifPseudoMAJ($_POST['pseudo'], $id_membre)){
-            $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
-          }
-        }
-        if(empty($_POST['nom'])){
-          $msg .= "Veuillez saisir un Nom.<br>";
-        }
-        if(empty($_POST['prenom'])){
-          $msg .= "Veuillez saisir un Prénom.<br>";
-        }
-        if(empty($_POST['email'])){
-          $msg .= "Veuillez saisir une adresse Email.<br>";
-        } else {
-          if(!$cont->verifMailMAJ($_POST['email'], $id_membre)){
-            $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
-          }
-        }
-        if(empty($_POST['sexe'])){
-          $msg .= "Veuillez saisir votre Sexe.<br>";
-        }
-        if(empty($_POST['ville'])){
-          $msg .= "Veuillez saisir une Ville.<br>";
-        }
-        if(empty($_POST['cp'])){
-          $msg .= "Veuillez saisir votre Code Postal.<br>";
-        }
-        if(empty($_POST['adresse'])){
-          $msg .= "Veuillez saisir une Adresse.<br>";
-        }
-
-        if(empty($msg)){
-
-          foreach ($_POST as $key => $value){
-            $_POST[$key] = htmlentities($value, ENT_QUOTES);
-          }
-
-          extract($_POST);
-
-          foreach ($_POST as $key => $value) {
-            if($key != 'mdp'){
-              $_SESSION['membre'][$key] = $value;
-            }
-          }
-
-          $cont = new modelesMembre();
-
-          $cont->updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre);
-
+      if(empty($_POST['pseudo'])){
+        $msg .= "Veuillez saisir un Pseudo.<br>";
+      } else {
+        if(!$cont->verifPseudoMAJ($_POST['pseudo'], $idMembre)){
+          $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
         }
       }
+      if(empty($_POST['nom'])){
+        $msg .= "Veuillez saisir un Nom.<br>";
+      }
+      if(empty($_POST['prenom'])){
+        $msg .= "Veuillez saisir un Prénom.<br>";
+      }
+      if(empty($_POST['email'])){
+        $msg .= "Veuillez saisir une adresse Email.<br>";
+      } else {
+        if(!$cont->verifMailMAJ($_POST['email'], $idMembre)){
+          $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
+        }
+      }
+      if(empty($_POST['sexe'])){
+        $msg .= "Veuillez saisir votre Sexe.<br>";
+      }
+      if(empty($_POST['ville'])){
+        $msg .= "Veuillez saisir une Ville.<br>";
+      }
+      if(empty($_POST['cp'])){
+        $msg .= "Veuillez saisir votre Code Postal.<br>";
+      }
+      if(empty($_POST['adresse'])){
+        $msg .= "Veuillez saisir une Adresse.<br>";
+      }
 
-      // Récupération des commandes par id_membre
+      if(empty($msg)){
 
-      $commandesIdMembres = new modelesCommande();
-      $commandes = $commandesIdMembres->commandesMembres($_SESSION['membre']['id_membre']);
+        foreach ($_POST as $key => $value){
+          $_POST[$key] = htmlentities($value, ENT_QUOTES);
+        }
 
+        extract($_POST);
+
+        foreach ($_POST as $key => $value) {
+          if($key != 'mdp'){
+            $_SESSION['membre'][$key] = $value;
+          }
+        }
+
+        $cont->updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre);
+
+      }
     }
+
+    // Récupération des commandes par id_membre
+
+    $commandesIdMembres = new modelesCommande();
+    $commandes = $commandesIdMembres->commandesMembres($idMembre);
 
     $this->render('../vues/membre/profil.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'commandes' => $commandes));
 

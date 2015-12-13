@@ -212,7 +212,6 @@ class controleursSalles extends controleursSuper {
       }
     }
 
-
     $this->Render('../vues/salle/gestion_salles.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'salles' => $salles, 'listeCategories' => $listeCategories));
 
   }

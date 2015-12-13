@@ -16,15 +16,6 @@ class controleursCommande extends controleursSuper {
 
     $pdo = new modelesCommande();
 
-    $listeCommandes = $pdo->lesCommandesAdmin();
-
-    // Calcule du prix total pour affichage CA.
-    $totalCA = 0;
-
-    foreach ($listeCommandes as $value) {
-      $totalCA += $value['montant'];
-    }
-
     // Affichage d'une commande en détail.
     if(isset($_GET['details_commande']) && !empty($_GET['details_commande'])){
 
@@ -37,6 +28,15 @@ class controleursCommande extends controleursSuper {
 
       $detailsCommandeDisplay = TRUE;
 
+    }
+
+    $listeCommandes = $pdo->lesCommandesAdmin();
+
+    // Calcule du prix total pour affichage CA.
+    $totalCA = 0;
+
+    foreach ($listeCommandes as $value) {
+      $totalCA += $value['montant'];
     }
 
     $this->Render('../vues/commande/gestion_commandes.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA, 'client' => $client, 'detailsCommandeID' => $detailsCommandeID, 'detailsCommandeDisplay' => $detailsCommandeDisplay));

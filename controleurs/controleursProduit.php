@@ -48,46 +48,43 @@ class controleursProduit extends controleursSuper {
 
     $id_salle = $ProduitIDSalle['id_salle'];
     $modAvis = new modelesAvis();
-    $affichageAvis = $modAvis->recuperationAvisSalle($id_salle);
-
 
     // CHECK Afficher TTC *0.196 et Suggestion avec rapport date et ville
-    if($userConnect){
+    $id_membre = $_SESSION['membre']['id_membre'];
 
-      $id_membre = $_SESSION['membre']['id_membre'];
+    $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
+    $form = ($nbAvis != 0) ? FALSE : TRUE;
 
-      $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
-      $form = ($nbAvis != 0) ? FALSE : TRUE;
+    if($form){
 
-      if($form){
+    if(isset($_POST['avis'])){
 
-      if(isset($_POST['avis'])){
+        if(empty($_POST['commentaire'])){
+          $msg .= "Veuillez saisir un commentaire.<br>";
+        }
+        if(!isset($_POST['note'])){
+          $msg .= "Une erreur est survenue.<br>";
+        }
 
-          if(empty($_POST['commentaire'])){
-            $msg .= "Veuillez saisir un commentaire.<br>";
+        if(empty($msg)){
+
+          foreach ($_POST as $key => $value){
+            $_POST[$key] = htmlentities($value, ENT_QUOTES);
           }
-          if(!isset($_POST['note'])){
-            $msg .= "Une erreur est survenue.<br>";
-          }
 
-          if(empty($msg)){
+          extract($_POST);
 
-            foreach ($_POST as $key => $value){
-              $_POST[$key] = htmlentities($value, ENT_QUOTES);
-            }
+          $id_salle = $ProduitIDSalle['id_salle'];
 
-            extract($_POST);
+          $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
+          $form =  FALSE;
 
-            $id_salle = $ProduitIDSalle['id_salle'];
-
-            $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
-            $affichageAvis = $modAvis->recuperationAvisSalle($id_salle);
-            $form =  FALSE;
-
-          }
         }
       }
     }
+
+    // Récupération des avis
+    $affichageAvis = $modAvis->recuperationAvisSalle($id_salle);
 
     // Traitement des suggestions par produit
     $suggestions = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);

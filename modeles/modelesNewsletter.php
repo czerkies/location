@@ -7,7 +7,7 @@ class modelesNewsletter extends modelesSuper {
 
     $verifNews = $this->connect_central_bdd()->query("SELECT * FROM newsletter WHERE id_membre = $id_membre");
 
-    $verif = $verifNews->rowCount();
+    $verif = ($verifNews->rowCount() != 0) ? FALSE : TRUE;
 
     return $verif;
 
@@ -36,11 +36,11 @@ class modelesNewsletter extends modelesSuper {
 
     $mailMembre = $this->connect_central_bdd()->query("SELECT m.email FROM membre m, newsletter n WHERE m.id_membre = n.id_membre");
 
-    $mailAbonne = $mailMembre->fetchAll(PDO::FETCH_ASSOC);
+    $donneesNews['mailAbonne'] = $mailMembre->fetchAll(PDO::FETCH_ASSOC);
 
-    $nbMail = $mailMembre->rowCount();
+    $donneesNews['nbMail'] = $mailMembre->rowCount();
 
-    return $donneesNews = array('mailAbonne' => $mailAbonne, 'nbMail' => $nbMail);
+    return $donneesNews;
 
   }
 

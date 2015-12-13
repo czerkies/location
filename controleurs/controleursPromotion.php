@@ -49,6 +49,7 @@ class controleursPromotion extends controleursSuper {
 
         $msg .= 'Votre code promo a bien été ajouté.';
         $ajouter = FALSE;
+        
       }
     }
 

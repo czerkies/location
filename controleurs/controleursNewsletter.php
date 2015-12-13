@@ -8,32 +8,26 @@ class controleursNewsletter extends controleursSuper {
     session_start();
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-
     $msg = '';
 
-    $userConnectAdmin = ($_SESSION && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $mail = new modelesNewsletter();
+    $donneesNews = $mail->recupMailMembre();
 
-    if($userConnectAdmin){
+    $nbAbonne = $donneesNews['nbMail'];
 
-      $mail = new modelesNewsletter();
-      $donneesNews = $mail->recupMailMembre();
+    $mailAdmin = $_SESSION['membre']['email'];
 
-      $nbAbonne = $donneesNews['nbMail'];
+    if(isset($_POST) && !empty($_POST)){
 
-      $mailAdmin = $_SESSION['membre']['email'];
+      $sujet = $_POST['sujet'];
+      $message = $_POST['message'];
 
-      if($_POST){
-
-        $sujet = $_POST['sujet'];
-        $message = $_POST['message'];
-
-        $mail = '';
-        foreach ($donneesNews['mailAbonne'] as $value) {
-          $mail .= $value['email'].', ';
-        }
-        mail($mail, $sujet, $message);
-        $msg .= 'Votre mail a bien été envoyé.';
+      $mail = '';
+      foreach ($donneesNews['mailAbonne'] as $value) {
+        $mail .= $value['email'].', ';
       }
+      mail($mail, $sujet, $message);
+      $msg .= 'Votre mail a bien été envoyé.';
     }
 
 
@@ -52,28 +46,24 @@ class controleursNewsletter extends controleursSuper {
 
     $msg = '';
 
-    if($userConnect){
+    $id_membre = $_SESSION['membre']['id_membre'];
 
-      $id_membre = $_SESSION['membre']['id_membre'];
+    $cont = new modelesNewsletter();
 
-      $cont = new modelesNewsletter();
-      $verifNews = $cont->verifNewsletter($id_membre);
+    if($cont->verifNewsletter($id_membre)){
 
-      if($verifNews == 0){
+      $affichage = TRUE;
 
-        $affichage = TRUE;
+      if(isset($_GET['inscription']) && !empty($_GET['inscription']) && $_GET['inscription'] == 'ok'){
 
-        if(isset($_GET['inscription']) && $_GET['inscription'] == 'ok'){
-
-          $pdo = new modelesNewsletter();
-          $insertion = $pdo->insertMembre($id_membre);
-          $affichage = FALSE;
-
-        }
-
-      } else {
+        $pdo = new modelesNewsletter();
+        $insertion = $pdo->insertMembre($id_membre);
         $affichage = FALSE;
+
       }
+
+    } else {
+      $affichage = FALSE;
     }
 
     $this->Render('../vues/newsletter/newsletter.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichage' => $affichage));
