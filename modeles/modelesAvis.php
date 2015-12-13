@@ -6,10 +6,12 @@ class modelesAvis extends modelesSuper {
   public function lesAvisAdmin(){
 
     $donnees = $this->connect_central_bdd()->query("SELECT a.id_avis, a.commentaire, a.note, a.id_salle,
-      DATE_FORMAT(a.date, '%e %M %Y à %Hh%i') AS date, m.prenom
+      DATE_FORMAT(a.date, '%e %M %Y à %Hh%i') AS date, m.prenom, a.id_membre
       FROM avis a, membre m
-      WHERE a.id_membre = m.id_membre
-      ORDER BY date
+      WHERE (a.id_membre = m.id_membre
+      OR a.id_membre IS NULL)
+      GROUP BY a.id_avis
+      ORDER BY a.date;
     ");
 
     $lesAvis = $donnees->fetchAll(PDO::FETCH_ASSOC);
@@ -31,10 +33,13 @@ class modelesAvis extends modelesSuper {
   public function recuperationAvisSalle($id_salle){
 
     $donnees = $this->connect_central_bdd()->query("SELECT a.commentaire, a.note,
-      DATE_FORMAT(a.date, '%e %M %Y') AS date, m.prenom
+      DATE_FORMAT(a.date, '%e %M %Y') AS date, m.prenom, a.id_membre
       FROM avis a, membre m
-      WHERE a.id_membre = m.id_membre
+      WHERE (a.id_membre = m.id_membre
+      OR a.id_membre IS NULL)
       AND a.id_salle = $id_salle
+      GROUP BY a.id_avis
+      ORDER BY a.date DESC
     ");
 
     $avis = $donnees->fetchAll(PDO::FETCH_ASSOC);

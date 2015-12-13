@@ -1,3 +1,4 @@
+<?php if($userConnectAdmin){ ?>
 <div class="">
   <h1>Gestions des avis</h1>
   <table border="1">
@@ -13,7 +14,12 @@
       <?php foreach ($listeAvis as $value) { ?>
         <tr>
           <td><?= $value['id_salle']; ?></td>
-          <td><?= $value['prenom']; ?></td>
+          <td><?php if($value['id_membre'] === NULL){ ?>
+            Ancien membre
+            <?php } else { ?>
+            <?= $value['prenom']; ?>
+            <?php } ?>
+          </td>
           <td><?= $value['commentaire']; ?></td>
           <td><?= $value['note']; ?>/10</td>
           <td><?= ucwords($value['date']); ?></td>
@@ -23,3 +29,4 @@
     </tbody>
   </table>
 </div>
+<?php } ?>
