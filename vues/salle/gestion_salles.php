@@ -18,7 +18,7 @@
     <label for="adresse">Adresse</label>
     <input type="text" name="adresse" id="adresse" value="<?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} elseif(isset($recupPourModif['adresse'])) {echo $recupPourModif['adresse'];} ?>" placeholder="Adresse" required>
     <label for="cp">Code Postale</label>
-    <input type="text" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} elseif(isset($recupPourModif['cp'])) {echo $recupPourModif['cp'];} ?>" placeholder="Code Postale" required>
+      <input type="text" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} elseif(isset($recupPourModif['cp'])) {echo $recupPourModif['cp'];} ?>" placeholder="Code Postale" required>
     <label for="titre">Titre</label>
     <input type="text" name="titre" id="titre" value="<?php if(isset($_POST['titre'])) {echo $_POST['titre'];} elseif(isset($recupPourModif['titre'])) {echo $recupPourModif['titre'];} ?>" placeholder="Titre" required>
     <label for="description">Description</label>
@@ -27,9 +27,9 @@
     <input type="text" name="capacite" id="capacite" value="<?php if(isset($_POST['capacite'])) {echo $_POST['capacite'];} elseif(isset($recupPourModif['capacite'])) {echo $recupPourModif['capacite'];} ?>" placeholder="Capacité" required>
     <label for="categorie">Catégorie</label>
     <select id="categorie" name="categorie">
-      <option value="null">Toutes categories</option>
+      <option disabled>Toutes categories</option>
       <?php foreach ($listeCategories as $value) { ?>
-        <option value="<?= $value; ?>" <?php if(isset($_POST['categorie']) && $_POST['categorie'] === $value) echo 'selected'?>>
+        <option value="<?= $value; ?>" <?php if(isset($_POST['categorie']) && $_POST['categorie'] === $value) {echo 'selected'; } elseif(isset($recupPourModif['categorie']) && $recupPourModif['categorie'] === $value) {echo 'selected';}?>>
           <?= ucfirst($value); ?>
         </option>
       <?php } ?>
