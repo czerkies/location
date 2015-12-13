@@ -46,8 +46,7 @@ class controleursProduitAdmin extends controleursSuper {
         $nouveauxProduit->InsertionProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo);
 
         $msg .= 'Le produit a bien été ajouté.';
-        $ajouter = FALSE;
-        
+
       }
 
     }
