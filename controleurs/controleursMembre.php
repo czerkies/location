@@ -193,10 +193,8 @@ class controleursMembre extends controleursSuper {
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
-    //$idMembre = $_SESSION['membre']['id_membre'];
-
     $cont = new modelesMembre();
-    $idMembre = isset($_SESSION['membre']['id_membre']);
+    $idMembre = ($_SESSION['membre']['id_membre']) ? $_SESSION['membre']['id_membre'] : NULL;
 
     if(isset($_POST) && !empty($_POST)){
 
@@ -253,7 +251,6 @@ class controleursMembre extends controleursSuper {
     }
 
     // Récupération des commandes par id_membre
-
     $commandesIdMembres = new modelesCommande();
     $commandes = $commandesIdMembres->commandesMembres($idMembre);
 
