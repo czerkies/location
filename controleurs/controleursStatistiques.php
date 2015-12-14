@@ -9,6 +9,7 @@ class controleursStatistiques extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $cinqNotes = FALSE;
     $cinqVendues = FALSE;
+    $cinqMembresQuantite = '';
 
     $donnees = new modelesStatistiques();
 
@@ -26,11 +27,17 @@ class controleursStatistiques extends controleursSuper {
 
       }
 
+      if($_GET['top'] === 'cinqMembresQuantite'){
+
+        $cinqMembresQuantite = $donnees->dataCinqMembresQuantite();
+
+      }
+
     }
 
 
 
-    $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'cinqNotes' => $cinqNotes, 'cinqVendues' => $cinqVendues));
+    $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'cinqNotes' => $cinqNotes, 'cinqVendues' => $cinqVendues, 'cinqMembresQuantite' => $cinqMembresQuantite));
 
   }
 
