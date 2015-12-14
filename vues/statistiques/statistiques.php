@@ -1,4 +1,4 @@
-<?php if($userConnectAdmin){ ?>
+<?php if($userConnectAdmin){ $i=1; ?>
 <h1>Statisques</h1>
 <div class="menu_page_active">
   <ul>
@@ -13,8 +13,9 @@
   <h2>Top 5 des salles les mieux notés</h2>
   <table>
     <tbody>
-      <?php foreach ($cinqNotes as $value) { ?>
+      <?php foreach($cinqNotes as $value) { ?>
         <tr>
+          <td><?= $i; $i++; ?></td>
           <td><?= $value['id_salle']; ?></td>
           <td><?= $value['titre']; ?></td>
           <td><?= $value['note']; ?></td>
@@ -22,10 +23,21 @@
       <?php } ?>
     </tbody>
   </table>
-  <?php } //if($cinqVendues){ ?>
+  <?php } if($cinqVendues){ ?>
   <h2>Top 5 des salles les plus vendues</h2>
-
-  <?php //} if($cinqMembresQuantite){ ?>
+  <table>
+    <tbody>
+      <?php foreach ($cinqVendues as $value) { ?>
+        <tr>
+          <td><?= $i; $i++; ?></td>
+          <td><?= $value['titre']; ?></td>
+          <td><?= $value['id_salle']; ?></td>
+          <td><?= $value['nbcommande']; ?></td>
+        </tr>
+      <?php } ?>
+    </tbody>
+  </table>
+  <?php } //if($cinqMembresQuantite){ ?>
   <h2>Top 5 des membres qui achète le plus</h2>
 
   <?php //} if($cinqMembresPrix){ ?>
