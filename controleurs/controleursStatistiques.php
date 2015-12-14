@@ -7,9 +7,10 @@ class controleursStatistiques extends controleursSuper {
     session_start();
     $userConnect = FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-    $cinqNotes = FALSE;
-    $cinqVendues = FALSE;
+    $cinqNotes = '';
+    $cinqVendues = '';
     $cinqMembresQuantite = '';
+    $cinqMembresPrix = '';
 
     $donnees = new modelesStatistiques();
 
@@ -41,52 +42,7 @@ class controleursStatistiques extends controleursSuper {
 
     }
 
-
-
     $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'cinqNotes' => $cinqNotes, 'cinqVendues' => $cinqVendues, 'cinqMembresQuantite' => $cinqMembresQuantite, 'cinqMembresPrix' => $cinqMembresPrix));
-
-  }
-
-  public function cinqNote(){
-
-    session_start();
-    $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-
-    $donnees = new modelesStatistiques();
-    $cinqNote = $donnees->dataCinqNote();
-
-    $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'cinqNotes' => $cinqNotes));
-
-  }
-
-  public function cinqVendues(){
-
-    session_start();
-    $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-
-    $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
-
-  }
-
-  public function cinqMembresQuantite(){
-
-    session_start();
-    $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-
-    $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
-
-  }
-
-  public function cinqMembresPrix(){
-
-    session_start();
-    $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
-
-    $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
 
   }
 
