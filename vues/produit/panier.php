@@ -26,7 +26,7 @@
         <td><?= $_SESSION['panier']['capacite'][$i]; ?></td>
         <td><?= $_SESSION['panier']['date_arrivee'][$i]; ?></td>
         <td><?= $_SESSION['panier']['date_depart'][$i]; ?></td>
-        <td><a href="/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier&suppId_produit=<?= $_SESSION['panier']['id_produit'][$i]; ?>">X</a></td>
+        <td><a href="routeur.php?controleurs=panier&action=affichagePanier&suppId_produit=<?= $_SESSION['panier']['id_produit'][$i]; ?>">X</a></td>
         <td><?= $_SESSION['panier']['prix'][$i]; ?> €</td>
         <td>20 %</td>
       </tr>
@@ -51,12 +51,12 @@
       <?php } ?>
     <tr>
       <td colspan="8">
-        <form class="" action="/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier" method="post">
+        <form class="" action="routeur.php?controleurs=panier&action=affichagePanier" method="post">
           <label for="code_promo">Utiliser un code de promotion :</label>
           <input id="code_promo" type="text" name="code_promo" value="<?php if(isset($_POST['code_promo'])) {echo $_POST['code_promo'];}?>" placeholder="Code promo">
           <input type="submit" name="promo" value="Appliquer mon code promotion">
         </form>
-        <form class="" action="/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier" method="post">
+        <form class="" action="routeur.php?controleurs=panier&action=affichagePanier" method="post">
           <label for="cgv">J'accepte les conditions générales de vente (<a href="#">Voir</a>)</label>
           <input id="cgv" type="checkbox" name="cgv">
         </td>
@@ -69,7 +69,7 @@
     </tr>
     <tr>
       <td colspan="10">
-        <a href="/lokisalle/www/routeur.php?controleurs=produit&action=affichagePanier&suppId_produit=panier">Vider mon panier</a>
+        <a href="routeur.php?controleurs=panier&action=affichagePanier&suppId_produit=panier">Vider mon panier</a>
       </td>
     </tr>
 </table>
