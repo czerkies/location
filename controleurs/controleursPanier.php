@@ -57,7 +57,7 @@ class controleursPanier extends controleursSuper {
       }
     }
 
-    if(isset($_GET['suppId_produit']) && !empty($_GET['suppId_produit'])){
+    if(isset($_SESSION['panier']) && isset($_GET['suppId_produit']) && !empty($_GET['suppId_produit'])){
       if($_GET['suppId_produit'] === 'panier'){
         unset($_SESSION['panier']);
         $userCart = FALSE;
