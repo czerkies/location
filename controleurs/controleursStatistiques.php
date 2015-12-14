@@ -33,11 +33,17 @@ class controleursStatistiques extends controleursSuper {
 
       }
 
+      if($_GET['top'] === 'cinqMembresPrix'){
+
+        $cinqMembresPrix = $donnees->dataCinqMembresPrix();
+
+      }
+
     }
 
 
 
-    $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'cinqNotes' => $cinqNotes, 'cinqVendues' => $cinqVendues, 'cinqMembresQuantite' => $cinqMembresQuantite));
+    $this->Render('../vues/statistiques/statistiques.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'cinqNotes' => $cinqNotes, 'cinqVendues' => $cinqVendues, 'cinqMembresQuantite' => $cinqMembresQuantite, 'cinqMembresPrix' => $cinqMembresPrix));
 
   }
 

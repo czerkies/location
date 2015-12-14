@@ -60,4 +60,22 @@ class modelesStatistiques extends modelesSuper {
 
   }
 
+  // *********** Top 5 des membres qui en ont acheté le plus ********** //
+  public function dataCinqMembresPrix(){
+
+    $donnees = $this->connect_central_bdd()->query("
+      SELECT SUM(c.montant) as total, m.prenom, m.nom
+      FROM commande c, membre m
+      WHERE c.id_membre = m.id_membre
+      GROUP BY m.id_membre
+      ORDER BY total DESC
+      LIMIT 5;
+    ");
+
+    $cinqMembresPrix = $donnees->fetchAll(PDO::FETCH_ASSOC);
+
+    return $cinqMembresPrix;
+
+  }
+
 }

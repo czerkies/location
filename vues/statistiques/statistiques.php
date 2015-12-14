@@ -51,10 +51,21 @@
       <?php } ?>
     </tbody>
   </table>
-  <?php } //if($cinqMembresPrix){ ?>
+  <?php } if($cinqMembresPrix){ ?>
   <h2>Top 5 des membres qui achète le plus cher</h2>
-
-  <?php //} ?>
+  <table>
+    <tbody>
+      <?php foreach ($cinqMembresPrix as $total) { ?>
+        <tr>
+          <td><?= $i; $i++; ?></td>
+          <td><?= $total['prenom']; ?></td>
+          <td><?= $total['nom']; ?></td>
+          <td><?= $total['total']; ?> €</td>
+        </tr>
+      <?php } ?>
+    </tbody>
+  </table>
+  <?php } ?>
 </div>
 <?php } else { ?>
 <p>Vous n'avez pas accès à cette page</p>
