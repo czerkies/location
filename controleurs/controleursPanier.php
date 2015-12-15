@@ -193,7 +193,10 @@ class controleursPanier extends controleursSuper {
         }
 
         // Récupération de la commande et coordonnées client
-        $client = $details_commande->detailsCommande($numeroCommande['id_commande']);
+        $client = $details_commande->detailsCommandeClient($numeroCommande['id_commande']);
+
+        // Récupération des infos de la commande
+        $infos = $details_commande->detailsCommandeInfos($numeroCommande['id_commande']);
 
         // Récupération des produits de la commande
         $produits = $details_commande->detailsCommandeProduits($numeroCommande['id_commande']);
@@ -207,7 +210,7 @@ class controleursPanier extends controleursSuper {
         $message = '<div style="width:90%;margin:25px auto;">Bonjour, merci de votre achat sur Lokisalle. Vous retrouverez ci-dessous le récapitulatif de votre commande.<br>';
         $message .= "Vos coordonnées : ".ucfirst($client['prenom'])." ".strtoupper($client['nom'])."<br>";
         $message .= "Votre adresse de facturation : ".$client['adresse'].", ".$client['cp']." ".$client['ville'].".<br>";
-        $message .= "Votre commande a été effectuée le ".$client['date_commande'].".</p>";
+        $message .= "Votre commande a été effectuée le ".$infos['date_commande'].".</p>";
         $message .= '<table border="1">
           <thead>
           <tr><th colspan="8">Récapitulatif</th></tr>
@@ -240,7 +243,7 @@ class controleursPanier extends controleursSuper {
         $message .= '
         <tr>
           <td colspan="7">Montant total :</td>
-          <td colspan="1">'. $client['montant'] .' € TTC</td>
+          <td colspan="1">'. $infos['montant'] .' € TTC</td>
         </tr>';
           if($prixTotalReduit != 0){
             $message .= '

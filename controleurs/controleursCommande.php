@@ -2,7 +2,7 @@
 
 class controleursCommande extends controleursSuper {
 
-  // ********* Gestions des Avis ********** //
+  // ********* Gestions des Commandes Admin ********** //
   public function gestionCommandes(){
 
     session_start();
@@ -11,10 +11,11 @@ class controleursCommande extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $detailsCommandeDisplay = FALSE;
     $detailsCommandeID = FALSE;
-    $client = FALSE;
+    $client = '';
+    $infos = '';
     $msg = '';
 
-    $pdo = new modelesCommande();
+    $donneesCommandes = new modelesCommande();
 
     // Affichage d'une commande en détail.
     if(isset($_GET['details_commande']) && !empty($_GET['details_commande'])){
@@ -23,14 +24,15 @@ class controleursCommande extends controleursSuper {
 
       $details = new modelesDetails_commande();
 
-      $client = $details->detailsCommande($idDetailsCommande);
+      $client = $details->detailsCommandeClient($idDetailsCommande);
+      $infos = $details->detailsCommandeInfos($idDetailsCommande);
       $detailsCommandeID = $details->detailsCommandeGestionAdmin($idDetailsCommande);
 
       $detailsCommandeDisplay = TRUE;
 
     }
 
-    $listeCommandes = $pdo->lesCommandesAdmin();
+    $listeCommandes = $donneesCommandes->lesCommandesAdmin();
 
     // Calcule du prix total pour affichage CA.
     $totalCA = 0;
@@ -39,7 +41,7 @@ class controleursCommande extends controleursSuper {
       $totalCA += $value['montant'];
     }
 
-    $this->Render('../vues/commande/gestion_commandes.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA, 'client' => $client, 'detailsCommandeID' => $detailsCommandeID, 'detailsCommandeDisplay' => $detailsCommandeDisplay));
+    $this->Render('../vues/commande/gestion_commandes.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA, 'client' => $client, 'infos' => $infos, 'detailsCommandeID' => $detailsCommandeID, 'detailsCommandeDisplay' => $detailsCommandeDisplay));
 
   }
 

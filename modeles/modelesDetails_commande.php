@@ -14,18 +14,26 @@ class modelesDetails_commande extends modelesSuper {
 
   }
 
-  // ********** Récupération détails d'une commande en détail ********** //
-  public function detailsCommande($id_commande){
+  // ********** Récupération détails d'une commande en détail (Client) ********** //
+  public function detailsCommandeClient($id_commande){
 
-    $commande = $this->connect_central_bdd()->query("SELECT c.id_membre, c.id_commande, c.montant, m.*, DATE_FORMAT(c.date, '%d/%m/%Y à %Hh%i') as date_commande
-    FROM commande c, membre m
-    WHERE c.id_membre = m.id_membre
-    AND c.id_commande = $id_commande
+    $commande = $this->connect_central_bdd()->query("SELECT nom, prenom, cp, adresse, ville FROM membre WHERE id_membre =(SELECT id_membre FROM commande WHERE id_commande = $id_commande);
     ");
 
     $client = $commande->fetch(PDO::FETCH_ASSOC);
 
     return $client;
+
+  }
+
+  // ********** Récupération détails d'une commande en détail (Infos) ********** //
+  public function detailsCommandeInfos($id_commande){
+
+    $commande = $this->connect_central_bdd()->query("SELECT montant, DATE_FORMAT(date, '%d/%m/%Y à %Hh%i') as date_commande FROM commande WHERE id_commande = $id_commande");
+
+    $infos = $commande->fetch(PDO::FETCH_ASSOC);
+
+    return $infos;
 
   }
 

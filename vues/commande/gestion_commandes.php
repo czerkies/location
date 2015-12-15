@@ -7,8 +7,9 @@
       <?php if($client) { ?>
       <p>Client : <?= strtoupper($client['nom']); ?> <?= ucfirst($client['prenom']); ?>.</p>
       <p>Adresse : <?= $client['adresse']; ?>, <?= $client['cp']; ?> <?= $client['ville']; ?>.</p>
-      <p>Commande passé le <?= $client['date_commande']; ?>.</p>
-      <p>Montant : <?= $client['montant']; ?> € TTC.</p>
+      <?php } if($infos){ ?>
+      <p>Commande passé le <?= $infos['date_commande']; ?>.</p>
+      <p>Montant : <?= $infos['montant']; ?> € TTC.</p>
       <?php } ?>
     </div>
     <table border="1">
