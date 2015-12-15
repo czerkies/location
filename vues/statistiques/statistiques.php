@@ -84,7 +84,7 @@
           <td><?= $i; $i++; ?></td>
           <td><?= $total['prenom']; ?></td>
           <td><?= $total['nom']; ?></td>
-          <td><?= $total['total']; ?> €</td>
+          <td><?= round($total['total'], 2); ?> €</td>
         </tr>
       <?php } ?>
     </tbody>
