@@ -2,10 +2,20 @@
 
 class modelesProduit extends modelesSuper {
 
+  // ********** Vérification existance produit par ID ********** //
+  public function verifExistanceIDProduit($id_produit){
+
+    $donnees = $this->connect_central_bdd()->query("SELECT id_produit FROM produit WHERE id_produit = '$id_produit'");
+
+    $idExist = ($donnees->rowCount() === 1) ? TRUE : FALSE;
+
+    return $idExist;
+
+  }
+
   // ********** Affichage produit offres pages d'accueil ********** //
   public function affichageACC(){
 
-    // Faire ça a tout les modeles
     $produitACC = $this->connect_central_bdd()->query("SELECT s.titre, s.photo, s.ville, s.capacite,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
@@ -17,7 +27,6 @@ class modelesProduit extends modelesSuper {
       LIMIT 0,3
     ");
 
-    // Faire ça a tout les modeles
     $produitsAccFetch = $produitACC->fetchAll(PDO::FETCH_ASSOC);
 
     return $produitsAccFetch;
