@@ -20,18 +20,22 @@
           <label for="date_arrivee">Date d'arrivée :</label>
           <?= $date->champs_date('date_depart', 'date_depart', $datebdd = (isset($idProduitModif)) ? $idProduitModif['date_depart'] : NULL); ?>
           <label for="prix">Prix :</label>
-          <input type="text" name="prix" id="prix" value="<?php if(isset($_POST['prix'])) {echo $_POST['prix'];} elseif(isset($idProduitModif['prix'])) {echo $idProduitModif['prix'];} ?>" placeholder="Prix" required> €
+          <input type="number" name="prix" id="prix" value="<?php if(isset($_POST['prix'])) {echo $_POST['prix'];} elseif(isset($idProduitModif['prix'])) {echo $idProduitModif['prix'];} ?>" placeholder="Prix" required> €
           <label for="code_promo">Attribution remise parmi les codes promots existant : </label>
           <select name="id_promo">
             <option disabled>Choisissez votre code promo</option>
-            <option value="NULL">Aucun code promo</option>
-            <?php foreach ($affichagePromo as $value) { ?>
-              <option value="<?= $value['id_promo']; ?>" <?php if(isset($_POST['id_promo']) && $_POST['id_promo'] == $value['id_promo']) {echo 'selected';}
-              elseif(isset($idProduitModif['id_promo']) && $idProduitModif['id_promo'] == $value['id_promo']) {echo 'selected';} ?>>Code : <?= $value['code_promo'].' | Réduction : '.$value['reduction'];?> €</option>
+            <option value="0">Aucun code promo</option>
+            <?php foreach ($affichagePromo as $promos) { ?>
+              <option value="<?= $promos['id_promo']; ?>" <?php if(isset($_POST['id_promo']) && $_POST['id_promo'] == $promos['id_promo']) {echo 'selected';}
+              elseif(isset($idProduitModif['id_promo']) && $idProduitModif['id_promo'] == $promos['id_promo']) {echo 'selected';} ?>>Code : <?= $promos['code_promo'].' | Réduction : '.$promos['reduction'];?> €</option>
             <?php } ?>
           </select>
+          <?php if($idProduitModif){ ?>
           <input type="hidden" name="id_produit" value="<?= $idProduitModif['id_produit']; ?>">
+          <input type="submit" value="Modifier">
+          <?php } else { ?>
           <input type="submit" value="Enregistrer">
+          <?php } ?>
         </form>
       </div>
     <?php } if($affichageProduitsAdmin) { ?>

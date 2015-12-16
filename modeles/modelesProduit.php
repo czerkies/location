@@ -42,17 +42,19 @@ class modelesProduit extends modelesSuper {
   }
 
   // ********** Insertion d'un produit depuis l'admin ********** //
-  public function InsertionProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo){
+  public function insertionProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo){
 
     $insertion = $this->connect_central_bdd()->prepare("INSERT INTO produit(date_arrivee, date_depart, id_salle, id_promo, prix) VALUES(:date_arrivee, :date_depart, :id_salle, :id_promo, :prix)");
 
     $insertion->bindValue(':date_arrivee', $date_arrivee, PDO::PARAM_STR);
     $insertion->bindValue(':date_depart', $date_depart, PDO::PARAM_STR);
     $insertion->bindValue(':id_salle', $id_salle, PDO::PARAM_INT);
-    $insertion->bindValue(':id_promo', $id_promo, PDO::PARAM_INT);
+    $insertion->bindValue(':id_promo', $id_promo, PDO::PARAM_STR);
     $insertion->bindValue(':prix', $prix, PDO::PARAM_INT);
 
-    $insertion->execute();
+    $resultInsertionProduit = $insertion->execute();
+
+    return $resultInsertionProduit;
 
   }
 
