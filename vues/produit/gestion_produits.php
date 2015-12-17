@@ -1,5 +1,6 @@
 <?php if($userConnectAdmin){ ?>
 <?= $msg; ?>
+<?= $controleDate; ?>
 <h1>Gestion des produits</h1>
 <div id="gestion_produit">
   <ul>
@@ -17,7 +18,7 @@
           </select>
           <label for="date_arrivee">Date d'arrivée :</label>
           <?= $date->champs_date('date_arrivee', 'date_arrivee', $datebdd = (isset($idProduitModif)) ? $idProduitModif['date_arrivee'] : NULL); ?>
-          <label for="date_arrivee">Date d'arrivée :</label>
+          <label for="date_arrivee">Date de départ :</label>
           <?= $date->champs_date('date_depart', 'date_depart', $datebdd = (isset($idProduitModif)) ? $idProduitModif['date_depart'] : NULL); ?>
           <label for="prix">Prix :</label>
           <input type="number" name="prix" id="prix" value="<?php if(isset($_POST['prix'])) {echo $_POST['prix'];} elseif(isset($idProduitModif['prix'])) {echo $idProduitModif['prix'];} ?>" placeholder="Prix" required> €

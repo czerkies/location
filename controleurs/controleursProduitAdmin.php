@@ -46,6 +46,7 @@ class controleursProduitAdmin extends controleursSuper {
     $userConnect = FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $msg = '';
+    $controleDate = '';
     $ajouter = TRUE;
     $affichageProduitsAdmin = FALSE;
     $idProduitModif = FALSE;
@@ -93,14 +94,31 @@ class controleursProduitAdmin extends controleursSuper {
           $id_promo = (isset($_POST['id_promo']) && $_POST['id_promo'] === '0') ? NULL : $_POST['id_promo'];
 
           $nouveauxProduit = new modelesProduit();
-          if($nouveauxProduit->insertionProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo)){
 
-            $msg .= 'Le produit a bien été ajouté.';
+          // Controle des dates
+          if($date_arrivee <= date('Y-m-d g:i')){
+            $controleDate .= 'Vous ne pouvez pas créer un produit inferieur à la date du jour.';
+          }
+          if($date_depart <= $date_arrivee){
+            $controleDate .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.';
+          }
 
+          if($nouveauxProduit->verifDateBDD($date_arrivee, $date_depart, $id_salle)){
+
+            if(empty($controleDate)){
+
+              if($nouveauxProduit->insertionProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo)){
+
+                $msg .= 'Le produit a bien été ajouté.';
+
+              } else {
+
+                $msg .= self::ERREURSQL;
+
+              }
+            }
           } else {
-
-            $msg .= self::ERREURSQL;
-
+            $msg .= 'Oups, une salle a déjà été reservé à cette date.<br>Merci de bien vouloir en choisir une autre.<br>';
           }
         }
       } else {
@@ -110,7 +128,7 @@ class controleursProduitAdmin extends controleursSuper {
       }
     }
 
-    $this->Render('../vues/produit/gestion_produits.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'affichageProduitsAdmin' => $affichageProduitsAdmin, 'affichageSalles' => $affichageSalles, 'affichagePromo' => $affichagePromo, 'date' => $date, 'idProduitModif' => $idProduitModif));
+    $this->Render('../vues/produit/gestion_produits.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'affichageProduitsAdmin' => $affichageProduitsAdmin, 'affichageSalles' => $affichageSalles, 'affichagePromo' => $affichagePromo, 'date' => $date, 'idProduitModif' => $idProduitModif, 'controleDate' => $controleDate));
 
   }
 
@@ -122,6 +140,7 @@ class controleursProduitAdmin extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
     $msg = '';
+    $controleDate = '';
     $modifSalle = FALSE;
     $idProduitModif = FALSE;
     $ajouter = FALSE;
@@ -221,7 +240,7 @@ class controleursProduitAdmin extends controleursSuper {
     $affichageSalles = $salles->affichageSalles();
     $affichagePromo = $listePromo->affichageCodePromo();
 
-    $this->Render('../vues/produit/gestion_produits.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'date' => $date, 'ajouter' => $ajouter, 'affichageProduitsAdmin' => $affichageProduitsAdmin, 'affichageSalles' => $affichageSalles, 'affichagePromo' => $affichagePromo, 'idProduitModif' => $idProduitModif));
+    $this->Render('../vues/produit/gestion_produits.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'date' => $date, 'ajouter' => $ajouter, 'affichageProduitsAdmin' => $affichageProduitsAdmin, 'affichageSalles' => $affichageSalles, 'affichagePromo' => $affichagePromo, 'idProduitModif' => $idProduitModif, 'controleDate' => $controleDate));
 
   }
 

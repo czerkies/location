@@ -215,4 +215,17 @@ class modelesProduit extends modelesSuper {
 
   }
 
+  // ********** Verification date d'une creation ou modification d'un produit ********** //
+  public function verifDateBDD($date_arrivee, $date_depart, $id_salle){
+
+    // Prends tout les produits qui a une date d'arrivee superieur ou egale a la date d'arrivee donnee ET qui a une date de depart inferieur ou egale a la date de depart donnee ET qui a pour id salle l'ID s'alle donné.
+
+    $donnees = modelesSuper::connect_central_bdd()->query("SELECT id_produit FROM produit WHERE (date_arrivee >= '$date_arrivee' OR '$date_arrivee' BETWEEN date_arrivee AND date_depart) AND (date_depart <= '$date_depart' OR '$date_depart' BETWEEN date_arrivee AND date_depart) AND id_salle IN(SELECT id_salle FROM salle WHERE id_salle = $id_salle)");
+
+    $verifDateProduit = ($donnees->rowCount() != 0) ? FALSE : TRUE;
+
+    return $verifDateProduit;
+
+  }
+
 }

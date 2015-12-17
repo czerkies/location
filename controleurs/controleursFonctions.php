@@ -58,7 +58,11 @@ class controleursFonctions extends controleursSuper {
     <select id="_J" name="'.$id_select.'_J">
     <option disabled>Jour</option>';
     for ($i=1;$i<=31;$i++) {
-      $select .= '<option value="'.$i.'" ';
+      if($i < 10){
+        $select .= '<option value="0'.$i.'" ';
+      } else {
+        $select .= '<option value="'.$i.'" ';
+      }
       if(isset($_POST[''.$id_select.'_J']) && $_POST[''.$id_select.'_J'] == $i) {$select .= 'selected';}
       elseif (empty($_POST) && $date_bdd != NULL && $date_bdd_array['day'] == $i) {$select .= 'selected';}
       elseif (empty($_POST) && $date_bdd === NULL && date('j') == $i) {$select .= 'selected';}
@@ -68,7 +72,11 @@ class controleursFonctions extends controleursSuper {
     <select name="'.$id_select.'_M">
     <option disabled>Mois</option>';
     for ($i=1;$i<=12;$i++) {
-      $select .= '<option value="'.$i.'" ';
+      if($i < 10){
+        $select .= '<option value="0'.$i.'" ';
+      } else {
+        $select .= '<option value="'.$i.'" ';
+      }
       if(isset($_POST[''.$id_select.'_M']) && $_POST[''.$id_select.'_M'] == $i){$select .= 'selected';}
       elseif (empty($_POST) && $date_bdd != NULL && $date_bdd_array['month'] == $i) {$select .= 'selected';}
       elseif (empty($_POST) && $date_bdd === NULL && date('n') == $i) {$select .= 'selected';}
