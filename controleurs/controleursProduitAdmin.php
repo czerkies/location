@@ -29,11 +29,7 @@ class controleursProduitAdmin extends controleursSuper {
     || !isset($value['id_promo']) || !is_numeric($value['id_promo'])){
       $msg .= self::ERREURSQL;
     }
-
-    // Vérif des dates
-
-    // Vérif des dates SQL.
-
+    
     return $msg;
 
   }

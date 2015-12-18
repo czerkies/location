@@ -41,9 +41,11 @@
       <label for="note">Note</label>
       <select name="note" id="note">
       <option disabled>Note</option>
-      <?php for($i=0;$i<=10;$i++) {
-        echo '<option value="'.$i.'">'.$i.'</option>';
-      } ?>
+      <?php for($i=0;$i<=10;$i++) { ?>
+        <option value="<?= $i; ?>"<?php
+          if(isset($_POST['note']) && $_POST['note'] == $i) echo ' selected';
+        ?>><?= $i; ?></option>
+      <?php } ?>
       </select>
       <input type="submit" name="avis" value="Envoyer mon avis">
       <?php

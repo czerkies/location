@@ -38,56 +38,67 @@ class controleursProduit extends controleursSuper {
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $form = (!$userConnect) ? FALSE : TRUE;
-
     $msg = '';
 
+    $modProduit = new modelesProduit();
     $id_produit = htmlentities($_GET['id_produit']);
 
-    $modProduit = new modelesProduit();
-    $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);
+    // Vérification existance ID produit.
+    if($modProduit->verifExistanceIDProduit($id_produit)){
 
-    $id_salle = $ProduitIDSalle['id_salle'];
-    $modAvis = new modelesAvis();
+      $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);
 
-    // CHECK Afficher TTC *0.196 et Suggestion avec rapport date et ville
-    $id_membre = $_SESSION['membre']['id_membre'];
+      $id_salle = $ProduitIDSalle['id_salle'];
+      $modAvis = new modelesAvis();
 
-    $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
-    $form = ($nbAvis != 0) ? FALSE : TRUE;
+      // CHECK Afficher TTC *0.196 et Suggestion avec rapport date et ville
+      $id_membre = $_SESSION['membre']['id_membre'];
 
-    if($form){
+      $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
+      $form = ($nbAvis != 0) ? FALSE : TRUE;
 
-    if(isset($_POST['avis'])){
+      if($form){
 
-        if(empty($_POST['commentaire'])){
-          $msg .= "Veuillez saisir un commentaire.<br>";
-        }
-        if(!isset($_POST['note'])){
-          $msg .= "Une erreur est survenue.<br>";
-        }
+        if(isset($_POST['avis']) && !empty($_POST['avis'])){
 
-        if(empty($msg)){
-
-          foreach ($_POST as $key => $value){
-            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+          if(isset($_POST['commentaire']) && empty($_POST['commentaire'])){
+            $msg .= "Veuillez saisir un commentaire.<br>";
           }
 
-          extract($_POST);
+          if(isset($_POST['note']) && !empty($_POST['note']) && is_numeric($_POST['note'])){
 
-          $id_salle = $ProduitIDSalle['id_salle'];
+            if(empty($msg)){
 
-          $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
-          $form =  FALSE;
+              foreach ($_POST as $key => $value){
+                $_POST[$key] = htmlentities($value, ENT_QUOTES);
+              }
+
+              extract($_POST);
+
+              $id_salle = $ProduitIDSalle['id_salle'];
+
+              $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
+              $form =  FALSE;
+
+            }
+          }
+
+          $msg = 'Une erreur est survenue lors de votre demande.';
 
         }
       }
+
+      // Récupération des avis
+      $affichageAvis = $modAvis->recuperationAvisSalle($id_salle);
+
+      // Traitement des suggestions par produit
+      $suggestions = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);
+
+    } else {
+
+      header('Location: routeur.php?controleurs=produit&action=produitReservation');
+
     }
-
-    // Récupération des avis
-    $affichageAvis = $modAvis->recuperationAvisSalle($id_salle);
-
-    // Traitement des suggestions par produit
-    $suggestions = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);
 
     $this->Render('../vues/produit/reservation_details.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));
 
