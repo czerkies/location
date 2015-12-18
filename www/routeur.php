@@ -19,8 +19,8 @@ function autoloader($class){
 spl_autoload_register('autoloader');
 
 
-$controleur = $_GET['controleurs'];
-$action = $_GET['action'];
+$controleur = htmlentities($_GET['controleurs']);
+$action = htmlentities($_GET['action']);
 
 
 if(file_exists('../controleurs/controleurs'.ucfirst($controleur).'.php')){
@@ -29,5 +29,13 @@ if(file_exists('../controleurs/controleurs'.ucfirst($controleur).'.php')){
       $classe = 'controleurs'.ucfirst($controleur);
       $instance = new $classe();
       $instance->$action();
+    } else {
+      include('../controleurs/controleursProduit.php');
+      $instance = new controleursProduit();
+      $instance->produitACC();
     }
+} else {
+  include('../controleurs/controleursProduit.php');
+  $instance = new controleursProduit();
+  $instance->produitACC();
 }
