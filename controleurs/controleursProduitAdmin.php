@@ -103,7 +103,7 @@ class controleursProduitAdmin extends controleursSuper {
             $controleDate .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.';
           }
 
-          if($nouveauxProduit->verifDateBDD($date_arrivee, $date_depart, $id_salle)){
+          if($nouveauxProduit->verifDateBDD($date_arrivee, $date_depart, $id_salle, NULL)){
 
             if(empty($controleDate)){
 
@@ -196,10 +196,31 @@ class controleursProduitAdmin extends controleursSuper {
 
             $id_promo = (isset($_POST['id_promo']) && $_POST['id_promo'] === '0') ? NULL : $_POST['id_promo'];
 
-            $donneesProduits->updateProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo, $id_produit);
+            // Controle des dates
+            if($date_arrivee <= date('Y-m-d g:i')){
+              $controleDate .= 'Vous ne pouvez pas créer un produit inferieur à la date du jour.';
+            }
+            if($date_depart <= $date_arrivee){
+              $controleDate .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.';
+            }
 
-            $msg .= 'Le produit a bien été modifié.';
+            if($donneesProduits->verifDateBDD($date_arrivee, $date_depart, $id_salle, $id_produit)){
 
+              if(empty($controleDate)){
+
+                if($donneesProduits->updateProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo, $id_produit)){
+
+                  $msg .= 'Le produit a bien été modifié.';
+
+                } else {
+
+                  $msg .= self::ERREURSQL;
+
+                }
+              }
+            } else {
+              $msg .= 'Oups, une salle a déjà été reservé à cette date.<br>Merci de bien vouloir en choisir une autre.<br>';
+            }
           }
         } else {
 
@@ -231,6 +252,7 @@ class controleursProduitAdmin extends controleursSuper {
         $affichageProduitsAdmin = $donneesProduits->affichageProduitsAdminTypeOrder($type, $order);
 
       }
+
     } else {
 
       $affichageProduitsAdmin = $donneesProduits->affichageProduitsAdmin();

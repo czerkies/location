@@ -144,7 +144,9 @@ class modelesProduit extends modelesSuper {
     $insertion->bindValue(':prix', $prix, PDO::PARAM_INT);
     $insertion->bindValue(':id_promo', $id_promo, PDO::PARAM_INT);
 
-    $insertion->execute();
+    $resultSQL = $insertion->execute();
+
+    return $resultSQL;
 
   }
 
@@ -216,11 +218,19 @@ class modelesProduit extends modelesSuper {
   }
 
   // ********** Verification date d'une creation ou modification d'un produit ********** //
-  public function verifDateBDD($date_arrivee, $date_depart, $id_salle){
+  public function verifDateBDD($date_arrivee, $date_depart, $id_salle, $id_produit){
 
-    // Prends tout les produits qui a une date d'arrivee superieur ou egale a la date d'arrivee donnee ET qui a une date de depart inferieur ou egale a la date de depart donnee ET qui a pour id salle l'ID s'alle donné.
+    $req = "SELECT id_produit FROM produit WHERE
+      (date_arrivee >= '$date_arrivee' OR '$date_arrivee' BETWEEN date_arrivee AND date_depart)
+      AND (date_depart <= '$date_depart' OR '$date_depart' BETWEEN date_arrivee AND date_depart)";
 
-    $donnees = modelesSuper::connect_central_bdd()->query("SELECT id_produit FROM produit WHERE (date_arrivee >= '$date_arrivee' OR '$date_arrivee' BETWEEN date_arrivee AND date_depart) AND (date_depart <= '$date_depart' OR '$date_depart' BETWEEN date_arrivee AND date_depart) AND id_salle IN(SELECT id_salle FROM salle WHERE id_salle = $id_salle)");
+    if($id_produit){
+      $req .= " AND id_produit != $id_produit";
+    }
+
+    $req .= " AND id_salle IN(SELECT id_salle FROM salle WHERE id_salle = $id_salle)";
+
+    $donnees = modelesSuper::connect_central_bdd()->query($req);
 
     $verifDateProduit = ($donnees->rowCount() != 0) ? FALSE : TRUE;
 
