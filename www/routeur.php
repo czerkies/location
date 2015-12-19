@@ -18,24 +18,33 @@ function autoloader($class){
 
 spl_autoload_register('autoloader');
 
+function erreurUrl(){
 
-$controleur = htmlentities($_GET['controleurs']);
-$action = htmlentities($_GET['action']);
+  include('../controleurs/controleursFonctions.php');
+  $instance = new controleursFonctions();
+  $instance->urlIncorrect();
 
+}
 
-if(file_exists('../controleurs/controleurs'.ucfirst($controleur).'.php')){
-  include('../controleurs/controleurs'.ucfirst($controleur).'.php');
-    if(method_exists('controleurs'.ucfirst($controleur), $action)){
-      $classe = 'controleurs'.ucfirst($controleur);
-      $instance = new $classe();
-      $instance->$action();
+if(isset($_GET['controleurs']) && !empty($_GET['controleurs'])
+  && isset($_GET['action']) && !empty($_GET['action'])){
+
+    $controleur = htmlentities($_GET['controleurs']);
+    $action = htmlentities($_GET['action']);
+
+    if(file_exists('../controleurs/controleurs'.ucfirst($controleur).'.php')){
+      include('../controleurs/controleurs'.ucfirst($controleur).'.php');
+        if(method_exists('controleurs'.ucfirst($controleur), $action)){
+          $classe = 'controleurs'.ucfirst($controleur);
+          $instance = new $classe();
+          $instance->$action();
+        } else {
+          erreurUrl();
+        }
     } else {
-      include('../controleurs/controleursProduit.php');
-      $instance = new controleursProduit();
-      $instance->produitACC();
+      erreurUrl();
     }
+    
 } else {
-  include('../controleurs/controleursProduit.php');
-  $instance = new controleursProduit();
-  $instance->produitACC();
+  erreurUrl();
 }

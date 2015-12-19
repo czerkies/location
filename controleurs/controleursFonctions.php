@@ -124,4 +124,15 @@ class controleursFonctions extends controleursSuper {
 
   }
 
+  // ********** Fonction pour une page de type "404" ********** //
+  public function urlIncorrect(){
+
+    session_start();
+    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
+    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+
+    $this->Render('../vues/erreur/page_introuvable.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
+
+  }
+
 }
