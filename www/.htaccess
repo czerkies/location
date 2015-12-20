@@ -1,4 +1,9 @@
 RewriteEngine On
-RewriteRule ^admin/gestion-produits/ routeur.php?controleurs=produit&action=afficherProduits [L]
-RewriteRule ^admin/gestion-produits/?modif= routeur.php?controleurs=produit&action=afficherProduits&modif=$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^admin/gestion-produits/modification/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&modif=$1 [L]
+RewriteRule ^admin/gestion-produits/ordre/(.*)/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&type=$1&order=$2 [L]
+RewriteRule ^admin/gestion-produits/ routeur.php?controleurs=produitAdmin&action=afficherProduits [L]
 RewriteRule ^accueil/ routeur.php?controleurs=produit&action=produitACC [L]

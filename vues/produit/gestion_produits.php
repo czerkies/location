@@ -78,7 +78,7 @@
                 <?php } ?>
                 <td><?= $value['prix']; ?> €</td>
                 <td><?= $value['etat']; ?></td>
-                <td><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&modif=<?= $value['id_produit']; ?>">Modifier</a></td>
+                <td><a href="/lokisalle/www/admin/gestion-produits/modification/<?= $value['id_produit']; ?>">Modifier</a></td>
                 <td><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&supp=<?= $value['id_produit']; ?>">Supprimer</a></td>
               </tr>
             <?php } ?>

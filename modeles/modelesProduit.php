@@ -114,7 +114,7 @@ class modelesProduit extends modelesSuper {
   }
 
   // ********** Récupération produit par ID Administrateur ********** //
-  public function recupProduitParID($id_produit){ // Récupérer les secondes SVP !
+  public function recupProduitParID($id_produit){
 
     $produitID = $this->connect_central_bdd()->query("SELECT s.*,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y %H:%i') AS date_arrivee,

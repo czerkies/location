@@ -29,7 +29,7 @@ class controleursProduitAdmin extends controleursSuper {
     || !isset($value['id_promo']) || !is_numeric($value['id_promo'])){
       $msg .= self::ERREURSQL;
     }
-    
+
     return $msg;
 
   }
@@ -236,18 +236,14 @@ class controleursProduitAdmin extends controleursSuper {
     }
 
     // ORDER BY pour desc de date_arrivee, date_depart et prix.
-    if(isset($_GET['type']) && isset($_GET['order'])){
+    if(isset($_GET['type']) && !empty($_GET['type']) && isset($_GET['order']) && !empty($_GET['order'])
+      && ($_GET['type'] === 'date_arrivee' || $_GET['type'] === 'date_depart' || $_GET['type'] === 'prix')
+      && ($_GET['order'] === 'asc' || $_GET['order'] === 'desc')) {
 
-      if(isset($_GET['type']) && !empty($_GET['type'] && isset($_GET['order']) && !empty($_GET['order'])
-        && $_GET['type'] === 'date_arrivee' || $_GET['type'] === 'date_depart' || $_GET['type'] === 'prix'
-        && $_GET['order'] === 'asc' || $_GET['order'] === 'desc')) {
+      $type = htmlentities($_GET['type']);
+      $order = htmlentities($_GET['order']);
 
-        $type = htmlentities($_GET['type']);
-        $order = htmlentities($_GET['order']);
-
-        $affichageProduitsAdmin = $donneesProduits->affichageProduitsAdminTypeOrder($type, $order);
-
-      }
+      $affichageProduitsAdmin = $donneesProduits->affichageProduitsAdminTypeOrder($type, $order);
 
     } else {
 
