@@ -7,3 +7,9 @@ RewriteRule ^admin/gestion-produits/modification/(.*)$ routeur.php?controleurs=p
 RewriteRule ^admin/gestion-produits/ordre/(.*)/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&type=$1&order=$2 [L]
 RewriteRule ^admin/gestion-produits/ routeur.php?controleurs=produitAdmin&action=afficherProduits [L]
 RewriteRule ^accueil/ routeur.php?controleurs=produit&action=produitACC [L]
+
+RewriteRule ^page-introuvable/ routeur.php?controleurs=Fonctions&action=urlIncorrect [L]
+
+ErrorDocument 401 /lokisalle/www/page-introuvable/
+ErrorDocument 403 /lokisalle/www/page-introuvable/
+ErrorDocument 404 /lokisalle/www/page-introuvable/

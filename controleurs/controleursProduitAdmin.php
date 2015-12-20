@@ -41,7 +41,7 @@ class controleursProduitAdmin extends controleursSuper {
     session_start();
     $title = 'Ajouter un produit';
     $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
     $controleDate = '';
     $ajouter = TRUE;
@@ -135,7 +135,7 @@ class controleursProduitAdmin extends controleursSuper {
     session_start();
     $title = 'Afficher les produits';
     $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $msg = '';
     $controleDate = '';

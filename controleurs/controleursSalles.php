@@ -11,7 +11,7 @@ class controleursSalles extends controleursSuper {
     session_start();
     $title = 'Gestion des salles';
     $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
     $recupPourModif = FALSE;
     $ajouter = FALSE;
@@ -60,8 +60,8 @@ class controleursSalles extends controleursSuper {
 
         if($this->verificationPhoto()) // on vérifie l'extension de la photo=si c'est TRUE
         {
-          define("RACINE_SITE", "/lokisalle/www/");
-          define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
+          //define("RACINE_SITE", "/lokisalle/www/");
+          //define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
 
           $nom_photo = 'salle' . $_POST['id_salle'] .'_'. $_FILES['photo']['name'];
           $photo_bdd = "img/$nom_photo";
@@ -138,7 +138,7 @@ class controleursSalles extends controleursSuper {
     session_start();
     $title = 'Ajouter une salle';
     $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
     $salles = FALSE;
     $ajouter = TRUE;
 

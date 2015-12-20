@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title><?= $title; ?> | Lokisalle</title>
     <meta name="description" content="Lokisalle | Réservez vos salle avec un service clef en main.">
-    <link rel="stylesheet" href="../www/css/style.css" charset="utf-8">
+    <link rel="stylesheet" href="<?= RACINE_SITE; ?>css/style.css" charset="utf-8">
   </head>
   <body>
     <div id="nav">

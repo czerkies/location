@@ -7,8 +7,8 @@ class controleursProduit extends controleursSuper {
 
     session_start();
     $title = 'Accueil';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $cont = new modelesProduit();
     $lesProduits = $cont->affichageACC();
@@ -22,8 +22,8 @@ class controleursProduit extends controleursSuper {
 
     session_start();
     $title = 'Tout nos produits';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $cont = new modelesProduit();
     $lesProduits = $cont->affichageReservation();
@@ -36,8 +36,8 @@ class controleursProduit extends controleursSuper {
   public function reservationDetails(){
 
     session_start();
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
     $form = (!$userConnect) ? FALSE : TRUE;
     $msg = '';
 
@@ -109,8 +109,8 @@ class controleursProduit extends controleursSuper {
 
     session_start();
     $title = 'Recherche d\'une salle';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
     $produits = FALSE;
     $msg = '';
 

@@ -7,8 +7,8 @@ class controleursPanier extends controleursSuper {
 
     session_start();
     $title = 'Votre panier';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
     $userCart = (isset($_SESSION['panier'])) ? TRUE : FALSE;
 
     $codeProduitOk = FALSE;

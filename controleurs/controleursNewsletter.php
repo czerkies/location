@@ -7,8 +7,8 @@ class controleursNewsletter extends controleursSuper {
 
     session_start();
     $title = 'Title';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
 
     $mail = new modelesNewsletter();
@@ -41,8 +41,8 @@ class controleursNewsletter extends controleursSuper {
 
     session_start();
     $title = 'Title';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
     $affichage = FALSE;
 
 

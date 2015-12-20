@@ -2,13 +2,13 @@
 
 class controleursMembre extends controleursSuper {
 
-  // ********** Affichage des produits sur la page d'accueil ********** //
+  // ********** Controle de la connexion d'un membre ********** //
   public function connexionMembre(){
 
     session_start();
     $title = 'Title';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $connect = '';
 
@@ -49,8 +49,8 @@ class controleursMembre extends controleursSuper {
 
     session_start();
     $title = 'Title';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $msg = '';
 
@@ -92,8 +92,8 @@ class controleursMembre extends controleursSuper {
       }
     }
 
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
 
     $this->render('../vues/membre/deconnexion.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
@@ -105,8 +105,8 @@ class controleursMembre extends controleursSuper {
 
     session_start();
     $title = 'Title';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $msg = '';
 
@@ -145,8 +145,8 @@ class controleursMembre extends controleursSuper {
 
     session_start();
     $title = 'Title';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $msg = '';
 
@@ -196,8 +196,8 @@ class controleursMembre extends controleursSuper {
     session_start();
     $title = 'Title';
     $msg = '';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $cont = new modelesMembre();
     $idMembre = ($_SESSION['membre']['id_membre']) ? $_SESSION['membre']['id_membre'] : NULL;

@@ -129,8 +129,8 @@ class controleursFonctions extends controleursSuper {
 
     session_start();
     $title = 'Page non trouvée';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = $this->userConnect();
+    $userConnectAdmin = $this->userConnectAdmin();
 
     $this->Render('../vues/erreur/page_introuvable.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
 

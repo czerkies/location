@@ -7,7 +7,7 @@ class controleursStatistiques extends controleursSuper {
     session_start();
     $title = 'Statistiques';
     $userConnect = FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
     $cinqNotes = '';
     $cinqVendues = '';
     $cinqMembresQuantite = '';

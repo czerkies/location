@@ -7,8 +7,8 @@ class controleursPromotion extends controleursSuper {
 
     session_start();
     $title = 'Ajouter une promotion';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
     $ajouter = TRUE;
     $donnees = FALSE;
@@ -62,8 +62,8 @@ class controleursPromotion extends controleursSuper {
 
     session_start();
     $title = 'Gestion des promotions';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
     $ajouter = FALSE;
     $dialogue = FALSE;
 

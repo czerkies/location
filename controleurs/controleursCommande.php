@@ -7,8 +7,8 @@ class controleursCommande extends controleursSuper {
 
     session_start();
     $title = 'Gestion des commandes';
-    $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
-    $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+    $userConnect = FALSE;
+    $userConnectAdmin = $this->userConnectAdmin();
     $detailsCommandeDisplay = FALSE;
     $detailsCommandeID = FALSE;
     $client = '';
