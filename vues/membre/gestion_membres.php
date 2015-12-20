@@ -28,6 +28,15 @@
       <?php } ?>
     </tbody>
   </table>
+  <?php if($dialogue) { ?>
+  <div class="dialogue">
+    <p>
+      Ce membre est associé à une commande, si vous le supprimez, vous perdrez ses coordonnées mais pas sa commande.<br>
+      Êtes-vous sur de vouloir le supprimer ?<br>
+      <a href="routeur.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=<?= $_GET['suppMembre']; ?>&confirm=oui">Oui</a> | <a href="routeur.php?controleurs=membreAdmin&action=gestionMembres">Non</a>
+    </p>
+  </div>
+  <?php } ?>
   <div class="">
     <p><a href="routeur.php?controleurs=membreAdmin&action=gestionMembres&ajouter=membre">Création d'un compte admin</a></p>
     <?php if($ajouterMembre){ ?>

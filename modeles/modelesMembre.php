@@ -149,4 +149,13 @@ class modelesMembre extends modelesSuper {
 
   }
 
+  // ********** Accord supprésion si un membre est rattaché à une commande ********* //
+  public function verifMembreCommande($id_membre){
+
+    $donnees = modelesSuper::connect_central_bdd()->query("SELECT id_commande FROM commande WHERE id_membre = $id_membre");
+
+    return $membresCommande = $donnees->rowCount();
+
+  }
+
 }

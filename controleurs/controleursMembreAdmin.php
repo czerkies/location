@@ -10,6 +10,7 @@ class controleursMembreAdmin extends controleursSuper {
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $ajouterMembre = FALSE;
+    $dialogue = FALSE;
     $msg = '';
 
     $membre = new modelesMembre();
@@ -19,16 +20,30 @@ class controleursMembreAdmin extends controleursSuper {
 
       $id_membre = htmlentities($_GET['suppMembre']);
 
-      if($membre->supprimerMembreAdmin($id_membre)){
+      if(!$membre->verifMembreCommande($id_membre)){
 
-        $msg .= 'Le membre a bien été supprimé.';
+        if($membre->supprimerMembreAdmin($id_membre)){
+          $msg .= 'Le membre a bien été supprimé.';
+        } else {
+          $msg .= 'Vous ne pouvez pas supprimer ce membre';
+        }
 
       } else {
 
-        $msg .= 'Vous ne pouvez pas supprimer ce membre';
+        $dialogue = TRUE;
 
+        if(isset($_GET['confirm']) && !empty($_GET['confirm']) && $_GET['confirm'] === 'oui'){
+
+          if($membre->supprimerMembreAdmin($id_membre)){
+            $msg .= 'Le membre a bien été supprimé.';
+          } else {
+            $msg .= 'Vous ne pouvez pas supprimer ce membre';
+          }
+
+          $dialogue = FALSE;
+
+        }
       }
-
     }
 
     // Ajout membre Administrateur
@@ -59,7 +74,7 @@ class controleursMembreAdmin extends controleursSuper {
     $listeMembres = $membre->lesMembresAdmin();
 
 
-    $this->Render('../vues/membre/gestion_membres.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres, 'ajouterMembre' => $ajouterMembre));
+    $this->Render('../vues/membre/gestion_membres.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres, 'ajouterMembre' => $ajouterMembre, 'dialogue' => $dialogue));
 
   }
 
