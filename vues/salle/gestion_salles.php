@@ -34,7 +34,6 @@
         </option>
       <?php } ?>
     </select>
-
     <label for="photo">Photo</label>
     <?php if(isset($recupPourModif['photo']) && !empty($recupPourModif['photo'])){ ?>
       <img src="<?= $recupPourModif['photo']; ?>">
@@ -48,6 +47,15 @@
   </form>
   <?php } if($salles) { ?>
   <h2>Afficher les salles</h2>
+  <?php if($dialogue) { ?>
+  <div class="dialogue">
+    <p>
+      Cette salle est utilisé pour des produits,<br>
+      Êtes-vous sur de vouloir la supprimer ?<br>
+      <a href="routeur.php?controleurs=salles&action=gestionSalles&supp=<?= $_GET['supp']; ?>&confirm=oui">Oui</a> | <a href="rrouteur.php?controleurs=salles&action=gestionSalles">Non</a>
+    </p>
+  </div>
+  <?php } ?>
   <table class="affichageSalles">
     <thead>
       <tr>

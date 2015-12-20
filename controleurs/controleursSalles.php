@@ -12,6 +12,7 @@ class controleursSalles extends controleursSuper {
     $msg = '';
     $recupPourModif = FALSE;
     $ajouter = FALSE;
+    $dialogue = FALSE;
 
     define('RACINE_SITE_IMG', '/lokisalle/www/');
     define('RACINE_SERVER_IMG', $_SERVER['DOCUMENT_ROOT']);
@@ -87,35 +88,48 @@ class controleursSalles extends controleursSuper {
 
       $id_salle = htmlentities($_GET['supp']);
 
+      $salleASupprimer = $pdo->modifSalleID($id_salle);
+      $chemin_photo = RACINE_SERVER_IMG . RACINE_SITE_IMG . $salleASupprimer['photo'];
+
       if(!$pdo->VerifSalleProduit($id_salle)){
 
-        //define("RACINE_SITE", "/lokisalle/www/");
-        //define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
+        if(!$pdo->verifSuppSalle($id_salle)){
 
-        $salleASupprimer = $pdo->modifSalleID($id_salle);
-        $chemin_photo = RACINE_SERVER_IMG . RACINE_SITE_IMG . $salleASupprimer['photo']; // nous avons besoin du chemin depuis la racine serveur pour supprimer la photo du serveur.
+          if(!empty($salleASupprimer['photo']) && file_exists($chemin_photo)){
+            unlink($chemin_photo);
+          }
+          $pdo->suppressionSalle($id_salle);
+          $gestionSalles = TRUE;
+          $msg .= '<div class="success"><p>Suppression effectuée.</p></div>';
 
-        if(!empty($salleASupprimer['photo']) && file_exists($chemin_photo)){
-          unlink($chemin_photo);
+        } else {
+
+          $dialogue = TRUE;
+
+          if(isset($_GET['confirm']) && !empty($_GET['confirm']) && $_GET['confirm'] === 'oui'){
+
+            if(!empty($salleASupprimer['photo']) && file_exists($chemin_photo)){
+              unlink($chemin_photo);
+            }
+            $pdo->suppressionSalle($id_salle);
+            $gestionSalles = TRUE;
+            $msg .= '<div class="success"><p>Suppression effectuée.</p></div>';
+            $dialogue = FALSE;
+
+          }
         }
-
-        $pdo->suppressionSalle($id_salle);
-        $gestionSalles = TRUE;
-        $msg .= '<div class="success"><p>Suppression effectuée.</p></div>';
-
       } else {
 
         $msg .= 'Vous ne pouvez pas supprimer cette salle car elle a été reservé par des clients.<br>';
 
       }
-
     }
 
     $salles = $pdo->affichageSalles();
     $listeCategories = $pdo->categoriesSalle();
 
 
-    $this->Render('../vues/salle/gestion_salles.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'recupPourModif' => $recupPourModif, 'salles' => $salles, 'listeCategories' => $listeCategories));
+    $this->Render('../vues/salle/gestion_salles.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'recupPourModif' => $recupPourModif, 'salles' => $salles, 'listeCategories' => $listeCategories, 'dialogue' => $dialogue));
 
   }
 
