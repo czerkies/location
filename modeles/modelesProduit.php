@@ -238,4 +238,13 @@ class modelesProduit extends modelesSuper {
 
   }
 
+  // ********** Pour ne pas supprimer un produit en etat 1 ********** //
+  public function produitEtatUn($id_produit_supp){
+
+    $donnees = modelesSuper::connect_central_bdd()->query("SELECT id_produit FROM produit WHERE id_produit = $id_produit_supp AND etat = 1");
+
+    return $nbProduitsVerif = $donnees->rowCount();
+
+  }
+
 }

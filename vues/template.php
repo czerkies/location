@@ -9,14 +9,14 @@
   <body>
     <div id="nav">
       <ul>
-        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=produit&action=produitACC">Accueil</a></li>
-        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=produit&action=produitReservation">Réservations</a></li>
-        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=produit&action=rechercheProduit">Recherche</a></li>
-        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=connexionMembre">Connexion</a></li>
+        <li><a href="<?= RACINE_SITE; ?>accueil/">Accueil</a></li>
+        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=produit&action=produitReservation">Réservations</a></li>
+        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=produit&action=rechercheProduit">Recherche</a></li>
+        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=connexionMembre">Connexion</a></li>
         <?php if($userConnect || $userConnectAdmin){ ?>
-        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=profilMembre">Profil</a></li>
-        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier">Mon panier</a></li>
-        <li><a onclick="confirm('Voulez-vous vraiment vous déconnecter ?');" href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=deconnexionMembre&deconnexion=true">Se déconnecter</a></li>
+        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=profilMembre">Profil</a></li>
+        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=panier&action=affichagePanier">Mon panier</a></li>
+        <li><a onclick="confirm('Voulez-vous vraiment vous déconnecter ?');" href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=deconnexionMembre&deconnexion=true">Se déconnecter</a></li>
         <?php } ?>
       </ul>
       <?php if($userConnectAdmin){
@@ -32,8 +32,8 @@
         <li>C.G.V</li>
         <li>Plan du site</li>
         <li><a href="#" onclick="javascript:window.print()">Imprimer la page</a></li>
-        <li><a href="routeur.php?controleurs=newsletter&action=inscriptionMembre">S'inscrire à la newsletter</a></li>
-        <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=contactMembre">Contact</a></li>
+        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=newsletter&action=inscriptionMembre">S'inscrire à la newsletter</a></li>
+        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=contactMembre">Contact</a></li>
       </ul>
     </footer>
   </body>

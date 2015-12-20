@@ -19,7 +19,7 @@
     <tr>
       <td><?= $value['titre']; ?></td>
       <td><?= $value['ville']; ?></td>
-      <td><img src="<?= $value['photo']; ?>" alt="<?= $value['titre']; ?>"></td>
+      <td><img src="<?= RACINE_SITE.$value['photo']; ?>" alt="<?= $value['titre']; ?>"></td>
       <td><?= $value['date_arrivee']; ?></td>
       <td><?= $value['date_depart']; ?></td>
       <td><?= $value['ville']; ?></td>

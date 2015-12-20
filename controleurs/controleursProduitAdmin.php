@@ -152,7 +152,19 @@ class controleursProduitAdmin extends controleursSuper {
     if(isset($_GET['supp']) && !empty($_GET['supp'])){
 
       $id_produit_supp = htmlentities($_GET['supp']);
-      $suppressionProduitAdmin = $donneesProduits->suppressionProduitAdmin($id_produit_supp);
+      print_r($donneesProduits->produitEtatUn($id_produit_supp));
+
+
+      if(!$donneesProduits->produitEtatUn($id_produit_supp)){
+
+        $suppressionProduitAdmin = $donneesProduits->suppressionProduitAdmin($id_produit_supp);
+        $msg .= 'Le produit a bien été supprimé.';
+
+      } else {
+
+        $msg .= 'Vous ne pouvez pas supprimer ce produit car il a été réservé par un client.';
+
+      }
 
     }
 
@@ -161,75 +173,80 @@ class controleursProduitAdmin extends controleursSuper {
 
       $title .= ' | Modification';
 
-      if(isset($_POST) && !empty($_POST)){
-
-        if(isset($_POST['id_salle']) && !empty($_POST['id_salle'])
-        && isset($_POST['date_arrivee_J']) && !empty($_POST['date_arrivee_J'])
-        && isset($_POST['date_arrivee_M']) && !empty($_POST['date_arrivee_M'])
-        && isset($_POST['date_arrivee_A']) && !empty($_POST['date_arrivee_A'])
-        && isset($_POST['date_arrivee_H']) && !empty($_POST['date_arrivee_H'])
-        && isset($_POST['date_arrivee_I']) && (!empty($_POST['date_arrivee_I']) || $_POST['date_arrivee_I'] === '0')
-        && isset($_POST['date_depart_J']) && !empty($_POST['date_depart_J'])
-        && isset($_POST['date_depart_M']) && !empty($_POST['date_depart_M'])
-        && isset($_POST['date_depart_A']) && !empty($_POST['date_depart_A'])
-        && isset($_POST['date_depart_H']) && !empty($_POST['date_depart_H'])
-        && isset($_POST['date_depart_I']) && (!empty($_POST['date_depart_I']) || $_POST['date_depart_I'] === '0')
-        && isset($_POST['id_promo']) && (!empty($_POST['id_promo']) || $_POST['id_promo'] === '0')
-        && isset($_POST['id_produit']) && !empty($_POST['id_produit']) && is_numeric($_POST['id_produit'])
-        && isset($_POST['prix'])){
-
-          $msg = $this->controleFormulaireProduits($_POST);
-
-          if(empty($msg)){
-
-            foreach ($_POST as $key => $value){
-              $_POST[$key] = htmlentities($value, ENT_QUOTES);
-            }
-
-            extract($_POST);
-
-            $date_arrivee = $_POST['date_arrivee_A'].'-'.$_POST['date_arrivee_M'].'-'.$_POST['date_arrivee_J'];
-            $date_arrivee .= ' '.$_POST['date_arrivee_H'].':'.$_POST['date_arrivee_I'];
-
-            $date_depart = $_POST['date_depart_A'].'-'.$_POST['date_depart_M'].'-'.$_POST['date_depart_J'];
-            $date_depart .= ' '.$_POST['date_depart_H'].':'.$_POST['date_depart_I'];
-
-            $id_promo = (isset($_POST['id_promo']) && $_POST['id_promo'] === '0') ? NULL : $_POST['id_promo'];
-
-            // Controle des dates
-            if($date_arrivee <= date('Y-m-d g:i')){
-              $controleDate .= 'Vous ne pouvez pas créer un produit inferieur à la date du jour.';
-            }
-            if($date_depart <= $date_arrivee){
-              $controleDate .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.';
-            }
-
-            if($donneesProduits->verifDateBDD($date_arrivee, $date_depart, $id_salle, $id_produit)){
-
-              if(empty($controleDate)){
-
-                if($donneesProduits->updateProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo, $id_produit)){
-
-                  $msg .= 'Le produit a bien été modifié.';
-
-                } else {
-
-                  $msg .= self::ERREURSQL;
-
-                }
-              }
-            } else {
-              $msg .= 'Oups, une salle a déjà été reservé à cette date.<br>Merci de bien vouloir en choisir une autre.<br>';
-            }
-          }
-        } else {
-
-          $msg .= self::ERREURSQL;
-
-        }
-      }
-
       $idProduitGet = htmlentities($_GET['modif']);
+
+      if(!$donneesProduits->produitEtatUn($idProduitGet)){
+
+        if(isset($_POST) && !empty($_POST)){
+
+          if(isset($_POST['id_salle']) && !empty($_POST['id_salle'])
+          && isset($_POST['date_arrivee_J']) && !empty($_POST['date_arrivee_J'])
+          && isset($_POST['date_arrivee_M']) && !empty($_POST['date_arrivee_M'])
+          && isset($_POST['date_arrivee_A']) && !empty($_POST['date_arrivee_A'])
+          && isset($_POST['date_arrivee_H']) && !empty($_POST['date_arrivee_H'])
+          && isset($_POST['date_arrivee_I']) && (!empty($_POST['date_arrivee_I']) || $_POST['date_arrivee_I'] === '0')
+          && isset($_POST['date_depart_J']) && !empty($_POST['date_depart_J'])
+          && isset($_POST['date_depart_M']) && !empty($_POST['date_depart_M'])
+          && isset($_POST['date_depart_A']) && !empty($_POST['date_depart_A'])
+          && isset($_POST['date_depart_H']) && !empty($_POST['date_depart_H'])
+          && isset($_POST['date_depart_I']) && (!empty($_POST['date_depart_I']) || $_POST['date_depart_I'] === '0')
+          && isset($_POST['id_promo']) && (!empty($_POST['id_promo']) || $_POST['id_promo'] === '0')
+          && isset($_POST['id_produit']) && !empty($_POST['id_produit']) && is_numeric($_POST['id_produit'])
+          && isset($_POST['prix'])){
+
+            $msg = $this->controleFormulaireProduits($_POST);
+
+            if(empty($msg)){
+
+              foreach ($_POST as $key => $value){
+                $_POST[$key] = htmlentities($value, ENT_QUOTES);
+              }
+
+              extract($_POST);
+
+              $date_arrivee = $_POST['date_arrivee_A'].'-'.$_POST['date_arrivee_M'].'-'.$_POST['date_arrivee_J'];
+              $date_arrivee .= ' '.$_POST['date_arrivee_H'].':'.$_POST['date_arrivee_I'];
+
+              $date_depart = $_POST['date_depart_A'].'-'.$_POST['date_depart_M'].'-'.$_POST['date_depart_J'];
+              $date_depart .= ' '.$_POST['date_depart_H'].':'.$_POST['date_depart_I'];
+
+              $id_promo = (isset($_POST['id_promo']) && $_POST['id_promo'] === '0') ? NULL : $_POST['id_promo'];
+
+              // Controle des dates
+              if($date_arrivee <= date('Y-m-d g:i')){
+                $controleDate .= 'Vous ne pouvez pas créer un produit inferieur à la date du jour.';
+              }
+              if($date_depart <= $date_arrivee){
+                $controleDate .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.';
+              }
+
+              if($donneesProduits->verifDateBDD($date_arrivee, $date_depart, $id_salle, $id_produit)){
+
+                if(empty($controleDate)){
+
+                  if($donneesProduits->updateProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo, $id_produit)){
+
+                    $msg .= 'Le produit a bien été modifié.';
+
+                  } else {
+
+                    $msg .= self::ERREURSQL;
+
+                  }
+                }
+              } else {
+                $msg .= 'Oups, une salle a déjà été reservé à cette date.<br>Merci de bien vouloir en choisir une autre.<br>';
+              }
+            }
+          } else {
+
+            $msg .= self::ERREURSQL;
+
+          }
+        }
+      } else {
+        $msg .= 'Ce produit ne peut être modifié car il été réservé par un client.';
+      }
 
       // Vérification existance ID produit.
       if($donneesProduits->verifExistanceIDProduit($idProduitGet)){
@@ -237,6 +254,7 @@ class controleursProduitAdmin extends controleursSuper {
       } else {
         $msg .= self::ERREURSQL;
       }
+
     }
 
     // ORDER BY pour desc de date_arrivee, date_depart et prix.
