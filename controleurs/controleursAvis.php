@@ -13,7 +13,7 @@ class controleursAvis extends controleursSuper {
 
     $donnees = new modelesAvis();
 
-    if(isset($_GET['supp']) && !empty($_GET['supp'])){
+    if(isset($_GET['supp']) && !empty($_GET['supp']) && is_numeric($_GET['supp'])){
 
       $id_avis = htmlentities($_GET['supp']);
 

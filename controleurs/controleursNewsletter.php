@@ -56,7 +56,7 @@ class controleursNewsletter extends controleursSuper {
 
       $affichage = TRUE;
 
-      if(isset($_GET['inscription']) && !empty($_GET['inscription']) && $_GET['inscription'] == 'ok'){
+      if(isset($_GET['inscription']) && !empty($_GET['inscription']) && $_GET['inscription'] === 'ok'){
 
         $pdo = new modelesNewsletter();
         $insertion = $pdo->insertMembre($id_membre);

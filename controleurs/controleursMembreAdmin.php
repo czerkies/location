@@ -16,7 +16,7 @@ class controleursMembreAdmin extends controleursSuper {
     $membre = new modelesMembre();
 
     // Suppréssion d'un membre
-    if(isset($_GET['suppMembre']) && !empty($_GET['suppMembre'])){
+    if(isset($_GET['suppMembre']) && !empty($_GET['suppMembre']) && is_numeric($_GET['suppMembre'])){
 
       $id_membre = htmlentities($_GET['suppMembre']);
 
@@ -47,7 +47,7 @@ class controleursMembreAdmin extends controleursSuper {
     }
 
     // Ajout membre Administrateur
-    if(isset($_GET['ajouter']) && !empty($_GET['ajouter'])){
+    if(isset($_GET['ajouter']) && !empty($_GET['ajouter']) && $_GET['ajouter'] === 'membre'){
 
       $ajouterMembre = TRUE;
 

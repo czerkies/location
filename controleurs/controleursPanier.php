@@ -23,9 +23,9 @@ class controleursPanier extends controleursSuper {
 
     $id_membre = isset($_SESSION['membre']['id_membre']);
 
-    if(isset($_GET['id_produit']) && !empty($_GET['id_produit'])){
+    if(isset($_GET['id_produit']) && !empty($_GET['id_produit']) && is_numeric($_GET['id_produit'])){
 
-      $id_produit = $_GET['id_produit'];
+      $id_produit = htmlentities($_GET['id_produit']);
 
       $donneesSession = $produitPanier->recupProduitParID($id_produit);
 
@@ -59,19 +59,25 @@ class controleursPanier extends controleursSuper {
     }
 
     if(isset($_SESSION['panier']) && isset($_GET['suppId_produit']) && !empty($_GET['suppId_produit'])){
+
       if($_GET['suppId_produit'] === 'panier'){
+
         unset($_SESSION['panier']);
         $userCart = FALSE;
-      } else {
-        $article_a_supprimer = $_GET['suppId_produit'];
+
+      } elseif(is_numeric($_GET['suppId_produit'])) {
+
+        $article_a_supprimer = htmlentities($_GET['suppId_produit']);
         $position_article = array_search($article_a_supprimer, $_SESSION['panier']['id_produit']);
         // retourne un chiffre correspondant à l'indice du tableau ARRAY où se trouve cette valeur (1er argument fourni)
-        if($position_article !== FALSE) // si l'article est présent dans le panier, on le retire.
-        {
+        if($position_article !== FALSE){
+
           foreach ($_SESSION['panier'] as $key => $value) {
             array_splice($_SESSION['panier'][$key], $position_article, 1);
           }
+
           $msg .= 'Votre article a été supprimé.';
+
         }
       }
     }

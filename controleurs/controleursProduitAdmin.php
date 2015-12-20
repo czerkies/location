@@ -149,7 +149,7 @@ class controleursProduitAdmin extends controleursSuper {
     $donneesProduits = new modelesProduit();
 
     // Supprésion d'une salle
-    if(isset($_GET['supp']) && !empty($_GET['supp'])){
+    if(isset($_GET['supp']) && !empty($_GET['supp']) && is_numeric($_GET['supp'])){
 
       $id_produit_supp = htmlentities($_GET['supp']);
 
@@ -167,7 +167,7 @@ class controleursProduitAdmin extends controleursSuper {
     }
 
     // Modification d'un produit Admin
-    if(isset($_GET['modif']) && !empty($_GET['modif'])) {
+    if(isset($_GET['modif']) && !empty($_GET['modif']) && is_numeric($_GET['modif'])) {
 
       $title .= ' | Modification';
 

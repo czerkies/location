@@ -20,7 +20,7 @@ class controleursSalles extends controleursSuper {
     $pdo = new modelesSalles();
 
     // Si le lien modifier est actif
-    if(isset($_GET['modif']) && !empty($_GET['modif'])){
+    if(isset($_GET['modif']) && !empty($_GET['modif']) && is_numeric($_GET['modif'])){
 
       $ajouter = TRUE;
       $id_salle = htmlentities($_GET['modif']);
@@ -84,7 +84,7 @@ class controleursSalles extends controleursSuper {
     }
 
     // Si le lien supp est actif
-    if(isset($_GET['supp']) && !empty($_GET['supp'])){
+    if(isset($_GET['supp']) && !empty($_GET['supp']) && is_numeric($_GET['supp'])){
 
       $id_salle = htmlentities($_GET['supp']);
 
@@ -191,7 +191,7 @@ class controleursSalles extends controleursSuper {
       }
 
       $photo_bdd = '';
-      if(isset($_GET['action']) && $_GET['action'] == 'modifierSalle'){
+      if(isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] === 'modifierSalle'){
         $photo_bdd = isset($_POST['photoBDD']);
       }
 

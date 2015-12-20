@@ -71,7 +71,7 @@ class controleursPromotion extends controleursSuper {
 
     $bdd = new modelesPromotion();
 
-    if(isset($_GET['supprimer']) && !empty($_GET['supprimer'])){
+    if(isset($_GET['supprimer']) && !empty($_GET['supprimer']) && is_numeric($_GET['supprimer'])){
 
       $id_promo = htmlentities($_GET['supprimer']);
       $VerifPromoProduit = $bdd->VerifPromoProduit($id_promo);

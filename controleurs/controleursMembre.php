@@ -14,8 +14,8 @@ class controleursMembre extends controleursSuper {
 
     if(!empty($_POST['connexion']) && isset($_POST['connexion'])){
 
-      $pseudo = $_POST['pseudo'];
-      $mdp = $_POST['mdp'];
+      $pseudo = htmlentities($_POST['pseudo'], ENT_QUOTES);
+      $mdp = htmlentities($_POST['mdp'], ENT_QUOTES);
 
       $connexion = new modelesMembre();
       $data = $connexion->recupMembre($pseudo, $mdp);
@@ -84,12 +84,10 @@ class controleursMembre extends controleursSuper {
     session_start();
     $title = 'Title';
 
-    if(!empty($_GET) && isset($_GET)){
-      if(isset($_GET['deconnexion']) == 'true'){
-        session_unset();
-      } else {
-        echo "METTRE UNE REDI";
-      }
+    if(isset($_GET) && !empty($_GET) && $_GET['deconnexion']) === 'true'){
+      session_unset();
+    } else {
+      echo "METTRE UNE REDI";
     }
 
     $userConnect = $this->userConnect();

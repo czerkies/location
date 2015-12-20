@@ -18,7 +18,7 @@ class controleursCommande extends controleursSuper {
     $donneesCommandes = new modelesCommande();
 
     // Affichage d'une commande en détail.
-    if(isset($_GET['details_commande']) && !empty($_GET['details_commande'])){
+    if(isset($_GET['details_commande']) && !empty($_GET['details_commande']) && is_numeric($_GET['details_commande'])){
 
       $idDetailsCommande = htmlentities($_GET['details_commande']);
 
