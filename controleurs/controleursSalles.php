@@ -1,8 +1,5 @@
 <?php
 
-// CHECK = Vérifier HTML les extensions.
-// Garder la photo lors de la fin de saisie (s'il y'a erreurr).
-
 class controleursSalles extends controleursSuper {
 
   // ********** Gestion des salles Admin ********** //
@@ -15,6 +12,9 @@ class controleursSalles extends controleursSuper {
     $msg = '';
     $recupPourModif = FALSE;
     $ajouter = FALSE;
+
+    define('RACINE_SITE_IMG', '/lokisalle/www/');
+    define('RACINE_SERVER_IMG', $_SERVER['DOCUMENT_ROOT']);
 
     $pdo = new modelesSalles();
 
@@ -55,17 +55,13 @@ class controleursSalles extends controleursSuper {
         $msg .= "Veuillez saisir votre Categorie.<br>";
       }
 
-      if(!empty($_FILES['photo']['name'])) // on vérifie si une photo a bien été postée.
-      {
+      if(!empty($_FILES['photo']['name'])){
 
-        if($this->verificationPhoto()) // on vérifie l'extension de la photo=si c'est TRUE
-        {
-          //define("RACINE_SITE", "/lokisalle/www/");
-          //define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
+        if($this->verificationPhoto()){
 
           $nom_photo = 'salle' . $_POST['id_salle'] .'_'. $_FILES['photo']['name'];
           $photo_bdd = "img/$nom_photo";
-          $photo_dossier = RACINE_SERVER . RACINE_SITE . "img/$nom_photo"; // chemin pour l'enregistrement dans le dossier qui va servir dans la fonction copy()
+          $photo_dossier = RACINE_SERVER_IMG . RACINE_SITE_IMG . "img/$nom_photo"; // chemin pour l'enregistrement dans le dossier qui va servir dans la fonction copy()
           copy($_FILES['photo']['tmp_name'], $photo_dossier); // copy() permet de copier un fichier depuis un endroit (1er argument) vers un autre endroit (2ème argument)
           // debug($_FILES);
         } else {
@@ -91,13 +87,13 @@ class controleursSalles extends controleursSuper {
 
       $id_salle = htmlentities($_GET['supp']);
 
-      if($pdo->VerifSalleProduit($id_salle)){
+      if(!$pdo->VerifSalleProduit($id_salle)){
 
-        define("RACINE_SITE", "/lokisalle/www/");
-        define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
+        //define("RACINE_SITE", "/lokisalle/www/");
+        //define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
 
         $salleASupprimer = $pdo->modifSalleID($id_salle);
-        $chemin_photo = RACINE_SERVER . RACINE_SITE . $salleASupprimer['photo']; // nous avons besoin du chemin depuis la racine serveur pour supprimer la photo du serveur.
+        $chemin_photo = RACINE_SERVER_IMG . RACINE_SITE_IMG . $salleASupprimer['photo']; // nous avons besoin du chemin depuis la racine serveur pour supprimer la photo du serveur.
 
         if(!empty($salleASupprimer['photo']) && file_exists($chemin_photo)){
           unlink($chemin_photo);
@@ -109,7 +105,7 @@ class controleursSalles extends controleursSuper {
 
       } else {
 
-        $msg .= 'Vous ne pouvez pas supprimer cette salle car des produits y sont rattachés.';
+        $msg .= 'Vous ne pouvez pas supprimer cette salle car elle a été reservé par des clients.<br>';
 
       }
 
@@ -142,9 +138,14 @@ class controleursSalles extends controleursSuper {
     $salles = FALSE;
     $ajouter = TRUE;
 
+    define('RACINE_SITE_IMG', '/lokisalle/www/');
+    define('RACINE_SERVER_IMG', $_SERVER['DOCUMENT_ROOT']);
+
     $salle = new modelesSalles();
     $listeCategories = $salle->categoriesSalle();
 
+    //define('RACINE_SITE', '/lokisalle/www/');
+    //define('RACINE_SERVER', $_SERVER['DOCUMENT_ROOT']);
 
     $msg = '';
 
@@ -183,14 +184,11 @@ class controleursSalles extends controleursSuper {
       if(!empty($_FILES['photo']['name'])) // on vérifie si une photo a bien été postée.
       {
 
-        if($this->verificationPhoto()) // on vérifie l'extension de la photo=si c'est TRUE
-        {
-          define("RACINE_SITE", "/lokisalle/www/");
-          define("RACINE_SERVER", $_SERVER['DOCUMENT_ROOT']);
+        if($this->verificationPhoto()){
 
           $nom_photo = 'salle' . $_POST['id_salle'] .'_'. $_FILES['photo']['name'];
           $photo_bdd = "img/$nom_photo";
-          $photo_dossier = RACINE_SERVER . RACINE_SITE . "img/$nom_photo"; // chemin pour l'enregistrement dans le dossier qui va servir dans la fonction copy()
+          $photo_dossier = RACINE_SERVER_IMG . RACINE_SITE_IMG . "img/$nom_photo"; // chemin pour l'enregistrement dans le dossier qui va servir dans la fonction copy()
           copy($_FILES['photo']['tmp_name'], $photo_dossier); // copy() permet de copier un fichier depuis un endroit (1er argument) vers un autre endroit (2ème argument)
           // debug($_FILES);
         } else {

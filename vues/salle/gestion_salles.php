@@ -51,6 +51,7 @@
   <table class="affichageSalles">
     <thead>
       <tr>
+        <th>ID Salle</th>
         <th>Photo</th>
         <th>Pays</th>
         <th>Ville</th>
@@ -66,6 +67,7 @@
     <tbody>
       <?php foreach($salles as $donnees){ ?>
       <tr>
+        <td><?= $donnees['id_salle']; ?></td>
         <td><img src="<?= $donnees['photo']; ?>" alt="<?= $donnees['titre']; ?>"></td>
         <td><?= $donnees['pays']; ?></td>
         <td><?= $donnees['ville']; ?></td>

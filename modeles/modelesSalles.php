@@ -68,12 +68,9 @@ class modelesSalles extends modelesSuper {
   // ********** Vérification produit existant pour modeles ********** //
   public function VerifSalleProduit($id_salle){
 
-    $donnees = $this->connect_central_bdd()->query("SELECT p.id_produit, p.id_salle, s.id_salle
-      FROM produit p, salle s
-      WHERE p.id_salle = s.id_salle
-      AND s.id_salle = $id_salle");
+    $donnees = $this->connect_central_bdd()->query("SELECT id_produit FROM produit WHERE etat = 1 AND id_salle =(SELECT id_salle FROM salle WHERE id_salle = $id_salle)");
 
-    $produitAssoc = ($donnees->rowCount() === 0) ? TRUE : FALSE;
+    $produitAssoc = $donnees->rowCount();
 
     return $produitAssoc;
 
