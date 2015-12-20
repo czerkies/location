@@ -152,8 +152,6 @@ class controleursProduitAdmin extends controleursSuper {
     if(isset($_GET['supp']) && !empty($_GET['supp'])){
 
       $id_produit_supp = htmlentities($_GET['supp']);
-      print_r($donneesProduits->produitEtatUn($id_produit_supp));
-
 
       if(!$donneesProduits->produitEtatUn($id_produit_supp)){
 

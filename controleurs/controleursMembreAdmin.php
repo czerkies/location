@@ -48,7 +48,7 @@ class controleursMembreAdmin extends controleursSuper {
           }
           extract($_POST);
 
-          $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 1);
+          $membre->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 1);
 
         }
 
