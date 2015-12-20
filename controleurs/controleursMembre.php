@@ -84,7 +84,7 @@ class controleursMembre extends controleursSuper {
     session_start();
     $title = 'Title';
 
-    if(isset($_GET) && !empty($_GET) && $_GET['deconnexion']) === 'true'){
+    if(isset($_GET['deconnexion']) && !empty($_GET['deconnexion']) && $_GET['deconnexion'] === 'oui'){
       session_unset();
     } else {
       echo "METTRE UNE REDI";
