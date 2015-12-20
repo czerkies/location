@@ -9,7 +9,7 @@ class controleursSalles extends controleursSuper {
   public function gestionSalles(){
 
     session_start();
-
+    $title = 'Gestion des salles';
     $userConnect = FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $msg = '';
@@ -119,7 +119,7 @@ class controleursSalles extends controleursSuper {
     $listeCategories = $pdo->categoriesSalle();
 
 
-    $this->Render('../vues/salle/gestion_salles.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'recupPourModif' => $recupPourModif, 'salles' => $salles, 'listeCategories' => $listeCategories));
+    $this->Render('../vues/salle/gestion_salles.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'recupPourModif' => $recupPourModif, 'salles' => $salles, 'listeCategories' => $listeCategories));
 
   }
 
@@ -136,6 +136,7 @@ class controleursSalles extends controleursSuper {
   public function ajouterSalle(){
 
     session_start();
+    $title = 'Ajouter une salle';
     $userConnect = FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $salles = FALSE;
@@ -212,7 +213,7 @@ class controleursSalles extends controleursSuper {
       }
     }
 
-    $this->Render('../vues/salle/gestion_salles.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'salles' => $salles, 'listeCategories' => $listeCategories));
+    $this->Render('../vues/salle/gestion_salles.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'salles' => $salles, 'listeCategories' => $listeCategories));
 
   }
 

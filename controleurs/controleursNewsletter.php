@@ -6,6 +6,7 @@ class controleursNewsletter extends controleursSuper {
   public function envoiNews(){
 
     session_start();
+    $title = 'Title';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $msg = '';
@@ -31,7 +32,7 @@ class controleursNewsletter extends controleursSuper {
     }
 
 
-    $this->Render('../vues/newsletter/envoi_newsletter.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'mailAdmin' => $mailAdmin, 'nbAbonne' => $nbAbonne));
+    $this->Render('../vues/newsletter/envoi_newsletter.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'mailAdmin' => $mailAdmin, 'nbAbonne' => $nbAbonne));
 
   }
 
@@ -39,6 +40,7 @@ class controleursNewsletter extends controleursSuper {
   public function inscriptionMembre(){
 
     session_start();
+    $title = 'Title';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $affichage = FALSE;
@@ -66,7 +68,7 @@ class controleursNewsletter extends controleursSuper {
       $affichage = FALSE;
     }
 
-    $this->Render('../vues/newsletter/newsletter.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichage' => $affichage));
+    $this->Render('../vues/newsletter/newsletter.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichage' => $affichage));
 
   }
 

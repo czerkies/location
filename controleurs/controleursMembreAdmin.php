@@ -6,7 +6,7 @@ class controleursMembreAdmin extends controleursSuper {
   public function gestionMembres(){
 
     session_start();
-
+    $title = 'Title';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $ajouterMembre = FALSE;
@@ -59,7 +59,7 @@ class controleursMembreAdmin extends controleursSuper {
     $listeMembres = $membre->lesMembresAdmin();
 
 
-    $this->Render('../vues/membre/gestion_membres.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres, 'ajouterMembre' => $ajouterMembre));
+    $this->Render('../vues/membre/gestion_membres.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres, 'ajouterMembre' => $ajouterMembre));
 
   }
 

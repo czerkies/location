@@ -128,10 +128,11 @@ class controleursFonctions extends controleursSuper {
   public function urlIncorrect(){
 
     session_start();
+    $title = 'Page non trouvée';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
-    $this->Render('../vues/erreur/page_introuvable.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
+    $this->Render('../vues/erreur/page_introuvable.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
 
   }
 

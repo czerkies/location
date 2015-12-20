@@ -6,7 +6,7 @@ class controleursCommande extends controleursSuper {
   public function gestionCommandes(){
 
     session_start();
-
+    $title = 'Gestion des commandes';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $detailsCommandeDisplay = FALSE;
@@ -41,7 +41,7 @@ class controleursCommande extends controleursSuper {
       $totalCA += $value['montant'];
     }
 
-    $this->Render('../vues/commande/gestion_commandes.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA, 'client' => $client, 'infos' => $infos, 'detailsCommandeID' => $detailsCommandeID, 'detailsCommandeDisplay' => $detailsCommandeDisplay));
+    $this->Render('../vues/commande/gestion_commandes.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCommandes' => $listeCommandes, 'totalCA' => $totalCA, 'client' => $client, 'infos' => $infos, 'detailsCommandeID' => $detailsCommandeID, 'detailsCommandeDisplay' => $detailsCommandeDisplay));
 
   }
 

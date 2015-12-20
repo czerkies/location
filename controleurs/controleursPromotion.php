@@ -6,6 +6,7 @@ class controleursPromotion extends controleursSuper {
   public function ajouterPromotion(){
 
     session_start();
+    $title = 'Ajouter une promotion';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $msg = '';
@@ -49,17 +50,18 @@ class controleursPromotion extends controleursSuper {
 
         $msg .= 'Votre code promo a bien été ajouté.';
         $ajouter = FALSE;
-        
+
       }
     }
 
-    $this->Render('../vues/promotion/gestion_promos.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees));
+    $this->Render('../vues/promotion/gestion_promos.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees));
 
   }
   // ********** Afficher les code promotions Administrateur ********** //
   public function afficherPromotion(){
 
     session_start();
+    $title = 'Gestion des promotions';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $ajouter = FALSE;
@@ -95,7 +97,7 @@ class controleursPromotion extends controleursSuper {
 
     $donnees = $bdd->affichageCodePromo();
 
-    $this->Render('../vues/promotion/gestion_promos.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees, 'dialogue' => $dialogue));
+    $this->Render('../vues/promotion/gestion_promos.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees, 'dialogue' => $dialogue));
 
   }
 

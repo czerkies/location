@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Lokisalle | Réservation de salle pour vos évènements</title>
+    <title><?= $title; ?> | Lokisalle</title>
     <meta name="description" content="Lokisalle | Réservez vos salle avec un service clef en main.">
     <link rel="stylesheet" href="../www/css/style.css" charset="utf-8">
   </head>

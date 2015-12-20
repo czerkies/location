@@ -6,6 +6,7 @@ class controleursMembre extends controleursSuper {
   public function connexionMembre(){
 
     session_start();
+    $title = 'Title';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
@@ -38,7 +39,7 @@ class controleursMembre extends controleursSuper {
 
     }
 
-    $this->Render('../vues/membre/connexion.php', array('connect' => $connect, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
+    $this->Render('../vues/membre/connexion.php', array('title' => $title, 'connect' => $connect, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
 
   }
 
@@ -47,6 +48,7 @@ class controleursMembre extends controleursSuper {
   public function ajoutMembre(){
 
     session_start();
+    $title = 'Title';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
@@ -72,7 +74,7 @@ class controleursMembre extends controleursSuper {
 
     }
 
-    $this->render('../vues/membre/inscription.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
+    $this->render('../vues/membre/inscription.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
 
   }
 
@@ -80,6 +82,7 @@ class controleursMembre extends controleursSuper {
   public function deconnexionMembre(){
 
     session_start();
+    $title = 'Title';
 
     if(!empty($_GET) && isset($_GET)){
       if(isset($_GET['deconnexion']) == 'true'){
@@ -93,7 +96,7 @@ class controleursMembre extends controleursSuper {
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
 
-    $this->render('../vues/membre/deconnexion.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
+    $this->render('../vues/membre/deconnexion.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
 
   }
 
@@ -101,6 +104,7 @@ class controleursMembre extends controleursSuper {
   public function mdpperduMembre(){
 
     session_start();
+    $title = 'Title';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
@@ -132,7 +136,7 @@ class controleursMembre extends controleursSuper {
       }
     }
 
-    $this->render('../vues/membre/mdpperdu.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
+    $this->render('../vues/membre/mdpperdu.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
 
   }
 
@@ -140,6 +144,7 @@ class controleursMembre extends controleursSuper {
   public function contactMembre(){
 
     session_start();
+    $title = 'Title';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
@@ -181,7 +186,7 @@ class controleursMembre extends controleursSuper {
       }
     }
 
-    $this->render('../vues/membre/contact.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
+    $this->render('../vues/membre/contact.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
 
   }
 
@@ -189,6 +194,7 @@ class controleursMembre extends controleursSuper {
   public function profilMembre(){
 
     session_start();
+    $title = 'Title';
     $msg = '';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
@@ -254,7 +260,7 @@ class controleursMembre extends controleursSuper {
     $commandesIdMembres = new modelesCommande();
     $commandes = $commandesIdMembres->commandesMembres($idMembre);
 
-    $this->render('../vues/membre/profil.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'commandes' => $commandes));
+    $this->render('../vues/membre/profil.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'commandes' => $commandes));
 
   }
 

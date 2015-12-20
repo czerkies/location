@@ -39,6 +39,7 @@ class controleursProduitAdmin extends controleursSuper {
   public function ajouterProduits(){
 
     session_start();
+    $title = 'Ajouter un produit';
     $userConnect = FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $msg = '';
@@ -124,7 +125,7 @@ class controleursProduitAdmin extends controleursSuper {
       }
     }
 
-    $this->Render('../vues/produit/gestion_produits.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'affichageProduitsAdmin' => $affichageProduitsAdmin, 'affichageSalles' => $affichageSalles, 'affichagePromo' => $affichagePromo, 'date' => $date, 'idProduitModif' => $idProduitModif, 'controleDate' => $controleDate));
+    $this->Render('../vues/produit/gestion_produits.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'affichageProduitsAdmin' => $affichageProduitsAdmin, 'affichageSalles' => $affichageSalles, 'affichagePromo' => $affichagePromo, 'date' => $date, 'idProduitModif' => $idProduitModif, 'controleDate' => $controleDate));
 
   }
 
@@ -132,6 +133,7 @@ class controleursProduitAdmin extends controleursSuper {
   public function afficherProduits(){
 
     session_start();
+    $title = 'Afficher les produits';
     $userConnect = FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
@@ -156,6 +158,8 @@ class controleursProduitAdmin extends controleursSuper {
 
     // Modification d'un produit Admin
     if(isset($_GET['modif']) && !empty($_GET['modif'])) {
+
+      $title .= ' | Modification';
 
       if(isset($_POST) && !empty($_POST)){
 
@@ -236,7 +240,8 @@ class controleursProduitAdmin extends controleursSuper {
     }
 
     // ORDER BY pour desc de date_arrivee, date_depart et prix.
-    if(isset($_GET['type']) && !empty($_GET['type']) && isset($_GET['order']) && !empty($_GET['order'])
+    if(isset($_GET['type']) && !empty($_GET['type'])
+      && isset($_GET['order']) && !empty($_GET['order'])
       && ($_GET['type'] === 'date_arrivee' || $_GET['type'] === 'date_depart' || $_GET['type'] === 'prix')
       && ($_GET['order'] === 'asc' || $_GET['order'] === 'desc')) {
 
@@ -254,7 +259,7 @@ class controleursProduitAdmin extends controleursSuper {
     $affichageSalles = $salles->affichageSalles();
     $affichagePromo = $listePromo->affichageCodePromo();
 
-    $this->Render('../vues/produit/gestion_produits.php', array('msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'date' => $date, 'ajouter' => $ajouter, 'affichageProduitsAdmin' => $affichageProduitsAdmin, 'affichageSalles' => $affichageSalles, 'affichagePromo' => $affichagePromo, 'idProduitModif' => $idProduitModif, 'controleDate' => $controleDate));
+    $this->Render('../vues/produit/gestion_produits.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'date' => $date, 'ajouter' => $ajouter, 'affichageProduitsAdmin' => $affichageProduitsAdmin, 'affichageSalles' => $affichageSalles, 'affichagePromo' => $affichagePromo, 'idProduitModif' => $idProduitModif, 'controleDate' => $controleDate));
 
   }
 

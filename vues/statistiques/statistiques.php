@@ -70,7 +70,7 @@
     </tbody>
   </table>
   <?php } if($cinqMembresPrix){ ?>
-  <h2>Top 5 des membres qui achète le plus cher</h2>
+  <h2>Top 5 des membres dépensant le plus</h2>
   <table>
     <thead>
       <th></th>

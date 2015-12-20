@@ -6,7 +6,7 @@ class controleursAvis extends controleursSuper {
   public function gestionAvis(){
 
     session_start();
-
+    $title = 'Gestion des avis';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $msg = '';
@@ -23,7 +23,7 @@ class controleursAvis extends controleursSuper {
 
     $listeAvis = $pdo->lesAvisAdmin();
 
-    $this->Render('../vues/avis/gestion_avis.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeAvis' => $listeAvis));
+    $this->Render('../vues/avis/gestion_avis.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeAvis' => $listeAvis));
 
   }
 

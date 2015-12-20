@@ -6,13 +6,14 @@ class controleursProduit extends controleursSuper {
   public function produitACC(){
 
     session_start();
+    $title = 'Accueil';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
     $cont = new modelesProduit();
     $lesProduits = $cont->affichageACC();
 
-    $this->Render('../vues/produit/accueil.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'lesProduits' => $lesProduits));
+    $this->Render('../vues/produit/accueil.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'lesProduits' => $lesProduits));
 
   }
 
@@ -20,14 +21,14 @@ class controleursProduit extends controleursSuper {
   public function produitReservation(){
 
     session_start();
-
+    $title = 'Tout nos produits';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
     $cont = new modelesProduit();
     $lesProduits = $cont->affichageReservation();
 
-    $this->Render('../vues/produit/reservation.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'lesProduits' => $lesProduits));
+    $this->Render('../vues/produit/reservation.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'lesProduits' => $lesProduits));
 
   }
 
@@ -48,10 +49,12 @@ class controleursProduit extends controleursSuper {
 
       $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);
 
+      $title = $ProduitIDSalle['titre'];
+
       $id_salle = $ProduitIDSalle['id_salle'];
       $modAvis = new modelesAvis();
 
-      // CHECK Afficher TTC *0.196 et Suggestion avec rapport date et ville
+      // CHECK Afficher TTC *0.196
       $id_membre = $_SESSION['membre']['id_membre'];
 
       $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
@@ -82,9 +85,6 @@ class controleursProduit extends controleursSuper {
 
             }
           }
-
-          $msg = 'Une erreur est survenue lors de votre demande.';
-
         }
       }
 
@@ -100,7 +100,7 @@ class controleursProduit extends controleursSuper {
 
     }
 
-    $this->Render('../vues/produit/reservation_details.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));
+    $this->Render('../vues/produit/reservation_details.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));
 
   }
 
@@ -108,6 +108,7 @@ class controleursProduit extends controleursSuper {
   public function rechercheProduit(){
 
     session_start();
+    $title = 'Recherche d\'une salle';
     $userConnect = (isset($_SESSION['membre'])) ? TRUE : FALSE;
     $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
     $produits = FALSE;
@@ -142,10 +143,12 @@ class controleursProduit extends controleursSuper {
 
           $produits = $donnees->requeteRecherche($date_arrivee, $keyword, $categorie);
 
+          $title .= ' | '.$produits['nbProduits'].' Résultat(s)';
+
         }
     }
 
-    $this->Render('../vues/produit/recherche.php', array('userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCategories' => $listeCategories, 'produits' => $produits, 'date' => $date));
+    $this->Render('../vues/produit/recherche.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeCategories' => $listeCategories, 'produits' => $produits, 'date' => $date));
 
   }
 
