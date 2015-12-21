@@ -16,7 +16,7 @@
         <?php if($userConnect || $userConnectAdmin){ ?>
         <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=profilMembre">Profil</a></li>
         <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=panier&action=affichagePanier">Mon panier</a></li>
-        <li><a onclick="confirm('Voulez-vous vraiment vous déconnecter ?');" href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=deconnexionMembre&deconnexion=oui">Se déconnecter</a></li>
+        <li><a onclick="confirmationDeco()" href="#">Se déconnecter</a></li>
         <?php } ?>
       </ul>
       <?php if($userConnectAdmin){
@@ -37,4 +37,11 @@
       </ul>
     </footer>
   </body>
+  <script type="text/javascript">
+    function confirmationDeco() {
+      if (confirm("Êtes vous sûr de vouloir vous déconnecter ?")) {
+        window.location.href = "<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=deconnexionMembre&deconnexion=oui";
+      }
+    }
+  </script>
 </html>
