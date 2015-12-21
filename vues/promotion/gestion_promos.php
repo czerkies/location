@@ -17,17 +17,13 @@
             </tr>
           </thead>
           <tbody>
-            <?php
-            foreach ($donnees as $value) {
-            ?>
+            <?php foreach ($donnees as $value) { ?>
             <tr>
               <td><?= $value['code_promo']; ?></td>
               <td><?= $value['reduction']; ?></td>
               <td><a href="/lokisalle/www/routeur.php?controleurs=promotion&action=afficherPromotion&supprimer=<?= $value['id_promo']; ?>">Supprimer</a></td>
             </tr>
-            <?php
-            }
-            ?>
+            <?php } ?>
           </tbody>
         </table>
       </div>
@@ -45,9 +41,9 @@
       <div class="gestion_produit_ajouter">
         <form class="" action="" method="post">
           <label for="code_promo">Code promotion :</label>
-          <input type="text" name="code_promo" id="code_promo" value="<?php if(isset($_POST['code_promo'])) {echo $_POST['code_promo'];} ?>" placeholder="Code promotion" maxlength="6" required>
+          <input type="text" name="code_promo" id="code_promo" value="<?php if(isset($_POST['code_promo'])) {echo $_POST['code_promo'];} ?>" placeholder="Code promotion" minlength="4" maxlength="6" required>
           <label for="reduction">Réduction :</label>
-          <input type="number" name="reduction" id="reduction" value="<?php if(isset($_POST['reduction'])) {echo $_POST['reduction'];} ?>" placeholder="Réduction" required>
+          <input type="number" name="reduction" id="reduction" min="1" value="<?php if(isset($_POST['reduction'])) {echo $_POST['reduction'];} ?>" placeholder="0000" required>
           <input type="submit" value="Créer le code promotion">
         </form>
       </div>

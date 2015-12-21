@@ -13,45 +13,50 @@ class controleursPromotion extends controleursSuper {
     $ajouter = TRUE;
     $donnees = FALSE;
 
-    if(isset($_POST) && !empty($_POST)){
+    if(isset($_POST)){
 
-      $code_promo = $_POST['code_promo'];
+      if(isset($_POST['code_promo']) && isset($_POST['reduction'])){
 
-      if(empty($_POST['code_promo'])){
-        $msg .= "Veuillez saisir un code promo.<br>";
-      } elseif(strlen($_POST['code_promo']) > 6){
-        $msg .= "Veuillez saisir un code promo à 6 chiffre maximum<br>";
-      } else {
+        $code_promo = htmlentities($_POST['code_promo'], ENT_QUOTES);
 
-        $cont = new modelesPromotion();
-        $promos = $cont->verifPresencePromo($code_promo);
+        if(empty($_POST['code_promo'])){
+          $msg .= "Veuillez saisir un code promo.<br>";
+        } elseif(strlen($_POST['code_promo']) > 6 || strlen($_POST['code_promo']) < 4){
+          $msg .= "Veuillez saisir un Code Promo entre 4 et 6 carractères.<br>";
+        } else {
 
-        if($promos['nbCodeVerif']){
+          $cont = new modelesPromotion();
+          $promos = $cont->verifPresencePromo($code_promo);
 
-          $msg .= "Le code promotion que vous avez saisis est déjà existante.<br>";
+          if($promos['nbCodeVerif']){
+
+            $msg .= "Le code promotion que vous avez saisis est déjà existante.<br>";
+
+          }
+        }
+
+        if(empty($_POST['reduction']) || !is_numeric($_POST['reduction']) || $_POST['reduction'] < 1){
+          $msg .= "Veuillez saisir un montant de réduction superieur ou égale à 1.<br>";
+        }
+
+        if(empty($msg)){
+
+          foreach ($_POST as $key => $value){
+            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+          }
+
+          extract($_POST);
+
+          $pdo = new modelesPromotion();
+          $pdo->ajouterCodePromo($code_promo, $reduction);
+
+          $msg .= 'Votre code promo a bien été ajouté.';
+          $ajouter = FALSE;
 
         }
       }
-
-      if(empty($_POST['reduction'])){
-        $msg .= "Veuillez saisir un montant de réduction.<br>";
-      }
-
-      if(empty($msg)){
-
-        foreach ($_POST as $key => $value){
-          $_POST[$key] = htmlentities($value, ENT_QUOTES);
-        }
-
-        extract($_POST);
-
-        $pdo = new modelesPromotion();
-        $pdo->ajouterCodePromo($code_promo, $reduction);
-
-        $msg .= 'Votre code promo a bien été ajouté.';
-        $ajouter = FALSE;
-
-      }
+    } else {
+      $msg .= 'Une erreur est survenue lors de votre demande.';
     }
 
     $this->Render('../vues/promotion/gestion_promos.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees));
