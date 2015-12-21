@@ -89,8 +89,7 @@ class controleursPanier extends controleursSuper {
         $msg .= 'Veuillez saisir une code promo.';
       } else {
 
-        $code_promo = htmlentities($_POST['code_promo']);
-
+        $code_promo = htmlentities($_POST['code_promo'], ENT_QUOTES);
         $codeVerif = $reCodeID->verifPresencePromo($code_promo);
 
         if(!$codeVerif['nbCodeVerif']){

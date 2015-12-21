@@ -148,67 +148,64 @@ class controleursMembre extends controleursSuper {
 
     $msg = '';
 
-    if(isset($_POST['sujet']) && isset($_POST['message'])){
+    if($_POST){
 
-      if(isset($_POST['sujet']) && empty($_POST['sujet'])){
-        $msg .= "Veuillez saisir un Sujet.<br>";
-      }
-      if(strlen($_POST['sujet']) < 4){
-        $msg .= "Votre sujet est trop court (minimum 4 carractères).<br>";
-      }
-      if(strlen($_POST['sujet']) > 30){
-        $msg .= "Votre sujet est trop long (maximum 30 carractères).<br>";
-      }
+      if(isset($_POST['sujet']) && isset($_POST['message'])){
 
-      if(!$userConnect || !$userConnectAdmin){
-
-        if(isset($_POST['email'])){
-
-          if(empty($_POST['email']) ){
-            $msg .= "Veuillez saisir un Email.<br>";
-          }
-          if(strlen($_POST['email']) < 4){
-            $msg .= "Votre email est trop court (minimum 4 carractères).";
-          }
-          if(strlen($_POST['email']) > 50){
-            $msg .= "Votre email est trop long (maximum 50 carractères).<br>";
-          }
-          // Pref match mail
-        } else {
-          $msg .= 'Une erreur est survenue';
-        }
-      }
-      if(isset($_POST['message']) && empty($_POST['message'])){
-        $msg .= "Veuillez saisir votre message.<br>";
-      }
-      if(strlen($_POST['message']) < 10){
-        $msg .= "Votre message est trop court (minimum 10 carractères).<br>";
-      }
-      if(strlen($_POST['message']) > 4000){
-        $msg .= "Votre message est trop long (maximum 4000 carractères).<br>";
-      }
-
-      if(empty($msg)){
-
-        if($userConnect){
-          $emailContact = $_SESSION['membre']['email'];
-        } else {
-          $emailContact = htmlentities($_POST['email']);
+        if(empty($_POST['sujet'])){
+          $msg .= "Veuillez saisir un Sujet.<br>";
+        } elseif(strlen($_POST['sujet']) < 4 || strlen($_POST['sujet']) > 30){
+            $msg .= "Votre sujet doit comporter entre 4 et 30 carractères.<br>";
         }
 
-        $sujet = htmlentities($_POST['sujet']);
-        $message = htmlentities($_POST['message']);
+        if(!$userConnect || !$userConnectAdmin){
 
-        $message .= '<br>De la part de '.$emailContact;
+          if(isset($_POST['email'])){
 
-        $pdo = new modelesMembre();
-        $emailAdmin = $pdo->recupMailAdmin();
+            if(empty($_POST['email'])){
+              $msg .= "Veuillez saisir un email.<br>";
+            } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+              $msg .= "Votre email est incorrect.<br>";
+            }
 
-        mail($emailAdmin['email'], $sujet, $message);
-        // CHECK = Demander à cecile sa requete pour mail pour voir si plus simple.
+          } else {
+            $msg .= 'Une erreur est survenue.<br>';
+          }
+        }
+
+        if(empty($_POST['message'])){
+          $msg .= "Veuillez saisir votre message.<br>";
+        } elseif(strlen($_POST['message']) < 10 || strlen($_POST['message']) > 4000){
+          $msg .= "Votre message doit comporter entre 10 et 4000 carractères.<br>";
+        }
+
+        if(empty($msg)){
+
+          if($userConnect){
+            $emailContact = $_SESSION['membre']['email'];
+            $coordonnees = $_SESSION['membre']['nom'].' '.$_SESSION['membre']['prenom'];
+          } else {
+            $emailContact = htmlentities($_POST['email']);
+            $coordonnees = 'Visiteur';
+          }
+
+          $header = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
+          $header .= 'FROM: '.$coordonnees.' <'.$emailContact.'>' . "\r\n";
+
+          $sujet = htmlentities($_POST['sujet']);
+          $message = htmlentities($_POST['message']);
+
+          $message .= '<br>De la part de '.$emailContact;
+
+          $pdo = new modelesMembre();
+          $emailAdmin = $pdo->recupMailAdmin();
+
+          mail($emailAdmin['email'], $sujet, $message, $header);
+          // CHECK = Demander à cecile sa requete pour mail pour voir si plus simple.
+        }
+      } else {
+        $msg .= 'Une erreur est survenue lors de votre demande.';
       }
-    } else {
-      $msg .= 'Une erreur est survenue lors de votre demande.';
     }
 
     $this->render('../vues/membre/contact.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
