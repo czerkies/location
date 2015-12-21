@@ -142,24 +142,50 @@ class controleursMembre extends controleursSuper {
   public function contactMembre(){
 
     session_start();
-    $title = 'Title';
+    $title = 'Contacter Lokisalle';
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
     $msg = '';
 
-    if(isset($_POST) && !empty($_POST)){
+    if(isset($_POST['sujet']) && isset($_POST['message'])){
 
-      if(empty($_POST['sujet'])){
+      if(isset($_POST['sujet']) && empty($_POST['sujet'])){
         $msg .= "Veuillez saisir un Sujet.<br>";
       }
-      if(isset($_POST['email'])){
-        if(empty($_POST['email'])){
-          $msg .= "Veuillez saisir un Email.<br>";
+      if(strlen($_POST['sujet']) < 4){
+        $msg .= "Votre sujet est trop court (minimum 4 carractères).<br>";
+      }
+      if(strlen($_POST['sujet']) > 30){
+        $msg .= "Votre sujet est trop long (maximum 30 carractères).<br>";
+      }
+
+      if(!$userConnect || !$userConnectAdmin){
+
+        if(isset($_POST['email'])){
+
+          if(empty($_POST['email']) ){
+            $msg .= "Veuillez saisir un Email.<br>";
+          }
+          if(strlen($_POST['email']) < 4){
+            $msg .= "Votre email est trop court (minimum 4 carractères).";
+          }
+          if(strlen($_POST['email']) > 50){
+            $msg .= "Votre email est trop long (maximum 50 carractères).<br>";
+          }
+          // Pref match mail
+        } else {
+          $msg .= 'Une erreur est survenue';
         }
       }
-      if(empty($_POST['message'])){
+      if(isset($_POST['message']) && empty($_POST['message'])){
         $msg .= "Veuillez saisir votre message.<br>";
+      }
+      if(strlen($_POST['message']) < 10){
+        $msg .= "Votre message est trop court (minimum 10 carractères).<br>";
+      }
+      if(strlen($_POST['message']) > 4000){
+        $msg .= "Votre message est trop long (maximum 4000 carractères).<br>";
       }
 
       if(empty($msg)){
@@ -180,8 +206,9 @@ class controleursMembre extends controleursSuper {
 
         mail($emailAdmin['email'], $sujet, $message);
         // CHECK = Demander à cecile sa requete pour mail pour voir si plus simple.
-        // CHECK = Ajouter une condition pour l'envoie du message.
       }
+    } else {
+      $msg .= 'Une erreur est survenue lors de votre demande.';
     }
 
     $this->render('../vues/membre/contact.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
