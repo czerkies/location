@@ -23,6 +23,8 @@ class controleursPromotion extends controleursSuper {
           $msg .= "Veuillez saisir un code promo.<br>";
         } elseif(strlen($_POST['code_promo']) > 6 || strlen($_POST['code_promo']) < 4){
           $msg .= "Veuillez saisir un code promo entre 4 et 6 carractères.<br>";
+        } elseif (!preg_match("/^[a-zA-Z0-9]*$/",$_POST['code_promo'])) {
+          $msg .= "Seul les chiffres et lettres sont autorisés.<br>";
         } else {
 
           $cont = new modelesPromotion();
@@ -56,7 +58,7 @@ class controleursPromotion extends controleursSuper {
         }
       }
     }
-    
+
     $this->Render('../vues/promotion/gestion_promos.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees));
 
   }

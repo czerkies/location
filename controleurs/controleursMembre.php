@@ -54,24 +54,34 @@ class controleursMembre extends controleursSuper {
 
     $msg = '';
 
-    if(isset($_POST) && !empty($_POST)){
+    if($_POST){
 
-      $controleFormulaire = new controleursFonctions();
-      $msg = $controleFormulaire->verifFormMembre($_POST);
+      if(isset($_POST['pseudo']) && isset($_POST['mdp'])
+      && isset($_POST['nom']) && isset($_POST['prenom'])
+      && isset($_POST['email']) && ((isset($_POST['sexe'])
+      && ($_POST['sexe'] === 'm' || $_POST['sexe'] === 'f'))
+      && isset($_POST['ville']) && isset($_POST['cp']))
+      && isset($_POST['adresse'])){
 
-      if(empty($msg)){
+        $controleFormulaire = new controleursFonctions();
+        $msg = $controleFormulaire->verifFormMembre($_POST);
 
-        foreach ($_POST as $key => $value){
-          $_POST[$key] = htmlentities($value, ENT_QUOTES);
+        if(empty($msg)){
+
+          foreach ($_POST as $key => $value){
+            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+          }
+
+          extract($_POST);
+
+          $cont = new modelesMembre();
+
+          $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 0);
+
         }
-        extract($_POST);
-
-        $cont = new modelesMembre();
-
-        $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 0);
-
+      } else {
+        $msg .= 'Une erreur est survenue lors de votre demande.<br>';
       }
-
     }
 
     $this->render('../vues/membre/inscription.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));

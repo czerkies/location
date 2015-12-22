@@ -15,6 +15,8 @@
     <input type="radio" name="sexe" value="m" id="m" <?php
       if(isset($_POST['sexe']) && $_POST['sexe'] === 'm') {
         echo "checked";
+      } else {
+        echo "checked";
       }
     ?>
     ><label for="m">Homme</label>
@@ -25,7 +27,7 @@
     ?>
     ><label for="f">Femme</label>
     <input type="text" name="ville" value="<?php if(isset($_POST['ville'])) {echo $_POST['ville'];} ?>" placeholder="Ville" required>
-    <input type="text" name="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} ?>" placeholder="Code Postal" required>
+    <input type="number" name="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} ?>" placeholder="Code Postal" min="5" max="5" required>
     <textarea name="adresse" placeholder="Adresse" required><?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} ?></textarea>
     <input type="submit" value="Inscription">
   </form>
