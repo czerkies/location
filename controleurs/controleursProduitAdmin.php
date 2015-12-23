@@ -16,11 +16,11 @@ class controleursProduitAdmin extends controleursSuper {
     }
 
     if(!isset($value['id_salle']) || !is_numeric($value['id_salle'])
-    || !isset($value['date_arrivee_J']) || !is_numeric($value['date_arrivee_J'])
-    || !isset($value['date_arrivee_M']) || !is_numeric($value['date_arrivee_M'])
-    || !isset($value['date_arrivee_A']) || !is_numeric($value['date_arrivee_A'])
-    || !isset($value['date_arrivee_H']) || !is_numeric($value['date_arrivee_H'])
-    || !isset($value['date_arrivee_I']) || !is_numeric($value['date_arrivee_I'])
+    || !isset($value['date_arrivee_J']) || !is_numeric($value['date_arrivee_J']) // || > 1 && < 32
+    || !isset($value['date_arrivee_M']) || !is_numeric($value['date_arrivee_M'])// || > 1 && < 13
+    || !isset($value['date_arrivee_A']) || !is_numeric($value['date_arrivee_A']) // || strlen == 4 && < strtotime('Y', +4 year)
+    || !isset($value['date_arrivee_H']) || !is_numeric($value['date_arrivee_H']) // > 6 && < 22
+    || !isset($value['date_arrivee_I']) || !is_numeric($value['date_arrivee_I']) // > 0 && < 56
     || !isset($value['date_depart_J']) || !is_numeric($value['date_depart_J'])
     || !isset($value['date_depart_M']) || !is_numeric($value['date_depart_M'])
     || !isset($value['date_depart_A']) || !is_numeric($value['date_depart_A'])
