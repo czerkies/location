@@ -10,7 +10,9 @@
 <?php if($ajouter){ ?>
   <h2>Ajouter une salle</h2>
   <form class="" action="" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id_salle" id="id_salle" value="<?php if(isset($recupPourModif['id_salle'])) { echo $recupPourModif['id_salle'];} ?>" />
+    <?php if($recupPourModif){ ?>
+      <input type="hidden" name="id_salle" id="id_salle" value="<?php if(isset($recupPourModif['id_salle'])) { echo $recupPourModif['id_salle'];} ?>" required>
+    <?php } ?>
     <label for="pays">Pays</label>
     <input type="text" name="pays" id="pays" value="<?php if(isset($_POST['pays'])) {echo $_POST['pays'];} elseif(isset($recupPourModif['pays'])) {echo $recupPourModif['pays'];} ?>" placeholder="Pays" required>
     <label for="ville">Ville</label>
@@ -18,13 +20,13 @@
     <label for="adresse">Adresse</label>
     <input type="text" name="adresse" id="adresse" value="<?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} elseif(isset($recupPourModif['adresse'])) {echo $recupPourModif['adresse'];} ?>" placeholder="Adresse" required>
     <label for="cp">Code Postale</label>
-      <input type="text" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} elseif(isset($recupPourModif['cp'])) {echo $recupPourModif['cp'];} ?>" placeholder="Code Postale" required>
+      <input type="number" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} elseif(isset($recupPourModif['cp'])) {echo $recupPourModif['cp'];} ?>" placeholder="Code Postale" required>
     <label for="titre">Titre</label>
     <input type="text" name="titre" id="titre" value="<?php if(isset($_POST['titre'])) {echo $_POST['titre'];} elseif(isset($recupPourModif['titre'])) {echo $recupPourModif['titre'];} ?>" placeholder="Titre" required>
     <label for="description">Description</label>
     <textarea name="description" id="description" placeholder="Description" required><?php if(isset($_POST['description'])) {echo $_POST['description'];} elseif(isset($recupPourModif['description'])) {echo $recupPourModif['description'];} ?></textarea>
     <label for="capacite">Capacité</label>
-    <input type="text" name="capacite" id="capacite" value="<?php if(isset($_POST['capacite'])) {echo $_POST['capacite'];} elseif(isset($recupPourModif['capacite'])) {echo $recupPourModif['capacite'];} ?>" placeholder="Capacité" required>
+    <input type="number" min="1" max="9999999999999" name="capacite" id="capacite" value="<?php if(isset($_POST['capacite'])) {echo $_POST['capacite'];} elseif(isset($recupPourModif['capacite'])) {echo $recupPourModif['capacite'];} ?>" placeholder="Capacité" required>
     <label for="categorie">Catégorie</label>
     <select id="categorie" name="categorie">
       <option disabled>Toutes categories</option>
@@ -63,8 +65,8 @@
         <th>Photo</th>
         <th>Pays</th>
         <th>Ville</th>
-        <th>Adresse</th>
-        <th>Code postale</th>
+        <th>Code postal</th>
+        <th>Titre</th>
         <th>Description</th>
         <th>Capacité</th>
         <th>Catégorie</th>

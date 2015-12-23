@@ -118,9 +118,9 @@ class controleursMembre extends controleursSuper {
 
     $msg = '';
 
-    if(isset($_POST) && !empty($_POST)){
+    if($_POST){
 
-      if(empty($_POST['email'])){
+      if(isset($_POST['email'] && empty($_POST['email'])){
         $msg .= 'Vous devez saisir une adresse email.';
       } else {
         $cont = new modelesMembre();

@@ -41,9 +41,9 @@ class controleursFonctions extends controleursSuper {
     }
     if(empty($value['email'])){
       $msg .= "Veuillez saisir une adresse Email.<br>";
-    } elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    } elseif(!filter_var($value['email'], FILTER_VALIDATE_EMAIL)) {
       $msg .= "Votre email est invalide.<br>";
-    } elseif(strlen($_POST['email']) > 30){
+    } elseif(strlen($value['email']) > 30){
       $msg .= "Votre email ne doit pas dépasser 30 carractères.<br>";
     } elseif(!$cont->verifMail($value['email'], $id_membre)){
       $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
