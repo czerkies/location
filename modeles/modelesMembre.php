@@ -47,29 +47,37 @@ class modelesMembre extends modelesSuper {
   }
 
   // *********** Vérification Pseudo ********** //
-  public function verifPseudo($pseudo){
+  public function verifPseudo($pseudo, $id_membre){
 
-    $pseudo = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo'");
+    $req = "SELECT id_membre FROM membre WHERE pseudo = '$pseudo'";
 
-    $nbPseudo = ($pseudo->rowCount() != 0) ? FALSE : TRUE;
+    if($id_membre){
+      $req .= " AND id_membre != '$id_membre'";
+    }
 
-    return $nbPseudo;
+    $donnees = $this->connect_central_bdd()->query($req);
+
+    return $nbPseudo = ($donnees->rowCount() != 0) ? FALSE : TRUE;
 
   }
 
   // *********** Vérification Mail ********** //
-  public function verifMail($email){
+  public function verifMail($email, $id_membre){
 
-    $mail = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE email = '$email'");
+    $req = "SELECT * FROM membre WHERE email = '$email' AND id_membre != '$id_membre'";
 
-    $nbMail = ($mail->rowCount() != 0) ? FALSE : TRUE;
+    if($id_membre){
+      $req .= " AND id_membre != '$id_membre'";
+    }
 
-    return $nbMail;
+    $donnees = $this->connect_central_bdd()->query($req);
+
+    return $nbMail = ($donnees->rowCount() != 0) ? FALSE : TRUE;
 
   }
 
   // *********** Vérification Pseudo pour MAJ ********** //
-  public function verifPseudoMAJ($pseudo, $id_membre){
+  /*public function verifPseudoMAJ($pseudo, $id_membre){
 
     $pseudo = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND id_membre != '$id_membre'");
 
@@ -88,7 +96,7 @@ class modelesMembre extends modelesSuper {
 
     return $nbMailUp;
 
-  }
+  }*/
 
   // *********** Mot de passe perdu ********** //
   public function nouveauMdp($mdp, $email){
@@ -114,7 +122,7 @@ class modelesMembre extends modelesSuper {
     $insertion->bindValue(':cp', $cp, PDO::PARAM_STR);
     $insertion->bindValue(':adresse', $adresse, PDO::PARAM_STR);
 
-    $insertion->execute();
+    return $insertion->execute();
 
   }
 

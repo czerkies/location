@@ -1,11 +1,9 @@
-<h1>Votre profil</h1>
 <?php if($userConnect){ ?>
+<h1>Votre profil</h1>
 <div id="profil">
   <h2>Voici vos informations</h2>
-  <?= $msg ?>
-  <?php
-  if(isset($_GET['modif']) == 'true'){
-  ?>
+  <?= $msg; ?>
+  <?php if(isset($_GET['modif']) == 'true'){ ?>
   <form class="" action="" method="post">
     <label for="pseudo">Votre Pseudo :</label> <input type="text" name="pseudo" id="pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} else {echo $_SESSION['membre']['pseudo'];} ?>">
     <label for="email">Votre Email est :</label> <input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) {echo $_POST['email'];} else {echo $_SESSION['membre']['email'];} ?>">
@@ -30,8 +28,7 @@
     <label for="ville">Votre ville est :</label> <input type="text" name="ville" id="ville" value="<?php if(isset($_POST['ville'])) {echo $_POST['ville'];} else {echo $_SESSION['membre']['ville'];} ?>">
     <label for="cp">Votre Code Postal est :</label> <input type="text" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} else {echo $_SESSION['membre']['cp'];} ?>">
     <label for="adresse">Votre adresse est :</label> <textarea name="adresse" name="adresse" id="adresse"><?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} else {echo $_SESSION['membre']['adresse'];} ?></textarea>
-    <input type="submit" name="modif" value="Enregistrer les informations">
-    <input type="submit" name="retour" value="Modification terminé">
+    <input type="submit" value="Enregistrer les informations">
   </form>
     <?php } else { ?>
   <label for="pseudo">Votre Pseudo :</label> <p><?= $_SESSION['membre']['pseudo']; ?></p>
@@ -41,7 +38,7 @@
   <label for="ville">Votre ville est :</label> <p><?= $_SESSION['membre']['ville']; ?></p>
   <label for="cp">Votre Code Postal est :</label> <p><?= $_SESSION['membre']['cp']; ?></p>
   <label for="adresse">Votre adresse est :</label> <p><?= $_SESSION['membre']['adresse']; ?></p>
-  <a href="../www/routeur.php?controleurs=membre&action=profilMembre&modif=true">Mettre à jour mes informations</a>
+  <a href="routeur.php?controleurs=membre&action=profilMembre&modif=true">Mettre à jour mes informations</a>
   <?php } ?>
 </div>
 <div id="last_commande">

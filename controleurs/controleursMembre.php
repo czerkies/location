@@ -64,7 +64,7 @@ class controleursMembre extends controleursSuper {
       && isset($_POST['adresse'])){
 
         $controleFormulaire = new controleursFonctions();
-        $msg = $controleFormulaire->verifFormMembre($_POST);
+        $msg = $controleFormulaire->verifFormMembre($_POST, NULL);
 
         if(empty($msg)){
 
@@ -230,67 +230,51 @@ class controleursMembre extends controleursSuper {
     $msg = '';
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
+    $commandes = '';
 
     $cont = new modelesMembre();
-    $idMembre = ($_SESSION['membre']['id_membre']) ? $_SESSION['membre']['id_membre'] : NULL;
+    $idMembre = (isset($_SESSION['membre']['id_membre'])) ? $_SESSION['membre']['id_membre'] : NULL;
 
-    if(isset($_POST) && !empty($_POST)){
+    if($_POST){
 
-      if(empty($_POST['pseudo'])){
-        $msg .= "Veuillez saisir un Pseudo.<br>";
-      } else {
-        if(!$cont->verifPseudoMAJ($_POST['pseudo'], $idMembre)){
-          $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
-        }
-      }
-      if(empty($_POST['nom'])){
-        $msg .= "Veuillez saisir un Nom.<br>";
-      }
-      if(empty($_POST['prenom'])){
-        $msg .= "Veuillez saisir un Prénom.<br>";
-      }
-      if(empty($_POST['email'])){
-        $msg .= "Veuillez saisir une adresse Email.<br>";
-      } else {
-        if(!$cont->verifMailMAJ($_POST['email'], $idMembre)){
-          $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
-        }
-      }
-      if(empty($_POST['sexe'])){
-        $msg .= "Veuillez saisir votre Sexe.<br>";
-      }
-      if(empty($_POST['ville'])){
-        $msg .= "Veuillez saisir une Ville.<br>";
-      }
-      if(empty($_POST['cp'])){
-        $msg .= "Veuillez saisir votre Code Postal.<br>";
-      }
-      if(empty($_POST['adresse'])){
-        $msg .= "Veuillez saisir une Adresse.<br>";
-      }
+      if(isset($_POST['pseudo']) && isset($_POST['nom'])
+      && isset($_POST['prenom']) && isset($_POST['email'])
+      && ((isset($_POST['sexe']) && ($_POST['sexe'] === 'm' || $_POST['sexe'] === 'f'))
+      && isset($_POST['ville']) && isset($_POST['cp']))
+      && isset($_POST['adresse'])){
 
-      if(empty($msg)){
+        $controleFormulaire = new controleursFonctions();
+        $msg = $controleFormulaire->verifFormMembre($_POST, $idMembre);
 
-        foreach ($_POST as $key => $value){
-          $_POST[$key] = htmlentities($value, ENT_QUOTES);
-        }
+        if(empty($msg)){
 
-        extract($_POST);
-
-        foreach ($_POST as $key => $value) {
-          if($key != 'mdp'){
-            $_SESSION['membre'][$key] = $value;
+          foreach ($_POST as $key => $value){
+            $_POST[$key] = htmlentities($value, ENT_QUOTES);
           }
+
+          extract($_POST);
+
+          foreach ($_POST as $key => $value) {
+            if($key != 'mdp'){
+              $_SESSION['membre'][$key] = $value;
+            }
+          }
+
+          if($cont->updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre)){
+            $msg .= "Votre profil a bien été mis à jour.<br>";
+          }
+
         }
-
-        $cont->updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre);
-
+      } else {
+        $msg .= "Une erreur est survenue lors de votre demande.<br>";
       }
     }
+    if($userConnect){
+      // Récupération des commandes par id_membre
+      $commandesIdMembres = new modelesCommande();
+      $commandes = $commandesIdMembres->commandesMembres($idMembre);
 
-    // Récupération des commandes par id_membre
-    $commandesIdMembres = new modelesCommande();
-    $commandes = $commandesIdMembres->commandesMembres($idMembre);
+    }
 
     $this->render('../vues/membre/profil.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'commandes' => $commandes));
 

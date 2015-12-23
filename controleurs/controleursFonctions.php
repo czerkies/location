@@ -3,7 +3,7 @@
 class controleursFonctions extends controleursSuper {
 
   // ********** Controle du formulaire de la création de membre ********** //
-  public function verifFormMembre($value){
+  public function verifFormMembre($value, $id_membre){
 
     $msg = '';
 
@@ -13,15 +13,17 @@ class controleursFonctions extends controleursSuper {
       $msg .= "Veuillez saisir un Pseudo.<br>";
     } elseif(strlen($value['pseudo']) < 4 || strlen($value['pseudo']) > 15) {
       $msg .= "Veuillez saisir un Pseudo entre 4 et 15 carractères.<br>";
-    } elseif(!$cont->verifPseudo($value['pseudo'])){
+    } elseif(!$cont->verifPseudo($value['pseudo'], $id_membre)){
       $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
     }
-    if(empty($value['mdp'])){
-      $msg .= "Veuillez saisir un mot de passe.<br>";
-    } elseif(strlen($value['mdp']) < 5 || strlen($value['mdp']) > 32) {
-      $msg .= "Veuillez saisir un mot de passe entre 5 et 32 carractères.<br>";
-    } elseif(preg_match("/^[A-Z0-9]*$/",$value['mdp'])){ // Controler si existe
-      $msg .= "Votre mot de passe doit comporter au moins une majuscule et un chiffre.<br>";
+    if(!$id_membre){
+      if(empty($value['mdp'])){
+        $msg .= "Veuillez saisir un mot de passe.<br>";
+      } elseif(strlen($value['mdp']) < 5 || strlen($value['mdp']) > 32) {
+        $msg .= "Veuillez saisir un mot de passe entre 5 et 32 carractères.<br>";
+      } elseif(preg_match("/^[A-Z0-9]*$/",$value['mdp'])){ // Controler si existe
+        $msg .= "Votre mot de passe doit comporter au moins une majuscule et un chiffre.<br>";
+      }
     }
     if(empty($value['nom'])){
       $msg .= "Veuillez saisir un Nom.<br>";
@@ -43,7 +45,7 @@ class controleursFonctions extends controleursSuper {
       $msg .= "Votre email est invalide.<br>";
     } elseif(strlen($_POST['email']) > 30){
       $msg .= "Votre email ne doit pas dépasser 30 carractères.<br>";
-    } elseif(!$cont->verifMail($value['email'])){
+    } elseif(!$cont->verifMail($value['email'], $id_membre)){
       $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
     }
     if(empty($value['sexe'])){

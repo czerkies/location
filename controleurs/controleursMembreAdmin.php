@@ -61,7 +61,7 @@ class controleursMembreAdmin extends controleursSuper {
         && isset($_POST['adresse'])){
 
           $controleFormulaire = new controleursFonctions();
-          $msg = $controleFormulaire->verifFormMembre($_POST);
+          $msg = $controleFormulaire->verifFormMembre($_POST, NULL);
 
           if(empty($msg)){
 

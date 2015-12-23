@@ -52,7 +52,7 @@
     <p>
       Cette salle est utilisé pour des produits,<br>
       Êtes-vous sur de vouloir la supprimer ?<br>
-      <a href="routeur.php?controleurs=salles&action=gestionSalles&supp=<?= $_GET['supp']; ?>&confirm=oui">Oui</a> | <a href="rrouteur.php?controleurs=salles&action=gestionSalles">Non</a>
+      <a href="routeur.php?controleurs=salles&action=gestionSalles&supp=<?= $_GET['supp']; ?>&confirm=oui">Oui</a> | <a href="routeur.php?controleurs=salles&action=gestionSalles">Non</a>
     </p>
   </div>
   <?php } ?>
