@@ -6,7 +6,7 @@ class controleursNewsletter extends controleursSuper {
   public function envoiNews(){
 
     session_start();
-    $title = 'Title';
+    $title = 'Envoyer la Newsletter';
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
@@ -16,9 +16,9 @@ class controleursNewsletter extends controleursSuper {
 
     $nbAbonne = $donneesNews['nbMail'];
 
-    $mailAdmin = $_SESSION['membre']['email'];
+    $mailAdmin = (isset($_SESSION['membre'])) ? $_SESSION['membre']['email'] : NULL;
 
-    if(isset($_POST) && !empty($_POST)){
+    if($_POST){
 
       $sujet = $_POST['sujet'];
       $message = $_POST['message'];
@@ -27,7 +27,9 @@ class controleursNewsletter extends controleursSuper {
       foreach ($donneesNews['mailAbonne'] as $value) {
         $mail .= $value['email'].', ';
       }
+
       mail($mail, $sujet, $message);
+
       $msg .= 'Votre mail a bien été envoyé.';
     }
 
@@ -49,7 +51,7 @@ class controleursNewsletter extends controleursSuper {
 
     if($userConnect){
 
-      $id_membre = (isset($_SESSION['membre']['id_membre']));
+      $id_membre = $_SESSION['membre']['id_membre'];
 
       $cont = new modelesNewsletter();
 
