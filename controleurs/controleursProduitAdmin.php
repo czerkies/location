@@ -16,16 +16,26 @@ class controleursProduitAdmin extends controleursSuper {
     }
 
     if(!isset($value['id_salle']) || !is_numeric($value['id_salle'])
-    || !isset($value['date_arrivee_J']) || !is_numeric($value['date_arrivee_J']) // || > 1 && < 32
-    || !isset($value['date_arrivee_M']) || !is_numeric($value['date_arrivee_M'])// || > 1 && < 13
-    || !isset($value['date_arrivee_A']) || !is_numeric($value['date_arrivee_A']) // || strlen == 4 && < strtotime('Y', +4 year)
-    || !isset($value['date_arrivee_H']) || !is_numeric($value['date_arrivee_H']) // > 6 && < 22
-    || !isset($value['date_arrivee_I']) || !is_numeric($value['date_arrivee_I']) // > 0 && < 56
+    || !isset($value['date_arrivee_J']) || !is_numeric($value['date_arrivee_J'])
+    || $value['date_arrivee_J'] < 1 || $value['date_arrivee_J'] > 31
+    || !isset($value['date_arrivee_M']) || !is_numeric($value['date_arrivee_M'])
+    || $value['date_arrivee_M'] < 1 || $value['date_arrivee_M'] > 12
+    || !isset($value['date_arrivee_A']) || !is_numeric($value['date_arrivee_A'])
+    || strlen($value['date_arrivee_A']) != 4 || $value['date_arrivee_A'] > date('Y', strtotime('+4 years'))
+    || !isset($value['date_arrivee_H']) || !is_numeric($value['date_arrivee_H'])
+    || $value['date_arrivee_H'] < 7 || $value['date_arrivee_H'] > 21
+    || !isset($value['date_arrivee_I']) || !is_numeric($value['date_arrivee_I'])
+    || $value['date_arrivee_I'] < 0 || $value['date_arrivee_I'] > 55
     || !isset($value['date_depart_J']) || !is_numeric($value['date_depart_J'])
+    || $value['date_depart_J'] < 1 || $value['date_depart_J'] > 31
     || !isset($value['date_depart_M']) || !is_numeric($value['date_depart_M'])
+    || $value['date_depart_M'] < 1 || $value['date_depart_M'] > 12
     || !isset($value['date_depart_A']) || !is_numeric($value['date_depart_A'])
+    || strlen($value['date_depart_A']) != 4 || $value['date_depart_A'] > date('Y', strtotime('+4 years'))
     || !isset($value['date_depart_H']) || !is_numeric($value['date_depart_H'])
+    || $value['date_depart_H'] < 7 || $value['date_depart_H'] > 21
     || !isset($value['date_depart_I']) || !is_numeric($value['date_depart_I'])
+    || $value['date_depart_I'] < 0 || $value['date_depart_I'] > 55
     || !isset($value['id_promo']) || !is_numeric($value['id_promo'])){
       $msg .= self::ERREURSQL;
     }

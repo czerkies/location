@@ -76,28 +76,6 @@ class modelesMembre extends modelesSuper {
 
   }
 
-  // *********** Vérification Pseudo pour MAJ ********** //
-  /*public function verifPseudoMAJ($pseudo, $id_membre){
-
-    $pseudo = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE pseudo = '$pseudo' AND id_membre != '$id_membre'");
-
-    $nbPseudo = ($pseudo->rowCount() != 0) ? FALSE : TRUE;
-
-    return $nbPseudo;
-
-  }
-
-  // *********** Vérification Mail pour MAJ ********** //
-  public function verifMailMAJ($email, $id_membre){
-
-    $mail = $this->connect_central_bdd()->query("SELECT * FROM membre WHERE email = '$email' AND id_membre != '$id_membre'");
-
-    $nbMailUp = ($mail->rowCount() != 0) ? FALSE : TRUE;
-
-    return $nbMailUp;
-
-  }*/
-
   // *********** Mot de passe perdu ********** //
   public function nouveauMdp($mdp, $email){
 

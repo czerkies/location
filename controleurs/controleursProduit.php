@@ -119,14 +119,13 @@ class controleursProduit extends controleursSuper {
     $categories = new modelesSalles();
     $listeCategories = $categories->categoriesSalle();
 
-    if(isset($_POST) && !empty($_POST)){
+    if($_POST){
 
-      if(
-        isset($_POST['recherche_date_A']) && !empty($_POST['recherche_date_A']) &&
+      if(isset($_POST['recherche_date_A']) && !empty($_POST['recherche_date_A']) &&
         isset($_POST['recherche_date_M']) && !empty($_POST['recherche_date_M']) &&
         isset($_POST['recherche_date_J']) && !empty($_POST['recherche_date_J']) &&
         isset($_POST['categorie']) && !empty($_POST['categorie']) &&
-        isset($_POST['keyword'])) {
+        isset($_POST['keyword'])){
 
           foreach ($_POST as $key => $value){
             $_POST[$key] = htmlentities($value, ENT_QUOTES);
