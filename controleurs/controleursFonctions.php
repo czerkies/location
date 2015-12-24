@@ -21,8 +21,8 @@ class controleursFonctions extends controleursSuper {
         $msg .= "Veuillez saisir un mot de passe.<br>";
       } elseif(strlen($value['mdp']) < 5 || strlen($value['mdp']) > 32) {
         $msg .= "Veuillez saisir un mot de passe entre 5 et 32 carractères.<br>";
-      } elseif(preg_match("/^[A-Z0-9]*$/",$value['mdp'])){ // Controler si existe
-        $msg .= "Votre mot de passe doit comporter au moins une majuscule et un chiffre.<br>";
+      } elseif(!preg_match('#^[^A-Z0-9]*([A-Z0-9])#',$value['mdp'])){ // Controler si existe
+        $msg .= "Votre mot de passe doit comporter au moins une majuscule ou un chiffre.<br>";
       }
     }
     if(empty($value['nom'])){
