@@ -120,7 +120,7 @@ class controleursMembre extends controleursSuper {
 
     if($_POST){
 
-      if(isset($_POST['email'] && empty($_POST['email'])){
+      if(isset($_POST['email']) && empty($_POST['email'])){
         $msg .= 'Vous devez saisir une adresse email.';
       } else {
         $cont = new modelesMembre();

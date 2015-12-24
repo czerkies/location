@@ -56,7 +56,7 @@ class controleursProduitAdmin extends controleursSuper {
 
     $date = new controleursFonctions();
 
-    if(isset($_POST) && !empty($_POST)){
+    if($_POST){
 
       if(isset($_POST['id_salle']) && !empty($_POST['id_salle'])
       && isset($_POST['date_arrivee_J']) && !empty($_POST['date_arrivee_J'])
@@ -94,10 +94,10 @@ class controleursProduitAdmin extends controleursSuper {
 
           // Controle des dates
           if($date_arrivee <= date('Y-m-d g:i')){
-            $controleDate .= 'Vous ne pouvez pas créer un produit inferieur à la date du jour.';
+            $controleDate .= 'Vous ne pouvez pas créer un produit inferieur à la date du jour.<br>';
           }
           if($date_depart <= $date_arrivee){
-            $controleDate .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.';
+            $controleDate .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.<br>';
           }
 
           if($nouveauxProduit->verifDateBDD($date_arrivee, $date_depart, $id_salle, NULL)){
@@ -115,7 +115,7 @@ class controleursProduitAdmin extends controleursSuper {
               }
             }
           } else {
-            $msg .= 'Oups, une salle a déjà été reservé à cette date.<br>Merci de bien vouloir en choisir une autre.<br>';
+            $msg .= 'Une salle a déjà été reservé à cette date.<br>Merci de bien vouloir en choisir une autre.<br>';
           }
         }
       } else {
@@ -175,7 +175,7 @@ class controleursProduitAdmin extends controleursSuper {
 
       if(!$donneesProduits->produitEtatUn($idProduitGet)){
 
-        if(isset($_POST) && !empty($_POST)){
+        if($_POST){
 
           if(isset($_POST['id_salle']) && !empty($_POST['id_salle'])
           && isset($_POST['date_arrivee_J']) && !empty($_POST['date_arrivee_J'])
