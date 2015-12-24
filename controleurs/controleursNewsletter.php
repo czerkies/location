@@ -40,32 +40,34 @@ class controleursNewsletter extends controleursSuper {
   public function inscriptionMembre(){
 
     session_start();
-    $title = 'Title';
+    $title = 'Inscription à la Newsletter';
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
     $affichage = FALSE;
 
-
     $msg = '';
 
-    $id_membre = $_SESSION['membre']['id_membre'];
+    if($userConnect){
 
-    $cont = new modelesNewsletter();
+      $id_membre = (isset($_SESSION['membre']['id_membre']));
 
-    if($cont->verifNewsletter($id_membre)){
+      $cont = new modelesNewsletter();
 
-      $affichage = TRUE;
+      if($cont->verifNewsletter($id_membre)){
 
-      if(isset($_GET['inscription']) && !empty($_GET['inscription']) && $_GET['inscription'] === 'ok'){
+        $affichage = TRUE;
 
-        $pdo = new modelesNewsletter();
-        $insertion = $pdo->insertMembre($id_membre);
+        if(isset($_GET['inscription']) && !empty($_GET['inscription']) && $_GET['inscription'] === 'ok'){
+
+          $pdo = new modelesNewsletter();
+          $insertion = $pdo->insertMembre($id_membre);
+          $affichage = FALSE;
+
+        }
+
+      } else {
         $affichage = FALSE;
-
       }
-
-    } else {
-      $affichage = FALSE;
     }
 
     $this->Render('../vues/newsletter/newsletter.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichage' => $affichage));

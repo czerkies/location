@@ -1,5 +1,5 @@
-<h1>S'inscrire à la newsletter</h1>
 <?php if($userConnect){ ?>
+<h1>S'inscrire à la newsletter</h1>
   <?= $msg; ?>
 <div id="envoi_newsletter">
   <?php if($affichage){ ?>

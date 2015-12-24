@@ -122,9 +122,11 @@ class controleursMembre extends controleursSuper {
 
       if(isset($_POST['email']) && empty($_POST['email'])){
         $msg .= 'Vous devez saisir une adresse email.';
+      } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $msg .= "Votre adresse email est invalide.<br>";
       } else {
         $cont = new modelesMembre();
-        if($cont->verifMail($_POST['email'])){
+        if($cont->verifMail($_POST['email'], NULL)){
           $msg .= 'Cet email existe n\'existe pas.';
         } else {
 
@@ -175,7 +177,7 @@ class controleursMembre extends controleursSuper {
             if(empty($_POST['email'])){
               $msg .= "Veuillez saisir un email.<br>";
             } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-              $msg .= "Votre email est incorrect.<br>";
+              $msg .= "Votre email est invalide.<br>";
             }
 
           } else {

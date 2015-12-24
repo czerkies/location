@@ -64,7 +64,7 @@ class modelesMembre extends modelesSuper {
   // *********** Vérification Mail ********** //
   public function verifMail($email, $id_membre){
 
-    $req = "SELECT * FROM membre WHERE email = '$email' AND id_membre != '$id_membre'";
+    $req = "SELECT id_membre FROM membre WHERE email = '$email'";
 
     if($id_membre){
       $req .= " AND id_membre != '$id_membre'";
