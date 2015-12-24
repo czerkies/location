@@ -10,36 +10,51 @@ class controleursMembre extends controleursSuper {
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
-    $connect = '';
+    $msg = '';
 
-    if(!empty($_POST['connexion']) && isset($_POST['connexion'])){
+    if(isset($_POST['connexion'])){
 
-      $pseudo = htmlentities($_POST['pseudo'], ENT_QUOTES);
-      $mdp = htmlentities($_POST['mdp'], ENT_QUOTES);
+      if(isset($_POST['pseudo']) && isset($_POST['mdp'])){
 
-      $connexion = new modelesMembre();
-      $data = $connexion->recupMembre($pseudo, $mdp);
+        if(empty($_POST['pseudo'])){
+          $msg .= 'Veuillez saisir un pseudo.<br>';
+        }
+        if(empty($_POST['mdp'])){
+          $msg .= 'Veuillez saisir un mot de passe.<br>';
+        }
 
-      if($data['pseudo'] === $pseudo && $data['mdp'] === $mdp){
-        foreach ($data as $key => $value) {
-          if($key != 'mdp'){
-            $_SESSION['membre'][$key] = $value;
-          }
-          if(isset($_POST['sauv_session'])){
-            setCookie('pseudo', $pseudo, time()+(365*24*3600));
+        if(empty($msg)){
+
+          $pseudo = htmlentities($_POST['pseudo'], ENT_QUOTES);
+          $mdp = htmlentities($_POST['mdp'], ENT_QUOTES);
+
+          $connexion = new modelesMembre();
+          $data = $connexion->recupMembre($pseudo, $mdp);
+
+          if($data['pseudo'] === $pseudo && $data['mdp'] === $mdp){
+            foreach ($data as $key => $value) {
+              if($key != 'mdp'){
+                $_SESSION['membre'][$key] = $value;
+              }
+              if(isset($_POST['sauv_session'])){
+                setCookie('pseudo', $pseudo, time()+(365*24*3600));
+              }
+            }
+            $msg .= "Bonjour ". $_SESSION['membre']['prenom'];
+            $userConnect = TRUE;
+            $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+
+          } else {
+            $msg .= "Erreur, vos ID sont éronnés.";
           }
         }
-        $connect .= "Session ouverte. Bonjour ". $_SESSION['membre']['prenom'];
-        $userConnect = TRUE;
-        $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
 
       } else {
-        $connect .= "Erreur, vos ID sont éronnés.";
+        $msg .= "Une erreur est survenue lors de votre demande";
       }
-
     }
 
-    $this->Render('../vues/membre/connexion.php', array('title' => $title, 'connect' => $connect, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
+    $this->Render('../vues/membre/connexion.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
 
   }
 
@@ -120,29 +135,34 @@ class controleursMembre extends controleursSuper {
 
     if($_POST){
 
-      if(isset($_POST['email']) && empty($_POST['email'])){
-        $msg .= 'Vous devez saisir une adresse email.';
-      } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $msg .= "Votre adresse email est invalide.<br>";
-      } else {
-        $cont = new modelesMembre();
-        if($cont->verifMail($_POST['email'], NULL)){
-          $msg .= 'Cet email existe n\'existe pas.';
+      if(isset($_POST['email'])){
+
+        if(empty($_POST['email'])){
+          $msg .= 'Vous devez saisir une adresse email.';
+        } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+          $msg .= "Votre adresse email est invalide.<br>";
         } else {
+          $cont = new modelesMembre();
+          if($cont->verifMail($_POST['email'], NULL)){
+            $msg .= 'Cet email existe n\'existe pas.';
+          } else {
 
-          // L'adresse email existe, donc génération d'un nouvau mdp.
-          $chaine = "abcdefghijklmnopqrst123456789";
-          $mdp_sch = str_shuffle($chaine);
-          $mdp = substr($mdp_sch, 0, 12);
+            // L'adresse email existe, donc génération d'un nouvau mdp.
+            $chaine = "abcdefghijklmnopqrst123456789";
+            $mdp_sch = str_shuffle($chaine);
+            $mdp = substr($mdp_sch, 0, 12);
 
-          $nouveauMdp = new modelesMembre();
-          $nouveauMdp->nouveauMdp($mdp, $_POST['email']);
+            $nouveauMdp = new modelesMembre();
+            $nouveauMdp->nouveauMdp($mdp, $_POST['email']);
 
-          $message = 'Voici votre nouveau mot de passe pour accéder à Lokisalle : ' . $mdp;
+            $message = 'Voici votre nouveau mot de passe pour accéder à Lokisalle : ' . $mdp;
 
-          mail($_POST['email'], 'Changement de mot de passe',  $message);
+            mail($_POST['email'], 'Changement de mot de passe',  $message);
 
+          }
         }
+      } else {
+        $msg .= "Une erreur est survenue lors de votre demande.<br>";
       }
     }
 
