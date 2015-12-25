@@ -3,6 +3,7 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
+RewriteRule ^connexion/ routeur.php?controleurs=membre&action=connexionMembre [L]
 RewriteRule ^admin/gestion-produits/modification/(.*.)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&modif=$1 [L]
 RewriteRule ^admin/gestion-produits/ordre/(.*)/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&type=$1&order=$2 [L]
 RewriteRule ^admin/gestion-produits/ routeur.php?controleurs=produitAdmin&action=afficherProduits [L]

@@ -55,34 +55,38 @@ class controleursProduit extends controleursSuper {
       $modAvis = new modelesAvis();
 
       // CHECK Afficher TTC *0.196
-      $id_membre = $_SESSION['membre']['id_membre'];
 
-      $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
-      $form = ($nbAvis != 0) ? FALSE : TRUE;
+      if($userConnect){
 
-      if($form){
+        $id_membre = $_SESSION['membre']['id_membre'];
 
-        if(isset($_POST['avis']) && !empty($_POST['avis'])){
+        $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
+        $form = ($nbAvis != 0) ? FALSE : TRUE;
 
-          if(isset($_POST['commentaire']) && empty($_POST['commentaire'])){
-            $msg .= "Veuillez saisir un commentaire.<br>";
-          }
+        if($form){
 
-          if(isset($_POST['note']) && !empty($_POST['note']) && is_numeric($_POST['note'])){
+          if(isset($_POST['avis']) && !empty($_POST['avis'])){
 
-            if(empty($msg)){
+            if(isset($_POST['commentaire']) && empty($_POST['commentaire'])){
+              $msg .= "Veuillez saisir un commentaire.<br>";
+            }
 
-              foreach ($_POST as $key => $value){
-                $_POST[$key] = htmlentities($value, ENT_QUOTES);
+            if(isset($_POST['note']) && !empty($_POST['note']) && is_numeric($_POST['note'])){
+
+              if(empty($msg)){
+
+                foreach ($_POST as $key => $value){
+                  $_POST[$key] = htmlentities($value, ENT_QUOTES);
+                }
+
+                extract($_POST);
+
+                $id_salle = $ProduitIDSalle['id_salle'];
+
+                $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
+                $form =  FALSE;
+
               }
-
-              extract($_POST);
-
-              $id_salle = $ProduitIDSalle['id_salle'];
-
-              $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
-              $form =  FALSE;
-
             }
           }
         }

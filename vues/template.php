@@ -12,7 +12,7 @@
         <li><a href="<?= RACINE_SITE; ?>accueil/">Accueil</a></li>
         <li><a href="<?= RACINE_SITE; ?>nos-salles/">Réservations</a></li>
         <li><a href="<?= RACINE_SITE; ?>recherche/">Recherche</a></li>
-        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=connexionMembre">Connexion</a></li>
+        <li><a href="<?= RACINE_SITE; ?>connexion/">Connexion</a></li>
         <?php if($userConnect || $userConnectAdmin){ ?>
         <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=profilMembre">Profil</a></li>
         <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=panier&action=affichagePanier">Mon panier</a></li>
