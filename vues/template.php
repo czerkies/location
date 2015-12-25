@@ -10,8 +10,8 @@
     <div id="nav">
       <ul>
         <li><a href="<?= RACINE_SITE; ?>accueil/">Accueil</a></li>
-        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=produit&action=produitReservation">Réservations</a></li>
-        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=produit&action=rechercheProduit">Recherche</a></li>
+        <li><a href="<?= RACINE_SITE; ?>nos-salles/">Réservations</a></li>
+        <li><a href="<?= RACINE_SITE; ?>recherche/">Recherche</a></li>
         <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=connexionMembre">Connexion</a></li>
         <?php if($userConnect || $userConnectAdmin){ ?>
         <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=profilMembre">Profil</a></li>

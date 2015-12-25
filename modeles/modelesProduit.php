@@ -7,9 +7,7 @@ class modelesProduit extends modelesSuper {
 
     $donnees = $this->connect_central_bdd()->query("SELECT id_produit FROM produit WHERE id_produit = '$id_produit'");
 
-    $idExist = ($donnees->rowCount() === 1) ? TRUE : FALSE;
-
-    return $idExist;
+    return $idExist = ($donnees->rowCount() === 1) ? TRUE : FALSE;
 
   }
 

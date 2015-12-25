@@ -292,6 +292,7 @@ class controleursMembre extends controleursSuper {
       }
     }
     if($userConnect){
+      
       // Récupération des commandes par id_membre
       $commandesIdMembres = new modelesCommande();
       $commandes = $commandesIdMembres->commandesMembres($idMembre);

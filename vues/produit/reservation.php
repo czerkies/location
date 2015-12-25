@@ -19,12 +19,12 @@
     <tr>
       <td><?= $value['titre']; ?></td>
       <td><?= $value['ville']; ?></td>
-      <td><img src="<?= $value['photo']; ?>" alt="<?= $value['titre']; ?>"></td>
+      <td><img src="<?= RACINE_SITE.$value['photo']; ?>" alt="<?= $value['titre']; ?>"></td>
       <td><?= $value['date_arrivee']; ?></td>
       <td><?= $value['date_depart']; ?></td>
       <td><?= $value['ville']; ?></td>
       <td><?= $value['prix']; ?></td>
-      <td><a href="routeur.php?controleurs=produit&action=reservationDetails&id_produit=<?= $value['id_produit']; ?>">Voir la fiche détaillée</a></td>
+      <td><a href="<?= RACINE_SITE ?>nos-salles/reservation-en-details/<?= $value['id_produit']; ?>">Voir la fiche détaillée</a></td>
       <?php if($userConnect){ ?>
         <td><a href="routeur.php?controleurs=panier&action=affichagePanier&id_produit=<?= $value['id_produit']; ?>">Ajouter au panier</a></td>
       <?php } else { ?>

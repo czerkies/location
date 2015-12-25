@@ -35,72 +35,77 @@ class controleursProduit extends controleursSuper {
   // ********** Page d'affichage réservation détail d'un produit ********** //
   public function reservationDetails(){
 
-    session_start();
-    $userConnect = $this->userConnect();
-    $userConnectAdmin = $this->userConnectAdmin();
-    $form = (!$userConnect) ? FALSE : TRUE;
-    $msg = '';
-
     $modProduit = new modelesProduit();
-    $id_produit = htmlentities($_GET['id_produit']);
+    $id_produit = htmlentities($_GET['id_produit'], ENT_QUOTES);
 
-    // Vérification existance ID produit.
-    if($modProduit->verifExistanceIDProduit($id_produit)){
+    if(isset($_GET['id_produit']) && is_numeric($_GET['id_produit'])
+    && $modProduit->verifExistanceIDProduit($id_produit) === TRUE){
 
-      $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);
+      session_start();
+      $userConnect = $this->userConnect();
+      $userConnectAdmin = $this->userConnectAdmin();
+      $form = (!$userConnect) ? FALSE : TRUE;
+      $msg = '';
 
-      $title = $ProduitIDSalle['titre'];
+      // Vérification existance ID produit.
+      //if($modProduit->verifExistanceIDProduit($id_produit)){
 
-      $id_salle = $ProduitIDSalle['id_salle'];
-      $modAvis = new modelesAvis();
+        $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);
 
-      // CHECK Afficher TTC *0.196
-      $id_membre = $_SESSION['membre']['id_membre'];
+        $title = $ProduitIDSalle['titre'];
 
-      $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
-      $form = ($nbAvis != 0) ? FALSE : TRUE;
+        $id_salle = $ProduitIDSalle['id_salle'];
+        $modAvis = new modelesAvis();
 
-      if($form){
+        // CHECK Afficher TTC *0.196
+        $id_membre = $_SESSION['membre']['id_membre'];
 
-        if(isset($_POST['avis']) && !empty($_POST['avis'])){
+        $nbAvis = $modAvis->verifAvisProduit($id_salle, $id_membre);
+        $form = ($nbAvis != 0) ? FALSE : TRUE;
 
-          if(isset($_POST['commentaire']) && empty($_POST['commentaire'])){
-            $msg .= "Veuillez saisir un commentaire.<br>";
-          }
+        if($form){
 
-          if(isset($_POST['note']) && !empty($_POST['note']) && is_numeric($_POST['note'])){
+          if(isset($_POST['avis']) && !empty($_POST['avis'])){
 
-            if(empty($msg)){
+            if(isset($_POST['commentaire']) && empty($_POST['commentaire'])){
+              $msg .= "Veuillez saisir un commentaire.<br>";
+            }
 
-              foreach ($_POST as $key => $value){
-                $_POST[$key] = htmlentities($value, ENT_QUOTES);
+            if(isset($_POST['note']) && !empty($_POST['note']) && is_numeric($_POST['note'])){
+
+              if(empty($msg)){
+
+                foreach ($_POST as $key => $value){
+                  $_POST[$key] = htmlentities($value, ENT_QUOTES);
+                }
+
+                extract($_POST);
+
+                $id_salle = $ProduitIDSalle['id_salle'];
+
+                $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
+                $form =  FALSE;
+
               }
-
-              extract($_POST);
-
-              $id_salle = $ProduitIDSalle['id_salle'];
-
-              $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
-              $form =  FALSE;
-
             }
           }
         }
-      }
 
-      // Récupération des avis
-      $affichageAvis = $modAvis->recuperationAvisSalle($id_salle);
+        // Récupération des avis
+        $affichageAvis = $modAvis->recuperationAvisSalle($id_salle);
 
-      // Traitement des suggestions par produit
-      $suggestions = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);
+        // Traitement des suggestions par produit
+        $suggestions = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);
 
-    } else {
-
-      header('Location: routeur.php?controleurs=produit&action=produitReservation');
-
-    }
+      //} else {
+        //header('Location: http://localhost/lokisalle/www/accueil/');
+      //}
 
     $this->Render('../vues/produit/reservation_details.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));
+
+    } else {
+      header('Location: /lokisalle/www/page-introuvable/');
+    }
 
   }
 
