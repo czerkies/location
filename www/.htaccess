@@ -3,14 +3,17 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^connexion/ routeur.php?controleurs=membre&action=connexionMembre [L]
-RewriteRule ^admin/gestion-produits/modification/(.*.)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&modif=$1 [L]
-RewriteRule ^admin/gestion-produits/ordre/(.*)/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&type=$1&order=$2 [L]
-RewriteRule ^admin/gestion-produits/ routeur.php?controleurs=produitAdmin&action=afficherProduits [L]
 RewriteRule ^accueil/ routeur.php?controleurs=produit&action=produitACC [L]
+RewriteRule ^connexion/ routeur.php?controleurs=membre&action=connexionMembre [L]
 RewriteRule ^nos-salles/reservation-en-details/(.*)$ routeur.php?controleurs=produit&action=reservationDetails&id_produit=$1 [L]
 RewriteRule ^nos-salles/ routeur.php?controleurs=produit&action=produitReservation [L]
 RewriteRule ^recherche/ routeur.php?controleurs=produit&action=rechercheProduit [L]
+RewriteRule ^contact/ routeur.php?controleurs=membre&action=contactMembre [L]
+
+
+RewriteRule ^admin/gestion-produits/modification/(.*.)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&modif=$1 [L]
+RewriteRule ^admin/gestion-produits/ordre/(.*)/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&type=$1&order=$2 [L]
+RewriteRule ^admin/gestion-produits/ routeur.php?controleurs=produitAdmin&action=afficherProduits [L]
 
 RewriteRule ^page-introuvable/ routeur.php?controleurs=Fonctions&action=urlIncorrect [L]
 

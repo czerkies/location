@@ -33,7 +33,7 @@
         <li>Plan du site</li>
         <li><a href="#" onclick="javascript:window.print()">Imprimer la page</a></li>
         <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=newsletter&action=inscriptionMembre">S'inscrire à la newsletter</a></li>
-        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=contactMembre">Contact</a></li>
+        <li><a href="<?= RACINE_SITE; ?>contact/">Contact</a></li>
       </ul>
     </footer>
   </body>
