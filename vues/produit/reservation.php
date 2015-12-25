@@ -28,7 +28,7 @@
       <?php if($userConnect){ ?>
         <td><a href="routeur.php?controleurs=panier&action=affichagePanier&id_produit=<?= $value['id_produit']; ?>">Ajouter au panier</a></td>
       <?php } else { ?>
-        <td><a href="routeur.php?controleurs=membre&action=connexionMembre">Connectez vous pour l'ajouter au panier</a></td>
+        <td><a href="<?= RACINE_SITE; ?>connexion/">Connectez vous pour l'ajouter au panier</a></td>
       <?php } ?>
     </tr>
   <?php } ?>

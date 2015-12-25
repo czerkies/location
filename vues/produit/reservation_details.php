@@ -4,7 +4,7 @@
   <?php if($userConnect) { ?>
   <a href="/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier&id_produit=<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
 <?php } else { ?>
-  <a href="routeur.php?controleurs=membre&action=connexionMembre">Connectez vous pour l'ajouter au panier</a>
+  <a href="<?= RACINE_SITE; ?>connexion/">Connectez vous pour l'ajouter au panier</a>
 <?php } ?>
   </div>
 <div id="datails_complémentaire">
@@ -51,7 +51,7 @@
       <?php
       }
     } else { ?>
-      <p><a href="/lokisalle/www/routeur.php?controleurs=membre&action=connexionMembre">Il faut être connecté pour pouvoir déposer un commentaire</a></p>
+      <p><a href="<?= RACINE_SITE; ?>connexion/">Il faut être connecté pour pouvoir déposer un commentaire</a></p>
     <?php } ?>
   </form>
 </div>
