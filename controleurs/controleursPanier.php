@@ -6,7 +6,8 @@ class controleursPanier extends controleursSuper {
   public function affichagePanier(){
 
     session_start();
-    $title = 'Votre panier';
+    $title['name'] = 'Votre panier';
+    $title['menu'] = 6;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
     $userCart = (isset($_SESSION['panier'])) ? TRUE : FALSE;

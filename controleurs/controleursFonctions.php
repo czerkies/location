@@ -152,7 +152,8 @@ class controleursFonctions extends controleursSuper {
   public function urlIncorrect(){
 
     session_start();
-    $title = 'Page non trouvée';
+    $title['name'] = 'Page non trouvée';
+    $title['menu'] = 0;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 

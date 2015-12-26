@@ -6,7 +6,8 @@ class controleursMembre extends controleursSuper {
   public function connexionMembre(){
 
     session_start();
-    $title = 'Title';
+    $title['name'] = 'Connexion';
+    $title['menu'] = 4;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
@@ -40,9 +41,9 @@ class controleursMembre extends controleursSuper {
                 setCookie('pseudo', $pseudo, time()+(365*24*3600));
               }
             }
-            $msg .= "Bonjour ". $_SESSION['membre']['prenom'];
-            $userConnect = TRUE;
-            $userConnectAdmin = (isset($_SESSION['membre']) && $_SESSION['membre']['statut'] == 1) ? TRUE : FALSE;
+
+            $userConnect = $this->userConnect();
+            $userConnectAdmin = $this->userConnectAdmin();
 
           } else {
             $msg .= "Erreur, vos ID sont éronnés.";
@@ -63,7 +64,8 @@ class controleursMembre extends controleursSuper {
   public function ajoutMembre(){
 
     session_start();
-    $title = 'Title';
+    $title['name'] = 'Inscription';
+    $title['menu'] = 4;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
@@ -107,12 +109,11 @@ class controleursMembre extends controleursSuper {
   public function deconnexionMembre(){
 
     session_start();
-    $title = 'Title';
+    $title['name'] = 'Déconnexion';
+    $title['menu'] = 4;
 
     if(isset($_GET['deconnexion']) && !empty($_GET['deconnexion']) && $_GET['deconnexion'] === 'oui'){
       session_unset();
-    } else {
-      echo "METTRE UNE REDI";
     }
 
     $userConnect = $this->userConnect();
@@ -127,7 +128,8 @@ class controleursMembre extends controleursSuper {
   public function mdpperduMembre(){
 
     session_start();
-    $title = 'Title';
+    $title['name'] = 'Mot de passe perdu';
+    $title['menu'] = 4;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
@@ -174,7 +176,8 @@ class controleursMembre extends controleursSuper {
   public function contactMembre(){
 
     session_start();
-    $title = 'Contacter Lokisalle';
+    $title['name'] = 'Contacter Lokisalle';
+    $title['menu'] = 20;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
@@ -248,7 +251,8 @@ class controleursMembre extends controleursSuper {
   public function profilMembre(){
 
     session_start();
-    $title = 'Title';
+    $title['name'] = 'Mon profil';
+    $title['menu'] = 5;
     $msg = '';
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
@@ -292,7 +296,7 @@ class controleursMembre extends controleursSuper {
       }
     }
     if($userConnect){
-      
+
       // Récupération des commandes par id_membre
       $commandesIdMembres = new modelesCommande();
       $commandes = $commandesIdMembres->commandesMembres($idMembre);

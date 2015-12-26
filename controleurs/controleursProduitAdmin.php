@@ -49,7 +49,8 @@ class controleursProduitAdmin extends controleursSuper {
   public function ajouterProduits(){
 
     session_start();
-    $title = 'Ajouter un produit';
+    $title['name'] = 'Ajouter un produit';
+    $title['menu'] = 10;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
@@ -143,7 +144,8 @@ class controleursProduitAdmin extends controleursSuper {
   public function afficherProduits(){
 
     session_start();
-    $title = 'Afficher les produits';
+    $title['name'] = 'Afficher les produits';
+    $title['menu'] = 10; 
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
 

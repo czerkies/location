@@ -6,7 +6,8 @@ class controleursProduit extends controleursSuper {
   public function produitACC(){
 
     session_start();
-    $title = 'Accueil';
+    $title['name'] = 'Accueil';
+    $title['menu'] = 1;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
@@ -21,7 +22,8 @@ class controleursProduit extends controleursSuper {
   public function produitReservation(){
 
     session_start();
-    $title = 'Tout nos produits';
+    $title['name'] = 'Tout nos produits';
+    $title['menu'] = 2;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
@@ -34,6 +36,8 @@ class controleursProduit extends controleursSuper {
 
   // ********** Page d'affichage réservation détail d'un produit ********** //
   public function reservationDetails(){
+
+    $title['menu'] = 2;
 
     $modProduit = new modelesProduit();
     $id_produit = htmlentities($_GET['id_produit'], ENT_QUOTES);
@@ -49,7 +53,7 @@ class controleursProduit extends controleursSuper {
 
       $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);
 
-      $title = $ProduitIDSalle['titre'];
+      $title['name'] = $ProduitIDSalle['titre'];
 
       $id_salle = $ProduitIDSalle['id_salle'];
       $modAvis = new modelesAvis();
@@ -110,7 +114,8 @@ class controleursProduit extends controleursSuper {
   public function rechercheProduit(){
 
     session_start();
-    $title = 'Recherche d\'une salle';
+    $title['name'] = "Recherche d'un produit";
+    $title['menu'] = 3;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
     $produits = FALSE;
@@ -144,7 +149,7 @@ class controleursProduit extends controleursSuper {
 
           $produits = $donnees->requeteRecherche($date_arrivee, $keyword, $categorie);
 
-          $title .= ' | '.$produits['nbProduits'].' Résultat(s)';
+          $title['name'] .= ' | '.$produits['nbProduits'].' Résultat(s)';
 
         }
     }

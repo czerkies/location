@@ -7,17 +7,23 @@
     <link rel="stylesheet" href="<?= RACINE_SITE; ?>css/style.css" charset="utf-8">
   </head>
   <body>
+    <div id="header">
+      <a href="<?= RACINE_SITE; ?>accueil/">
+        <h1>Loki<span>salle</span></h1>
+        <p>Service de location de salles, simple et rapide.</p>
+      </a>
+    </div>
     <div id="nav">
       <ul class="menu_user">
         <li><a href="<?= RACINE_SITE; ?>accueil/" <?php if($title['menu'] === 1) echo 'class="active" '; ?>>Accueil</a></li>
         <li><a href="<?= RACINE_SITE; ?>nos-salles/" <?php if($title['menu'] === 2) echo 'class="active" '; ?>>Réservations</a></li>
         <li><a href="<?= RACINE_SITE; ?>recherche/" <?php if($title['menu'] === 3) echo 'class="active" '; ?>>Recherche</a></li>
-        <?php if(!$userConnect || !$userConnectAdmin){ ?>
-        <li><a href="<?= RACINE_SITE; ?>connexion/">Connexion</a></li>
+        <?php if(!$userConnect){ ?>
+        <li><a href="<?= RACINE_SITE; ?>connexion/" <?php if($title['menu'] === 4) echo 'class="active" '; ?>>Connexion</a></li>
         <?php } if($userConnect || $userConnectAdmin){ ?>
-        <li><a href="<?= RACINE_SITE; ?>mon-profil/">Profil</a></li>
-        <li><a href="<?= RACINE_SITE; ?>panier/">Mon panier</a></li>
-        <li><a onclick="confirmationDeco()" href="#">Se déconnecter</a></li>
+        <li><a href="<?= RACINE_SITE; ?>mon-profil/" <?php if($title['menu'] === 5) echo 'class="active" '; ?>>Profil</a></li>
+        <li><a href="<?= RACINE_SITE; ?>panier/" <?php if($title['menu'] === 6) echo 'class="active" '; ?>>Mon panier</a></li>
+        <li><a onclick="confirmationDeco()" href="#" <?php if($title['menu'] === 7) echo 'class="active" '; ?>>Se déconnecter</a></li>
         <?php } ?>
       </ul>
       <?php if($userConnectAdmin){
@@ -29,12 +35,12 @@
     </div>
     <footer>
       <ul class="menu_footer">
-        <li><a href="#">Mentions légales</a></li>
-        <li><a href="#">C.G.V</a></li>
-        <li><a href="#">Plan du site</a></li>
+        <li><a href="#" <?php if($title['menu'] === 16) echo 'class="active" '; ?>>Mentions légales</a></li>
+        <li><a href="#" <?php if($title['menu'] === 17) echo 'class="active" '; ?>>C.G.V</a></li>
+        <li><a href="#" <?php if($title['menu'] === 18) echo 'class="active" '; ?>>Plan du site</a></li>
         <li><a href="#" onclick="javascript:window.print()">Imprimer la page</a></li>
-        <li><a href="<?= RACINE_SITE; ?>newsletter/">S'inscrire à la newsletter</a></li>
-        <li><a href="<?= RACINE_SITE; ?>contact/">Contact</a></li>
+        <li><a href="<?= RACINE_SITE; ?>newsletter/" <?php if($title['menu'] === 19) echo 'class="active" '; ?>>S'inscrire à la newsletter</a></li>
+        <li><a href="<?= RACINE_SITE; ?>contact/" <?php if($title['menu'] === 20) echo 'class="active" '; ?>>Contact</a></li>
       </ul>
     </footer>
   </body>

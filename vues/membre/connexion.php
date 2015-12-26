@@ -1,10 +1,8 @@
-<?= $msg; ?>
 <h1>Connexion</h1>
-<?php
-  if($userConnect){
-    echo "Bonjour ". $_SESSION['membre']['prenom'];
-  } else {
-?>
+<?= $msg; ?>
+<?php if($userConnect){ ?>
+  <meta http-equiv="refresh" content="0; URL=<?= RACINE_SITE; ?>accueil/">
+<?php } else { ?>
 <div id="connexion">
   <form action="" method="post">
     <input type="text" name="pseudo" placeholder="Pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} elseif(isset($_COOKIE['pseudo'])) {echo $_COOKIE['pseudo'];} ?>" required>

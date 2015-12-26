@@ -6,7 +6,8 @@ class controleursSalles extends controleursSuper {
   public function gestionSalles(){
 
     session_start();
-    $title = 'Gestion des salles';
+    $title['name'] = 'Gestion des salles';
+    $title['menu'] = 8;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
@@ -134,7 +135,8 @@ class controleursSalles extends controleursSuper {
   public function ajouterSalle(){
 
     session_start();
-    $title = 'Ajouter une salle';
+    $title['name'] = 'Ajouter une salle';
+    $title['menu'] = 8;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $recupPourModif = FALSE;

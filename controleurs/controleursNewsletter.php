@@ -6,7 +6,8 @@ class controleursNewsletter extends controleursSuper {
   public function envoiNews(){
 
     session_start();
-    $title = 'Envoyer la Newsletter';
+    $title['name'] = 'Envoyer la Newsletter';
+    $title['menu'] = 15;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
@@ -42,7 +43,8 @@ class controleursNewsletter extends controleursSuper {
   public function inscriptionMembre(){
 
     session_start();
-    $title = 'Inscription à la Newsletter';
+    $title['name'] = 'Inscription à la Newsletter';
+    $title['menu'] = 19;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
     $affichage = FALSE;

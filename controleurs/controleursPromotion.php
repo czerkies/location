@@ -6,7 +6,8 @@ class controleursPromotion extends controleursSuper {
   public function ajouterPromotion(){
 
     session_start();
-    $title = 'Ajouter une promotion';
+    $title['name'] = 'Ajouter une promotion';
+    $title['menu'] = 13;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
@@ -66,7 +67,8 @@ class controleursPromotion extends controleursSuper {
   public function afficherPromotion(){
 
     session_start();
-    $title = 'Gestion des promotions';
+    $title['name'] = 'Gestion des promotions';
+    $title['menu'] = 13;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $ajouter = FALSE;

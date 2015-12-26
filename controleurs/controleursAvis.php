@@ -6,7 +6,8 @@ class controleursAvis extends controleursSuper {
   public function gestionAvis(){
 
     session_start();
-    $title = 'Gestion des avis';
+    $title['name'] = 'Gestion des avis';
+    $title['menu'] = 11;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';

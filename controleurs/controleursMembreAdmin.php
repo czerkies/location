@@ -6,7 +6,8 @@ class controleursMembreAdmin extends controleursSuper {
   public function gestionMembres(){
 
     session_start();
-    $title = 'Title';
+    $title['name'] = 'Gestion des membres';
+    $title['menu'] = 10;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $ajouterMembre = FALSE;

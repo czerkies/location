@@ -5,7 +5,8 @@ class controleursStatistiques extends controleursSuper {
   public function affichageStatistiques(){
 
     session_start();
-    $title = 'Statistiques';
+    $title['name'] = 'Statistiques';
+    $title['menu'] = 14;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $cinqNotes = '';
@@ -20,28 +21,28 @@ class controleursStatistiques extends controleursSuper {
       if($_GET['top'] === 'cinqNotes'){
 
         $cinqNotes = $donnees->dataCinqNotes();
-        $title .= ' | 5 Salles les mieux notés';
+        $title['name'] .= ' | 5 Salles les mieux notés';
 
       }
 
       if($_GET['top'] === 'cinqVendues'){
 
         $cinqVendues = $donnees->dataCinqVendues();
-        $title .= ' | 5 Salles les plus vendues';
+        $title['name'] .= ' | 5 Salles les plus vendues';
 
       }
 
       if($_GET['top'] === 'cinqMembresQuantite'){
 
         $cinqMembresQuantite = $donnees->dataCinqMembresQuantite();
-        $title .= ' | 5 Membres qui achète le plus';
+        $title['name'] .= ' | 5 Membres qui achète le plus';
 
       }
 
       if($_GET['top'] === 'cinqMembresPrix'){
 
         $cinqMembresPrix = $donnees->dataCinqMembresPrix();
-        $title .= ' | 5 Membres dépensant le plus';
+        $title['name'] .= ' | 5 Membres dépensant le plus';
 
       }
 
