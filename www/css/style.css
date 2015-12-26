@@ -1,37 +1,121 @@
 *{
   box-sizing:border-box;
-  font-family:helvetica, arial;
+  font-family:verdana, helvetica, arial;
+}
+a{
+  text-decoration:none;
+  color:#735d6d;
+  transition:color 250ms ease;
+}
+a:hover{
+  color:#594055;
 }
 body{
+  background:#d9cdbf;
   width:100%;
   margin:0 auto;
   float:left;
 }
 #nav{
-  height:100px;
-  position:fixed;
-  border-bottom:1px solid #888;
-  background:rgba(255, 255, 255, 0.9);
+  height:auto;
   width:100%;
+  float:left;
 }
-ul{
-  width:960px;
+ul.menu_user,
+ul.menu_userAdmin{
+  text-align:center;
+  padding:0;
+  margin:0;
+}
+ul.menu_user li,
+ul.menu_userAdmin li,
+ul.menu_footer li{
+  list-style:none;
   margin:auto;
 }
-ul li{
-  list-style:square;
+ul.menu_user li a,
+ul.menu_userAdmin li a{
+  font-size:1.5em;
+  line-height:2em;
+  width:100%;
   float:left;
-  margin:10px;
+  border-bottom:1px solid #bfb3a4;
+  transition:all 250ms ease;
 }
+ul.menu_user li a:hover,
+ul.menu_userAdmin li a:hover,
+ul.menu_user li a.active,
+ul.menu_userAdmin li a.active{
+  background:#bfb3a4;
+}
+
 #cont {
-  width:960px;
-  margin:100px auto 0;
+  width:100%;
+  margin:auto;
+  float:left;
 }
-footer {
-  width:960px;
+h1, h2{
+  color:#402E39;
+  font-weight:100;
+}
+
+/* Menu Footer */
+footer{
+  float:left;
+  width:100%;
   margin:50px auto;
-  font-size:14px;
 }
+
+@media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
+  body{
+    float:none;
+    width:960px;
+    margin:auto;
+  }
+  #nav{
+    float:left;
+  }
+  ul.menu_user li a,
+  ul.menu_userAdmin li a{
+    font-size:1em;
+    line-height:2em;
+    padding:0;
+    border:1px solid #bfb3a4;
+    border-radius:2px;
+    margin:1%;
+    background:#bfb3a4;
+  }
+  ul.menu_user li a:hover,
+  ul.menu_userAdmin li a:hover,
+  ul.menu_user li a.active,
+  ul.menu_userAdmin li a.active{
+    box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
+    color:#594055;
+  }
+  ul.menu_user li a{
+    width:14.6%;
+  }
+  ul.menu_userAdmin li a{
+    width:22.9%;
+  }
+
+  /* Menu Footer */
+  ul.menu_footer{
+    width:100%;
+    margin:0;
+    padding:0;
+    text-align:center;
+  }
+  ul.menu_footer li a{
+    letter-spacing:1px;
+    font-size:.9em;
+    line-height:1em;
+    padding:0 24px;
+    float:left;
+    width:auto;
+  }
+}
+/*
 table {
   width:100%;
 }
@@ -61,3 +145,4 @@ img {
   float:left;
   width:100%;
 }
+*/
