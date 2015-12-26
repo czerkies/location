@@ -21,40 +21,41 @@ class controleursPanier extends controleursSuper {
     $reCodeID = new modelesPromotion();
     $produitPanier = new modelesProduit();
 
-    $id_membre = isset($_SESSION['membre']['id_membre']);
-
     if(isset($_GET['id_produit']) && !empty($_GET['id_produit']) && is_numeric($_GET['id_produit'])){
 
-      $id_produit = htmlentities($_GET['id_produit']);
+      $id_produit = htmlentities($_GET['id_produit'], ENT_QUOTES);
 
-      $donneesSession = $produitPanier->recupProduitParID($id_produit);
+      if($produitPanier->verifExistanceIDProduit($id_produit)){
 
-      if(!isset($_SESSION['panier'])) // si le panier n'existe pas
-      {
+        $donneesSession = $produitPanier->recupProduitParID($id_produit);
 
-        $_SESSION['panier'] = array();
-        $_SESSION['panier']['id_produit'] = array();
-        $_SESSION['panier']['titre'] = array();
-        $_SESSION['panier']['photo'] = array();
-        $_SESSION['panier']['ville'] = array();
-        $_SESSION['panier']['capacite'] = array();
-        $_SESSION['panier']['date_arrivee'] = array();
-        $_SESSION['panier']['date_depart'] = array();
-        $_SESSION['panier']['prix'] = array();
+        if(!isset($_SESSION['panier'])) // si le panier n'existe pas
+        {
 
-        $userCart = TRUE;
+          $_SESSION['panier'] = array();
+          $_SESSION['panier']['id_produit'] = array();
+          $_SESSION['panier']['titre'] = array();
+          $_SESSION['panier']['photo'] = array();
+          $_SESSION['panier']['ville'] = array();
+          $_SESSION['panier']['capacite'] = array();
+          $_SESSION['panier']['date_arrivee'] = array();
+          $_SESSION['panier']['date_depart'] = array();
+          $_SESSION['panier']['prix'] = array();
 
-      }
+          $userCart = TRUE;
 
-      $verifProduit = array_search($id_produit, $_SESSION['panier']['id_produit']);
+        }
 
-      if($verifProduit !== FALSE){
-        $msg .= 'Salut, tu as déjà ce produit dans le panier.';
-      } else {
-          foreach ($donneesSession as $key => $value) {
-            $_SESSION['panier'][$key][] = $value;
-          }
-        $verifProduit = TRUE;
+        $verifProduit = array_search($id_produit, $_SESSION['panier']['id_produit']);
+
+        if($verifProduit !== FALSE){
+          $msg .= 'Salut, tu as déjà ce produit dans le panier.';
+        } else {
+            foreach ($donneesSession as $key => $value) {
+              $_SESSION['panier'][$key][] = $value;
+            }
+          $verifProduit = TRUE;
+        }
       }
     }
 

@@ -38,7 +38,7 @@
   <label for="ville">Votre ville est :</label> <p><?= $_SESSION['membre']['ville']; ?></p>
   <label for="cp">Votre Code Postal est :</label> <p><?= $_SESSION['membre']['cp']; ?></p>
   <label for="adresse">Votre adresse est :</label> <p><?= $_SESSION['membre']['adresse']; ?></p>
-  <a href="routeur.php?controleurs=membre&action=profilMembre&modif=true">Mettre à jour mes informations</a>
+  <a href="<?= RACINE_SITE; ?>mon-profil/modification/">Mettre à jour mes informations</a>
   <?php } ?>
 </div>
 <div id="last_commande">

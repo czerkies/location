@@ -12,10 +12,11 @@
         <li><a href="<?= RACINE_SITE; ?>accueil/">Accueil</a></li>
         <li><a href="<?= RACINE_SITE; ?>nos-salles/">Réservations</a></li>
         <li><a href="<?= RACINE_SITE; ?>recherche/">Recherche</a></li>
+        <?php if(!$userConnect || !$userConnectAdmin){ ?>
         <li><a href="<?= RACINE_SITE; ?>connexion/">Connexion</a></li>
-        <?php if($userConnect || $userConnectAdmin){ ?>
-        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=profilMembre">Profil</a></li>
-        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=panier&action=affichagePanier">Mon panier</a></li>
+        <?php } if($userConnect || $userConnectAdmin){ ?>
+        <li><a href="<?= RACINE_SITE; ?>mon-profil/">Profil</a></li>
+        <li><a href="<?= RACINE_SITE; ?>panier/">Mon panier</a></li>
         <li><a onclick="confirmationDeco()" href="#">Se déconnecter</a></li>
         <?php } ?>
       </ul>
@@ -32,7 +33,7 @@
         <li>C.G.V</li>
         <li>Plan du site</li>
         <li><a href="#" onclick="javascript:window.print()">Imprimer la page</a></li>
-        <li><a href="<?= RACINE_SITE; ?>routeur.php?controleurs=newsletter&action=inscriptionMembre">S'inscrire à la newsletter</a></li>
+        <li><a href="<?= RACINE_SITE; ?>newsletter/">S'inscrire à la newsletter</a></li>
         <li><a href="<?= RACINE_SITE; ?>contact/">Contact</a></li>
       </ul>
     </footer>
@@ -40,7 +41,7 @@
   <script type="text/javascript">
     function confirmationDeco() {
       if (confirm("Êtes vous sûr de vouloir vous déconnecter ?")) {
-        window.location.href = "<?= RACINE_SITE; ?>routeur.php?controleurs=membre&action=deconnexionMembre&deconnexion=oui";
+        window.location.href = "<?= RACINE_SITE; ?>deconnexion/a-bientot/";
       }
     }
   </script>

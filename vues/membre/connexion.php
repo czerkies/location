@@ -11,11 +11,11 @@
     <input type="password" name="mdp" placeholder="Mot de passe" required>
     <input type="checkbox" name="sauv_session" id="sauv_session"><label for="sauv_session">Se souvenir de moi</label><br>
     <input type="submit" name="connexion" value="Connexion">
-    <p><a href="routeur.php?controleurs=membre&action=mdpperduMembre">J'ai perdu mon mot de passe</a></p>
+    <p><a href="<?= RACINE_SITE; ?>connexion/mot-de-passe-perdu/">J'ai perdu mon mot de passe</a></p>
   </form>
 </div>
 <div class="bloc_2">
   <p>Pas encore membre ?</p>
-  <p><a href="routeur.php?controleurs=membre&action=ajoutMembre">Créer un compte</a></p>
+  <p><a href="<?= RACINE_SITE; ?>inscription/">Créer un compte</a></p>
 </div>
 <?php } ?>

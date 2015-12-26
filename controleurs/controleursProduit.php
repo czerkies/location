@@ -38,7 +38,7 @@ class controleursProduit extends controleursSuper {
     $modProduit = new modelesProduit();
     $id_produit = htmlentities($_GET['id_produit'], ENT_QUOTES);
 
-    if(isset($_GET['id_produit']) && is_numeric($_GET['id_produit'])
+    if(isset($_GET['id_produit']) && !empty($_GET['id_produit']) && is_numeric($_GET['id_produit'])
     && $modProduit->verifExistanceIDProduit($id_produit) === TRUE){
 
       session_start();

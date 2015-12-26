@@ -26,7 +26,7 @@
       <td><?= $value['prix']; ?></td>
       <td><a href="<?= RACINE_SITE ?>nos-salles/reservation-en-details/<?= $value['id_produit']; ?>">Voir la fiche détaillée</a></td>
       <?php if($userConnect){ ?>
-        <td><a href="routeur.php?controleurs=panier&action=affichagePanier&id_produit=<?= $value['id_produit']; ?>">Ajouter au panier</a></td>
+        <td><a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $value['id_produit']; ?>">Ajouter au panier</a></td>
       <?php } else { ?>
         <td><a href="<?= RACINE_SITE; ?>connexion/">Connectez vous pour l'ajouter au panier</a></td>
       <?php } ?>

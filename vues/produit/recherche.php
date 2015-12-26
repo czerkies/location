@@ -33,9 +33,9 @@
         <p><?= $value['date_depart']; ?></p>
         <p><img src="<?= $value["photo"]; ?>"></p>
         <?php if($userConnect){ ?>
-          <p><a href="routeur.php?controleurs=panier&action=affichagePanier&id_produit=<?= $value['id_produit']; ?>">Ajouter au panier</a></p>
+          <p><a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $value['id_produit']; ?>">Ajouter au panier</a></p>
         <?php } else { ?>
-          <p><a href="routeur.php?controleurs=membre&action=connexionMembre">Connectez vous pour l'ajouter au panier</a></p>
+          <p><a href="<?= RACINE_SITE; ?>connexion/">Connectez vous pour l'ajouter au panier</a></p>
         <?php } ?>
       </div>
       <hr>

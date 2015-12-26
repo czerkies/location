@@ -2,7 +2,7 @@
 <div id="details_salle">
   <h2>Nom de la salle</h2>
   <?php if($userConnect) { ?>
-  <a href="/lokisalle/www/routeur.php?controleurs=panier&action=affichagePanier&id_produit=<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
+  <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
 <?php } else { ?>
   <a href="<?= RACINE_SITE; ?>connexion/">Connectez vous pour l'ajouter au panier</a>
 <?php } ?>
