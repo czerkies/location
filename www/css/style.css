@@ -65,7 +65,7 @@ ul.menu_user li a.active,
 ul.menu_userAdmin li a.active{
     background:#bfb3a4;
 }
-#cont {
+#cont{
     width:100%;
     margin:0;
     padding:0;
@@ -81,45 +81,170 @@ footer{
 }
 
 /* Accueil */
-#apropos{
+.infos_1,
+.infos_2{
     border:1px solid #735d6d;
     border-radius:2px;
     margin:50px 1%;
+    width:98%;
 }
-#apropos h2{
-    font-family:'codel';
-    font-size:2em;
-    margin:0 0 10px;
-    padding:10px;
-    background:#735d6d;
-    color:#d9cdbf;
-    border-radius:2px 2px 0 0;
+.infos_1 h2,
+.infos_2 h2{
+  font-family:'codel';
+  width:100%;
+  font-size:2em;
+  margin:0 0 10px;
+  padding:10px;
+  background:#735d6d;
+  color:#d9cdbf;
+  border-radius:2px 2px 0 0;
 }
-#apropos h2 span{
+.infos_1 h2 span{
   font-family:'codeb';
 }
-#apropos p{
-    padding:10px;
-    color:#444;
+.infos_1 p,
+.infos_2 p{
+  padding:10px;
+  color:#444;
 }
 #last3offres{
-    width:100%;
+  width:100%;
 }
 h2{
-    font-family:'codel';
-    width:100%;
-    font-size:2em;
-    margin:1%;
-    color:#735d6d;
+  font-family:'codel';
+  width:98%;
+  font-size:2em;
+  margin:1%;
+  color:#735d6d;
+}
+
+/* Formulaire */
+.form-group{
+  float:left;
+  width:96%;
+  margin:10px 2%;
+  min-height:115px;
+  padding:0;
+  border-radius:2px;
+}
+.form-group label,
+.form-group input,
+.form-group textarea,
+.form-group em,
+.form-group p{
+  float:left;
+  width:100%;
+  margin:0;
+}
+.form-group label{
+  font-family:'codel';
+  font-size:1.75em;
+  margin:0;
+  padding:10px;
+  background:#735d6d;
+  color:#d9cdbf;
+  border-radius:2px 2px 0 0;
+}
+.form-group.infos label{
+  background:rgb(143, 0, 0);
+}
+.form-group.infos p{
+  border-color:rgb(143, 0, 0);
+}
+.form-group input,
+.form-group textarea,
+.form-group p{
+  border:1px solid #735d6d;
+  padding:10px 5px;
+  font-size:1em;
+  border-radius:0 0 2px 2px;
+  background:#eee;
+  color:#444;
+}
+.form-group textarea{
+  max-width:100%;
+  min-height:150px;
+}
+.form-group em{
+  transition:opacity 250ms ease;
+  margin:0;
+  padding:5px;
+  font-size:.9em;
+  color:#888;
+  opacity:0;
+}
+.form-group:hover em{
+  opacity:1;
+}
+input[type="submit"]{
+  width:98%;
+  margin:10px 1%;
+  font-size:1em;
+  letter-spacing:1px;
+  cursor:pointer;
+  line-height:2em;
+  padding:.5em;
+  border:none;
+  border-radius:2px;
+  background:#bfb3a4;
+  transition:all 250ms ease;
+  color:#735d6d;
+}
+input[type="submit"]:hover{
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+  color:#735d6d;
+}
+.form-group__inlabel{
+  width:96%;
+  margin:2%;
+  float:left;
+  border:1px solid #735d6d;
+  border-radius:2px;
+  background:#eee;
+  padding:10px;
+}
+.form-group__radio{
+  float:left;
+  width:100%;
+  padding:10px;
+  border:1px solid #735d6d;
+  border-radius:0 0 2px 2px;
+  background:#eee;
+}
+.form-group__inlabel label{
+  width:95%;
+  float:left;
+}
+.form-group__inlabel input{
+  width:5%;
+  float:left;
+  margin:0;
+}
+.form-group__radio label{
+  border:none;
+  padding:0;
+  font-family:inherit;
+  font-size:1em;
+  float:left;
+  background:#eee;
+  width:45%;
+  color:#444;
+  border-radius:0;
+}
+.form-group__radio input,
+.form-group__inlabel input{
+  float:left;
+  width:5%;
+  padding:2px;
+  background:#eee;
 }
 
 /* Affichage d'un produit simple */
 .produit{
-  width:99%;
-  margin:100%;
+  width:98%;
+  margin:1%;
   border:1px solid #735d6d;
   border-radius:2px;
-  margin:50px 0;
 }
 .produit:hover{
   transition:all 250ms ease;
@@ -157,7 +282,8 @@ h2{
 }
 .produit .panier{
   text-align:center;
-  margin:15px 0;
+  margin:0;
+  padding:10px 0;
 }
 .produit .panier a{
   font-size:1em;
@@ -173,62 +299,89 @@ h2{
 }
 
 @media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
-    body{
-        float:none;
-        width:960px;
-        margin:auto;
-    }
-    #nav{
-        float:left;
-    }
-    ul.menu_user li a,
-    ul.menu_userAdmin li a{
-        font-size:1em;
-        line-height:2em;
-        padding:0;
-        border:1px solid #bfb3a4;
-        border-radius:2px;
-        margin:1%;
-        background:#bfb3a4;
-    }
-    ul.menu_user li a:hover,
-    ul.menu_userAdmin li a:hover,
-    ul.menu_user li a.active,
-    ul.menu_userAdmin li a.active{
-        box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
-        color:#594055;
-    }
-    ul.menu_user li a{
-        width:14.6%;
-    }
-    ul.menu_userAdmin li a{
-        width:22.9%;
-    }
+  body{
+    float:none;
+    width:960px;
+    margin:auto;
+  }
+  .infos_2{
+    width:48%;
+    margin:100px 1%;
+    float:left;
+  }
+  .infos_2 h2{
+    font-size:1em;
+  }
+  #nav{
+    float:left;
+  }
+  ul.menu_user li a,
+  ul.menu_userAdmin li a{
+    font-size:1em;
+    line-height:2em;
+    padding:0;
+    border:1px solid #bfb3a4;
+    border-radius:2px;
+    margin:1%;
+    background:#bfb3a4;
+  }
+  ul.menu_user li a:hover,
+  ul.menu_userAdmin li a:hover,
+  ul.menu_user li a.active,
+ul.menu_userAdmin li a.active{
+    box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
+    color:#594055;
+  }
+  ul.menu_user li a{
+    width:14.6%;
+  }
+  ul.menu_userAdmin li a{
+    width:22.9%;
+  }
 
-    /* Menu Footer */
-    ul.menu_footer{
-      width:100%;
-      margin:0;
-      padding:0;
-      text-align:center;
-    }
-    ul.menu_footer li a{
-      letter-spacing:1px;
-      font-size:.9em;
-      line-height:1em;
-      padding:0 24px;
-      float:left;
-      width:auto;
-    }
+  /* Menu Footer */
+  ul.menu_footer{
+    width:100%;
+    margin:0;
+    padding:0;
+    text-align:center;
+  }
+  ul.menu_footer li a{
+    letter-spacing:1px;
+    font-size:.9em;
+    line-height:1em;
+    padding:0 24px;
+    float:left;
+    width:auto;
+  }
 
-    /* Accueil */
+  /* Accueil */
 
-    /* Produit simple */
-    .produit{
-      width:31.3%;
-      margin:1%;
-      float:left;
-    }
+  /* Produit simple */
+  .produit{
+    width:31.3%;
+    margin:1%;
+    float:left;
+  }
+
+  /* Formulaire */
+  .form-group,
+  .form-group .radio{
+    width:48%;
+    margin:5px 1%;
+  }
+  .form-group.large{
+    width:98%;
+    margin:10px 1%;
+  }
+  input[type="submit"]{
+    width:50%;
+    margin:10px 25%;
+  }
+  .form-group__inlabel{
+    width:48%;
+    margin:0 1% 10px;
+  }
 
 }
 /*

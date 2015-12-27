@@ -1,4 +1,4 @@
-<div id="apropos">
+<div class="infos_1">
   <h2>À propos de <span>Loki</span>salle</h2>
   <p>Lokisalle est un service de location de salle, clef en main. Les meilleurs salle de réunions vous sont proposées pour un prix imbattable. Sont service de location rapide et efficace vous permettra de réserver votre salle en toutes simplicités.</p>
 </div>
