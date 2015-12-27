@@ -18,7 +18,7 @@
         <li><a href="<?= RACINE_SITE; ?>accueil/" <?php if($title['menu'] === 1) echo 'class="active" '; ?>>Accueil</a></li>
         <li><a href="<?= RACINE_SITE; ?>nos-salles/" <?php if($title['menu'] === 2) echo 'class="active" '; ?>>Réservations</a></li>
         <li><a href="<?= RACINE_SITE; ?>recherche/" <?php if($title['menu'] === 3) echo 'class="active" '; ?>>Recherche</a></li>
-        <?php if(!$userConnect){ ?>
+        <?php if(!($userConnect || $userConnectAdmin)){ ?>
         <li><a href="<?= RACINE_SITE; ?>connexion/" <?php if($title['menu'] === 4) echo 'class="active" '; ?>>Connexion</a></li>
         <?php } if($userConnect || $userConnectAdmin){ ?>
         <li><a href="<?= RACINE_SITE; ?>mon-profil/" <?php if($title['menu'] === 5) echo 'class="active" '; ?>>Profil</a></li>

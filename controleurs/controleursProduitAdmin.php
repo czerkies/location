@@ -50,7 +50,7 @@ class controleursProduitAdmin extends controleursSuper {
 
     session_start();
     $title['name'] = 'Ajouter un produit';
-    $title['menu'] = 10;
+    $title['menu'] = 9;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
@@ -145,7 +145,7 @@ class controleursProduitAdmin extends controleursSuper {
 
     session_start();
     $title['name'] = 'Afficher les produits';
-    $title['menu'] = 10; 
+    $title['menu'] = 9;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
 
@@ -181,7 +181,7 @@ class controleursProduitAdmin extends controleursSuper {
     // Modification d'un produit Admin
     if(isset($_GET['modif']) && !empty($_GET['modif']) && is_numeric($_GET['modif'])) {
 
-      $title .= ' | Modification';
+      $title['name'] .= ' | Modification';
 
       $idProduitGet = htmlentities($_GET['modif']);
 

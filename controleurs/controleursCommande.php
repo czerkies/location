@@ -7,7 +7,7 @@ class controleursCommande extends controleursSuper {
 
     session_start();
     $title['name'] = 'Gestion des commandes';
-    $title['menu'] = 10;
+    $title['menu'] = 11;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $detailsCommandeDisplay = FALSE;

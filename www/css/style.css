@@ -68,7 +68,7 @@ ul.menu_userAdmin li a.active{
 #cont {
     width:100%;
     margin:0;
-    padding:1%;
+    padding:0;
     float:left;
 }
 
@@ -84,7 +84,7 @@ footer{
 #apropos{
     border:1px solid #735d6d;
     border-radius:2px;
-    margin:50px 0;
+    margin:50px 1%;
 }
 #apropos h2{
     font-family:'codel';
@@ -99,11 +99,77 @@ footer{
   font-family:'codeb';
 }
 #apropos p{
-  padding:10px;
-  color:#594055;
+    padding:10px;
+    color:#444;
 }
 #last3offres{
     width:100%;
+}
+#last3offres h2{
+    font-family:'codel';
+    width:100%;
+    font-size:2em;
+    margin:1%;
+    color:#735d6d;
+}
+
+/* Affichage d'un produit simple */
+.produit{
+  width:99%;
+  margin:100%;
+  border:1px solid #735d6d;
+  border-radius:2px;
+  margin:50px 0;
+}
+.produit:hover{
+  transition:all 250ms ease;
+  box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
+}
+.produit h3{
+  font-family:'codel';
+  font-size:1.75em;
+  margin:0;
+  padding:10px;
+  background:#735d6d;
+  color:#d9cdbf;
+  border-radius:2px 2px 0 0;
+}
+.produit p{
+  color:#444;
+  padding:10px;
+  margin:0;
+}
+.produit .image_overflow{
+  width:100%;
+  height:175px;
+  margin:0 0 25px;
+  padding:0;
+  overflow:hidden;
+}
+.produit .image_overflow img{
+  width:100%;
+  height:auto;
+  opacity:.8;
+  transition:opacity 250ms ease;
+}
+.produit:hover .image_overflow img{
+  opacity:1;
+}
+.produit .panier{
+  text-align:center;
+  margin:15px 0;
+}
+.produit .panier a{
+  font-size:1em;
+  line-height:2em;
+  padding:.5em;
+  border:1px solid #bfb3a4;
+  border-radius:2px;
+  background:#bfb3a4;
+  transition:all 250ms ease;
+}
+.produit .panier a:hover{
+  box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
@@ -141,21 +207,28 @@ footer{
 
     /* Menu Footer */
     ul.menu_footer{
-        width:100%;
-        margin:0;
-        padding:0;
-        text-align:center;
+      width:100%;
+      margin:0;
+      padding:0;
+      text-align:center;
     }
     ul.menu_footer li a{
-        letter-spacing:1px;
-        font-size:.9em;
-        line-height:1em;
-        padding:0 24px;
-        float:left;
-        width:auto;
+      letter-spacing:1px;
+      font-size:.9em;
+      line-height:1em;
+      padding:0 24px;
+      float:left;
+      width:auto;
     }
 
     /* Accueil */
+
+    /* Produit simple */
+    .produit{
+      width:31.3%;
+      margin:1%;
+      float:left;
+    }
 
 }
 /*
