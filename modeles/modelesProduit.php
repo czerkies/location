@@ -35,7 +35,7 @@ class modelesProduit extends modelesSuper {
   // ********** Affichage produit toutes nos offres ********** //
   public function affichageReservation(){
 
-    $produitOffre = $this->connect_central_bdd()->query("SELECT s.titre, s.photo, s.ville, s.capacite,
+    $produitOffre = $this->connect_central_bdd()->query("SELECT s.titre, s.photo, s.ville, s.pays, s.capacite,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
       p.prix, p.id_produit

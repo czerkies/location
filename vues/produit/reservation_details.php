@@ -1,6 +1,5 @@
-<h1>Reservation en détails</h1>
 <div id="details_salle">
-  <h2>Nom de la salle</h2>
+  <h2><?= $ProduitIDSalle['titre']; ?></h2>
   <?php if($userConnect) { ?>
   <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
 <?php } else { ?>
@@ -9,7 +8,7 @@
   </div>
 <div id="datails_complémentaire">
   <h2>Informations complémentaires</h2>
-  <?= $ProduitIDSalle['titre'].' | '.$ProduitIDSalle['capacite'].' | '.$ProduitIDSalle['categorie']; ?>
+  <?= $ProduitIDSalle['capacite'].' | '.$ProduitIDSalle['categorie']; ?>
   <?= $ProduitIDSalle['adresse'].' - '.$ProduitIDSalle['cp'].' - '.$ProduitIDSalle['ville'].' <br> '.$ProduitIDSalle['pays'];?>
   <img src="<?= $ProduitIDSalle['photo'] ?>" alt="<?= $ProduitIDSalle['titre']; ?>">
   Prix : <?= $ProduitIDSalle['prix'] = $ProduitIDSalle['prix'] * 1.2; ?> € TTC.
@@ -58,10 +57,23 @@
 <div id="details_sugg">
   <h2>Autres suggestion</h2>
   <?php foreach ($suggestions as $value) { ?>
-    <div class="suggestion">
-      <?= $value['titre']; ?>
-      <?= $value['ville']; ?>
-      <?= $value['date_arrivee']; ?> | <?= $value['date_depart']; ?>
+    <div class="produit">
+      <a href="<?= RACINE_SITE ?>nos-salles/reservation-en-details/<?= $value['id_produit']; ?>">
+        <h3><?= $value['titre']; ?></h3>
+        <p class="image_overflow"><img src="<?= RACINE_SITE.$value['photo']; ?>" alt="<?= $value['titre']; ?>"></p>
+        <p class="adresse"><?= $value['ville']; ?>, <?= $value['pays']; ?></p>
+        <p class="date_arrivee">Date d'arrivée : <?= $value['date_arrivee']; ?></p>
+        <p class="date_depart">Date de départ : <?= $value['date_depart']; ?></p>
+        <p class="capacite">Capacité : <?= $value['capacite']; ?></p>
+        <p class="prix">Prix : <?= $value['prix']; ?> € HT</p>
+      </a>
+      <p class="panier">
+        <?php if($userConnect){ ?>
+        <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $value['id_produit']; ?>">Ajouter au panier</a>
+        <?php } else { ?>
+        <a href="<?= RACINE_SITE; ?>connexion/">Se connecter pour l'ajouter au panier</a>
+        <?php } ?>
+      </p>
     </div>
   <?php } ?>
 </div>
