@@ -1,21 +1,32 @@
 <h2>Inscription</h2>
-<?php if($userConnect){
-    echo "Vous êtes déjà inscrit.";
-  } else { ?>
+<?php if($userConnect){ ?>
+  <div class="form-group erreur large">
+    <label>Erreur(s)</label>
+    <p>Vous êtres déjà connecté et inscrit.</p>
+  </div>
+<?php } else { ?>
 <div class="inscription">
   <form class="" action="" method="post">
     <?php if(!empty($msg)) { ?>
-      <div class="form-group infos large">
+      <div class="form-group erreur large">
         <label>Erreur(s)</label>
         <p>
           <?= $msg; ?>
         </p>
       </div>
-    <?php } ?>
+    <?php } if($confirmation) { ?>
+      <div class="form-group ok large">
+        <label>Confirmation</label>
+        <p>
+          Votre inscription a bien été pris en compte.<br>
+          Vous pouvez maintenant vous connecter.
+        </p>
+      </div>
+    <?php } else { ?>
     <div class="form-group">
       <label for="pseudo">Pseudo</label>
       <input type="text" id="pseudo" name="pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} ?>" placeholder="Pseudo" required>
-      <em>Veuillez inscrire un speudo, dans le format que vous souhaitez.</em>
+      <em>Veuillez inscrire un speudo, sans espace.</em>
     </div>
     <div class="form-group">
       <label for="mdp">Mot de passe</label>
@@ -45,13 +56,11 @@
             echo "checked";
           } else {
             echo "checked";
-          }
-        ?>><label for="m">Homme</label>
+          }?>><label for="m">Homme</label>
         <input type="radio" name="sexe" value="f" id="f" <?php
         if(isset($_POST['sexe']) && $_POST['sexe'] === 'f') {
           echo "checked";
-        }
-      ?>><label for="f">Femme</label>
+        }?>><label for="f">Femme</label>
       </div>
       <em></em>
     </div>
@@ -72,7 +81,6 @@
     </div>
     <input type="submit" value="Inscription">
   </form>
+  <?php } ?>
 </div>
-<?php
-  }
-?>
+<?php } ?>

@@ -1,12 +1,20 @@
 <div id="details_salle">
   <h2><?= $ProduitIDSalle['titre']; ?></h2>
-  <?php if($userConnect) { ?>
-  <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
-<?php } else { ?>
-  <a href="<?= RACINE_SITE; ?>connexion/">Connectez vous pour l'ajouter au panier</a>
-<?php } ?>
-  </div>
-<div id="datails_complémentaire">
+  <?php if(!empty($msg)) { ?>
+    <div class="form-group erreur large">
+      <label>Erreur(s)</label>
+      <p>
+        <?= $msg; ?>
+      </p>
+    </div>
+  <?php } if($confirmation) { ?>
+    <div class="form-group ok large">
+      <label>Confirmation</label>
+      <p>Votre avis a bien été posté.</p>
+    </div>
+  <?php } ?>
+</div>
+<div id="details_complémentaire">
   <h2>Informations complémentaires</h2>
   <?= $ProduitIDSalle['capacite'].' | '.$ProduitIDSalle['categorie']; ?>
   <?= $ProduitIDSalle['adresse'].' - '.$ProduitIDSalle['cp'].' - '.$ProduitIDSalle['ville'].' <br> '.$ProduitIDSalle['pays'];?>
@@ -28,12 +36,9 @@
       <?php } ?>
       </p>
     <div>
-  <?php } ?>
-  <?php
-  if($userConnect){
+  <?php } if($userConnect){
     if($form){
-    echo $msg;
-    ?>
+    echo $msg; ?>
     <form class="" action="" method="post">
       <label for="commentaire">Ajouter un commentaire</label>
       <textarea name="commentaire" id="commentaire" placeholder="Laissez votre avis sur la salle..."></textarea>
@@ -47,13 +52,17 @@
       <?php } ?>
       </select>
       <input type="submit" name="avis" value="Envoyer mon avis">
-      <?php
-      }
+      <?php }
     } else { ?>
       <p><a href="<?= RACINE_SITE; ?>connexion/">Il faut être connecté pour pouvoir déposer un commentaire</a></p>
     <?php } ?>
   </form>
 </div>
+<?php if($userConnect) { ?>
+  <a class="bouton-a" href="<?= RACINE_SITE; ?>panier/ajouter/<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
+<?php } else { ?>
+  <a href="<?= RACINE_SITE; ?>connexion/">Connectez vous pour l'ajouter au panier</a>
+<?php } ?>
 <div id="details_sugg">
   <h2>Autres suggestion</h2>
   <?php foreach ($suggestions as $value) { ?>

@@ -50,6 +50,7 @@ class controleursProduit extends controleursSuper {
       $userConnectAdmin = $this->userConnectAdmin();
       $form = (!$userConnect) ? FALSE : TRUE;
       $msg = '';
+      $confirmation = FALSE;
 
       $ProduitIDSalle = $modProduit->recupProduitParID($id_produit);
 
@@ -69,13 +70,15 @@ class controleursProduit extends controleursSuper {
 
         if($form){
 
-          if(isset($_POST['avis']) && !empty($_POST['avis'])){
+          if(isset($_POST['avis'])){
 
             if(isset($_POST['commentaire']) && empty($_POST['commentaire'])){
               $msg .= "Veuillez saisir un commentaire.<br>";
             }
 
-            if(isset($_POST['note']) && !empty($_POST['note']) && is_numeric($_POST['note'])){
+            if(isset($_POST['note']) && !empty($_POST['note'])
+            && $_POST['note'] > 0 && $_POST['note'] < 11 || $_POST['note'] == 0
+            && is_numeric($_POST['note'])){
 
               if(empty($msg)){
 
@@ -89,6 +92,7 @@ class controleursProduit extends controleursSuper {
 
                 $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
                 $form =  FALSE;
+                $confirmation = TRUE;
 
               }
             }
@@ -102,7 +106,7 @@ class controleursProduit extends controleursSuper {
       // Traitement des suggestions par produit
       $suggestions = $modProduit->searchSuggestionProduit($id_produit, $ProduitIDSalle['ville'], $ProduitIDSalle['date_arriveeSQL'], $ProduitIDSalle['date_departSQL']);
 
-    $this->Render('../vues/produit/reservation_details.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));
+    $this->Render('../vues/produit/reservation_details.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'confirmation' => $confirmation, 'affichageAvis' => $affichageAvis, 'ProduitIDSalle' => $ProduitIDSalle, 'form' => $form, 'suggestions' => $suggestions));
 
     } else {
       header('Location: /lokisalle/www/page-introuvable/');

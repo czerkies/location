@@ -28,9 +28,10 @@ class modelesCommande extends modelesSuper {
   // ********** Commandes à afficher sur le profil d'un membre ********** //
   public function commandesMembres($id_membre){
 
-    $donnees = $this->connect_central_bdd()->query("SELECT id_commande, DATE_FORMAT(date, '%d/%m/%Y') as date_commande FROM commande WHERE id_membre = $id_membre AND id_membre IS NOT NULL ORDER BY date DESC LIMIT 6");
+    $donnees = $this->connect_central_bdd()->query("SELECT id_commande, DATE_FORMAT(date, '%d/%m/%Y') as date_commande FROM commande WHERE id_membre = $id_membre AND id_membre IS NOT NULL ORDER BY date DESC LIMIT 20");
 
-    $commandes = $donnees->fetchAll(PDO::FETCH_ASSOC);
+    $commandes['donnees'] = $donnees->fetchAll(PDO::FETCH_ASSOC);
+    $commandes['nbCommandes'] = $donnees->rowCount();
 
     return $commandes;
 

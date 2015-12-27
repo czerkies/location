@@ -59,7 +59,6 @@ class controleursMembre extends controleursSuper {
 
   }
 
-
   // ********** INSCRIPTION NOUVEAU MEMBRE ********** //
   public function ajoutMembre(){
 
@@ -70,6 +69,7 @@ class controleursMembre extends controleursSuper {
     $userConnectAdmin = $this->userConnectAdmin();
 
     $msg = '';
+    $confirmation = FALSE;
 
     if($_POST){
 
@@ -93,7 +93,9 @@ class controleursMembre extends controleursSuper {
 
           $cont = new modelesMembre();
 
-          $cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 0);
+          if($cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 0)){
+            $confirmation = TRUE;
+          }
 
         }
       } else {
@@ -101,7 +103,7 @@ class controleursMembre extends controleursSuper {
       }
     }
 
-    $this->render('../vues/membre/inscription.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
+    $this->render('../vues/membre/inscription.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'confirmation' => $confirmation));
 
   }
 
@@ -134,6 +136,7 @@ class controleursMembre extends controleursSuper {
     $userConnectAdmin = $this->userConnectAdmin();
 
     $msg = '';
+    $confirmation = FALSE;
 
     if($_POST){
 
@@ -148,6 +151,8 @@ class controleursMembre extends controleursSuper {
           if($cont->verifMail($_POST['email'], NULL)){
             $msg .= 'Cet email existe n\'existe pas.';
           } else {
+
+            $confirmation = TRUE;
 
             // L'adresse email existe, donc génération d'un nouvau mdp.
             $chaine = "abcdefghijklmnopqrst123456789";
@@ -168,7 +173,7 @@ class controleursMembre extends controleursSuper {
       }
     }
 
-    $this->render('../vues/membre/mdpperdu.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
+    $this->render('../vues/membre/mdpperdu.php', array('title' => $title, 'confirmation' => $confirmation, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
 
   }
 
@@ -182,6 +187,7 @@ class controleursMembre extends controleursSuper {
     $userConnectAdmin = $this->userConnectAdmin();
 
     $msg = '';
+    $confirmation = FALSE;
 
     if($_POST){
 
@@ -193,7 +199,7 @@ class controleursMembre extends controleursSuper {
             $msg .= "Votre sujet doit comporter entre 4 et 30 carractères.<br>";
         }
 
-        if(!$userConnect || !$userConnectAdmin){
+        if(!($userConnect || $userConnectAdmin)){
 
           if(isset($_POST['email'])){
 
@@ -236,7 +242,9 @@ class controleursMembre extends controleursSuper {
           $emailAdmin = $pdo->recupMailAdmin();
 
           mail($emailAdmin['email'], $sujet, $message, $header);
-          // CHECK = Demander à cecile sa requete pour mail pour voir si plus simple.
+
+          $confirmation = TRUE;
+
         }
       } else {
         $msg .= 'Une erreur est survenue lors de votre demande.';
@@ -254,6 +262,7 @@ class controleursMembre extends controleursSuper {
     $title['name'] = 'Mon profil';
     $title['menu'] = 5;
     $msg = '';
+    $confirmation = FALSE;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
     $commandes = '';
@@ -287,7 +296,7 @@ class controleursMembre extends controleursSuper {
           }
 
           if($cont->updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre)){
-            $msg .= "Votre profil a bien été mis à jour.<br>";
+            $confirmation = TRUE;
           }
 
         }
@@ -303,7 +312,7 @@ class controleursMembre extends controleursSuper {
 
     }
 
-    $this->render('../vues/membre/profil.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'commandes' => $commandes));
+    $this->render('../vues/membre/profil.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'confirmation' => $confirmation, 'commandes' => $commandes));
 
   }
 

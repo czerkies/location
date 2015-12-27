@@ -1,4 +1,7 @@
+<div class="form-group ok large">
+  <label>Confirmation</label>
+  <p>Vous avez bien été déconnecté !</p>
+</div>
 <div id="deconnexion">
-  <h1>Vous avez bien été déconnecté !</h1>
   <h2>À très vite.</h2>
 </div>

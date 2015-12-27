@@ -27,12 +27,13 @@
     <input type="submit" name="connexion" value="Connexion">
   </form>
 </div>
+<h2>Je n'ai pas d'identifiants</h2>
 <div class="infos_2">
-  <h2>Pas encore membre ?</h2>
+  <h3>Pas encore membre ?</h3>
   <p><a href="<?= RACINE_SITE; ?>inscription/">Je souhaite créer un compte</a></p>
 </div>
 <div class="infos_2">
-  <h2>Vous avez perdu votre mot de passe ?</h2>
+  <h3>Vous avez perdu votre mot de passe ?</h3>
   <p><a href="<?= RACINE_SITE; ?>connexion/mot-de-passe-perdu/">Je souhaite réinitialiser mon mot de passe</a></p>
 </div>
 <?php } ?>

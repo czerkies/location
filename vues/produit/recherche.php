@@ -1,25 +1,31 @@
 <div class="form_recherche">
   <h2>Zone de recherche</h2>
-  <form class="" action="" method="post">
-    <?= $date->champs_date('recherche_date', '', NULL); ?>
-    <label for="categorie">Rechercher par categorie</label>
-    <select id="categorie" name="categorie">
-      <option value="all">Toutes categories</option>
-      <?php foreach ($listeCategories as $value) { ?>
-        <option value="<?= $value; ?>" <?php if(isset($_POST['categorie']) && $_POST['categorie'] === $value) echo 'selected'?>>
-          <?= ucfirst($value); ?>
-        </option>
-      <?php } ?>
-    </select>
-    <label for="keyword">Affiner la recherche avec un mot clef :</label>
-    <input type="text" name="keyword" id="keyword" placeholder="Mot clef" value="<?php if(isset($_POST['keyword'])) echo $_POST['keyword']; ?>" autofocus>
+  <form action="" method="post">
+    <div class="form-group date">
+      <?= $date->champs_date('recherche_date', '', NULL); ?>
+    </div>
+    <div class="form-group">
+      <label for="categorie">Rechercher par categorie</label>
+      <select id="categorie" name="categorie">
+        <option value="all">Toutes categories</option>
+        <?php foreach ($listeCategories as $value) { ?>
+          <option value="<?= $value; ?>" <?php if(isset($_POST['categorie']) && $_POST['categorie'] === $value) echo 'selected'?>>
+            <?= ucfirst($value); ?>
+          </option>
+        <?php } ?>
+      </select>
+    </div>
+    <div class="form-group large">
+      <label for="keyword">Mot clef :</label>
+      <input type="text" name="keyword" id="keyword" placeholder="Mot clef" value="<?php if(isset($_POST['keyword'])) echo $_POST['keyword']; ?>" autofocus>
+    </div>
     <input type="submit" value="Rechercher">
   </form>
   <div class="reponse-recherche">
   <?php if($produits){ ?>
-    <p>Nombres de résultats : <?= $produits['nbProduits']; ?>
+    <h2>Nombres de résultats : <?= $produits['nbProduits']; ?></h2>
     <?php if(!$produits['nbProduits']) { ?>
-    <p>Aucun produit ne correspond à votre recherche.</p>
+    <h2>Aucun produit ne correspond à votre recherche.<br>¯\_(⊙︿⊙)_/¯</h2>
     <? } else { ?>
     <?php foreach ($produits['listeProduits'] as $value) { ?>
       <div class="produit">
