@@ -375,9 +375,10 @@ ul.body{
 }
 .tableau .cel{
   margin:0;
+  transition:background-color 250ms ease;
 }
 .tableau .body{
-  color:#444;
+  color:#735d6d;
   background:#eee;
 }
 .tableau .cel{
@@ -396,8 +397,26 @@ ul.body{
 #panier .wp10{
   width:10%;
 }
-#panier .wp20{
+#panier .wp20,
+#panier .wp20l{
   width:20%;
+}
+#panier .wp20l{
+  text-align:left;
+  padding-left:10px;
+  background:#cecece;
+}
+#panier .wp50{
+  width:50%;
+}
+#panier .wp80{
+  width:80%;
+  padding-right:10px;
+  text-align:right;
+  background:#cecece;
+}
+#panier .wp100{
+  width:100%;
 }
 #panier .wp15{
   width:15%;
@@ -405,11 +424,11 @@ ul.body{
 #panier .wp5{
   width:5%;
 }
-#verif_promo{
-  float:left;
+#economie{
   width:100%;
-  margin:0;
+  float:left;
 }
+
 /* Profil d'un membre */
 #last_commande,
 #profil{
@@ -489,12 +508,16 @@ ul.body{
     margin:5px 1%;
   }
   .form-group.large{
+    width:98%;
+    margin:5px 1%;
+  }
+  form.mid .form-group{
     width:100%;
-    margin:10px 0;
+    margin:5px 0;
   }
   input[type="submit"]{
     width:50%;
-    margin:10px 25%;
+    margin:5px 25%;
   }
   input[type="submit"].large{
     width:100%;
@@ -518,13 +541,17 @@ ul.body{
     width:98%;
     margin:0 1%;
   }
-  .tableau{
+  .tableau.mid{
+    width:96%;
+    margin:1% 2%;
+  }
+  .tableau.large{
     width:98%;
     margin:1%;
   }
 
   /* Panier */
-  #verif_promo{
+  #economie{
     width:50%;
     margin:0;
   }

@@ -15,7 +15,7 @@
       <p>Votre profil a bien été mis à jour.</p>
     </div>
   <?php } ?>
-  <form action="" method="post">
+  <form class="large" action="" method="post">
     <div class="form-group large">
       <label for="pseudo">Pseudo</label>
       <input type="text" name="pseudo" id="pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} else {echo $_SESSION['membre']['pseudo'];} ?>" required>
@@ -65,7 +65,7 @@
       <label for="adresse">Adresse</label>
       <textarea name="adresse" name="adresse" id="adresse"><?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} else {echo $_SESSION['membre']['adresse'];} ?></textarea>
     </div>
-      <input type="submit" class="large" value="Enregistrer les informations">
+      <input type="submit" class="" value="Enregistrer les informations">
   </form>
     <?php } else { ?>
   <div class="form-group large">
@@ -104,7 +104,7 @@
   <h2>Aucune commande</h2>
   <?php } else { ?>
   <h2><?= $commandes['nbCommandes']; ?> dernières commandes</h2>
-    <div class="tableau">
+    <div class="tableau mid">
       <div class="head">
         <div class="title">Numéro de commande</div>
         <div class="title">Date de la commande</div>

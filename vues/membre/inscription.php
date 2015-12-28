@@ -6,7 +6,7 @@
   </div>
 <?php } else { ?>
 <div class="inscription">
-  <form class="" action="" method="post">
+  <form class="large" action="" method="post">
     <?php if(!empty($msg)) { ?>
       <div class="form-group erreur large">
         <label>Erreur(s)</label>

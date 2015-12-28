@@ -4,7 +4,7 @@
 <?php } else { ?>
 <div id="connexion">
   <?php if(!empty($msg)) { ?>
-    <div class="form-group infos large">
+    <div class="form-group erreur large">
       <label>Erreur(s)</label>
       <p>
         <?= $msg; ?>

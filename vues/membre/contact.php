@@ -13,7 +13,7 @@
       <p>Votre email a bien été envoyé.</p>
     </div>
   <?php } ?>
-  <form class="" action="" method="post">
+  <form class="large" action="" method="post">
     <div class="form-group">
       <label for="sujet">Sujet</label>
       <input type="text" name="sujet" value="<?php if(isset($_POST['sujet'])) {echo $_POST['sujet'];} ?>" id="sujet" placeholder="Sujet" minlength="4" maxlength="30" required>
