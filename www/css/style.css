@@ -393,6 +393,16 @@ ul.body{
   width:50%;
 }
 
+/* Panier */
+#panier .wp10{
+  width:10%;
+}
+#panier .wp20{
+  width:20%;
+}
+#panier .wp15{
+  width:15%;
+}
 /* Profil d'un membre */
 #last_commande,
 #profil{
