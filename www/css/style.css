@@ -116,7 +116,7 @@ h2{
   width:94%;
   padding:0 3%;
   font-size:2em;
-  margin:100px 0 25px;
+  margin:50px 0 25px;
   color:#735d6d;
 }
 
@@ -350,13 +350,12 @@ a.bouton-a:hover{
 .tableau .body{
   float:left;
   width:100%;
-  border-radius: 2px 2px 0 0;
 }
 .tableau .title{
   font-family:'codel';
   font-size:1.1em;
   margin:0;
-  padding:10px;
+  padding:10px 0;
   background:#735d6d;
   color:#d9cdbf;
   float:left;
@@ -383,7 +382,7 @@ ul.body{
 }
 .tableau .cel{
   float:left;
-  padding:10px;
+  padding:10px 0;
 }
 .tableau li:hover .cel{
   background:#cecece;
@@ -402,6 +401,14 @@ ul.body{
 }
 #panier .wp15{
   width:15%;
+}
+#panier .wp5{
+  width:5%;
+}
+#verif_promo{
+  float:left;
+  width:100%;
+  margin:0;
 }
 /* Profil d'un membre */
 #last_commande,
@@ -482,22 +489,26 @@ ul.body{
     margin:5px 1%;
   }
   .form-group.large{
-    width:98%;
-    margin:10px 1%;
+    width:100%;
+    margin:10px 0;
   }
   input[type="submit"]{
     width:50%;
     margin:10px 25%;
   }
   input[type="submit"].large{
-    width:98%;
-    margin:1%;
+    width:100%;
+    margin:0;
   }
   .form-group__inlabel{
     width:48%;
     margin:0 1% 10px;
   }
-
+  form.mid{
+    float:left;
+    width:48%;
+    margin:0 1%;
+  }
   /* Profil d'un membre */
   #profil,
   #last_commande{
@@ -506,6 +517,16 @@ ul.body{
   a.bouton-a{
     width:98%;
     margin:0 1%;
+  }
+  .tableau{
+    width:98%;
+    margin:1%;
+  }
+
+  /* Panier */
+  #verif_promo{
+    width:50%;
+    margin:0;
   }
 }
 /*

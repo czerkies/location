@@ -50,7 +50,7 @@ class controleursPanier extends controleursSuper {
         $verifProduit = array_search($id_produit, $_SESSION['panier']['id_produit']);
 
         if($verifProduit !== FALSE){
-          $msg .= 'Salut, tu as déjà ce produit dans le panier.';
+          $msg .= 'Désolé, vous ne pouvez pas ajouter ce produit car il est déjà dans votre panier.';
         } else {
             foreach ($donneesSession as $key => $value) {
               $_SESSION['panier'][$key][] = $value;
