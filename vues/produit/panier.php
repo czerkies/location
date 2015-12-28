@@ -1,5 +1,5 @@
 <?php if($userConnect){ ?>
-<h1>Panier</h1>
+<h2>Panier</h2>
 <?= $msg; ?>
 <?php if($userCart){ ?>
 <table class="panier">

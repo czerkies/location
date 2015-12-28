@@ -251,7 +251,7 @@ class controleursMembre extends controleursSuper {
       }
     }
 
-    $this->render('../vues/membre/contact.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
+    $this->render('../vues/membre/contact.php', array('title' => $title, 'confirmation' => $confirmation, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg));
 
   }
 
