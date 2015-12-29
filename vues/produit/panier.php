@@ -79,7 +79,7 @@
           <input id="cgv" type="checkbox" name="cgv">
           <label for="cgv">J'accepte les conditions générales de vente (<a href="#">Voir</a>)</label>
         </div>
-        <em>Il est obligé d'accepter les CGV.</em>
+        <em>Il est obligatoire d'accepter les Conditions Générale de Vente.</em>
       <input type="hidden" name="reduction" value="<?php if(isset($_POST['code_promo'])) echo $_POST['code_promo']; ?>">
       <input type="submit" name="payer" value="Payer">
     </form>

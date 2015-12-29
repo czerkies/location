@@ -435,6 +435,20 @@ ul.body{
   float:left;
 }
 
+/* Details d'un produit */
+#details_produit{
+  width:98%;
+  margin:1%;
+  float:left;
+}
+#avis_produit{
+  float:left;
+}
+#details_sugg{
+  width:100%;
+  float:left;
+}
+
 @media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
   body{
     float:none;
@@ -554,6 +568,26 @@ ul.body{
   #economie{
     width:50%;
     margin:0;
+  }
+
+  /* Détails d'un produit */
+  #details_produit{
+    width:58%;
+    margin:0 1%;
+  }
+  #details_produit .produit{
+    width:100%;
+    margin:1% auto;
+  }
+  #avis_produit{
+    width:40%;
+    margin:0;
+  }
+  #avis_produit .wp20{
+    width:20%;
+  }
+  #avis_produit .wp80{
+    width:80%;
   }
 }
 /*
