@@ -82,6 +82,7 @@
         <em>Il est obligatoire d'accepter les Conditions Générale de Vente.</em>
       <input type="hidden" name="reduction" value="<?php if(isset($_POST['code_promo'])) echo $_POST['code_promo']; ?>">
       <input type="submit" name="payer" value="Payer">
+      <a class="bouton-a" href="<?= RACINE_SITE; ?>panier/supprimer/panier">Vider mon panier</a>
     </form>
   </div>
   <?php } else { ?>
@@ -91,3 +92,4 @@
   </div>
   <?php } ?>
 <?php } ?>
+</div>

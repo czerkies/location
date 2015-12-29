@@ -23,8 +23,10 @@ body{
   float:left;
 }
 #header {
-padding:1%;
-text-align:center;
+  padding:1%;
+  text-align:center;
+  background:#402e39;
+  margin:0 0 25px;
 }
 #header h1{
   font-family:'codeb';
@@ -32,6 +34,9 @@ text-align:center;
 }
 #header h1 span{
   font-family:'codel';
+}
+#header a{
+  color:#d9cdbf;
 }
 #nav{
   height:auto;
@@ -77,15 +82,21 @@ footer{
   float:left;
   text-align:center;
   width:100%;
-  margin:50px auto;
+  padding:50px 0;
+  margin:25px auto 0;
+  background:#402e39;
+}
+.menu_footer li a{
+  color:#d9cdbf;
 }
 
 /* Accueil */
 .infos_1,
 .infos_2{
+  float:left;
   border:1px solid #735d6d;
   border-radius:2px;
-  margin:50px 1%;
+  margin:0 1% 50px;
   width:98%;
   background:#eee;
 }
@@ -154,7 +165,7 @@ h2{
   border-color:rgb(143, 0, 0);
 }
 .form-group.ok label{
-  background:rgb(0, 108, 0);;
+  background:rgb(0, 108, 0);
 }
 .form-group.ok p{
   border-color:rgb(0, 108, 0);
@@ -303,13 +314,18 @@ a.bouton-a:hover{
   padding:10px;
   margin:0;
 }
+.produit .description{
+  padding-bottom:20px;
+  margin-bottom:10px;
+  border-bottom:1px solid #735d6d;
+}
 .produit p span{
   font-weight:800;
 }
 .produit .image_overflow{
   width:100%;
   height:275px;
-  margin:0 0 25px;
+  margin:0 0 10px;
   padding:0;
   overflow:hidden;
 }
@@ -464,10 +480,19 @@ ul.body{
 }
 
 @media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
-  body{
+  #nav,
+  #cont,
+  ul.menu_footer{
     float:none;
     width:960px;
     margin:auto;
+  }
+  #header,
+  footer{
+    height:150px;
+  }
+  #header h1{
+    margin:0;
   }
   .infos_2{
     width:48%;
@@ -477,8 +502,11 @@ ul.body{
   .infos_2 h3{
     font-size:1em;
   }
-  #nav{
-    float:left;
+  ul.menu_user{
+    height:52px;
+  }
+  ul.menu_userAdmin{
+    height:110px;
   }
   ul.menu_user li a,
   ul.menu_userAdmin li a{
@@ -500,17 +528,14 @@ ul.body{
   ul.menu_user li a{
     width:14.6%;
   }
+  ul.menu_visiteur li a{
+    width:23%;
+  }
   ul.menu_userAdmin li a{
     width:22.9%;
   }
 
   /* Menu Footer */
-  ul.menu_footer{
-    width:100%;
-    margin:0;
-    padding:0;
-    text-align:center;
-  }
   ul.menu_footer li a{
     letter-spacing:1px;
     font-size:.9em;
@@ -519,7 +544,9 @@ ul.body{
     float:left;
     width:auto;
   }
-
+  footer{
+    padding:68px;
+  }
   /* Accueil */
 
   /* Produit simple */
@@ -570,8 +597,8 @@ ul.body{
     width:50%;
   }
   a.bouton-a{
-    width:98%;
-    margin:0 1%;
+    width:50%;
+    margin:5px 25%;
   }
   .tableau.mid{
     width:96%;

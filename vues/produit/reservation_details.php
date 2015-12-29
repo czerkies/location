@@ -5,13 +5,13 @@
       <p class="image_overflow">
         <img src="<?= RACINE_SITE.$ProduitIDSalle['photo'] ?>" alt="<?= $ProduitIDSalle['titre']; ?>">
       </p>
+      <p class="description"><?= $ProduitIDSalle['description']; ?></p>
       <p class="adresse"><span>Adresse :</span> <?= $ProduitIDSalle['adresse']; ?>, <?= $ProduitIDSalle['ville'].'. '.strtoupper($ProduitIDSalle['pays']); ?>.</p>
-      <p class="description"><span>Description :</span> <?= $ProduitIDSalle['description']; ?></p>
       <p class="categorie"><span>Categorie :</span> <?= ucfirst($ProduitIDSalle['categorie']); ?>.</p>
       <p class="date_arrivee"><span>Date d'arrivée :</span> <?= $ProduitIDSalle['date_arrivee']; ?>.</p>
       <p class="date_depart"><span>Date de départ :</span> <?= $ProduitIDSalle['date_depart']; ?>.</p>
       <p class="capacite"><span>Capacité :</span> <?= $ProduitIDSalle['capacite']; ?> places.</p>
-      <p class="prix"><span>Prix :</span> <?= $ProduitIDSalle['prix'] = $ProduitIDSalle['prix'] * 1.2; ?> € TTC</p>
+      <p class="prix"><span>Prix :</span> <?= $ProduitIDSalle['prix']; /*= $ProduitIDSalle['prix'] * 1.2;*/ ?> € HT</p>
       <p class="panier">
       <?php if($userConnect) { ?>
         <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
