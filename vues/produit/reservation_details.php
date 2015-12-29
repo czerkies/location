@@ -5,10 +5,13 @@
       <p class="image_overflow">
         <img src="<?= RACINE_SITE.$ProduitIDSalle['photo'] ?>" alt="<?= $ProduitIDSalle['titre']; ?>">
       </p>
-      <p><?= $ProduitIDSalle['capacite'].' | '.$ProduitIDSalle['categorie']; ?>
-      <?= $ProduitIDSalle['adresse'].' - '.$ProduitIDSalle['cp'].' - '.$ProduitIDSalle['ville'].' <br> '.$ProduitIDSalle['pays'];?>
-      Prix : <?= $ProduitIDSalle['prix'] = $ProduitIDSalle['prix'] * 1.2; ?> € TTC.
-      Date : Du <?= $ProduitIDSalle['date_arrivee']; ?> au <?= $ProduitIDSalle['date_depart']; ?>.</p>
+      <p class="adresse"><span>Adresse :</span> <?= $ProduitIDSalle['adresse']; ?>, <?= $ProduitIDSalle['ville'].'. '.strtoupper($ProduitIDSalle['pays']); ?>.</p>
+      <p class="description"><span>Description :</span> <?= $ProduitIDSalle['description']; ?></p>
+      <p class="categorie"><span>Categorie :</span> <?= ucfirst($ProduitIDSalle['categorie']); ?>.</p>
+      <p class="date_arrivee"><span>Date d'arrivée :</span> <?= $ProduitIDSalle['date_arrivee']; ?>.</p>
+      <p class="date_depart"><span>Date de départ :</span> <?= $ProduitIDSalle['date_depart']; ?>.</p>
+      <p class="capacite"><span>Capacité :</span> <?= $ProduitIDSalle['capacite']; ?> places.</p>
+      <p class="prix"><span>Prix :</span> <?= $ProduitIDSalle['prix'] = $ProduitIDSalle['prix'] * 1.2; ?> € TTC</p>
       <p class="panier">
       <?php if($userConnect) { ?>
         <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
@@ -58,7 +61,7 @@
       <div class="form-group large">
         <label for="commentaire">Ajouter un avis</label>
         <textarea name="commentaire" id="commentaire" placeholder="Laissez votre avis sur la salle..."></textarea>
-        <em>Votres avis doit comporter entre 4 et 10 carractères.</em>
+        <em>Votres avis doit comporter entre 4 et 450 carractères.</em>
       </div>
       <div class="form-group large">
         <label for="note">Note</label>

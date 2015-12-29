@@ -303,9 +303,12 @@ a.bouton-a:hover{
   padding:10px;
   margin:0;
 }
+.produit p span{
+  font-weight:800;
+}
 .produit .image_overflow{
   width:100%;
-  height:175px;
+  height:275px;
   margin:0 0 25px;
   padding:0;
   overflow:hidden;
@@ -525,6 +528,9 @@ ul.body{
     margin:1%;
     float:left;
   }
+  .produit .image_overflow{
+    height:175px;
+  }
 
   /* Formulaire */
   .form-group,
@@ -590,6 +596,19 @@ ul.body{
   #details_produit .produit{
     width:100%;
     margin:1% auto;
+  }
+  #details_produit .produit:hover{
+    box-shadow:none;
+  }
+  #details_produit .produit img{
+    transition:transform 250ms ease-out;
+    opacity:1;
+  }
+  #details_produit .produit:hover .image_overflow img{
+    transform:scale(1.1);
+  }
+  #details_produit .produit .image_overflow{
+      height:350px;
   }
   #avis_produit{
     width:40%;
