@@ -358,6 +358,7 @@ a.bouton-a:hover{
   padding:10px 0;
   background:#735d6d;
   color:#d9cdbf;
+  line-height:20px;
   float:left;
 }
 ul.body{
@@ -444,9 +445,19 @@ ul.body{
 #avis_produit{
   float:left;
 }
+#avis_produit .wp100a{
+  text-align:left;
+  width:100%;
+  padding:10px;
+}
 #details_sugg{
   width:100%;
   float:left;
+}
+#avis_produit p{
+  float:left;
+  width:100%;
+  padding:2%;
 }
 
 @media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
@@ -546,6 +557,7 @@ ul.body{
     width:48%;
     margin:0 1%;
   }
+
   /* Profil d'un membre */
   #profil,
   #last_commande{

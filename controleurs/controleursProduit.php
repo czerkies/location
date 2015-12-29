@@ -72,29 +72,38 @@ class controleursProduit extends controleursSuper {
 
           if(isset($_POST['avis'])){
 
-            if(isset($_POST['commentaire']) && empty($_POST['commentaire'])){
-              $msg .= "Veuillez saisir un commentaire.<br>";
-            }
+            if(isset($_POST['commentaire']) && isset($_POST['note'])){
 
-            if(isset($_POST['note']) && !empty($_POST['note'])
-            && $_POST['note'] > 0 && $_POST['note'] < 11 || $_POST['note'] == 0
-            && is_numeric($_POST['note'])){
+              if(!empty($_POST['note'])
+              && $_POST['note'] > 0 && $_POST['note'] < 11 || $_POST['note'] == 0
+              && is_numeric($_POST['note'])){
 
-              if(empty($msg)){
-
-                foreach ($_POST as $key => $value){
-                  $_POST[$key] = htmlentities($value, ENT_QUOTES);
-                }
-
-                extract($_POST);
-
-                $id_salle = $ProduitIDSalle['id_salle'];
-
-                $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
-                $form =  FALSE;
-                $confirmation = TRUE;
-
+              if(empty($_POST['commentaire'])){
+                $msg .= "Veuillez saisir un avis.<br>";
+              } elseif(strlen($_POST['commentaire']) < 4 || strlen($_POST['commentaire']) > 450){
+                $msg .= "Votre avis doit comporter entre 4 et 450 carractères.<br>";
               }
+
+                if(empty($msg)){
+
+                  foreach ($_POST as $key => $value){
+                    $_POST[$key] = htmlentities($value, ENT_QUOTES);
+                  }
+
+                  extract($_POST);
+
+                  $id_salle = $ProduitIDSalle['id_salle'];
+
+                  $modAvis->insertionAvisParID($id_membre, $id_salle, $commentaire, $note);
+                  $form =  FALSE;
+                  $confirmation = TRUE;
+
+                }
+              } else {
+                $msg .= 'Une erreur est survenue lors de votre demande.<br>';
+              }
+            } else {
+              $msg .= 'Une erreur est survenue lors de votre demande.<br>';
             }
           }
         }
