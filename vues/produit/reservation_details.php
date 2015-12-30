@@ -23,41 +23,21 @@
 </div>
 <div id="avis_produit">
   <h2>Avis</h2>
-  <?php foreach($affichageAvis as $donnees) { ?>
-  <div class="tableau large">
-    <div class="head">
-      <div class="title wp80">
-        <?php if($donnees['id_membre'] === NULL){ ?>
-          Le <?= ucwords($donnees['date']); ?>.
-        <?php } else { ?>
-          <?= $donnees['prenom']; ?>, le <?= ucwords($donnees['date']); ?>.
-        <?php } ?>
-      </div>
-      <div class="title wp20"><?= $donnees['note']; ?>/10</div>
-    </div>
-    <ul class="body">
-      <li>
-        <p class="cel wp100a"><?= $donnees['commentaire']; ?></p>
-      </li>
-    </ul>
-  </div>
-  <?php } ?>
   <?php if($userConnect){
-    if($form){ ?>
-      <?php if(!empty($msg)) { ?>
-        <div class="form-group erreur large">
-          <label>Erreur(s)</label>
-          <p>
-            <?= $msg; ?>
-          </p>
-        </div>
-      <?php } if($confirmation) { ?>
-        <div class="form-group ok large">
-          <label>Confirmation</label>
-          <p>Votre avis a bien été posté.</p>
-        </div>
-      <?php } ?>
-    <form class="" action="" method="post">
+    if(!empty($msg)) { ?>
+      <div class="form-group erreur large">
+        <label>Erreur(s)</label>
+        <p>
+          <?= $msg; ?>
+        </p>
+      </div>
+    <?php } if($confirmation) { ?>
+      <div class="form-group ok large">
+        <label>Confirmation</label>
+        <p>Votre avis a bien été posté.</p>
+      </div>
+    <?php } if($form){ ?>
+    <form class="" action="#avis_produit" method="post">
       <div class="form-group large">
         <label for="commentaire">Ajouter un avis</label>
         <textarea name="commentaire" id="commentaire" placeholder="Laissez votre avis sur la salle..."></textarea>
@@ -79,6 +59,25 @@
     <?php }
   } else { ?>
     <p><a href="<?= RACINE_SITE; ?>connexion/">Il faut être connecté pour pouvoir déposer un avis.</a></p>
+  <?php } ?>
+  <?php foreach($affichageAvis as $donnees) { ?>
+  <div class="tableau large">
+    <div class="head">
+      <div class="title wp80">
+        <?php if($donnees['id_membre'] === NULL){ ?>
+          Le <?= ucwords($donnees['date']); ?>.
+        <?php } else { ?>
+          <?= $donnees['prenom']; ?>, le <?= ucwords($donnees['date']); ?>.
+        <?php } ?>
+      </div>
+      <div class="title wp20"><?= $donnees['note']; ?>/10</div>
+    </div>
+    <ul class="body">
+      <li>
+        <p class="cel wp100a"><?= $donnees['commentaire']; ?></p>
+      </li>
+    </ul>
+  </div>
   <?php } ?>
 </div>
 <div id="details_sugg">
