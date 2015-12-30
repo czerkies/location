@@ -4,8 +4,8 @@
 <h1>Gestion des produits</h1>
 <div id="gestion_produit">
   <ul>
-    <li><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=ajouterProduits">Ajouter un produit</a></li>
-    <li><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits">Affichage des produits</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/gestion-produits/ajouter/">Ajouter un produit</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/gestion-produits/">Affichage des produits</a></li>
   </ul>
     <?php if($ajouter || $idProduitModif){ ?>
       <div class="gestion_produit_modifier">
@@ -46,18 +46,18 @@
             <tr>
               <th>Produit</th>
               <th>Date arrivée
-                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=date_arrivee&order=asc">^</a>
-                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=date_arrivee&order=desc">v</a>
+                <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_arrivee/asc">^</a>
+                <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_arrivee/desc">v</a>
               </th>
               <th>Date départ
-                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=date_depart&order=asc">^</a>
-                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=date_depart&order=desc">v</a>
+                <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_depart/asc">^</a>
+                <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_depart/desc">v</a>
               </th>
               <th>Salle</th>
               <th>Promo</th>
               <th>Prix
-                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=prix&order=asc">^</a>
-                <a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&type=prix&order=desc">V</a>
+                <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/prix/asc">^</a>
+                <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/prix/desc">V</a>
               </th>
               <th>État</th>
               <th>Modifier</th>
@@ -78,8 +78,8 @@
                 <?php } ?>
                 <td><?= $value['prix']; ?> €</td>
                 <td><?= $value['etat']; ?></td>
-                <td><a href="/lokisalle/www/admin/gestion-produits/modification/<?= $value['id_produit']; ?>">Modifier</a></td>
-                <td><a href="/lokisalle/www/routeur.php?controleurs=produitAdmin&action=afficherProduits&supp=<?= $value['id_produit']; ?>">Supprimer</a></td>
+                <td><a href="<?= RACINE_SITE; ?>admin/gestion-produits/modification/<?= $value['id_produit']; ?>">Modifier</a></td>
+                <td><a href="<?= RACINE_SITE; ?>admin/gestion-produits/suppression/<?= $value['id_produit']; ?>">Supprimer</a></td>
               </tr>
             <?php } ?>
           </tbody>

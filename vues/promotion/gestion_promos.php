@@ -3,8 +3,8 @@
 <div id="gestion_promotion">
   <?= $msg; ?>
   <ul>
-    <li><a href="/lokisalle/www/routeur.php?controleurs=promotion&action=ajouterPromotion">Ajouter un code promotion</a></li>
-    <li><a href="/lokisalle/www/routeur.php?controleurs=promotion&action=afficherPromotion">Affichage des codes promos</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/gestion-promotions/ajouter/">Ajouter un code promotion</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/gestion-promotions/">Affichage des codes promos</a></li>
   </ul>
     <?php if($donnees){ ?>
       <div class="gestion_produit_afficher">
@@ -21,7 +21,7 @@
             <tr>
               <td><?= $value['code_promo']; ?></td>
               <td><?= $value['reduction']; ?></td>
-              <td><a href="/lokisalle/www/routeur.php?controleurs=promotion&action=afficherPromotion&supprimer=<?= $value['id_promo']; ?>">Supprimer</a></td>
+              <td><a href="<?= RACINE_SITE; ?>admin/gestion-promotions/supprimer/<?= $value['id_promo']; ?>">Supprimer</a></td>
             </tr>
             <?php } ?>
           </tbody>
@@ -32,7 +32,7 @@
         <p>
           Ce code promo est associés à des produits,<br>
           Êtes-vous sur de vouloir le supprimer ?<br>
-          <a href="routeur.php?controleurs=promotion&action=afficherPromotion&supprimer=<?= $_GET['supprimer']; ?>&confirm=oui">Oui</a> | <a href="routeur.php?controleurs=promotion&action=afficherPromotion">Non</a>
+          <a href="r<?= RACINE_SITE; ?>admin/gestion-promotions/supprimer/<?= $_GET['supprimer']; ?>/confirmer/oui">Oui</a> | <a href="<?= RACINE_SITE; ?>admin/gestion-promotions/">Non</a>
         </p>
       </div>
       <?php } ?>
@@ -50,5 +50,5 @@
     <?php } ?>
 </div>
 <?php } else {
-  echo "Vous devez être connecté !";
+  echo "Vous n'avez pas accès à cette page.";
 }?>

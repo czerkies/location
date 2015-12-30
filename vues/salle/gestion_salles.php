@@ -3,8 +3,8 @@
 <h1>Gestion des salles</h1>
 <div class="menu_page_active">
   <ul>
-    <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=ajouterSalle">Ajouter une salle</a></li>
-    <li><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=gestionSalles">Affichage des salles</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/gestion-salles/ajouter/">Ajouter une salle</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/gestion-salles/">Affichage des salles</a></li>
   </ul>
 </div>
 <?php if($ajouter){ ?>
@@ -54,7 +54,7 @@
     <p>
       Cette salle est utilisé pour des produits,<br>
       Êtes-vous sur de vouloir la supprimer ?<br>
-      <a href="routeur.php?controleurs=salles&action=gestionSalles&supp=<?= $_GET['supp']; ?>&confirm=oui">Oui</a> | <a href="routeur.php?controleurs=salles&action=gestionSalles">Non</a>
+      <a href="<?= RACINE_SITE; ?>admin/gestion-salles/suppression/<?= $_GET['supp']; ?>/oui">Oui</a> | <a href="<?= RACINE_SITE; ?>admin/gestion-salles/">Non</a>
     </p>
   </div>
   <?php } ?>
@@ -86,8 +86,8 @@
         <td><?= $donnees['description']; ?></td>
         <td><?= $donnees['capacite']; ?> Personnes</td>
         <td><?= ucfirst($donnees['categorie']); ?></td>
-        <td><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=gestionSalles&modif=<?= $donnees['id_salle']; ?>">Modifier</a></td>
-        <td><a href="http://localhost/lokisalle/www/routeur.php?controleurs=salles&action=gestionSalles&supp=<?= $donnees['id_salle']; ?>">Supprimer</a></td>
+        <td><a href="<?= RACINE_SITE; ?>admin/gestion-salles/modification/<?= $donnees['id_salle']; ?>">Modifier</a></td>
+        <td><a href="<?= RACINE_SITE; ?>admin/gestion-salles/suppression/<?= $donnees['id_salle']; ?>">Supprimer</a></td>
       </tr>
       <? } ?>
     </tbody>

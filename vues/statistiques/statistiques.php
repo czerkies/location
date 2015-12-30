@@ -2,10 +2,10 @@
 <h1>Statisques</h1>
 <div class="menu_page_active">
   <ul>
-    <li><a href="routeur.php?controleurs=statistiques&action=affichageStatistiques&top=cinqNotes">Top 5 des salles les mieux notés</a></li>
-    <li><a href="routeur.php?controleurs=statistiques&action=affichageStatistiques&top=cinqVendues">Top 5 des salles les plus vendues</a></li>
-    <li><a href="routeur.php?controleurs=statistiques&action=affichageStatistiques&top=cinqMembresQuantite">Top 5 des membres qui achète le plus</a></li>
-    <li><a href="routeur.php?controleurs=statistiques&action=affichageStatistiques&top=cinqMembresPrix">Top 5 des membres qui achète le plus cher</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/statistiques/salles-mieux-notes/">Top 5 des salles les mieux notés</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/statistiques/salles-plus-vendues/">Top 5 des salles les plus vendues</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/statistiques/membre-quantite/">Top 5 des membres qui achète le plus</a></li>
+    <li><a href="<?= RACINE_SITE; ?>admin/statistiques/membre-prix/">Top 5 des membres qui achète le plus cher</a></li>
   </ul>
 </div>
 <div>

@@ -22,7 +22,7 @@
           <td><?= $value['statut']; ?></td>
           <td><?= $value['sexe']; ?></td>
           <td><?php if($value['statut'] == 0) { ?>
-            <a href="routeur.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=<?= $value['id_membre']; ?>">X</a>
+            <a href="<?= RACINE_SITE; ?>admin/gestion-membres/suppression/<?= $value['id_membre']; ?>">X</a>
           <?php } ?></td>
         </tr>
       <?php } ?>
@@ -33,12 +33,12 @@
     <p>
       Ce membre est associé à une commande, si vous le supprimez, vous perdrez ses coordonnées mais pas sa commande.<br>
       Êtes-vous sur de vouloir le supprimer ?<br>
-      <a href="routeur.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=<?= $_GET['suppMembre']; ?>&confirm=oui">Oui</a> | <a href="routeur.php?controleurs=membreAdmin&action=gestionMembres">Non</a>
+      <a href="<?= RACINE_SITE; ?>.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=<?= $_GET['suppMembre']; ?>/oui">Oui</a> | <a href="<?= RACINE_SITE; ?>admin/gestion-membres/">Non</a>
     </p>
   </div>
   <?php } ?>
   <div class="">
-    <p><a href="routeur.php?controleurs=membreAdmin&action=gestionMembres&ajouter=membre">Création d'un compte admin</a></p>
+    <p><a href="<?= RACINE_SITE; ?>admin/gestion-membres/ajouter-admin/">Création d'un compte admin</a></p>
     <?php if($ajouterMembre){ ?>
       <div class="inscription">
         <form class="" action="" method="post">

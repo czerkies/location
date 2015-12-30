@@ -23,7 +23,7 @@
           <td><?= $value['commentaire']; ?></td>
           <td><?= $value['note']; ?>/10</td>
           <td><?= ucwords($value['date']); ?></td>
-          <td><a href="routeur.php?controleurs=avis&action=gestionAvis&supp=<?= $value['id_avis']; ?>">X</a></td>
+          <td><a href="<?= RACINE_SITE; ?>admin/gestion-avis/<?= $value['id_avis']; ?>">X</a></td>
         </tr>
       <?php } ?>
     </tbody>

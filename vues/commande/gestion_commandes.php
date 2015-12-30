@@ -44,7 +44,7 @@
     <tbody>
       <?php foreach ($listeCommandes as $value) { ?>
         <tr>
-          <td><a href="routeur.php?controleurs=commande&action=gestionCommandes&details_commande=<?= $value['id_commande']; ?>"><?= $value['id_commande']; ?></a></td>
+          <td><a href="<?= RACINE_SITE; ?>admin/gestion-commandes/details-commandes/<?= $value['id_commande']; ?>"><?= $value['id_commande']; ?></a></td>
           <td><?= $value['id_membre']; ?></td>
           <td><?= $value['montant']; ?> €</td>
         </tr>
