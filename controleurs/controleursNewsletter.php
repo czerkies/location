@@ -21,17 +21,33 @@ class controleursNewsletter extends controleursSuper {
 
     if($_POST){
 
-      $sujet = $_POST['sujet'];
-      $message = $_POST['message'];
+      if(isset($_POST['expediteur']) && !empty($_POST['expediteur'])
+      && isset($_POST['sujet']) && !empty($_POST['sujet'])
+      && isset($_POST['message']) && !empty($_POST['message'])){
 
-      $mail = '';
-      foreach ($donneesNews['mailAbonne'] as $value) {
-        $mail .= $value['email'].', ';
+        if(strlen($_POST['message']) < 10 || strlen($_POST['message']) > 5000){
+          $msg .= 'Votre message doit contenir entre 10 et 5000 carractères.<br>';
+        }
+
+        if(empty($msg)){
+
+          $sujet = $_POST['sujet'];
+          $message = $_POST['message'];
+
+          $mail = '';
+          foreach ($donneesNews['mailAbonne'] as $value) {
+            $mail .= $value['email'].', ';
+          }
+
+          mail($mail, $sujet, $message);
+
+          $msg .= 'Votre mail a bien été envoyé.';
+          // $confirmation = TRUE;
+
+        }
+      } else {
+        $msg .= 'Remplissez correctement tout les champs avant d\'envoyer la newsletter.<br>';
       }
-
-      mail($mail, $sujet, $message);
-
-      $msg .= 'Votre mail a bien été envoyé.';
     }
 
 
