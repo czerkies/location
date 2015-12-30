@@ -33,13 +33,17 @@ class controleursNewsletter extends controleursSuper {
 
           $sujet = $_POST['sujet'];
           $message = $_POST['message'];
+          $expediteur = $_POST['expediteur'];
+
+          $headers = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
+          $headers .= 'FROM: '.$expediteur.' <'.$expediteur.'>' . "\r\n";
 
           $mail = '';
           foreach ($donneesNews['mailAbonne'] as $value) {
             $mail .= $value['email'].', ';
           }
 
-          mail($mail, $sujet, $message);
+          mail($mail, $sujet, $message, $headers);
 
           $msg .= 'Votre mail a bien été envoyé.';
           // $confirmation = TRUE;

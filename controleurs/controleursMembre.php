@@ -159,12 +159,15 @@ class controleursMembre extends controleursSuper {
             $mdp_sch = str_shuffle($chaine);
             $mdp = substr($mdp_sch, 0, 12);
 
+            $headers = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
+            $headers .= 'FROM: LokiSalle - Nouveau mot de passe  <motdepasse@lokisalle.fr>' . "\r\n";
+
             $nouveauMdp = new modelesMembre();
             $nouveauMdp->nouveauMdp($mdp, $_POST['email']);
 
             $message = 'Voici votre nouveau mot de passe pour accéder à Lokisalle : ' . $mdp;
 
-            mail($_POST['email'], 'Changement de mot de passe',  $message);
+            mail($_POST['email'], 'Changement de mot de passe',  $message, $headers);
 
           }
         }
