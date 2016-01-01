@@ -20,7 +20,7 @@
     <label for="adresse">Adresse</label>
     <input type="text" name="adresse" id="adresse" value="<?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} elseif(isset($recupPourModif['adresse'])) {echo $recupPourModif['adresse'];} ?>" placeholder="Adresse" required>
     <label for="cp">Code Postale</label>
-      <input type="number" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} elseif(isset($recupPourModif['cp'])) {echo $recupPourModif['cp'];} ?>" placeholder="Code Postale" required>
+      <input type="text" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} elseif(isset($recupPourModif['cp'])) {echo $recupPourModif['cp'];} ?>" placeholder="Code Postal" required>
     <label for="titre">Titre</label>
     <input type="text" name="titre" id="titre" value="<?php if(isset($_POST['titre'])) {echo $_POST['titre'];} elseif(isset($recupPourModif['titre'])) {echo $recupPourModif['titre'];} ?>" placeholder="Titre" required>
     <label for="description">Description</label>

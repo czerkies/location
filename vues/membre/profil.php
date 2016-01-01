@@ -28,7 +28,7 @@
     </div>
     <div class="form-group large">
       <label for="prenom">Prénom</label>
-      <input type="text" name="prenom" id="prenom" value="<?php if(isset($_POST['prenom'])) {echo $_POST['prenom'];} else {echo $_SESSION['membre']['prenom'];} ?>">
+      <input type="text" name="prenom" id="prenom" value="<?php if(isset($_POST['prenom'])) {echo $_POST['prenom'];} else {echo $_SESSION['membre']['prenom'];} ?>" required>
       <em>Votre prénom pour l'enregistrement de vos commandes.</em>
     </div>
     <div class="form-group large">
@@ -55,15 +55,15 @@
     </div>
     <div class="form-group large">
       <label for="ville">Ville</label>
-      <input type="text" name="ville" id="ville" value="<?php if(isset($_POST['ville'])) {echo $_POST['ville'];} else {echo $_SESSION['membre']['ville'];} ?>">
+      <input type="text" name="ville" id="ville" value="<?php if(isset($_POST['ville'])) {echo $_POST['ville'];} else {echo $_SESSION['membre']['ville'];} ?>" required>
     </div>
     <div class="form-group large">
       <label for="cp">Code postal</label>
-      <input type="text" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} else {echo $_SESSION['membre']['cp'];} ?>">
+      <input type="text" name="cp" id="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} else {echo $_SESSION['membre']['cp'];} ?>" required>
     </div>
     <div class="form-group large">
       <label for="adresse">Adresse</label>
-      <textarea name="adresse" name="adresse" id="adresse"><?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} else {echo $_SESSION['membre']['adresse'];} ?></textarea>
+      <textarea name="adresse" name="adresse" id="adresse" required><?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} else {echo $_SESSION['membre']['adresse'];} ?></textarea>
     </div>
       <input type="submit" class="" value="Enregistrer les informations">
   </form>
