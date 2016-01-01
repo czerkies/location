@@ -150,6 +150,7 @@ class controleursSalles extends controleursSuper {
     $listeCategories = $salle->categoriesSalle();
 
     $msg = '';
+    $confirmation = FALSE;
 
     if($_POST){
 
@@ -198,7 +199,7 @@ class controleursSalles extends controleursSuper {
       }
     }
 
-    $this->Render('../vues/salle/gestion_salles.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'salles' => $salles, 'recupPourModif' => $recupPourModif, 'listeCategories' => $listeCategories));
+    $this->Render('../vues/salle/gestion_salles.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'confirmation' => $confirmation, 'ajouter' => $ajouter, 'salles' => $salles, 'recupPourModif' => $recupPourModif, 'listeCategories' => $listeCategories));
 
   }
 
@@ -208,7 +209,7 @@ class controleursSalles extends controleursSuper {
     $msg = '';
 
     if(empty($value['pays'])){
-      $msg .= "Veuillez saisir un pays.<br>";
+      $msg .= "Veuillez saisir un Pays.<br>";
     } elseif(strlen($value['pays']) < 2 || strlen($value['pays']) > 20 || is_numeric($value['pays'])) {
       $msg .= "Veuillez saisir un Pays entre 2 et 20 carractères.<br>";
     }

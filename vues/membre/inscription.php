@@ -72,7 +72,7 @@
     <div class="form-group">
       <label for="cp">Code postal</label>
       <input type="text" id="cp" name="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} ?>" placeholder="Code Postal" required>
-      <em>Code postal à 5 chiffres</em>
+      <em>Code postal à 5 chiffres.</em>
     </div>
     <div class="form-group large">
       <label for="adresse">Adresse</label>
