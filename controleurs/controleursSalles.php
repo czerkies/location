@@ -8,9 +8,11 @@ class controleursSalles extends controleursSuper {
     session_start();
     $title['name'] = 'Gestion des salles';
     $title['menu'] = 8;
+    $title['menu_admin'] = 100;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
+    $confirmation = '';
     $recupPourModif = FALSE;
     $ajouter = FALSE;
     $dialogue = FALSE;
@@ -66,7 +68,7 @@ class controleursSalles extends controleursSuper {
 
           if($pdo->modificationSalle($id_salle, $pays, $ville, $adresse, $cp, $titre, $description, $photo_bdd, $capacite, $categorie)){
 
-            $msg .= 'La salle a bien été modifié.<br>';
+            $confirmation .= 'La salle a bien été modifié.<br>';
             $ajouter = FALSE;
 
             if(!empty($photoSuppModif['photo']) && file_exists($chemin_photoModif)){
@@ -111,7 +113,7 @@ class controleursSalles extends controleursSuper {
 
             $pdo->suppressionSalle($id_salle);
             $gestionSalles = TRUE;
-            $msg .= 'La salle a bien été supprimé.<br>';
+            $confirmation .= 'La salle a bien été supprimé.<br>';
             $dialogue = FALSE;
 
           }
@@ -127,7 +129,7 @@ class controleursSalles extends controleursSuper {
     $listeCategories = $pdo->categoriesSalle();
 
 
-    $this->Render('../vues/salle/gestion_salles.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'ajouter' => $ajouter, 'recupPourModif' => $recupPourModif, 'salles' => $salles, 'listeCategories' => $listeCategories, 'dialogue' => $dialogue));
+    $this->Render('../vues/salle/gestion_salles.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'confirmation' => $confirmation, 'ajouter' => $ajouter, 'recupPourModif' => $recupPourModif, 'salles' => $salles, 'listeCategories' => $listeCategories, 'dialogue' => $dialogue));
 
   }
 
@@ -137,6 +139,7 @@ class controleursSalles extends controleursSuper {
     session_start();
     $title['name'] = 'Ajouter une salle';
     $title['menu'] = 8;
+    $title['menu_admin'] = 101;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $recupPourModif = FALSE;
@@ -150,7 +153,7 @@ class controleursSalles extends controleursSuper {
     $listeCategories = $salle->categoriesSalle();
 
     $msg = '';
-    $confirmation = FALSE;
+    $confirmation = '';
 
     if($_POST){
 
@@ -188,11 +191,12 @@ class controleursSalles extends controleursSuper {
           }
           extract($_POST);
 
-          $salle->ajouterSalle($pays, $ville, $adresse, $cp, $titre, $description, $photo_bdd, $capacite, $categorie);
+          if($salle->ajouterSalle($pays, $ville, $adresse, $cp, $titre, $description, $photo_bdd, $capacite, $categorie)){
 
-          $msg .= 'La salle a bien été ajouté.';
-          $ajouter = FALSE;
+            $confirmation .= 'La salle a bien été ajouté.';
+            $ajouter = FALSE;
 
+          }
         }
       } else {
         $msg .= 'Une erreur est survenue lors de votre demande.<br>';
@@ -236,7 +240,7 @@ class controleursSalles extends controleursSuper {
     if(empty($value['description'])){
       $msg .= "Veuillez saisir votre Description.<br>";
     } elseif(strlen($value['description']) < 10 || strlen($value['description']) > 400) {
-      $msg .= "Veuillez saisir une Adresse entre 4 et 400 carractères.<br>";
+      $msg .= "Veuillez saisir une Description entre 4 et 400 carractères.<br>";
     }
     if(empty($value['capacite'])){
       $msg .= "Veuillez saisir une Capacite.<br>";

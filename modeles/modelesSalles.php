@@ -41,6 +41,8 @@ class modelesSalles extends modelesSuper {
 
     $insertion->execute();
 
+    return $insertion;
+
   }
 
 

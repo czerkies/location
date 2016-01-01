@@ -67,7 +67,8 @@ ul.menu_userAdmin li a{
 ul.menu_user li a:hover,
 ul.menu_userAdmin li a:hover,
 ul.menu_user li a.active,
-ul.menu_userAdmin li a.active{
+ul.menu_userAdmin li a.active,
+ul.sous-menu-admin li a.active{
   background:#bfb3a4;
 }
 #cont{
@@ -144,10 +145,15 @@ h2{
 .form-group input,
 .form-group textarea,
 .form-group em,
-.form-group p{
+.form-group p,
+.form-group img{
   float:left;
   width:100%;
   margin:0;
+}
+.form-group img{
+  border-right:1px solid #735d6d;
+  border-left:1px solid #735d6d;
 }
 .form-group label{
   font-family:'codel';
@@ -365,6 +371,9 @@ a.bouton-a:hover{
   border:1px solid #735d6d;
   border-radius:2px;
 }
+.tableau img{
+  height:100px;
+}
 .tableau .head,
 .tableau .body{
   float:left;
@@ -414,10 +423,10 @@ ul.body{
 }
 
 /* Panier */
-#panier .wp10{
+.wp10{
   width:10%;
 }
-#panier .wp20,
+.wp20,
 #panier .wp20l{
   width:20%;
 }
@@ -426,23 +435,27 @@ ul.body{
   padding-left:10px;
   background:#cecece;
 }
-#panier .wp50{
+.wp50{
   width:50%;
 }
-#panier .wp80{
+.wp80{
   width:80%;
   padding-right:10px;
   text-align:right;
   background:#cecece;
 }
-#panier .wp100{
+.wp100{
   width:100%;
 }
-#panier .wp15{
+.wp15{
   width:15%;
 }
-#panier .wp5{
+.wp5{
   width:5%;
+}
+.tableau .wpimg{
+  padding:0;
+  overflow:hidden;
 }
 #economie{
   width:100%;
@@ -477,6 +490,26 @@ ul.body{
   float:left;
   width:100%;
   padding:2%;
+}
+
+/* Menu Admin */
+ul.sous-menu-admin{
+  width:100%;
+  float:left;
+  margin:25px 0 50px;
+  padding:0;
+}
+ul.sous-menu-admin li{
+  list-style:none;
+}
+ul.sous-menu-admin li a{
+  width:100%;
+  margin:0;
+}
+
+/* Gestion salles (admin) */
+#gestion_salles .tableau .cel{
+  height:100px;
 }
 
 @media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
@@ -521,7 +554,8 @@ ul.body{
   ul.menu_user li a:hover,
   ul.menu_userAdmin li a:hover,
   ul.menu_user li a.active,
-  ul.menu_userAdmin li a.active{
+  ul.menu_userAdmin li a.active,
+  ul.sous-menu-admin li a.active{
     box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
     color:#594055;
   }
@@ -590,6 +624,11 @@ ul.body{
     width:48%;
     margin:0 1%;
   }
+  .form-group.erreur .bouton-a{
+    width:25%;
+    margin:20px 12.5% 10px;
+    color:rgb(143, 0, 0);
+  }
 
   /* Profil d'un membre */
   #profil,
@@ -641,12 +680,19 @@ ul.body{
     width:40%;
     margin:0;
   }
-  #avis_produit .wp20{
+  /*#avis_produit .wp20{
     width:20%;
   }
   #avis_produit .wp80{
     width:80%;
+  }*/
+
+  /* Menu Admin */
+  ul.sous-menu-admin li a{
+    width:48%;
+    margin:1%;
   }
+
 }
 /*
 table {
