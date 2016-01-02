@@ -457,6 +457,9 @@ ul.body{
   padding:0;
   overflow:hidden;
 }
+.tableau .pict img{
+  height:20px;
+}
 #economie{
   width:100%;
   float:left;
