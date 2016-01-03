@@ -13,6 +13,9 @@ RewriteRule ^recherche/ routeur.php?controleurs=produit&action=rechercheProduit 
 RewriteRule ^contact/ routeur.php?controleurs=membre&action=contactMembre [L]
 RewriteRule ^newsletter/inscription/ routeur.php?controleurs=newsletter&action=inscriptionMembre&inscription=ok [L]
 RewriteRule ^newsletter/ routeur.php?controleurs=newsletter&action=inscriptionMembre [L]
+RewriteRule ^mentions-legales/ routeur.php?controleurs=footer&action=mentionsLegales [L]
+RewriteRule ^conditions-generales-de-ventes/ routeur.php?controleurs=footer&action=cgv [L]
+RewriteRule ^plan-du-site/ routeur.php?controleurs=footer&action=planDuSite [L]
 
 RewriteRule ^mon-profil/modification/ routeur.php?controleurs=membre&action=profilMembre&modif=true [L]
 RewriteRule ^mon-profil/ routeur.php?controleurs=membre&action=profilMembre [L]

@@ -35,9 +35,9 @@
     </div>
     <footer>
       <ul class="menu_footer">
-        <li><a href="#" <?php if($title['menu'] === 16) echo 'class="active" '; ?>>Mentions légales</a></li>
-        <li><a href="#" <?php if($title['menu'] === 17) echo 'class="active" '; ?>>C.G.V</a></li>
-        <li><a href="#" <?php if($title['menu'] === 18) echo 'class="active" '; ?>>Plan du site</a></li>
+        <li><a href="<?= RACINE_SITE; ?>mentions-legales/" <?php if($title['menu'] === 16) echo 'class="active" '; ?>>Mentions légales</a></li>
+        <li><a href="<?= RACINE_SITE; ?>conditions-generales-de-ventes/" <?php if($title['menu'] === 17) echo 'class="active" '; ?>>C.G.V</a></li>
+        <li><a href="<?= RACINE_SITE; ?>plan-du-site/" <?php if($title['menu'] === 18) echo 'class="active" '; ?>>Plan du site</a></li>
         <li><a href="#" onclick="javascript:window.print()">Imprimer la page</a></li>
         <li><a href="<?= RACINE_SITE; ?>newsletter/" <?php if($title['menu'] === 19) echo 'class="active" '; ?>>S'inscrire à la newsletter</a></li>
         <li><a href="<?= RACINE_SITE; ?>contact/" <?php if($title['menu'] === 20) echo 'class="active" '; ?>>Contact</a></li>
