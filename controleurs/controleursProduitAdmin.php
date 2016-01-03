@@ -257,7 +257,7 @@ class controleursProduitAdmin extends controleursSuper {
           }
         }
       } else {
-        $msg .= 'Ce produit ne peut être modifié car il été réservé par un client.';
+        $msg .= 'Ce produit ne peut être modifié car il été réservé par un client.<br>';
       }
 
       // Vérification existance ID produit.

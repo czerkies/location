@@ -268,15 +268,15 @@ class controleursPanier extends controleursSuper {
         $message .= 'Lokisalle '.date('Y').'.
         </div>';
 
-        echo $sujet;
-        echo $message;
+        //echo $sujet;
+        //echo $message;
 
         // Vider le Panier
         unset($_SESSION['panier']);
         $userCart = FALSE;
 
         // Mail de confirmation
-        //mail($_SESSION['membre']['email'], $sujet, $message, $headers);
+        mail($_SESSION['membre']['email'], $sujet, $message, $headers);
 
         $msg .= "La vente est validée.<br>Vous avez reçus votre facture par Email à l'adresse suivante : ".$_SESSION['membre']['email'];
 
