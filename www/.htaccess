@@ -36,7 +36,7 @@ RewriteRule ^admin/gestion-produits/ajouter/ routeur.php?controleurs=produitAdmi
 RewriteRule ^admin/gestion-produits/ routeur.php?controleurs=produitAdmin&action=afficherProduits [L]
 
 RewriteRule ^admin/gestion-membres/suppression/(.*)$ routeur.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=$1 [L]
-RewriteRule ^admin/gestion-membres/suppression/(.*)$/oui routeur.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=$1&confirm=oui [L]
+RewriteRule ^admin/gestion-membres/suppression/oui/(.*)$ routeur.php?controleurs=membreAdmin&action=gestionMembres&confirm=oui&suppMembre=$1 [L]
 RewriteRule ^admin/gestion-membres/ajouter-admin/ routeur.php?controleurs=membreAdmin&action=gestionMembres&ajouter=membre [L]
 RewriteRule ^admin/gestion-membres/ routeur.php?controleurs=membreAdmin&action=gestionMembres [L]
 
