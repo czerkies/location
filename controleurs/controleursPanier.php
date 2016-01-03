@@ -210,8 +210,8 @@ class controleursPanier extends controleursSuper {
         $produits = $details_commande->detailsCommandeProduits($numeroCommande['id_commande']);
 
         // Formatage du mail avec les données
-        $header = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
-        $header .= 'FROM: Lokisalle <contact@lokisalle.romanczerkies.fr>' . "\r\n";
+        $headers = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
+        $headers .= 'FROM: Lokisalle <commande@lokisalle.fr>' . "\r\n";
 
         $sujet = "N° de commande Lokisalle : ".$numeroCommande['id_commande'];
 
@@ -239,7 +239,7 @@ class controleursPanier extends controleursSuper {
             '<tr>
               <td>'. $value['id_produit'] .'</td>
               <td>'. $value['titre'] .'</td>
-              <td><img src="'. $value['photo'] .'" alt="'. $value['photo'] .'"></td>
+              <td><img style="width:150px;" src="http://loki-salle.romanczerkies.fr/'.$value['photo'] .'" alt="'. $value['titre'] .'"></td>
               <td>'. $value['ville'] .'</td>
               <td>'. $value['capacite'] .'</td>
               <td>'. $value['date_arrivee'] .'</td>
@@ -269,7 +269,7 @@ class controleursPanier extends controleursSuper {
         </div>';
 
         //echo $sujet;
-        //echo $message;
+        echo $message;
 
         // Vider le Panier
         unset($_SESSION['panier']);

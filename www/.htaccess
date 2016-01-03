@@ -4,7 +4,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^accueil/ routeur.php?controleurs=produit&action=produitACC [L]
-RewriteRule ^connexion/mot-de-passe-perdu/ http://localhost/lokisalle/www/routeur.php?controleurs=membre&action=mdpperduMembre [L]
+RewriteRule ^connexion/mot-de-passe-perdu/ routeur.php?controleurs=membre&action=mdpperduMembre [L]
 RewriteRule ^connexion/ routeur.php?controleurs=membre&action=connexionMembre [L]
 RewriteRule ^inscription/ routeur.php?controleurs=membre&action=ajoutMembre [L]
 RewriteRule ^nos-salles/reservation-en-details/(.*)$ routeur.php?controleurs=produit&action=reservationDetails&id_produit=$1 [L]
