@@ -531,8 +531,13 @@ ul.sous-menu-admin li a{
   height:100px;
 }
 
-#nouvel-admin{
+#nouvel-admin,
+#details-commandes{
   float:left;
+}
+
+#details-commandes{
+  margin:0 0 50px;
 }
 
 @media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
