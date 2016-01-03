@@ -72,7 +72,7 @@ class modelesProduit extends modelesSuper {
     $produitsAdmin = $this->connect_central_bdd()->query("SELECT p.id_produit,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
-      p.prix, p.id_produit, p.etat, s.id_salle, s.ville, s.pays, o.code_promo
+      p.prix, p.id_produit, p.etat, s.id_salle, s.titre, o.code_promo
       FROM produit p
       LEFT JOIN promotion o
       ON p.id_promo = o.id_promo
@@ -90,7 +90,7 @@ class modelesProduit extends modelesSuper {
     $typeOrder = $this->connect_central_bdd()->query("SELECT p.id_produit,
       DATE_FORMAT(p.date_arrivee, '%d/%m/%Y') AS date_arrivee,
       DATE_FORMAT(p.date_depart, '%d/%m/%Y') AS date_depart,
-      p.prix, p.id_produit, p.etat, s.id_salle, s.ville, s.pays, o.code_promo
+      p.prix, p.id_produit, p.etat, s.id_salle, s.titre, o.code_promo
       FROM produit p
       LEFT JOIN promotion o
       ON p.id_promo = o.id_promo
@@ -165,9 +165,7 @@ class modelesProduit extends modelesSuper {
       OR p.date_depart BETWEEN '$date_arrivee' AND '$date_depart')
       ");
 
-    $suggestionsProduits = $recherche->fetchAll(PDO::FETCH_ASSOC);
-
-    return $suggestionsProduits;
+    return $suggestionsProduits = $recherche->fetchAll(PDO::FETCH_ASSOC);
 
   }
 
@@ -231,9 +229,7 @@ class modelesProduit extends modelesSuper {
 
     $donnees = modelesSuper::connect_central_bdd()->query($req);
 
-    $verifDateProduit = ($donnees->rowCount() != 0) ? FALSE : TRUE;
-
-    return $verifDateProduit;
+    return $verifDateProduit = ($donnees->rowCount() != 0) ? FALSE : TRUE;
 
   }
 

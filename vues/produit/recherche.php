@@ -2,7 +2,7 @@
   <h2>Zone de recherche</h2>
   <form action="" method="post">
     <div class="form-group date">
-      <?= $date->champs_date('recherche_date', '', NULL); ?>
+      <?= $date->champs_date('recherche_date', '', NULL, 'Recherche par date'); ?>
     </div>
     <div class="form-group">
       <label for="categorie">Rechercher par categorie</label>

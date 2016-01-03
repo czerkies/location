@@ -5,21 +5,7 @@
     <li><a class="bouton-a <?php if($title['menu_admin'] === 100) echo 'active'; ?>" href="<?= RACINE_SITE; ?>admin/gestion-salles/#gestion_salles">Affichage des salles</a></li>
     <li><a class="bouton-a <?php if($title['menu_admin'] === 101) echo 'active'; ?>" href="<?= RACINE_SITE; ?>admin/gestion-salles/ajouter/#gestion_salles">Ajouter une salle</a></li>
   </ul>
-  <?php if(!empty($msg)) { ?>
-  <div class="form-group erreur large">
-    <label>Erreur(s)</label>
-    <p>
-      <?= $msg; ?>
-    </p>
-  </div>
-  <?php } if(!empty($confirmation)) { ?>
-  <div class="form-group ok large">
-    <label>Confirmation</label>
-    <p>
-      <?= $confirmation; ?>
-    </p>
-  </div>
-  <?php } ?>
+  <?php include '../vues/dialogue.php'; ?>
   <?php if($ajouter){ ?>
     <h2>Gestion d'une salle</h2>
     <form class="" action="#gestion_salles" method="post" enctype="multipart/form-data">
@@ -128,10 +114,10 @@
             <p class="cel wp20"><?= substr($donnees['description'], 0, 100); ?>...</p>
             <p class="cel wp10"><?= $donnees['capacite']; ?></p>
             <p class="cel wp10"><?= $donnees['categorie']; ?></p>
-            <p class="cel wp5 pict"><img src="<?= RACINE_SITE ?>/pict/mod.png" alt="Modifier"></p>
+            <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>/pict/mod.png" alt="Modifier"></p>
           </a>
           <a href="<?= RACINE_SITE; ?>admin/gestion-salles/suppression/<?= $donnees['id_salle']; ?>#gestion_salles">
-            <p class="cel wp5 pict"><img src="<?= RACINE_SITE ?>/pict/supp.png" alt="Supprimer"></p>
+            <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>/pict/supp.png" alt="Supprimer"></p>
           </a>
         </li>
         <?php } ?>

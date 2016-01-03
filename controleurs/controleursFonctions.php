@@ -74,11 +74,11 @@ class controleursFonctions extends controleursSuper {
   }
 
   // ********** Fonction pour générer un champs de type "date" ********** //
-  public function champs_date($id_select, $id_select_h, $date_bdd){
+  public function champs_date($id_select, $id_select_h, $date_bdd, $label){
 
     $date_bdd_array = date_parse_from_format("j.m.Y.H.i", $date_bdd);
 
-    $select = '<label for="_J">Date</label>
+    $select = '<label for="_J">'.$label.'</label>
     <select id="_J" name="'.$id_select.'_J">
     <option disabled>Jour</option>';
     for ($i=1;$i<=31;$i++) {

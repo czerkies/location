@@ -387,6 +387,7 @@ a.bouton-a:hover{
   background:#735d6d;
   color:#d9cdbf;
   line-height:20px;
+  height:40px;
   float:left;
 }
 ul.body{
@@ -456,6 +457,18 @@ ul.body{
 .tableau .wpimg{
   padding:0;
   overflow:hidden;
+}
+.tableau .title a{
+
+}
+.tableau .title .order{
+  height:15px;
+}
+.tableau .title .order.desc{
+  transform:rotate(180deg);
+}
+.tableau .pict{
+  padding:7px 0;
 }
 .tableau .pict img{
   height:20px;
