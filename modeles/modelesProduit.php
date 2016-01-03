@@ -5,7 +5,7 @@ class modelesProduit extends modelesSuper {
   // ********** Vérification existance produit par ID ********** //
   public function verifExistanceIDProduit($id_produit){
 
-    $donnees = $this->connect_central_bdd()->query("SELECT id_produit FROM produit WHERE id_produit = '$id_produit'");
+    $donnees = $this->connect_central_bdd()->query("SELECT id_produit FROM produit WHERE etat = 0 AND id_produit = '$id_produit'");
 
     return $idExist = ($donnees->rowCount() === 1) ? TRUE : FALSE;
 
