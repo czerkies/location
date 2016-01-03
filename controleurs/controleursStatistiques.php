@@ -22,6 +22,7 @@ class controleursStatistiques extends controleursSuper {
 
         $cinqNotes = $donnees->dataCinqNotes();
         $title['name'] .= ' | 5 Salles les mieux notés';
+        $title['menu_admin'] = 700;
 
       }
 
@@ -29,6 +30,7 @@ class controleursStatistiques extends controleursSuper {
 
         $cinqVendues = $donnees->dataCinqVendues();
         $title['name'] .= ' | 5 Salles les plus vendues';
+        $title['menu_admin'] = 701;
 
       }
 
@@ -36,6 +38,7 @@ class controleursStatistiques extends controleursSuper {
 
         $cinqMembresQuantite = $donnees->dataCinqMembresQuantite();
         $title['name'] .= ' | 5 Membres qui achète le plus';
+        $title['menu_admin'] = 702;
 
       }
 
@@ -43,6 +46,7 @@ class controleursStatistiques extends controleursSuper {
 
         $cinqMembresPrix = $donnees->dataCinqMembresPrix();
         $title['name'] .= ' | 5 Membres dépensant le plus';
+        $title['menu_admin'] = 703;
 
       }
 

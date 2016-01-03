@@ -23,11 +23,12 @@ RewriteRule ^deconnexion/a-bientot/ routeur.php?controleurs=membre&action=deconn
 
 
 RewriteRule ^admin/gestion-salles/modification/(.*)$ routeur.php?controleurs=salles&action=gestionSalles&modif=$1 [L]
+RewriteRule ^admin/gestion-salles/suppression/oui/(.*)$ routeur.php?controleurs=salles&action=gestionSalles&confirm=oui&supp=$1 [L]
 RewriteRule ^admin/gestion-salles/suppression/(.*)$ routeur.php?controleurs=salles&action=gestionSalles&supp=$1 [L]
-RewriteRule ^admin/gestion-salles/suppression/(.*)$/oui routeur.php?controleurs=salles&action=gestionSalles&supp=$1&confirm=oui [L]
 
 RewriteRule ^admin/gestion-salles/ajouter/ routeur.php?controleurs=salles&action=ajouterSalle [L]
 RewriteRule ^admin/gestion-salles/ routeur.php?controleurs=salles&action=gestionSalles [L]
+
 RewriteRule ^admin/gestion-produits/modification/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&modif=$1 [L]
 RewriteRule ^admin/gestion-produits/suppression/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&supp=$1 [L]
 RewriteRule ^admin/gestion-produits/ordre/(.*)/(.*)$ routeur.php?controleurs=produitAdmin&action=afficherProduits&type=$1&order=$2 [L]
@@ -45,7 +46,7 @@ RewriteRule ^admin/gestion-commandes/ routeur.php?controleurs=commande&action=ge
 RewriteRule ^admin/gestion-avis/(.*)$ routeur.php?controleurs=avis&action=gestionAvis&supp=$1 [L]
 RewriteRule ^admin/gestion-avis/ routeur.php?controleurs=avis&action=gestionAvis [L]
 
-RewriteRule ^admin/gestion-promotions/supprimer/(.*)$/confirmer/oui /routeur.php?controleurs=promotion&action=afficherPromotion&supprimer=$1&confirm=oui [L]
+RewriteRule ^admin/gestion-promotions/supprimer/oui/(.*)$ routeur.php?controleurs=promotion&action=afficherPromotion&confirm=oui&supprimer=$1 [L]
 RewriteRule ^admin/gestion-promotions/supprimer/(.*)$ routeur.php?controleurs=promotion&action=afficherPromotion&supprimer=$1 [L]
 RewriteRule ^admin/gestion-promotions/ajouter/ routeur.php?controleurs=promotion&action=ajouterPromotion [L]
 RewriteRule ^admin/gestion-promotions/ routeur.php?controleurs=promotion&action=afficherPromotion [L]

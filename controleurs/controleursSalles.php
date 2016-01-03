@@ -85,7 +85,7 @@ class controleursSalles extends controleursSuper {
     // Si le lien supp est actif
     if(isset($_GET['supp']) && !empty($_GET['supp']) && is_numeric($_GET['supp'])){
 
-      $id_salle = htmlentities($_GET['supp'], ENT_QUOTES);
+      $id_salle = htmlentities($_GET['supp']);
 
       $salleASupprimer = $pdo->modifSalleID($id_salle);
       $chemin_photo = RACINE_SERVER_IMG . RACINE_SITE_IMG . $salleASupprimer['photo'];
@@ -99,7 +99,7 @@ class controleursSalles extends controleursSuper {
           }
           $pdo->suppressionSalle($id_salle);
           $gestionSalles = TRUE;
-          $msg .= 'La salle a bien été supprimé.<br>';
+          $confirmation .= 'La salle a bien été supprimé.<br>';
 
         } else {
 

@@ -1,11 +1,11 @@
 <?php if($userConnectAdmin){ $i=1; ?>
-<h1>Statisques</h1>
+<h2>Statisques</h2>
 <div class="menu_page_active">
-  <ul>
-    <li><a href="<?= RACINE_SITE; ?>admin/statistiques/salles-mieux-notes/">Top 5 des salles les mieux notés</a></li>
-    <li><a href="<?= RACINE_SITE; ?>admin/statistiques/salles-plus-vendues/">Top 5 des salles les plus vendues</a></li>
-    <li><a href="<?= RACINE_SITE; ?>admin/statistiques/membre-quantite/">Top 5 des membres qui achète le plus</a></li>
-    <li><a href="<?= RACINE_SITE; ?>admin/statistiques/membre-prix/">Top 5 des membres qui achète le plus cher</a></li>
+  <ul class="sous-menu-admin">
+    <li><a class="bouton-a <?php if($title['menu_admin'] === 700) echo 'active'; ?>" href="<?= RACINE_SITE; ?>admin/statistiques/salles-mieux-notes/">Top 5 des salles les mieux notés</a></li>
+    <li><a class="bouton-a <?php if($title['menu_admin'] === 701) echo 'active'; ?>" href="<?= RACINE_SITE; ?>admin/statistiques/salles-plus-vendues/">Top 5 des salles les plus vendues</a></li>
+    <li><a class="bouton-a <?php if($title['menu_admin'] === 702) echo 'active'; ?>" href="<?= RACINE_SITE; ?>admin/statistiques/membre-quantite/">Top 5 des membres qui achète le plus</a></li>
+    <li><a class="bouton-a <?php if($title['menu_admin'] === 703) echo 'active'; ?>" href="<?= RACINE_SITE; ?>admin/statistiques/membre-prix/">Top 5 des membres qui achète le plus cher</a></li>
   </ul>
 </div>
 <div>

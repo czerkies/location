@@ -8,9 +8,11 @@ class controleursPromotion extends controleursSuper {
     session_start();
     $title['name'] = 'Ajouter une promotion';
     $title['menu'] = 13;
+    $title['menu_admin'] = 601;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
+    $confirmation = '';
     $ajouter = TRUE;
     $donnees = FALSE;
 
@@ -53,14 +55,14 @@ class controleursPromotion extends controleursSuper {
           $pdo = new modelesPromotion();
           $pdo->ajouterCodePromo($code_promo, $reduction);
 
-          $msg .= 'Votre code promo a bien été ajouté.';
+          $confirmation .= 'Votre code promo a bien été ajouté.';
           $ajouter = FALSE;
 
         }
       }
     }
 
-    $this->Render('../vues/promotion/gestion_promos.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees));
+    $this->Render('../vues/promotion/gestion_promos.php', array('title' => $title, 'msg' => $msg, 'confirmation' => $confirmation, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees));
 
   }
   // ********** Afficher les code promotions Administrateur ********** //
@@ -69,12 +71,14 @@ class controleursPromotion extends controleursSuper {
     session_start();
     $title['name'] = 'Gestion des promotions';
     $title['menu'] = 13;
+    $title['menu_admin'] = 600;
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $ajouter = FALSE;
     $dialogue = FALSE;
 
     $msg = '';
+    $confirmation = '';
 
     $bdd = new modelesPromotion();
 
@@ -86,7 +90,7 @@ class controleursPromotion extends controleursSuper {
       if($VerifPromoProduit['nbProduitAssoc']){
 
         $bdd->SuppPromo($id_promo);
-        $msg .= "Votre code promo a bien été supprimé.";
+        $confirmation .= "Votre code promo a bien été supprimé.";
 
       } else {
 
@@ -95,7 +99,7 @@ class controleursPromotion extends controleursSuper {
         if(isset($_GET['confirm']) && !empty($_GET['confirm']) && $_GET['confirm'] === 'oui'){
 
           $bdd->SuppPromo($id_promo);
-          $msg .= "Votre code promo a bien été supprimé.";
+          $confirmation .= "Votre code promo a bien été supprimé.";
           $dialogue = FALSE;
 
         }
@@ -104,7 +108,7 @@ class controleursPromotion extends controleursSuper {
 
     $donnees = $bdd->affichageCodePromo();
 
-    $this->Render('../vues/promotion/gestion_promos.php', array('title' => $title, 'msg' => $msg, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees, 'dialogue' => $dialogue));
+    $this->Render('../vues/promotion/gestion_promos.php', array('title' => $title, 'msg' => $msg, 'confirmation' => $confirmation, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'ajouter' => $ajouter, 'donnees' => $donnees, 'dialogue' => $dialogue));
 
   }
 
