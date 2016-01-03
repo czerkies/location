@@ -500,6 +500,9 @@ ul.body{
   text-align:left;
   width:100%;
   padding:10px;
+  -webkit-hyphens:auto;
+  -moz-hyphens:auto;
+  -ms-hyphens:auto;
 }
 #details_sugg{
   width:100%;

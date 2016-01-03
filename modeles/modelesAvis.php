@@ -6,7 +6,7 @@ class modelesAvis extends modelesSuper {
   public function lesAvisAdmin(){
 
     $donnees = $this->connect_central_bdd()->query("SELECT a.id_avis, a.commentaire, a.note, a.id_salle,
-      DATE_FORMAT(a.date, '%e %M %Y à %Hh%i') AS date, m.prenom, a.id_membre
+      DATE_FORMAT(a.date, '%d/%m/%Y') AS date, m.prenom, a.id_membre
       FROM avis a, membre m
       WHERE (a.id_membre = m.id_membre
       OR a.id_membre IS NULL)
@@ -27,6 +27,8 @@ class modelesAvis extends modelesSuper {
 
     $del->execute();
 
+    return $del;
+    
   }
 
   // ********** Récupere les avis de la salle du produit ********** //
