@@ -11,6 +11,7 @@ class controleursNewsletter extends controleursSuper {
     $userConnect = FALSE;
     $userConnectAdmin = $this->userConnectAdmin();
     $msg = '';
+    $confirmation = '';
 
     $mail = new modelesNewsletter();
     $donneesNews = $mail->recupMailMembre();
@@ -25,8 +26,11 @@ class controleursNewsletter extends controleursSuper {
       && isset($_POST['sujet']) && !empty($_POST['sujet'])
       && isset($_POST['message']) && !empty($_POST['message'])){
 
+        if(!filter_var($_POST['expediteur'], FILTER_VALIDATE_EMAIL)){
+          $msg .= "Votre adresse email est invalide.<br>";
+        }
         if(strlen($_POST['message']) < 10 || strlen($_POST['message']) > 5000){
-          $msg .= 'Votre message doit contenir entre 10 et 5000 carractères.<br>';
+          $msg .= "Votre message doit contenir entre 10 et 5000 carractères.<br>";
         }
 
         if(empty($msg)){
@@ -45,8 +49,7 @@ class controleursNewsletter extends controleursSuper {
 
           mail($mail, $sujet, $message, $headers);
 
-          $msg .= 'Votre mail a bien été envoyé.';
-          // $confirmation = TRUE;
+          $confirmation .= 'Votre mail a bien été envoyé.';
 
         }
       } else {
@@ -55,7 +58,7 @@ class controleursNewsletter extends controleursSuper {
     }
 
 
-    $this->Render('../vues/newsletter/envoi_newsletter.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'mailAdmin' => $mailAdmin, 'nbAbonne' => $nbAbonne));
+    $this->Render('../vues/newsletter/envoi_newsletter.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'confirmation' => $confirmation, 'mailAdmin' => $mailAdmin, 'nbAbonne' => $nbAbonne));
 
   }
 

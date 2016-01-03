@@ -123,13 +123,20 @@ footer{
 #last3offres{
   width:100%;
 }
-h2{
+h2,
+h3{
   font-family:'codel';
   width:94%;
   padding:0 3%;
+  color:#735d6d;
+}
+h2{
   font-size:2em;
   margin:50px 0 25px;
-  color:#735d6d;
+}
+h3{
+  font-size:1.5em;
+  margin:25px 0;
 }
 
 /* Formulaire */
