@@ -1,73 +1,57 @@
-<div class="">
-  <?php if($userConnectAdmin){ ?>
-  <h1>Gestions des membres</h1>
-  <?= $msg; ?>
-  <table border="1">
-    <thead>
-      <th>ID Membre</th>
-      <th>Pseudo</th>
-      <th>Nom</th>
-      <th>Prénom</th>
-      <th>Statut</th>
-      <th>Sexe</th>
-      <th>Supprimer</th>
-    </thead>
-    <tbody>
-      <?php foreach ($listeMembres as $value) { ?>
-        <tr>
-          <td><?= $value['id_membre']; ?></td>
-          <td><?= $value['pseudo']; ?></td>
-          <td><?= strtoupper($value['nom']); ?></td>
-          <td><?= ucfirst($value['prenom']); ?></td>
-          <td><?= $value['statut']; ?></td>
-          <td><?= $value['sexe']; ?></td>
-          <td><?php if($value['statut'] == 0) { ?>
-            <a href="<?= RACINE_SITE; ?>admin/gestion-membres/suppression/<?= $value['id_membre']; ?>">X</a>
-          <?php } ?></td>
-        </tr>
-      <?php } ?>
-    </tbody>
-  </table>
-  <?php if($dialogue) { ?>
-  <div class="dialogue">
-    <p>
-      Ce membre est associé à une commande, si vous le supprimez, vous perdrez ses coordonnées mais pas sa commande.<br>
-      Êtes-vous sur de vouloir le supprimer ?<br>
-      <a href="<?= RACINE_SITE; ?>.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=<?= $_GET['suppMembre']; ?>/oui">Oui</a> | <a href="<?= RACINE_SITE; ?>admin/gestion-membres/">Non</a>
-    </p>
-  </div>
-  <?php } ?>
-  <div class="">
-    <p><a href="<?= RACINE_SITE; ?>admin/gestion-membres/ajouter-admin/">Création d'un compte admin</a></p>
-    <?php if($ajouterMembre){ ?>
-      <div class="inscription">
-        <form class="" action="" method="post">
-          <input type="text" name="pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} ?>" placeholder="Pseudo" required>
-          <input type="password" name="mdp" value="" placeholder="Mot de passe" required>
-          <input type="text" name="nom" value="<?php if(isset($_POST['nom'])) {echo $_POST['nom'];} ?>" placeholder="Nom" required>
-          <input type="text" name="prenom" value="<?php if(isset($_POST['prenom'])) {echo $_POST['prenom'];} ?>" placeholder="Prénom" required>
-          <input type="email" name="email" value="<?php if(isset($_POST['email'])) {echo $_POST['email'];} ?>" placeholder="Email" required>
-          <input type="radio" name="sexe" value="m" id="m" <?php
-            if(isset($_POST['sexe']) && $_POST['sexe'] === 'm') {
-              echo "checked";
-            } else {
-              echo "checked";
-            }
-          ?>
-          ><label for="m">Homme</label>
-          <input type="radio" name="sexe" value="f" id="f" <?php
-            if(isset($_POST['sexe']) && $_POST['sexe'] === 'f') {
-              echo "checked";
-            }
-          ?>
-          ><label for="f">Femme</label>
-          <input type="text" name="ville" value="<?php if(isset($_POST['ville'])) {echo $_POST['ville'];} ?>" placeholder="Ville" required>
-          <input type="number" name="cp" value="<?php if(isset($_POST['cp'])) {echo $_POST['cp'];} ?>" placeholder="Code Postal" min="5" max="5" required>
-          <textarea name="adresse" placeholder="Adresse" required><?php if(isset($_POST['adresse'])) {echo $_POST['adresse'];} ?></textarea>
-          <input type="submit" value="Inscription">
-        </form>
-      </div>
-    <?php } ?>
-  </div>
-  <?php } ?>
+<?php if($userConnectAdmin){ ?>
+<h2>Gestions des membres</h2>
+<?php if($dialogue) { ?>
+<div class="form-group erreur large">
+  <label>Attention</label>
+  <p>Ce membre est associé à une commande.<br>Si vous le supprimez, vous perdrez ses coordonnées mais pas sa commande.
+  Êtes-vous sur de vouloir le supprimer ?
+    <a class="bouton-a" href="<?= RACINE_SITE; ?>.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=<?= $_GET['suppMembre']; ?>/oui">Oui</a>
+    <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-membres/">Non</a>
+  </p>
 </div>
+<?php } ?>
+<div class="tableau large">
+  <div class="head">
+    <p class="title wp5">ID</p>
+    <p class="title wp15">Pseudo</p>
+    <p class="title wp15">Nom</p>
+    <p class="title wp15">Prénom</p>
+    <p class="title wp25">Email</p>
+    <p class="title wp5">Sexe</p>
+    <p class="title wp10">Statut</p>
+    <p class="title wp10">Actions</p>
+  </div>
+  <ul class="body">
+    <?php foreach ($listeMembres as $value) { ?>
+      <li>
+        <p class="cel wp5"><?= $value['id_membre']; ?></p>
+        <p class="cel wp15"><?= $value['pseudo']; ?></p>
+        <p class="cel wp15"><?= strtoupper($value['nom']); ?></p>
+        <p class="cel wp15"><?= ucfirst($value['prenom']); ?></p>
+        <p class="cel wp25"><?= $value['email']; ?></p>
+        <p class="cel wp5"><?= $value['sexe']; ?></p>
+        <p class="cel wp10"><?= $value['statut']; ?></p>
+        <?php if($value['statut'] == 0) { ?>
+        <p class="cel wp10 pict">
+          <a href="<?= RACINE_SITE; ?>admin/gestion-membres/suppression/<?= $value['id_membre']; ?>"><img src="<?= RACINE_SITE; ?>/pict/supp.png" alt="Supprimer"></a>
+        </p>
+        <?php } else { ?>
+        <p class="cel wp10">
+          Admin
+        </p>
+        <?php } ?>
+      </li>
+    <?php } ?>
+  </ul>
+</div>
+<a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-membres/ajouter-admin/#nouvel-admin">Création d'un compte admin</a>
+<?php if($ajouterMembre){ ?>
+  <div id="nouvel-admin">
+  <?php include '../vues/dialogue.php'; ?>
+    <form class="" action="#nouvel-admin" method="post">
+      <?php include '../vues/inscription.php'; ?>
+      <input type="submit" value="Inscription">
+    </form>
+  </div>
+<?php } ?>
+<?php } ?>

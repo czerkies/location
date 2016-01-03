@@ -436,6 +436,9 @@ ul.body{
   padding-left:10px;
   background:#cecece;
 }
+.wp25{
+  width:25%;
+}
 .wp50{
   width:50%;
 }
@@ -526,6 +529,10 @@ ul.sous-menu-admin li a{
 /* Gestion salles (admin) */
 #gestion_salles .tableau .cel{
   height:100px;
+}
+
+#nouvel-admin{
+  float:left;
 }
 
 @media screen and (min-width: 600px) { /*@media screen and (min-device-width: 600px) {*/
