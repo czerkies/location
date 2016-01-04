@@ -64,7 +64,7 @@ class controleursMembre extends controleursSuper {
 
     session_start();
     $title['name'] = 'Inscription';
-    $title['menu'] = 4;
+    $title['menu'] = 41;
     $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 

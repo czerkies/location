@@ -1,6 +1,6 @@
 <h2>Se connecter</h2>
 <?php if($userConnect){ ?>
-  <meta http-equiv="refresh" content="0; URL=<?= RACINE_SITE; ?>accueil/">
+  <meta http-equiv="refresh" content="0; URL=<?= RACINE_SITE; ?>">
 <?php } else { ?>
 <div id="connexion">
   <?php if(!empty($msg)) { ?>

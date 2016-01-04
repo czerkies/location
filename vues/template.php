@@ -20,6 +20,7 @@
         <li><a href="<?= RACINE_SITE; ?>recherche/" <?php if($title['menu'] === 3) echo 'class="active" '; ?>>Recherche</a></li>
         <?php if(!($userConnect || $userConnectAdmin)){ ?>
         <li><a href="<?= RACINE_SITE; ?>connexion/" <?php if($title['menu'] === 4) echo 'class="active" '; ?>>Connexion</a></li>
+        <li><a href="<?= RACINE_SITE; ?>inscription/" <?php if($title['menu'] === 41) echo 'class="active" '; ?>>Créer un compte</a></li>
         <?php } if($userConnect || $userConnectAdmin){ ?>
         <li><a href="<?= RACINE_SITE; ?>mon-profil/" <?php if($title['menu'] === 5) echo 'class="active" '; ?>>Profil</a></li>
         <li><a href="<?= RACINE_SITE; ?>panier/" <?php if($title['menu'] === 6) echo 'class="active" '; ?>>Mon panier</a></li>
