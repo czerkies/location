@@ -1,7 +1,7 @@
 <div>
   <h2>Plan du site</h2>
   <h3>Visiteurs</h3>
-  <p><a href="<?= RACINE_SITE; ?>accueil/">Accueil</a></p>
+  <p><a href="<?= RACINE_SITE; ?>">Accueil</a></p>
   <p><a href="<?= RACINE_SITE; ?>nos-salles/">Réservations</a></p>
   <p><a href="<?= RACINE_SITE; ?>recherche/">Recherche</a></p>
   <p><a href="<?= RACINE_SITE; ?>connexion/">Connexion</a></p>

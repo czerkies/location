@@ -8,14 +8,14 @@
   </head>
   <body>
     <div id="header">
-      <a href="<?= RACINE_SITE; ?>accueil/">
+      <a href="<?= RACINE_SITE; ?>">
         <h1>Loki<span>salle</span></h1>
         <p>Service de location de salles, simple et rapide.</p>
       </a>
     </div>
     <div id="nav">
       <ul class="menu_user <?php if(!($userConnect || $userConnectAdmin)) echo 'menu_visiteur'; ?>">
-        <li><a href="<?= RACINE_SITE; ?>accueil/" <?php if($title['menu'] === 1) echo 'class="active" '; ?>>Accueil</a></li>
+        <li><a href="<?= RACINE_SITE; ?>" <?php if($title['menu'] === 1) echo 'class="active" '; ?>>Accueil</a></li>
         <li><a href="<?= RACINE_SITE; ?>nos-salles/" <?php if($title['menu'] === 2) echo 'class="active" '; ?>>Réservations</a></li>
         <li><a href="<?= RACINE_SITE; ?>recherche/" <?php if($title['menu'] === 3) echo 'class="active" '; ?>>Recherche</a></li>
         <?php if(!($userConnect || $userConnectAdmin)){ ?>

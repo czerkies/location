@@ -47,5 +47,9 @@ if(isset($_GET['controleurs']) && !empty($_GET['controleurs'])
     }
 
 } else {
-  erreurUrl();
+
+  include('../controleurs/controleursProduit.php');
+  $instance = new controleursProduit();
+  $instance->produitACC();
+
 }
