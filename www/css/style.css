@@ -77,6 +77,9 @@ ul.sous-menu-admin li a.active{
   padding:0;
   float:left;
 }
+#plan-du-site p{
+  padding:0 6%;
+}
 
 /* Menu Footer */
 footer{
@@ -89,6 +92,9 @@ footer{
 }
 .menu_footer li a{
   color:#d9cdbf;
+}
+.menu_footer li a.active{
+  color:#735d6d;
 }
 
 /* Accueil */
@@ -301,7 +307,10 @@ a.bouton-a{
 a.bouton-a:hover{
   box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
 }
-
+form.validation{
+  float:left;
+  margin:25px auto;
+}
 /* Affichage d'un produit simple */
 .produit{
   width:98%;

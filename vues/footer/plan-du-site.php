@@ -1,4 +1,4 @@
-<div>
+<div id="plan-du-site">
   <h2>Plan du site</h2>
   <h3>Visiteurs</h3>
   <p><a href="<?= RACINE_SITE; ?>">Accueil</a></p>

@@ -72,19 +72,19 @@
       </div>
       <?php } ?>
     </div>
-    <form class="" action="<?= RACINE_SITE; ?>panier/" method="post">
+    <form class="validation" action="<?= RACINE_SITE; ?>panier/" method="post">
       <div class="form-group large">
         <label for="cgv">Conditions générales de vente</label>
         <div class="form-group__radio">
           <input id="cgv" type="checkbox" name="cgv">
-          <label for="cgv">J'accepte les conditions générales de vente (<a href="#">Voir</a>)</label>
+          <label for="cgv">J'accepte les conditions générales de vente (<a href="<?= RACINE_SITE; ?>conditions-generales-de-ventes/">Voir</a>)</label>
         </div>
         <em>Il est obligatoire d'accepter les Conditions Générale de Vente.</em>
+      </div>
       <input type="hidden" name="reduction" value="<?php if(isset($_POST['code_promo'])) echo $_POST['code_promo']; ?>">
       <input type="submit" name="payer" value="Payer">
       <a class="bouton-a" href="<?= RACINE_SITE; ?>panier/supprimer/panier">Vider mon panier</a>
     </form>
-  </div>
   <?php } else { ?>
   <div class="form-group ok large">
     <label>Votre panier est vide</label>
