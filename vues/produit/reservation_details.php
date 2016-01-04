@@ -23,6 +23,7 @@
 </div>
 <div id="avis_produit">
   <h2>Avis</h2>
+  <div class="autoscoll">
   <?php if($userConnect){
     if(!empty($msg)) { ?>
       <div class="form-group erreur large">
@@ -57,28 +58,29 @@
       <input type="submit" name="avis" value="Envoyer mon avis">
     </form>
     <?php }
-  } else { ?>
+    } else { ?>
     <p><a href="<?= RACINE_SITE; ?>connexion/">Il faut être connecté pour pouvoir déposer un avis.</a></p>
-  <?php } ?>
-  <?php foreach($affichageAvis as $donnees) { ?>
-  <div class="tableau large">
-    <div class="head">
-      <div class="title wp80">
-        <?php if($donnees['id_membre'] === NULL){ ?>
-          Le <?= ucwords($donnees['date']); ?>.
-        <?php } else { ?>
-          <?= $donnees['prenom']; ?>, le <?= ucwords($donnees['date']); ?>.
-        <?php } ?>
+    <?php } ?>
+    <?php foreach($affichageAvis as $donnees) { ?>
+    <div class="tableau large">
+      <div class="head">
+        <div class="title wp80">
+          <?php if($donnees['id_membre'] === NULL){ ?>
+            Le <?= ucwords($donnees['date']); ?>.
+          <?php } else { ?>
+            <?= $donnees['prenom']; ?>, le <?= ucwords($donnees['date']); ?>.
+          <?php } ?>
+        </div>
+        <div class="title wp20"><?= $donnees['note']; ?>/10</div>
       </div>
-      <div class="title wp20"><?= $donnees['note']; ?>/10</div>
+      <ul class="body">
+        <li>
+          <p class="cel wp100a"><?= $donnees['commentaire']; ?></p>
+        </li>
+      </ul>
     </div>
-    <ul class="body">
-      <li>
-        <p class="cel wp100a"><?= $donnees['commentaire']; ?></p>
-      </li>
-    </ul>
+    <?php } ?>
   </div>
-  <?php } ?>
 </div>
 <div id="details_sugg">
   <h2>Autres suggestion</h2>

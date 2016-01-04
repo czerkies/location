@@ -733,6 +733,10 @@ ul.sous-menu-admin li a{
     width:40%;
     margin:0;
   }
+  .autoscoll{
+    max-height:825px;
+    overflow:auto;
+  }
   /*#avis_produit .wp20{
     width:20%;
   }
