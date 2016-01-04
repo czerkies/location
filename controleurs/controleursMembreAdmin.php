@@ -67,7 +67,7 @@ class controleursMembreAdmin extends controleursSuper {
           if(empty($msg)){
 
             foreach ($_POST as $key => $value){
-              $_POST[$key] = htmlentities($value, ENT_QUOTES);
+              $_POST[$key] = htmlspecialchars($value, ENT_QUOTES);
             }
             extract($_POST);
 

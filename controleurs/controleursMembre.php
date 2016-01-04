@@ -26,8 +26,8 @@ class controleursMembre extends controleursSuper {
 
         if(empty($msg)){
 
-          $pseudo = htmlentities($_POST['pseudo'], ENT_QUOTES);
-          $mdp = htmlentities($_POST['mdp'], ENT_QUOTES);
+          $pseudo = htmlspecialchars($_POST['pseudo'], ENT_QUOTES);
+          $mdp = htmlspecialchars($_POST['mdp'], ENT_QUOTES);
 
           $connexion = new modelesMembre();
           $data = $connexion->recupMembre($pseudo, $mdp);
@@ -86,7 +86,7 @@ class controleursMembre extends controleursSuper {
         if(empty($msg)){
 
           foreach ($_POST as $key => $value){
-            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+            $_POST[$key] = htmlspecialchars($value, ENT_QUOTES);
           }
 
           extract($_POST);
@@ -287,7 +287,7 @@ class controleursMembre extends controleursSuper {
         if(empty($msg)){
 
           foreach ($_POST as $key => $value){
-            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+            $_POST[$key] = htmlspecialchars($value, ENT_QUOTES);
           }
 
           extract($_POST);
