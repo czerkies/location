@@ -23,7 +23,7 @@
         <p class="cel wp50"><?= substr($value['commentaire'], 0, 60); ?>...</p>
         <p class="cel wp5"><?= $value['note']; ?>/10</p>
         <p class="cel wp15"><?= $value['date']; ?></p>
-        <p class="cel wp5 pict"><a href="<?= RACINE_SITE; ?>admin/gestion-avis/<?= $value['id_avis']; ?>"><img src="<?= RACINE_SITE; ?>/pict/supp.png" alt="Supprimer"></a></p>
+        <p class="cel wp5 pict"><a href="<?= RACINE_SITE; ?>admin/gestion-avis/<?= $value['id_avis']; ?>"><img src="<?= RACINE_SITE; ?>pict/supp.png" alt="Supprimer"></a></p>
       </li>
     <?php } ?>
   </ul>

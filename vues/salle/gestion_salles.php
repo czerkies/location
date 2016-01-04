@@ -115,10 +115,10 @@
             <p class="cel wp20"><?= substr($donnees['description'], 0, 100); ?>...</p>
             <p class="cel wp10"><?= $donnees['capacite']; ?></p>
             <p class="cel wp10"><?= $donnees['categorie']; ?></p>
-            <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>/pict/mod.png" alt="Modifier"></p>
+            <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>pict/mod.png" alt="Modifier"></p>
           </a>
           <a href="<?= RACINE_SITE; ?>admin/gestion-salles/suppression/<?= $donnees['id_salle']; ?>#gestion_salles">
-            <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>/pict/supp.png" alt="Supprimer"></p>
+            <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>pict/supp.png" alt="Supprimer"></p>
           </a>
         </li>
         <?php } ?>

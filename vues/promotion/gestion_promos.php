@@ -28,7 +28,7 @@
               <li>
                 <p class="cel wp40"><?= $value['code_promo']; ?></p>
                 <p class="cel wp40"><?= $value['reduction']; ?> €</p>
-                <p class="cel wp20 pict"><a href="<?= RACINE_SITE; ?>admin/gestion-promotions/supprimer/<?= $value['id_promo']; ?>#gestion-promos"><img src="<?= RACINE_SITE; ?>/pict/supp.png" alt="Supprimer"></a></p>
+                <p class="cel wp20 pict"><a href="<?= RACINE_SITE; ?>admin/gestion-promotions/supprimer/<?= $value['id_promo']; ?>#gestion-promos"><img src="<?= RACINE_SITE; ?>pict/supp.png" alt="Supprimer"></a></p>
               </li>
             <?php } ?>
           </ul>

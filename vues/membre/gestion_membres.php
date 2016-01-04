@@ -33,7 +33,7 @@
         <p class="cel wp10"><?= $value['statut']; ?></p>
         <?php if($value['statut'] == 0) { ?>
         <p class="cel wp10 pict">
-          <a href="<?= RACINE_SITE; ?>admin/gestion-membres/suppression/<?= $value['id_membre']; ?>"><img src="<?= RACINE_SITE; ?>/pict/supp.png" alt="Supprimer"></a>
+          <a href="<?= RACINE_SITE; ?>admin/gestion-membres/suppression/<?= $value['id_membre']; ?>"><img src="<?= RACINE_SITE; ?>pict/supp.png" alt="Supprimer"></a>
         </p>
         <?php } else { ?>
         <p class="cel wp10">

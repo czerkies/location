@@ -58,17 +58,17 @@
         <p class="title wp5">ID</p>
         <p class="title wp20">Salle</p>
         <p class="title wp15">Arrivée
-          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_arrivee/asc#gestion_produit"><img class="order" src="<?= RACINE_SITE; ?>/pict/drop.png" alt="Date arrivée croissante"></a>
-          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_arrivee/desc#gestion_produit"><img class="order desc" src="<?= RACINE_SITE; ?>/pict/drop.png" alt="Date arrivée décroissante"></a>
+          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_arrivee/asc#gestion_produit"><img class="order" src="<?= RACINE_SITE; ?>pict/drop.png" alt="Date arrivée croissante"></a>
+          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_arrivee/desc#gestion_produit"><img class="order desc" src="<?= RACINE_SITE; ?>pict/drop.png" alt="Date arrivée décroissante"></a>
         </p>
         <p class="title wp15">Départ
-          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_depart/asc#gestion_produit"><img class="order" src="<?= RACINE_SITE; ?>/pict/drop.png" alt="Date départ croissante"></a>
-          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_depart/desc#gestion_produit"><img class="order desc" src="<?= RACINE_SITE; ?>/pict/drop.png" alt="Date départ croissante"></a>
+          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_depart/asc#gestion_produit"><img class="order" src="<?= RACINE_SITE; ?>pict/drop.png" alt="Date départ croissante"></a>
+          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/date_depart/desc#gestion_produit"><img class="order desc" src="<?= RACINE_SITE; ?>pict/drop.png" alt="Date départ croissante"></a>
         </p>
         <p class="title wp15">Code promo</p>
         <p class="title wp15">Prix
-          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/prix/asc#gestion_produit"><img class="order" src="<?= RACINE_SITE; ?>/pict/drop.png" alt="Prix croissant"></a>
-          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/prix/desc#gestion_produit"><img class="order desc" src="<?= RACINE_SITE; ?>/pict/drop.png" alt="Prix décroissant"></a>
+          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/prix/asc#gestion_produit"><img class="order" src="<?= RACINE_SITE; ?>pict/drop.png" alt="Prix croissant"></a>
+          <a href="<?= RACINE_SITE; ?>admin/gestion-produits/ordre/prix/desc#gestion_produit"><img class="order desc" src="<?= RACINE_SITE; ?>pict/drop.png" alt="Prix décroissant"></a>
         </p>
         <p class="title wp5">Etat</p>
         <p class="title wp10">Actions</p>
@@ -92,10 +92,10 @@
               <?php } ?>
               <p class="cel wp15"><?= $value['prix']; ?> €</p>
               <p class="cel wp5"><?= $value['etat']; ?></p>
-              <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>/pict/mod.png" alt="Modifier"></p>
+              <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>pict/mod.png" alt="Modifier"></p>
             </a>
             <a href="<?= RACINE_SITE; ?>admin/gestion-produits/suppression/<?= $value['id_produit']; ?>#gestion_produit">
-              <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>/pict/supp.png" alt="Supprimer"></p>
+              <p class="cel wp5 pict"><img src="<?= RACINE_SITE; ?>pict/supp.png" alt="Supprimer"></p>
             </a>
           </li>
         <?php } ?>
