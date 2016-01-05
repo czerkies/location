@@ -379,7 +379,8 @@ form.validation{
 }
 .produit .panier a img{
   width:20px;
-  margin:-5px 10px 0 0;
+  margin:0 10px 0 0;
+  transform: translateY(5px);
 }
 
 /* Tableau */
