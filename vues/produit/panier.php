@@ -32,7 +32,7 @@
             <p class="cel wp10"><?= $_SESSION['panier']['prix'][$i]; ?> €</p>
             <p class="cel wp5">20%</p>
           </a>
-          <p class="cel wp5"><a href="<?= RACINE_SITE; ?>panier/supprimer/<?= $_SESSION['panier']['id_produit'][$i]; ?>">X</a></p>
+          <p class="cel wp5 pict"><a href="<?= RACINE_SITE; ?>panier/supprimer/<?= $_SESSION['panier']['id_produit'][$i]; ?>"><img src="<?= RACINE_SITE; ?>pict/supp.png" alt="Supprimer"></a></p>
         </li>
       <?php } ?>
         <li>
