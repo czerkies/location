@@ -78,7 +78,7 @@ class controleursFonctions extends controleursSuper {
 
     $date_bdd_array = date_parse_from_format("j.m.Y.H.i", $date_bdd);
 
-    $select = '<label for="_J">'.$label.'</label>
+    $select = '<label for="_J"><img src="'.RACINE_SITE.'pict/cal.png" alt="date">'.$label.'</label>
     <select id="_J" name="'.$id_select.'_J">
     <option disabled>Jour</option>';
     for ($i=1;$i<=31;$i++) {

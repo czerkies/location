@@ -377,6 +377,10 @@ form.validation{
 .produit .panier a:hover{
   box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
 }
+.produit .panier a img{
+  width:20px;
+  margin:-5px 10px 0 0;
+}
 
 /* Tableau */
 .tableau{
@@ -684,6 +688,14 @@ ul.sous-menu-admin li a{
     width:25%;
     margin:20px 12.5% 10px;
     color:rgb(143, 0, 0);
+  }
+  .form-group label img{
+    width:20px;
+    border:none;
+    margin:0 10px 0 0;
+  }
+  .form-group.erreur label img{
+    transform:rotate(180deg);
   }
 
   /* Profil d'un membre */

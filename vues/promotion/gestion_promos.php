@@ -10,7 +10,7 @@
       <div id="gestion-promos">
         <?php if($dialogue) { ?>
         <div class="form-group erreur large">
-          <label>Attention</label>
+          <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Erreur"> Attention</label>
           <p>Cette salle est utilisé pour des produits. Êtes-vous sur de vouloir la supprimer ?
             <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-promotions/supprimer/oui/<?= $_GET['supprimer']; ?>">Oui</a>
             <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-promotions/">Non</a>

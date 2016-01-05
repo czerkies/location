@@ -60,7 +60,7 @@
         <em>Catégorie de la salle.</em>
       </div>
       <div class="form-group">
-        <label for="photo">Photo</label>
+        <label for="photo"><img src="<?= RACINE_SITE; ?>pict/img.png" alt="Photo">Photo</label>
         <?php if(isset($recupPourModif['photo']) && !empty($recupPourModif['photo'])){ ?>
           <img src="<?= RACINE_SITE.$recupPourModif['photo']; ?>">
           <input type="hidden" name="photoBDD" value="<?= $recupPourModif['photo']; ?>">
@@ -79,7 +79,7 @@
     <h2>Afficher les salles</h2>
     <?php if($dialogue) { ?>
     <div class="form-group erreur large">
-      <label>Attention</label>
+      <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Erreur"> Attention</label>
       <p>Cette salle est utilisé pour des produits. Êtes-vous sur de vouloir la supprimer ?
         <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-salles/suppression/oui/<?= $_GET['supp']; ?>#gestion_salles">Oui</a>
         <a class="bouton-a" href="routeur.php?controleurs=salles&action=gestionSalles&supp=<?= $_GET['supp']; ?>&confirm=oui#gestion_salles">Non Test</a>

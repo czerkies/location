@@ -3,7 +3,7 @@
 <?php include '../vues/dialogue.php'; ?>
 <?php if($dialogue) { ?>
 <div class="form-group erreur large">
-  <label>Attention</label>
+  <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Erreur"> Attention</label>
   <p>Ce membre est associé à une commande.<br>Si vous le supprimez, vous perdrez ses coordonnées mais pas sa commande.
   Êtes-vous sur de vouloir le supprimer ?
     <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-membres/suppression/oui/<?= $_GET['suppMembre']; ?>">Oui</a>

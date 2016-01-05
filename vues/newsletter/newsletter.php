@@ -6,7 +6,7 @@
     <a class="bouton-a" href="<?= RACINE_SITE; ?>newsletter/inscription/">Je souhaite m'abonner à la newsletter et recevoir les actualités de LOKISALLE</a>
   <?php } else { ?>
     <div class="form-group ok large">
-      <label>Confirmation</label>
+      <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Information"> Confirmation</label>
       <p>Vous êtes inscrit à la newsletter.</p>
     </div>
   <?php }

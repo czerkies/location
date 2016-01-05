@@ -5,7 +5,7 @@
 <div id="connexion">
   <?php if(!empty($msg)) { ?>
     <div class="form-group erreur large">
-      <label>Erreur(s)</label>
+      <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Erreur"> Erreur(s)</label>
       <p>
         <?= $msg; ?>
       </p>

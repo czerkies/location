@@ -2,14 +2,14 @@
 <div id="inscription">
   <?php if(!empty($msg)) { ?>
     <div class="form-group erreur large">
-      <label>Erreur(s)</label>
+      <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Erreur"> Erreur(s)</label>
       <p>
         <?= $msg; ?>
       </p>
     </div>
   <?php } if($confirmation) { ?>
     <div class="form-group ok large">
-      <label>Confirmation</label>
+      <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Information"> Confirmation</label>
       <p>Votre email a bien été envoyé.</p>
     </div>
   <?php } ?>

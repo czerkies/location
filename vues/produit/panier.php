@@ -3,7 +3,7 @@
   <div id="panier">
   <?php if(!empty($msg)) { ?>
     <div class="form-group ok large">
-      <label>Information(s)</label>
+      <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Information">Information(s)</label>
       <p>
         <?= $msg; ?>
       </p>
@@ -87,7 +87,7 @@
     </form>
   <?php } else { ?>
   <div class="form-group ok large">
-    <label>Votre panier est vide</label>
+    <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Information">Votre panier est vide</label>
     <p><a href="<?= RACINE_SITE; ?>nos-salles/">Voir le catalogues de toutes les salles proposées par <b>LOKI</b>SALLE.</a></p>
   </div>
   <?php } ?>
