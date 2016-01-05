@@ -503,10 +503,13 @@ ul.body{
   float:left;
 }
 
-/* Profil d'un membre */
+/* Profil d'un membre & gestion membres */
 #last_commande,
 #profil{
   float:left;
+}
+#nouvel-admin{
+  margin:50px 0;
 }
 
 /* Details d'un produit */

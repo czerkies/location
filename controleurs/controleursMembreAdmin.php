@@ -2,6 +2,9 @@
 
 class controleursMembreAdmin extends controleursSuper {
 
+  const SUPPOK = "Le membre a bien été supprimé.<br>";
+  const SUPPERROR = "Vous ne pouvez pas supprimer ce membre.<br>";
+
   // ********* Gestions des Membres Admin ********** //
   public function gestionMembres(){
 
@@ -13,6 +16,7 @@ class controleursMembreAdmin extends controleursSuper {
     $ajouterMembre = FALSE;
     $dialogue = FALSE;
     $msg = '';
+    $confirmation = '';
 
     $membre = new modelesMembre();
 
@@ -24,9 +28,9 @@ class controleursMembreAdmin extends controleursSuper {
       if(!$membre->verifMembreCommande($id_membre)){
 
         if($membre->supprimerMembreAdmin($id_membre)){
-          $msg .= 'Le membre a bien été supprimé.';
+          $confirmation .= self::SUPPOK;
         } else {
-          $msg .= 'Vous ne pouvez pas supprimer ce membre';
+          $msg .= self::SUPPERROR;
         }
 
       } else {
@@ -36,9 +40,9 @@ class controleursMembreAdmin extends controleursSuper {
         if(isset($_GET['confirm']) && !empty($_GET['confirm']) && $_GET['confirm'] === 'oui'){
 
           if($membre->supprimerMembreAdmin($id_membre)){
-            $msg .= 'Le membre a bien été supprimé.';
+            $confirmation .= self::SUPPOK;
           } else {
-            $msg .= 'Vous ne pouvez pas supprimer ce membre';
+            $msg .= self::SUPPERROR;
           }
 
           $dialogue = FALSE;
@@ -71,7 +75,9 @@ class controleursMembreAdmin extends controleursSuper {
             }
             extract($_POST);
 
-            $membre->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 1);
+            if($membre->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 1)){
+              $confirmation .= "Le membre a bien été ajouté.<br>";
+            }
 
           }
         } else {
@@ -83,7 +89,7 @@ class controleursMembreAdmin extends controleursSuper {
     $listeMembres = $membre->lesMembresAdmin();
 
 
-    $this->Render('../vues/membre/gestion_membres.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'listeMembres' => $listeMembres, 'ajouterMembre' => $ajouterMembre, 'dialogue' => $dialogue));
+    $this->Render('../vues/membre/gestion_membres.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'confirmation' => $confirmation, 'listeMembres' => $listeMembres, 'ajouterMembre' => $ajouterMembre, 'dialogue' => $dialogue));
 
   }
 

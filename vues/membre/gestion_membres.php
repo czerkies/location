@@ -1,5 +1,6 @@
 <?php if($userConnectAdmin){ ?>
 <h2>Gestions des membres</h2>
+<?php include '../vues/dialogue.php'; ?>
 <?php if($dialogue) { ?>
 <div class="form-group erreur large">
   <label>Attention</label>
@@ -44,11 +45,11 @@
     <?php } ?>
   </ul>
 </div>
+<?php if(!$ajouterMembre){ ?>
 <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-membres/ajouter-admin/#nouvel-admin">Création d'un compte admin</a>
-<?php if($ajouterMembre){ ?>
+<?php } if($ajouterMembre){ ?>
   <div id="nouvel-admin">
-  <?php include '../vues/dialogue.php'; ?>
-    <form class="" action="#nouvel-admin" method="post">
+    <form class="" action="" method="post">
       <?php include '../vues/inscription.php'; ?>
       <input type="submit" value="Inscription">
     </form>
