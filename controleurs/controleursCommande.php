@@ -25,12 +25,15 @@ class controleursCommande extends controleursSuper {
 
       $details = new modelesDetails_commande();
 
-      $client = $details->detailsCommandeClient($idDetailsCommande);
-      $infos = $details->detailsCommandeInfos($idDetailsCommande);
-      $detailsCommandeID = $details->detailsCommandeGestionAdmin($idDetailsCommande);
+      if($details->detailsCommandeInfos($idDetailsCommande)){
 
-      $detailsCommandeDisplay = TRUE;
+        $client = $details->detailsCommandeClient($idDetailsCommande);
+        $infos = $details->detailsCommandeInfos($idDetailsCommande);
+        $detailsCommandeID = $details->detailsCommandeGestionAdmin($idDetailsCommande);
 
+        $detailsCommandeDisplay = TRUE;
+
+      }
     }
 
     $listeCommandes = $donneesCommandes->lesCommandesAdmin();
