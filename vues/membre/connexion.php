@@ -15,6 +15,7 @@
     <div class="form-group">
       <label for="pseudo">Pseudo</label>
       <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} elseif(isset($_COOKIE['pseudo'])) {echo $_COOKIE['pseudo'];} ?>" required>
+      <em></em>
     </div>
     <div class="form-group">
       <label for="mdp">Mot de passe</label>

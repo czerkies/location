@@ -94,9 +94,21 @@ class controleursMembre extends controleursSuper {
           $cont = new modelesMembre();
 
           if($cont->insertMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, 0)){
-            $confirmation = TRUE;
-          }
 
+            $confirmation = TRUE;
+            $connexion = new modelesMembre();
+            $data = $connexion->recupMembre($pseudo, $mdp);
+
+            if($data['pseudo'] === $pseudo && $data['mdp'] === $mdp){
+              foreach ($data as $key => $value) {
+                if($key != 'mdp'){
+                  $_SESSION['membre'][$key] = $value;
+                }
+              }
+              $userConnect = $this->userConnect();
+              $userConnectAdmin = $this->userConnectAdmin();
+            }
+          }
         }
       } else {
         $msg .= 'Une erreur est survenue lors de votre demande.<br>';

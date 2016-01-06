@@ -1,9 +1,6 @@
 <h2>Inscription</h2>
 <?php if($userConnect){ ?>
-  <div class="form-group erreur large">
-    <label>Erreur(s)</label>
-    <p>Vous êtres déjà connecté et inscrit.</p>
-  </div>
+  <meta http-equiv="refresh" content="0; URL=<?= RACINE_SITE; ?>mon-profil/">
 <?php } else { ?>
 <div class="inscription">
   <?php if(!empty($msg)) { ?>
@@ -11,14 +8,6 @@
       <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Erreur"> Erreur(s)</label>
       <p>
         <?= $msg; ?>
-      </p>
-    </div>
-  <?php } if($confirmation) { ?>
-    <div class="form-group ok large">
-      <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Information"> Confirmation</label>
-      <p>
-        Votre inscription a bien été pris en compte.<br>
-        Vous pouvez maintenant vous connecter.
       </p>
     </div>
   <?php } else { ?>

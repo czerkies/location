@@ -37,8 +37,8 @@ RewriteRule ^admin/gestion-produits/ordre/(.*)/(.*)$ index.php?controleurs=produ
 RewriteRule ^admin/gestion-produits/ajouter/ index.php?controleurs=produitAdmin&action=ajouterProduits [L]
 RewriteRule ^admin/gestion-produits/ index.php?controleurs=produitAdmin&action=afficherProduits [L]
 
-RewriteRule ^admin/gestion-membres/suppression/(.*)$ index.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=$1 [L]
 RewriteRule ^admin/gestion-membres/suppression/oui/(.*)$ index.php?controleurs=membreAdmin&action=gestionMembres&confirm=oui&suppMembre=$1 [L]
+RewriteRule ^admin/gestion-membres/suppression/(.*)$ index.php?controleurs=membreAdmin&action=gestionMembres&suppMembre=$1 [L]
 RewriteRule ^admin/gestion-membres/ajouter-admin/ index.php?controleurs=membreAdmin&action=gestionMembres&ajouter=membre [L]
 RewriteRule ^admin/gestion-membres/ index.php?controleurs=membreAdmin&action=gestionMembres [L]
 
