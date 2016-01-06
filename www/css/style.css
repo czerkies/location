@@ -144,6 +144,8 @@ h3{
   font-size:1.5em;
   margin:25px 0;
 }
+
+/* Animation accueil */
 .slide{
   width:100%;
   height:400px;
@@ -156,24 +158,36 @@ h3{
   height:auto;
 }
 .slide img.img1{
-  animation:slide1 30s ease;
+  animation:slide1 30s ease infinite;
 }
 .slide img.img2{
   opacity:0;
-  animation:slide2 30s ease;
+  animation:slide2 30s ease infinite;
 }
 .slide img.img3{
   opacity:0;
-  animation:slide3 30s ease;
+  animation:slide3 30s ease infinite;
 }
 .slide img.img4{
   opacity:0;
-  animation:slide4 30s ease;
+  animation:slide4 30s ease infinite;
 }
 
 @keyframes slide1{
-  0%,100%{opacity:0;}
-  10%,90%{opacity:1;}
+  0%,27%,100%{opacity:0;}
+  4%,23%{opacity:1;}
+}
+@keyframes slide2{
+  0%,23%,50%,100%{opacity:0;}
+  27%,46%{opacity:1;}
+}
+@keyframes slide3{
+  0%,46%,73%,100%{opacity:0;}
+  50%,69%{opacity:1;}
+}
+@keyframes slide4{
+  0%,69%,100%{opacity:0;}
+  73%,99%{opacity:1;}
 }
 
 /* Formulaire */
@@ -383,7 +397,7 @@ form.validation{
 .produit .image_overflow{
   width:100%;
   height:275px;
-  margin:0 0 10px;
+  margin:0;
   padding:0;
   overflow:hidden;
 }

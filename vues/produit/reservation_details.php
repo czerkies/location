@@ -6,10 +6,9 @@
         <img src="<?= RACINE_SITE.$ProduitIDSalle['photo'] ?>" alt="<?= $ProduitIDSalle['titre']; ?>">
       </p>
       <p class="description"><?= $ProduitIDSalle['description']; ?></p>
-      <p class="adresse"><span>Adresse :</span> <?= $ProduitIDSalle['adresse']; ?>, <?= $ProduitIDSalle['ville'].'. '.strtoupper($ProduitIDSalle['pays']); ?>.</p>
+      <p class="adresse"><img class="pict" src="<?= RACINE_SITE; ?>pict/localisation.png" alt="Localisation"><?= $ProduitIDSalle['adresse']; ?>, <?= $ProduitIDSalle['ville'].'. '.strtoupper($ProduitIDSalle['pays']); ?>.</p>
       <p class="categorie"><span>Categorie :</span> <?= ucfirst($ProduitIDSalle['categorie']); ?>.</p>
-      <p class="date_arrivee"><span>Date d'arrivée :</span> <?= $ProduitIDSalle['date_arrivee']; ?>.</p>
-      <p class="date_depart"><span>Date de départ :</span> <?= $ProduitIDSalle['date_depart']; ?>.</p>
+      <p class="date_arrivee"><span>Disponible du </span> <?= $ProduitIDSalle['date_arrivee']; ?> <span>au</span> <?= $ProduitIDSalle['date_depart']; ?>.</p>
       <p class="capacite"><span>Capacité :</span> <?= $ProduitIDSalle['capacite']; ?> places.</p>
       <p class="prix"><span>Prix :</span> <?= $ProduitIDSalle['prix']; /*= $ProduitIDSalle['prix'] * 1.2;*/ ?> € HT</p>
       <p class="panier">
