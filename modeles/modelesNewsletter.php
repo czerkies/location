@@ -7,9 +7,7 @@ class modelesNewsletter extends modelesSuper {
 
     $verifNews = $this->connect_central_bdd()->query("SELECT * FROM newsletter WHERE id_membre = $id_membre");
 
-    $verif = ($verifNews->rowCount() != 0) ? FALSE : TRUE;
-
-    return $verif;
+    return $verif = $verifNews->rowCount();
 
   }
 
@@ -17,19 +15,25 @@ class modelesNewsletter extends modelesSuper {
   public function insertMembre($id_membre){
 
     $insertion = $this->connect_central_bdd()->prepare("INSERT INTO newsletter(id_membre) VALUES(:id_membre)");
+
     $insertion->bindValue(':id_membre', $id_membre, PDO::PARAM_INT);
+
     $insertion->execute();
+
+    return TRUE;
 
   }
 
-  // ********** Récupération nombre abonné ********** //
-  //public function nbAbonne(){
+  // ********** Suppréssion membre newsletter ********** //
+  public function suppNews($id_membre){
 
-    //$pdo = $this->connect_central_bdd();
-    //$nbAbonne = $pdo->query("SELECT COUNT(*) FROM newsletter");
-    //return $nbAbonne;
+    $supprimer = $this->connect_central_bdd()->prepare("DELETE FROM newsletter WHERE id_membre = $id_membre");
 
-  //}
+    $supprimer->execute();
+
+    return TRUE;
+
+  }
 
   // ********** Requete pour récupérer adresse mail des membres inscrit ********** //
   public function recupMailMembre(){

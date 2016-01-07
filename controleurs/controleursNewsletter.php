@@ -77,18 +77,17 @@ class controleursNewsletter extends controleursSuper {
     if($userConnect){
 
       $id_membre = $_SESSION['membre']['id_membre'];
+      $news = new modelesNewsletter();
 
-      $cont = new modelesNewsletter();
-
-      if($cont->verifNewsletter($id_membre)){
+      if(!$news->verifNewsletter($id_membre)){
 
         $affichage = TRUE;
 
         if(isset($_GET['inscription']) && !empty($_GET['inscription']) && $_GET['inscription'] === 'ok'){
 
-          $pdo = new modelesNewsletter();
-          $insertion = $pdo->insertMembre($id_membre);
-          $affichage = FALSE;
+          if($news->insertMembre($id_membre)){
+            $affichage = FALSE;
+          }
 
         }
 
@@ -96,6 +95,15 @@ class controleursNewsletter extends controleursSuper {
         $affichage = FALSE;
       }
     }
+
+    if(isset($_GET['inscription']) && !empty($_GET['inscription']) && $_GET['inscription'] === 'del'){
+
+      if($news->suppNews($id_membre)){
+        $affichage = TRUE;
+      }
+
+    }
+
 
     $this->Render('../vues/newsletter/newsletter.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin, 'msg' => $msg, 'affichage' => $affichage));
 

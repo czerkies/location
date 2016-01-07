@@ -11,6 +11,7 @@ RewriteRule ^nos-salles/ index.php?controleurs=produit&action=produitReservation
 RewriteRule ^recherche/ index.php?controleurs=produit&action=rechercheProduit [L]
 RewriteRule ^contact/ index.php?controleurs=membre&action=contactMembre [L]
 RewriteRule ^newsletter/inscription/ index.php?controleurs=newsletter&action=inscriptionMembre&inscription=ok [L]
+RewriteRule ^newsletter/desinscription/ index.php?controleurs=newsletter&action=inscriptionMembre&inscription=del [L]
 RewriteRule ^newsletter/ index.php?controleurs=newsletter&action=inscriptionMembre [L]
 RewriteRule ^mentions-legales/ index.php?controleurs=footer&action=mentionsLegales [L]
 RewriteRule ^conditions-generales-de-ventes/ index.php?controleurs=footer&action=cgv [L]
