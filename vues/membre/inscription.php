@@ -10,11 +10,10 @@
         <?= $msg; ?>
       </p>
     </div>
-  <?php } else { ?>
+  <?php } ?>
   <form class="large" action="" method="post">
     <?php include '../vues/inscription.php'; ?>
     <input type="submit" value="Inscription">
   </form>
-  <?php } ?>
 </div>
 <?php } ?>

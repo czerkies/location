@@ -81,7 +81,7 @@ class controleursMembre extends controleursSuper {
       && isset($_POST['adresse'])){
 
         $controleFormulaire = new controleursFonctions();
-        $msg = $controleFormulaire->verifFormMembre($_POST, NULL, 'add');
+        $msg = $controleFormulaire->verifFormMembre($_POST, NULL);
 
         if(empty($msg)){
 
@@ -306,7 +306,7 @@ class controleursMembre extends controleursSuper {
       && isset($_POST['adresse']) && isset($_POST['mdp'])){
 
         $controleFormulaire = new controleursFonctions();
-        $msg = $controleFormulaire->verifFormMembre($_POST, $idMembre, 'update');
+        $msg = $controleFormulaire->verifFormMembre($_POST, $idMembre);
 
         if(empty($msg)){
 
