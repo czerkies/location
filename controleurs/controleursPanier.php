@@ -268,9 +268,6 @@ class controleursPanier extends controleursSuper {
         $message .= 'Lokisalle '.date('Y').'.
         </div>';
 
-        //echo $sujet;
-        echo $message;
-
         // Vider le Panier
         unset($_SESSION['panier']);
         $userCart = FALSE;

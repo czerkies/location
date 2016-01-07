@@ -43,6 +43,7 @@ class modelesProduit extends modelesSuper {
       WHERE s.id_salle = p.id_salle
       AND p.etat = 0
       AND p.date_arrivee >= NOW()
+      ORDER BY p.date_arrivee
     ");
 
     return $produitOffre;
