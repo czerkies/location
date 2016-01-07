@@ -2,8 +2,8 @@
 
 class controleursFonctions extends controleursSuper {
 
-  // ********** Controle du formulaire de la création de membre ********** //
-  public function verifFormMembre($value, $id_membre){
+  // ********** Controle du formulaire de la création et modification profil de membre ********** //
+  public function verifFormMembre($value, $id_membre, $type){
 
     $msg = '';
 
@@ -16,12 +16,21 @@ class controleursFonctions extends controleursSuper {
     } elseif(!$cont->verifPseudo($value['pseudo'], $id_membre)){
       $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
     }
-    if(!$id_membre){
+    if($type === 'update'){
+      if(!empty($value['mdp'])){
+          if(strlen($value['mdp']) < 5 || strlen($value['mdp']) > 32) {
+          $msg .= "Veuillez saisir un mot de passe entre 5 et 32 carractères.<br>";
+        } elseif(!preg_match('#^[^A-Z0-9]*([A-Z0-9])#',$value['mdp'])){
+          $msg .= "Votre mot de passe doit comporter au moins une majuscule ou un chiffre.<br>";
+        }
+      }
+    }
+    if($type === 'add'){
       if(empty($value['mdp'])){
         $msg .= "Veuillez saisir un mot de passe.<br>";
       } elseif(strlen($value['mdp']) < 5 || strlen($value['mdp']) > 32) {
         $msg .= "Veuillez saisir un mot de passe entre 5 et 32 carractères.<br>";
-      } elseif(!preg_match('#^[^A-Z0-9]*([A-Z0-9])#',$value['mdp'])){ // Controler si existe
+      } elseif(!preg_match('#^[^A-Z0-9]*([A-Z0-9])#',$value['mdp'])){
         $msg .= "Votre mot de passe doit comporter au moins une majuscule ou un chiffre.<br>";
       }
     }

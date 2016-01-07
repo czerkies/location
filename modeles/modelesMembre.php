@@ -87,9 +87,19 @@ class modelesMembre extends modelesSuper {
   }
 
   // ********** Mise à jour profil membre ********* //
-  public function updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $id_membre){
+  public function updateMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $id_membre){
 
-    $insertion = $this->connect_central_bdd()->prepare("UPDATE membre SET pseudo = :pseudo, email = :email, sexe = :sexe, nom = :nom, prenom = :prenom, ville = :ville, cp = :cp, adresse = :adresse WHERE id_membre = '$id_membre'");
+    if($mdp === NULL){
+
+      $req = "UPDATE membre SET pseudo = :pseudo, email = :email, sexe = :sexe, nom = :nom, prenom = :prenom, ville = :ville, cp = :cp, adresse = :adresse WHERE id_membre = '$id_membre'";
+
+    } else {
+
+      $req = "UPDATE membre SET pseudo = :pseudo, mdp = :mdp, email = :email, sexe = :sexe, nom = :nom, prenom = :prenom, ville = :ville, cp = :cp, adresse = :adresse WHERE id_membre = '$id_membre'";
+
+    }
+
+    $insertion = $this->connect_central_bdd()->prepare($req);
 
     $insertion->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
     $insertion->bindValue(':nom', $nom, PDO::PARAM_STR);
@@ -99,6 +109,10 @@ class modelesMembre extends modelesSuper {
     $insertion->bindValue(':ville', $ville, PDO::PARAM_STR);
     $insertion->bindValue(':cp', $cp, PDO::PARAM_STR);
     $insertion->bindValue(':adresse', $adresse, PDO::PARAM_STR);
+
+    if($mdp != NULL){
+      $insertion->bindValue(':mdp', $mdp, PDO::PARAM_STR);
+    }
 
     return $insertion->execute();
 

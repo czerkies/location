@@ -81,7 +81,7 @@ class controleursMembre extends controleursSuper {
       && isset($_POST['adresse'])){
 
         $controleFormulaire = new controleursFonctions();
-        $msg = $controleFormulaire->verifFormMembre($_POST, NULL);
+        $msg = $controleFormulaire->verifFormMembre($_POST, NULL, 'add');
 
         if(empty($msg)){
 
@@ -105,8 +105,20 @@ class controleursMembre extends controleursSuper {
                   $_SESSION['membre'][$key] = $value;
                 }
               }
+
               $userConnect = $this->userConnect();
               $userConnectAdmin = $this->userConnectAdmin();
+
+              $headers = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
+              $headers .= 'FROM: LokiSalle <contact@lokisalle.fr>' . "\r\n";
+
+              $sujet = "Bienvenue chez LokiSalle ".ucfirst($nom)." ".$prenom.".";
+
+              $message = "Bienvenue chez Lokisalle.<br>
+              Vous pouvez désormais commander vos salle dans notre catalogue à la page suivante : <a href=\"http://loki-salle.romanczerkies.fr/nos-salles/\">Nos Salles</a>";
+
+              mail($email, $sujet, $message, $headers);
+
             }
           }
         }
@@ -291,10 +303,10 @@ class controleursMembre extends controleursSuper {
       && isset($_POST['prenom']) && isset($_POST['email'])
       && ((isset($_POST['sexe']) && ($_POST['sexe'] === 'm' || $_POST['sexe'] === 'f'))
       && isset($_POST['ville']) && isset($_POST['cp']))
-      && isset($_POST['adresse'])){
+      && isset($_POST['adresse']) && isset($_POST['mdp'])){
 
         $controleFormulaire = new controleursFonctions();
-        $msg = $controleFormulaire->verifFormMembre($_POST, $idMembre);
+        $msg = $controleFormulaire->verifFormMembre($_POST, $idMembre, 'update');
 
         if(empty($msg)){
 
@@ -310,7 +322,9 @@ class controleursMembre extends controleursSuper {
             }
           }
 
-          if($cont->updateMembre($pseudo, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre)){
+          $mdp = (!empty($_POST['mdp'])) ? htmlspecialchars($_POST['mdp']) : NULL;
+
+          if($cont->updateMembre($pseudo, $mdp, $nom, $prenom, $email, $sexe, $ville, $cp, $adresse, $idMembre)){
             $confirmation = TRUE;
           }
 

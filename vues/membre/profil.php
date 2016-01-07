@@ -22,6 +22,11 @@
       <em>Veuillez inscrire un speudo, sans espace.</em>
     </div>
     <div class="form-group large">
+      <label for="mdp">Mot de passe</label>
+      <input type="password" name="mdp" id="mdp">
+      <em>Vous pouvez changer votre mot de passe ici.</em>
+    </div>
+    <div class="form-group large">
       <label for="nom">Nom</label>
       <input type="text" name="nom" id="nom" value="<?php if(isset($_POST['nom'])) {echo $_POST['nom'];} else {echo $_SESSION['membre']['nom'];} ?>" required>
       <em>Votre nom pour l'enregistrement de vos commandes.</em>
