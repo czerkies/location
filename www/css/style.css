@@ -77,8 +77,10 @@ ul.sous-menu-admin li a.active{
   padding:0;
   float:left;
 }
-#plan-du-site p{
-  padding:0 6%;
+.plan-du-site__visiteur,
+.plan-du-site__admin{
+  width:50%;
+  float:left;
 }
 
 /* Menu Footer */
