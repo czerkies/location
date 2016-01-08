@@ -195,7 +195,7 @@ h3{
   float:left;
   width:96%;
   margin:10px 2%;
-  min-height:115px;
+  min-height:100px;
   padding:0;
   border-radius:2px;
 }
@@ -382,9 +382,9 @@ form.validation{
   margin:0;
 }
 .produit img.pict{
-  width:25px;
+  width:20px;
   margin:0 10px 0 0;
-  transform:translateY(5px);
+  transform:translateY(2px);
 }
 .produit .description{
   padding-bottom:20px;
@@ -720,7 +720,7 @@ ul.sous-menu-admin li a{
   }
   input[type="submit"]{
     width:50%;
-    margin:5px 25%;
+    margin:0 25% 10px;
   }
   input[type="submit"].large{
     width:100%;

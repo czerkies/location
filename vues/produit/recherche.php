@@ -27,27 +27,10 @@
     <?php if(!$produits['nbProduits']) { ?>
     <h2>Aucun produit ne correspond à votre recherche.<br>¯\_(⊙︿⊙)_/¯</h2>
     <? } else { ?>
-    <?php foreach ($produits['listeProduits'] as $value) { ?>
-      <div class="produit">
-        <a href="<?= RACINE_SITE; ?>nos-salles/reservation-en-details/<?= $value['id_produit']; ?>">
-          <h3><?= $value['titre']; ?></h3>
-          <p class="image_overflow"><img src="<?= RACINE_SITE.$value['photo']; ?>" alt="<?= $value['titre']; ?>"></p>
-          <p class="adresse"><img class="pict" src="<?= RACINE_SITE; ?>pict/localisation.png" alt="Localisation"><?= $value['ville']; ?>, <?= $value['pays']; ?></p>
-          <p class="date_arrivee"><span>Disponible du</span> <?= $value['date_arrivee']; ?></p>
-          <p class="date_depart"><span>au</span> <?= $value['date_depart']; ?></p>
-          <p class="capacite"><span>Capacité :</span> <?= $value['capacite']; ?> places.</p>
-          <p class="prix"><span>Prix :</span> <?= $value['prix']; ?> € HT</p>
-        </a>
-        <p class="panier">
-          <?php if($userConnect){ ?>
-          <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $value['id_produit']; ?>"><img src="<?= RACINE_SITE; ?>pict/cart.png" alt="Panier">Ajouter au panier</a>
-          <?php } else { ?>
-          <a href="<?= RACINE_SITE; ?>connexion/">Se connecter pour l'ajouter au panier</a>
-          <?php } ?>
-        </p>
-      </div>
-    <?php } ?>
-  <?php }
-      } ?>
+    <?php foreach ($produits['listeProduits'] as $produitFiche) {
+        include 'produitFiche.php';
+        }
+      }
+    } ?>
   </div>
 </div>
