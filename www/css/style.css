@@ -427,6 +427,9 @@ form.validation{
 .produit .panier a:hover{
   box-shadow:0 2px 2px rgba(0, 0, 0, 0.5);
 }
+.produit .panier a:active{
+  box-shadow:none;
+}
 .produit .panier a img{
   width:20px;
   margin:0 10px 0 0;

@@ -30,7 +30,7 @@
         <p class="cel wp15"><?= strtoupper($value['nom']); ?></p>
         <p class="cel wp15"><?= ucfirst($value['prenom']); ?></p>
         <p class="cel wp25"><?= $value['email']; ?></p>
-        <p class="cel wp5"><?= $value['sexe']; ?></p>
+        <p class="cel wp5"><?= ucfirst($value['sexe']); ?></p>
         <p class="cel wp10"><?= $value['statut']; ?></p>
         <?php if($value['statut'] == 0) { ?>
         <p class="cel wp10 pict">

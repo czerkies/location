@@ -13,7 +13,7 @@
       <p class="prix"><span>Prix :</span> <?= $ProduitIDSalle['prix']; /*= $ProduitIDSalle['prix'] * 1.2;*/ ?> € HT</p>
       <p class="panier">
       <?php if($userConnect) { ?>
-        <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $ProduitIDSalle['id_produit']; ?>">Ajouter au panier</a>
+        <a href="<?= RACINE_SITE; ?>panier/ajouter/<?= $ProduitIDSalle['id_produit']; ?>"><img src="<?= RACINE_SITE; ?>pict/cart.png" alt="Panier">Ajouter au panier</a>
       <?php } else { ?>
         <a href="<?= RACINE_SITE; ?>connexion/">Connectez vous pour l'ajouter au panier</a>
       <?php } ?>
