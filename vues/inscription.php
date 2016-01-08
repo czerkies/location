@@ -6,17 +6,17 @@
 <div class="form-group">
   <label for="mdp">Mot de passe</label>
   <input type="password" id="mdp" name="mdp" value="" placeholder="Mot de passe" required>
-  <em>Votre mot de passe doit compter au moins une majuscule ou un chiffre.</em>
+  <em>Votre mot de passe doit comporter au moins une majuscule ou un chiffre.</em>
 </div>
 <div class="form-group">
   <label for="nom">Nom</label>
   <input type="text" id="nom" name="nom" value="<?php if(isset($_POST['nom'])) {echo $_POST['nom'];} ?>" placeholder="Nom" required>
-  <em>Votre nom pour l'enregistrement de vos commandes.</em>
+  <em>Votre Nom est nécésaire pour la facturation de vos commandes.</em>
 </div>
 <div class="form-group">
   <label for="prenom">Prénom</label>
   <input type="text" id="prenom" name="prenom" value="<?php if(isset($_POST['prenom'])) {echo $_POST['prenom'];} ?>" placeholder="Prénom" required>
-  <em>Votre prénom pour l'enregistrement de vos commandes.</em>
+  <em>Votre Prénom est nécésaire pour la facturation de vos commandes.</em>
 </div>
 <div class="form-group">
   <label for="email">Email</label>
@@ -42,7 +42,7 @@
 <div class="form-group">
   <label for="ville">Ville</label>
   <input type="text" id="ville" name="ville" value="<?php if(isset($_POST['ville'])) {echo $_POST['ville'];} ?>" placeholder="Ville" required>
-  <em></em>
+  <em>Votre Ville est nécésaire pour la facturation de vos commandes.</em>
 </div>
 <div class="form-group">
   <label for="cp">Code postal</label>
