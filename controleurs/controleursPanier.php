@@ -71,7 +71,7 @@ class controleursPanier extends controleursSuper {
 
         $article_a_supprimer = htmlentities($_GET['suppId_produit']);
         $position_article = array_search($article_a_supprimer, $_SESSION['panier']['id_produit']);
-        // retourne un chiffre correspondant à l'indice du tableau ARRAY où se trouve cette valeur (1er argument fourni)
+
         if($position_article !== FALSE){
 
           foreach ($_SESSION['panier'] as $key => $value) {
@@ -79,6 +79,11 @@ class controleursPanier extends controleursSuper {
           }
 
           $msg .= 'Votre article a été supprimé.';
+
+          if(empty($_SESSION['panier']['id_produit'])){
+            unset($_SESSION['panier']);
+            $userCart = FALSE;
+          }
 
         }
       }
