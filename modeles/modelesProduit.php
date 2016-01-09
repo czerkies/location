@@ -22,7 +22,7 @@ class modelesProduit extends modelesSuper {
       WHERE s.id_salle = p.id_salle
       AND p.etat = 0
       AND p.date_arrivee >= NOW()
-      ORDER BY id_produit ASC
+      ORDER BY id_produit DESC
       LIMIT 3
     ");
 

@@ -10,7 +10,12 @@
 </div>
 <div id="last3offres">
   <h2>Nos 3 dernières offres</h2>
-  <?php foreach ($lesProduits as $produitFiche) {
-    include 'produitFiche.php';
-  } ?>
+  <?php
+  if($lesProduits){
+    foreach ($lesProduits as $produitFiche) {
+      include 'produitFiche.php';
+    }
+  } else { ?>
+    <h3>Aucune salle n'est disponible</h3>
+  <?php } ?>
 </div>

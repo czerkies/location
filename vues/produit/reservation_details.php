@@ -83,7 +83,11 @@
 </div>
 <div id="details_sugg">
   <h2>Autres suggestion</h2>
-  <?php foreach ($suggestions as $produitFiche) {
-    include 'produitFiche.php';
-  } ?>
+  <?php if($suggestions){
+    foreach ($suggestions as $produitFiche) {
+      include 'produitFiche.php';
+    }
+  } else { ?>
+    <h3>Aucune suggestion n'est proposé avec cette salle.</h3>
+  <?php } ?>
 </div>
