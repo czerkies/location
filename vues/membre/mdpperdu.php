@@ -24,7 +24,7 @@
     <div class="form-group large">
       <label for="mdpperdu">Adresse email correspondant à votre compte</label>
       <input type="email" id="mdpperdu" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>" placeholder="Email" required>
-      <em>Vous recevrez pas email votre nouveau mot de passe.</em>
+      <em>Vous recevrez par email votre nouveau mot de passe.</em>
     </div>
     <input type="submit" value="Recevoir mon nouveau mot de passe">
   </form>

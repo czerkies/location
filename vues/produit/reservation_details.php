@@ -41,7 +41,7 @@
       <div class="form-group large">
         <label for="commentaire">Ajouter un avis</label>
         <textarea name="commentaire" id="commentaire" placeholder="Laissez votre avis sur la salle..."></textarea>
-        <em>Votres avis doit comporter entre 4 et 450 carractères.</em>
+        <em>Votre avis doit comporter entre 4 et 450 carractères.</em>
       </div>
       <div class="form-group large">
         <label for="note">Note</label>
