@@ -20,11 +20,10 @@ a:hover{
 body{
   background:#d9cdbf;
   width:100%;
-  margin:0 auto;
-  float:left;
+  margin:0;
 }
 #header {
-  padding:1%;
+  padding:10px;
   text-align:center;
   background:#402e39;
   margin:0 0 25px;
@@ -652,6 +651,8 @@ ul.sous-menu-admin li a{
   #header,
   footer{
     height:150px;
+    width:100%;
+    min-width:960px;
   }
   #header h1{
     margin:0;
@@ -708,7 +709,7 @@ ul.sous-menu-admin li a{
     width:auto;
   }
   footer{
-    padding:68px;
+    padding:68px 0;
   }
   /* Accueil */
 

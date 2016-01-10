@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><?= $title['name']; ?> | Lokisalle</title>
+    <link rel="icon" type="image/png" href="<?= RACINE_SITE; ?>favicon.png"/>
     <meta name="description" content="Lokisalle | Réservez vos salle avec un service clef en main.">
     <link rel="stylesheet" href="<?= RACINE_SITE; ?>css/style.css" charset="utf-8">
   </head>
