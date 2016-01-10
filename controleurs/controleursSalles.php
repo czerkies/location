@@ -17,7 +17,7 @@ class controleursSalles extends controleursSuper {
     $ajouter = FALSE;
     $dialogue = FALSE;
 
-    define('RACINE_SITE_IMG', '/lokisalle/www/');
+    define('RACINE_SITE_IMG', '/');
     define('RACINE_SERVER_IMG', $_SERVER['DOCUMENT_ROOT']);
 
     $pdo = new modelesSalles();
@@ -146,7 +146,7 @@ class controleursSalles extends controleursSuper {
     $salles = FALSE;
     $ajouter = TRUE;
 
-    define('RACINE_SITE_IMG', '/lokisalle/www/');
+    define('RACINE_SITE_IMG', '/');
     define('RACINE_SERVER_IMG', $_SERVER['DOCUMENT_ROOT']);
 
     $salle = new modelesSalles();
