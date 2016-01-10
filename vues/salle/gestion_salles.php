@@ -82,7 +82,6 @@
       <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Erreur"> Attention</label>
       <p>Cette salle est utilisé pour des produits. Êtes-vous sur de vouloir la supprimer ?
         <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-salles/suppression/oui/<?= $_GET['supp']; ?>#gestion_salles">Oui</a>
-        <a class="bouton-a" href="routeur.php?controleurs=salles&action=gestionSalles&supp=<?= $_GET['supp']; ?>&confirm=oui#gestion_salles">Non Test</a>
         <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-salles/#gestion_salles">Non</a>
       </p>
     </div>
