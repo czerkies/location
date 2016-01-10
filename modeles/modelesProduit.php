@@ -163,9 +163,10 @@ class modelesProduit extends modelesSuper {
       WHERE s.id_salle = p.id_salle
       AND p.etat = 0
       AND p.id_produit != $id_produit
-      AND (s.ville = '$ville'
-      OR p.date_arrivee BETWEEN '$date_arrivee' AND '$date_depart'
+      AND s.ville = '$ville'
+      AND (p.date_arrivee BETWEEN '$date_arrivee' AND '$date_depart'
       OR p.date_depart BETWEEN '$date_arrivee' AND '$date_depart')
+      AND p.date_arrivee >= NOW()
       ");
 
     return $suggestionsProduits = $recherche->fetchAll(PDO::FETCH_ASSOC);

@@ -8,7 +8,7 @@ class controleursFooter extends controleursSuper {
     session_start();
     $title['name'] = 'Mentions Légales';
     $title['menu'] = 16;
-    $userConnect = $this->userConnectAdmin();
+    $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
     $this->Render('../vues/footer/mentions-legales.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
@@ -21,7 +21,7 @@ class controleursFooter extends controleursSuper {
     session_start();
     $title['name'] = 'Conditions générales de ventes';
     $title['menu'] = 17;
-    $userConnect = $this->userConnectAdmin();
+    $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
     $this->Render('../vues/footer/cgv.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));
@@ -32,9 +32,9 @@ class controleursFooter extends controleursSuper {
   public function planDuSite(){
 
     session_start();
-    $title['name'] = 'Conditions générales de ventes';
+    $title['name'] = 'Plan du site';
     $title['menu'] = 18;
-    $userConnect = $this->userConnectAdmin();
+    $userConnect = $this->userConnect();
     $userConnectAdmin = $this->userConnectAdmin();
 
     $this->Render('../vues/footer/plan-du-site.php', array('title' => $title, 'userConnect' => $userConnect, 'userConnectAdmin' => $userConnectAdmin));

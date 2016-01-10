@@ -14,7 +14,7 @@
           <select id="id_salle" name="id_salle">
             <?php foreach ($affichageSalles as $donneesSalles) { ?>
               <option value="<?= $donneesSalles['id_salle']; ?>" <?php if(isset($_POST['id_salle']) && $_POST['id_salle'] == $donneesSalles['id_salle']) {echo 'selected';}
-              elseif(isset($idProduitModif['id_salle']) && $idProduitModif['id_salle'] == $donneesSalles['id_salle']) {echo 'selected';} ?>><?= $donneesSalles['titre'].' - '.$donneesSalles['pays'];?></option>
+              elseif(isset($idProduitModif['id_salle']) && $idProduitModif['id_salle'] == $donneesSalles['id_salle']) {echo 'selected';} ?>><?= $donneesSalles['titre'].' - '.$donneesSalles['ville'];?></option>
             <?php } ?>
           </select>
           <em>Sélectionné une salle pour ce produit.</em>
