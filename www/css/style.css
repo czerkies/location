@@ -636,8 +636,12 @@ ul.sous-menu-admin li a{
 #details-commandes{
   margin:0 0 50px;
 }
+#page-footer p{
+  color:#444;
+  padding:0 0 0 25px;
+}
 
-@media screen and (min-device-width: 600px) {
+@media screen and (min-device-width: 600px) { /*********** Site responsive **********/
   #nav,
   #cont,
   ul.menu_footer{
