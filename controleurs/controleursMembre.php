@@ -223,7 +223,7 @@ class controleursMembre extends controleursSuper {
         if(empty($_POST['sujet'])){
           $msg .= "Veuillez saisir un Sujet.<br>";
         } elseif(strlen($_POST['sujet']) < 4 || strlen($_POST['sujet']) > 30){
-            $msg .= "Votre sujet doit comporter entre 4 et 30 carractères.<br>";
+            $msg .= "Votre sujet doit comporter entre 4 et 30 caractères.<br>";
         }
 
         if(!($userConnect || $userConnectAdmin)){
@@ -244,7 +244,7 @@ class controleursMembre extends controleursSuper {
         if(empty($_POST['message'])){
           $msg .= "Veuillez saisir votre message.<br>";
         } elseif(strlen($_POST['message']) < 10 || strlen($_POST['message']) > 4000){
-          $msg .= "Votre message doit comporter entre 10 et 4000 carractères.<br>";
+          $msg .= "Votre message doit comporter entre 10 et 4000 caractères.<br>";
         }
 
         if(empty($msg)){

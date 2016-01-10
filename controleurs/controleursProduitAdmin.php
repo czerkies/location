@@ -216,19 +216,21 @@ class controleursProduitAdmin extends controleursSuper {
 
               extract($_POST);
 
+              $date_arriveeControle = $_POST['date_arrivee_A'].'-'.$_POST['date_arrivee_M'].'-'.$_POST['date_arrivee_J'];
               $date_arrivee = $_POST['date_arrivee_A'].'-'.$_POST['date_arrivee_M'].'-'.$_POST['date_arrivee_J'];
               $date_arrivee .= ' '.$_POST['date_arrivee_H'].':'.$_POST['date_arrivee_I'];
 
+              $date_departControle = $_POST['date_depart_A'].'-'.$_POST['date_depart_M'].'-'.$_POST['date_depart_J'];
               $date_depart = $_POST['date_depart_A'].'-'.$_POST['date_depart_M'].'-'.$_POST['date_depart_J'];
               $date_depart .= ' '.$_POST['date_depart_H'].':'.$_POST['date_depart_I'];
 
               $id_promo = (isset($_POST['id_promo']) && $_POST['id_promo'] === '0') ? NULL : $_POST['id_promo'];
 
               // Controle des dates
-              if($date_arrivee <= date('Y-m-d g:i')){
-                $msg .= 'Vous ne pouvez pas créer un produit inferieur à la date du jour.';
+              if($date_arriveeControle <= date('Y-m-d')){
+                $msg .= 'Vous ne pouvez pas créer un produit inferieur ou égale à la date du jour.';
               }
-              if($date_depart <= $date_arrivee){
+              if($date_departControle <= $date_arriveeControle){
                 $msg .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.';
               }
 

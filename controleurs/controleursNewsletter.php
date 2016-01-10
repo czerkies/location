@@ -42,13 +42,10 @@ class controleursNewsletter extends controleursSuper {
           $headers = 'Content-Type: text/html; charset=\"UTF-8\";' . "\r\n";
           $headers .= 'FROM: '.$expediteur.' <'.$expediteur.'>' . "\r\n";
 
-          $mail = '';
           foreach ($donneesNews['mailAbonne'] as $value) {
-            $mail .= $value['email'].', ';
+            mail($value['email'], $sujet, $message, $headers);
           }
-
-          mail($mail, $sujet, $message, $headers);
-
+          
           $confirmation .= 'Votre mail a bien été envoyé.';
 
         }

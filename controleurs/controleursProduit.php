@@ -81,7 +81,7 @@ class controleursProduit extends controleursSuper {
               if(empty($_POST['commentaire'])){
                 $msg .= "Veuillez saisir un avis.<br>";
               } elseif(strlen($_POST['commentaire']) < 4 || strlen($_POST['commentaire']) > 450){
-                $msg .= "Votre avis doit comporter entre 4 et 450 carractères.<br>";
+                $msg .= "Votre avis doit comporter entre 4 et 450 caractères.<br>";
               }
 
                 if(empty($msg)){

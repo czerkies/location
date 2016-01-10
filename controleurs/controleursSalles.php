@@ -215,17 +215,17 @@ class controleursSalles extends controleursSuper {
     if(empty($value['pays'])){
       $msg .= "Veuillez saisir un Pays.<br>";
     } elseif(strlen($value['pays']) < 2 || strlen($value['pays']) > 20 || is_numeric($value['pays'])) {
-      $msg .= "Veuillez saisir un Pays entre 2 et 20 carractères.<br>";
+      $msg .= "Veuillez saisir un Pays entre 2 et 20 caractères.<br>";
     }
     if(empty($value['ville'])){
       $msg .= "Veuillez saisir une Ville.<br>";
     } elseif(strlen($value['ville']) < 2 || strlen($value['ville']) > 20) {
-      $msg .= "Veuillez saisir une Ville entre 2 et 20 carractères.<br>";
+      $msg .= "Veuillez saisir une Ville entre 2 et 20 caractères.<br>";
     }
     if(empty($value['adresse'])){
       $msg .= "Veuillez saisir une Adresse.<br>";
     } elseif(strlen($value['adresse']) < 4 || strlen($value['adresse']) > 150) {
-      $msg .= "Veuillez saisir une Adresse entre 4 et 150 carractères.<br>";
+      $msg .= "Veuillez saisir une Adresse entre 4 et 150 caractères.<br>";
     }
     if(empty($value['cp'])){
       $msg .= "Veuillez saisir un Code Postale.<br>";
@@ -235,12 +235,12 @@ class controleursSalles extends controleursSuper {
     if(empty($value['titre'])){
       $msg .= "Veuillez saisir un Titre.<br>";
     } elseif(strlen($value['titre']) < 4 || strlen($value['titre']) > 200) {
-      $msg .= "Veuillez saisir une adresse entre 4 et 200 carractères.<br>";
+      $msg .= "Veuillez saisir une adresse entre 4 et 200 caractères.<br>";
     }
     if(empty($value['description'])){
       $msg .= "Veuillez saisir votre Description.<br>";
     } elseif(strlen($value['description']) < 10 || strlen($value['description']) > 400) {
-      $msg .= "Veuillez saisir une Description entre 4 et 400 carractères.<br>";
+      $msg .= "Veuillez saisir une Description entre 4 et 400 caractères.<br>";
     }
     if(empty($value['capacite'])){
       $msg .= "Veuillez saisir une Capacite.<br>";

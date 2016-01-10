@@ -32,8 +32,8 @@
   <div class="tableau large">
     <div class="head">
       <p class="title wp10"></p>
-      <p class="title wp30">Titre de la salle</p>
       <p class="title wp30">ID Salle</p>
+      <p class="title wp30">Titre de la salle</p>
       <p class="title wp30">Nombre commandé</p>
     </div>
     <ul class="body">

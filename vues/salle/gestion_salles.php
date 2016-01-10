@@ -70,7 +70,7 @@
       <div class="form-group">
         <label for="photo">Photo</label>
         <?php } ?>
-        <input type="file" id="photo" name="photo" accept="image/jpeg" required>
+        <input type="file" id="photo" name="photo" accept="image/jpeg">
         <em>Photo au format JPG.</em>
       </div>
       <input type="submit" name="name" value="Valider la saisie">

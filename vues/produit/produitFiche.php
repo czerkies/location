@@ -1,7 +1,13 @@
 <div class="produit">
     <a href="<?= RACINE_SITE; ?>nos-salles/reservation-en-details/<?= $produitFiche['id_produit']; ?>">
     <h3><?= $produitFiche['titre']; ?></h3>
-    <p class="image_overflow"><img src="<?= RACINE_SITE.$produitFiche['photo']; ?>" alt="<?= $produitFiche['titre']; ?>"></p>
+    <p class="image_overflow">
+      <?php if(!empty($produitFiche['photo']) && file_exists(RACINE_SERVER.RACINE_SITE.$produitFiche['photo'])) { ?>
+      <img src="<?= RACINE_SITE.$produitFiche['photo']; ?>" alt="<?= $produitFiche['titre']; ?>">
+      <?php } else { ?>
+        Pas de visuel disponible
+      <?php } ?>
+    </p>
     <p class="adresse"><img class="pict" src="<?= RACINE_SITE; ?>pict/localisation.png" alt="Localisation"><?= $produitFiche['ville']; ?>, <?= $produitFiche['pays']; ?>.</p>
     <p class="date_arrivee"><span>Disponible du</span> <?= $produitFiche['date_arrivee']; ?></p>
     <p class="date_depart"><span>au</span> <?= $produitFiche['date_depart']; ?>.</p>

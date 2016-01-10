@@ -1,6 +1,5 @@
 <?php if($userConnectAdmin){ ?>
 <h2>Gestions des membres</h2>
-<?php include '../vues/dialogue.php'; ?>
 <?php if($dialogue) { ?>
 <div class="form-group erreur large">
   <label><img src="<?= RACINE_SITE; ?>pict/info.png" alt="Erreur"> Attention</label>
@@ -45,6 +44,7 @@
     <?php } ?>
   </ul>
 </div>
+<?php include '../vues/dialogue.php'; ?>
 <?php if(!$ajouterMembre){ ?>
 <a class="bouton-a" href="<?= RACINE_SITE; ?>admin/gestion-membres/ajouter-admin/#nouvel-admin">Création d'un compte admin</a>
 <?php } if($ajouterMembre){ ?>
