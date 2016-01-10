@@ -19,7 +19,7 @@
     <div class="form-group large">
       <label for="pseudo">Pseudo</label>
       <input type="text" name="pseudo" id="pseudo" value="<?php if(isset($_POST['pseudo'])) {echo $_POST['pseudo'];} else {echo $_SESSION['membre']['pseudo'];} ?>" required>
-      <em>Veuillez inscrire un speudo, sans espace.</em>
+      <em>Veuillez inscrire un Pseudo.</em>
     </div>
     <div class="form-group large">
       <label for="mdp">Mot de passe</label>
@@ -39,7 +39,7 @@
     <div class="form-group large">
       <label for="email">Email</label>
       <input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) {echo $_POST['email'];} else {echo $_SESSION['membre']['email'];} ?>" required>
-      <em>Votre mot de passe doit compter au moins une majuscule ou un chiffre.</em>
+      <em>Nous vous enverrons par email toutes les informations.</em>
     </div>
     <div class="form-group large">
       <label for="">Sexe</label>
