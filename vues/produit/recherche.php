@@ -25,7 +25,7 @@
   <?php if($produits){ ?>
     <h2>Nombres de résultats : <?= $produits['nbProduits']; ?></h2>
     <?php if(!$produits['nbProduits']) { ?>
-    <h2>Aucun produit ne correspond à votre recherche.<br>¯\_(⊙︿⊙)_/¯</h2>
+    <h3>Aucun produit ne correspond à votre recherche.</h3>
     <? } else { ?>
     <?php foreach ($produits['listeProduits'] as $produitFiche) {
         include 'produitFiche.php';

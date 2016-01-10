@@ -1,8 +1,6 @@
 <h2>Toutes nos offres</h2>
 <div id="reservation">
-  <?php
-  if($lesProduits){
-
+  <?php if($lesProduits){
     foreach ($lesProduits as $produitFiche) {
       include 'produitFiche.php';
     }
