@@ -5,7 +5,7 @@
       <?php if(!empty($produitFiche['photo']) && file_exists(RACINE_SERVER.RACINE_SITE.$produitFiche['photo'])) { ?>
       <img src="<?= RACINE_SITE.$produitFiche['photo']; ?>" alt="<?= $produitFiche['titre']; ?>">
       <?php } else { ?>
-        Pas de visuel disponible
+        Pas de visuel disponible.
       <?php } ?>
     </p>
     <p class="adresse"><img class="pict" src="<?= RACINE_SITE; ?>pict/localisation.png" alt="Localisation"><?= $produitFiche['ville']; ?>, <?= $produitFiche['pays']; ?>.</p>

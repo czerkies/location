@@ -11,7 +11,7 @@ class controleursFonctions extends controleursSuper {
 
     if(empty($value['pseudo'])){
       $msg .= "Veuillez saisir un Pseudo.<br>";
-    } elseif(strlen($value['pseudo']) < 4 || strlen($value['pseudo']) > 15 || preg_match('#[^a-zA-Z$]#', $value['pseudo'])) {
+    } elseif(strlen($value['pseudo']) < 4 || strlen($value['pseudo']) > 15 || preg_match('#[^a-zA-Z0-9$]#', $value['pseudo'])) {
       $msg .= "Veuillez saisir un Pseudo entre 4 et 15 carractères sans caractères spéciaux.<br>";
     } elseif(!$cont->verifPseudo($value['pseudo'], $id_membre)){
       $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";

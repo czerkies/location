@@ -3,7 +3,11 @@
     <div class="produit">
       <h3><?= $ProduitIDSalle['titre']; ?></h3>
       <p class="image_overflow">
-        <img src="<?= RACINE_SITE.$ProduitIDSalle['photo'] ?>" alt="<?= $ProduitIDSalle['titre']; ?>">
+        <?php if(!empty($ProduitIDSalle['photo']) && file_exists(RACINE_SERVER.RACINE_SITE.$ProduitIDSalle['photo'])) { ?>
+        <img src="<?= RACINE_SITE.$ProduitIDSalle['photo']; ?>" alt="<?= $ProduitIDSalle['titre']; ?>">
+        <?php } else { ?>
+          Pas de visuel disponible.
+        <?php } ?>
       </p>
       <p class="description"><?= $ProduitIDSalle['description']; ?></p>
       <p class="adresse"><img class="pict" src="<?= RACINE_SITE; ?>pict/localisation.png" alt="Localisation"><?= $ProduitIDSalle['adresse']; ?>, <?= $ProduitIDSalle['ville'].'. '.strtoupper($ProduitIDSalle['pays']); ?>.</p>
