@@ -90,7 +90,7 @@ class controleursPromotion extends controleursSuper {
       if($VerifPromoProduit['nbProduitAssoc']){
 
         $bdd->SuppPromo($id_promo);
-        $confirmation .= "Votre code promo a bien été supprimé.";
+        $confirmation .= "Votre code promo a bien été supprimé.<br>";
 
       } else {
 
@@ -99,7 +99,7 @@ class controleursPromotion extends controleursSuper {
         if(isset($_GET['confirm']) && !empty($_GET['confirm']) && $_GET['confirm'] === 'oui'){
 
           $bdd->SuppPromo($id_promo);
-          $confirmation .= "Votre code promo a bien été supprimé.";
+          $confirmation .= "Votre code promo a bien été supprimé.<br>";
           $dialogue = FALSE;
 
         }

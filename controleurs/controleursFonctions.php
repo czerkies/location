@@ -10,69 +10,69 @@ class controleursFonctions extends controleursSuper {
     $cont = new modelesMembre();
 
     if(empty($value['pseudo'])){
-      $msg .= "Veuillez saisir un Pseudo.<br>";
+      $msg .= "Veuillez saisir un <b>Pseudo</b>.<br>";
     } elseif(strlen($value['pseudo']) < 4 || strlen($value['pseudo']) > 15 || preg_match('#[^a-zA-Z0-9$]#', $value['pseudo'])) {
-      $msg .= "Veuillez saisir un Pseudo entre 4 et 15 carractères sans caractères spéciaux.<br>";
+      $msg .= "Veuillez saisir un <b>Pseudo</b> entre 4 et 15 carractères sans caractères spéciaux.<br>";
     } elseif(!$cont->verifPseudo($value['pseudo'], $id_membre)){
-      $msg .= "Le Pseudo que vous avez saisis est déjà existant.<br>";
+      $msg .= "Le <b>Pseudo</b> que vous avez saisis est déjà existant.<br>";
     }
     if(!$id_membre){
       if(empty($value['mdp'])){
-        $msg .= "Veuillez saisir un mot de passe.<br>";
+        $msg .= "Veuillez saisir un <b>mot de passe</b>.<br>";
       } elseif(strlen($value['mdp']) < 5 || strlen($value['mdp']) > 32) {
-        $msg .= "Veuillez saisir un mot de passe entre 5 et 32 carractères.<br>";
+        $msg .= "Veuillez saisir un <b>mot de passe</b> entre 5 et 32 carractères.<br>";
       } elseif(!preg_match('#^[^A-Z0-9]*([A-Z0-9])#',$value['mdp'])){
-        $msg .= "Votre mot de passe doit comporter au moins une majuscule ou un chiffre.<br>";
+        $msg .= "Votre <b>mot de passe doit comporter au moins une majuscule ou un chiffre.<br>";
       }
     } elseif($id_membre && !empty($value['mdp'])){
       if(strlen($value['mdp']) < 5 || strlen($value['mdp']) > 32) {
-       $msg .= "Veuillez saisir un mot de passe entre 5 et 32 carractères.<br>";
+       $msg .= "Veuillez saisir <b>un mot de passe</b> entre 5 et 32 carractères.<br>";
      } elseif(!preg_match('#^[^A-Z0-9]*([A-Z0-9])#',$value['mdp'])){
-       $msg .= "Votre mot de passe doit comporter au moins une majuscule ou un chiffre.<br>";
+       $msg .= "Votre <b>mot de passe doit comporter au moins une majuscule ou un chiffre.<br>";
      }
     }
     if(empty($value['nom'])){
-      $msg .= "Veuillez saisir un Nom.<br>";
+      $msg .= "Veuillez saisir un <b>Nom</b>.<br>";
     } elseif(strlen($value['nom']) < 2 || strlen($value['nom']) > 20) {
-      $msg .= "Veuillez saisir un Nom entre 2 et 20 carractères.<br>";
+      $msg .= "Veuillez saisir un <b>Nom</b> entre 2 et 20 carractères.<br>";
     } elseif(is_numeric($value['nom'])){
-      $msg .= "Seul les lettres sont autorisées pour votre Nom.<br>";
+      $msg .= "Seul les lettres sont autorisées pour votre <b>Nom</b>.<br>";
     }
     if(empty($value['prenom'])){
-      $msg .= "Veuillez saisir un Prénom.<br>";
+      $msg .= "Veuillez saisir un <b>Prénom</b>.<br>";
     } elseif(strlen($value['prenom']) < 2 || strlen($value['prenom']) > 20) {
-      $msg .= "Veuillez saisir un Prénom entre 2 et 20 carractères.<br>";
+      $msg .= "Veuillez saisir un <b>Prénom</b> entre 2 et 20 carractères.<br>";
     } elseif(is_numeric($value['prenom'])){
-      $msg .= "Seul les lettres sont autorisées pour votre Prénom.<br>";
+      $msg .= "Seul les lettres sont autorisées pour votre <b>Prénom</b>.<br>";
     }
     if(empty($value['email'])){
-      $msg .= "Veuillez saisir une adresse Email.<br>";
+      $msg .= "Veuillez saisir une adresse <b>Email</b>.<br>";
     } elseif(!filter_var($value['email'], FILTER_VALIDATE_EMAIL)) {
-      $msg .= "Votre email est invalide.<br>";
+      $msg .= "Votre <b>Email</b> est invalide.<br>";
     } elseif(strlen($value['email']) > 30){
-      $msg .= "Votre email ne doit pas dépasser 30 carractères.<br>";
+      $msg .= "Votre <b>Email</b> ne doit pas dépasser 30 carractères.<br>";
     } elseif(!$cont->verifMail($value['email'], $id_membre)){
-      $msg .= "L'adresse email que vous avez saisis est déjà existante.<br>";
+      $msg .= "L'adresse <b>Email</b> que vous avez saisis est déjà existante.<br>";
     }
     if(empty($value['sexe'])){
-      $msg .= "Veuillez saisir votre Sexe.<br>";
+      $msg .= "Veuillez saisir votre <b>Sexe</b>.<br>";
     }
     if(empty($value['ville'])){
-      $msg .= "Veuillez saisir une ville.<br>";
+      $msg .= "Veuillez saisir une <b>Ville</b>.<br>";
     } elseif(is_numeric($value['ville'])){
-      $msg .= "Votre ville ne doit comporter aucun carractères spéciaux.<br>";
+      $msg .= "Votre <b>Ville</b> ne doit comporter aucun carractères spéciaux.<br>";
     } elseif(strlen($value['ville']) < 2 || strlen($value['ville']) > 30){
-      $msg .= "Veuillez saisir une ville entre 2 et 30 carractères.<br>";
+      $msg .= "Veuillez saisir une <b>Ville</b> entre 2 et 30 carractères.<br>";
     }
     if(empty($value['cp'])){
-      $msg .= "Veuillez saisir votre Code Postal.<br>";
+      $msg .= "Veuillez saisir votre <b>Code Postal</b>.<br>";
     } elseif(strlen($value['cp']) != 5 || !is_numeric($value['cp'])) {
-      $msg .= "Votre code postal doit contenir 5 chiffres.<br>";
+      $msg .= "Votre <b>Code postal</b> doit contenir 5 chiffres.<br>";
     }
     if(empty($value['adresse'])){
-      $msg .= "Veuillez saisir une Adresse.<br>";
+      $msg .= "Veuillez saisir une <b>Adresse</b>.<br>";
     } elseif(strlen($value['adresse']) < 10 || strlen($value['adresse']) > 30){
-      $msg .= "Veuillez saisir une adresse entre 10 et 30 carractères.<br>";
+      $msg .= "Veuillez saisir une <b>Adresse</b> entre 10 et 30 carractères.<br>";
     }
 
     return $msg;

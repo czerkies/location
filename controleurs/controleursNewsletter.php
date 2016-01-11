@@ -45,8 +45,8 @@ class controleursNewsletter extends controleursSuper {
           foreach ($donneesNews['mailAbonne'] as $value) {
             mail($value['email'], $sujet, $message, $headers);
           }
-          
-          $confirmation .= 'Votre mail a bien été envoyé.';
+
+          $confirmation .= 'Votre mail a bien été envoyé.<br>';
 
         }
       } else {

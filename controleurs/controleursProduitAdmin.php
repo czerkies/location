@@ -170,11 +170,11 @@ class controleursProduitAdmin extends controleursSuper {
       if(!$donneesProduits->produitEtatUn($id_produit_supp)){
 
         $suppressionProduitAdmin = $donneesProduits->suppressionProduitAdmin($id_produit_supp);
-        $confirmation .= 'Le produit a bien été supprimé.';
+        $confirmation .= 'Le produit a bien été supprimé.<br>';
 
       } else {
 
-        $msg .= 'Vous ne pouvez pas supprimer ce produit car il a été réservé par un client.';
+        $msg .= 'Vous ne pouvez pas supprimer ce produit car il a été réservé par un client.<br>';
 
       }
 
@@ -228,10 +228,10 @@ class controleursProduitAdmin extends controleursSuper {
 
               // Controle des dates
               if($date_arriveeControle <= date('Y-m-d')){
-                $msg .= 'Vous ne pouvez pas créer un produit inferieur ou égale à la date du jour.';
+                $msg .= 'Vous ne pouvez pas créer un produit inferieur ou égale à la date du jour.<br>';
               }
               if($date_departControle <= $date_arriveeControle){
-                $msg .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.';
+                $msg .= 'Vous ne pouvez pas créer un produit avec une date de départ egale ou inferieur à la date d\'arrivée.<br>';
               }
 
               if($donneesProduits->verifDateBDD($date_arrivee, $date_depart, $id_salle, $id_produit)){
@@ -240,7 +240,7 @@ class controleursProduitAdmin extends controleursSuper {
 
                   if($donneesProduits->updateProduitAdmin($id_salle, $date_arrivee, $date_depart, $prix, $id_promo, $id_produit)){
 
-                    $confirmation .= 'Le produit a bien été modifié.';
+                    $confirmation .= 'Le produit a bien été modifié.<br>';
 
                   } else {
 

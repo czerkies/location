@@ -193,7 +193,7 @@ class controleursSalles extends controleursSuper {
 
           if($salle->ajouterSalle($pays, $ville, $adresse, $cp, $titre, $description, $photo_bdd, $capacite, $categorie)){
 
-            $confirmation .= 'La salle a bien été ajouté.';
+            $confirmation .= 'La salle a bien été ajouté.<br>';
             $ajouter = FALSE;
 
           }
@@ -213,42 +213,42 @@ class controleursSalles extends controleursSuper {
     $msg = '';
 
     if(empty($value['pays'])){
-      $msg .= "Veuillez saisir un Pays.<br>";
+      $msg .= "Veuillez saisir un <b>Pays</b>.<br>";
     } elseif(strlen($value['pays']) < 2 || strlen($value['pays']) > 20 || is_numeric($value['pays'])) {
-      $msg .= "Veuillez saisir un Pays entre 2 et 20 caractères.<br>";
+      $msg .= "Veuillez saisir un <b>Pays</b> entre 2 et 20 caractères.<br>";
     }
     if(empty($value['ville'])){
-      $msg .= "Veuillez saisir une Ville.<br>";
+      $msg .= "Veuillez saisir une <b>Ville</b>.<br>";
     } elseif(strlen($value['ville']) < 2 || strlen($value['ville']) > 20) {
-      $msg .= "Veuillez saisir une Ville entre 2 et 20 caractères.<br>";
+      $msg .= "Veuillez saisir une <b>Ville</b> entre 2 et 20 caractères.<br>";
     }
     if(empty($value['adresse'])){
-      $msg .= "Veuillez saisir une Adresse.<br>";
+      $msg .= "Veuillez saisir une <b>Adresse</b>.<br>";
     } elseif(strlen($value['adresse']) < 4 || strlen($value['adresse']) > 150) {
-      $msg .= "Veuillez saisir une Adresse entre 4 et 150 caractères.<br>";
+      $msg .= "Veuillez saisir une <b>Adresse</b> entre 4 et 150 caractères.<br>";
     }
     if(empty($value['cp'])){
-      $msg .= "Veuillez saisir un Code Postale.<br>";
+      $msg .= "Veuillez saisir un <b>Code Postale</b>.<br>";
     } elseif(strlen($value['cp']) != 5 || !is_numeric($value['cp'])) {
-      $msg .= "Votre code postal doit contenir 5 chiffres.<br>";
+      $msg .= "Votre <b>code postal</b> doit contenir 5 chiffres.<br>";
     }
     if(empty($value['titre'])){
-      $msg .= "Veuillez saisir un Titre.<br>";
+      $msg .= "Veuillez saisir un <b>Titre</b>.<br>";
     } elseif(strlen($value['titre']) < 4 || strlen($value['titre']) > 200) {
-      $msg .= "Veuillez saisir une adresse entre 4 et 200 caractères.<br>";
+      $msg .= "Veuillez saisir une <b>Titre</b> entre 4 et 200 caractères.<br>";
     }
     if(empty($value['description'])){
-      $msg .= "Veuillez saisir votre Description.<br>";
+      $msg .= "Veuillez saisir votre <b>Description.<br>";
     } elseif(strlen($value['description']) < 10 || strlen($value['description']) > 400) {
-      $msg .= "Veuillez saisir une Description entre 4 et 400 caractères.<br>";
+      $msg .= "Veuillez saisir une <b>Description</b> entre 10 et 400 caractères.<br>";
     }
     if(empty($value['capacite'])){
-      $msg .= "Veuillez saisir une Capacite.<br>";
+      $msg .= "Veuillez saisir une <b>Capacite</b>.<br>";
     } elseif($value['capacite'] < 1 ||$value['capacite'] > 9999999999999){
-      $msg .= "Veuillez saisir une capacité raisonable.<br>";
+      $msg .= "Veuillez saisir une <b>Capacité</b> raisonable.<br>";
     }
     if(empty($value['categorie']) || is_numeric($value['categorie'])){
-      $msg .= "Veuillez saisir votre Categorie.<br>";
+      $msg .= "Veuillez saisir votre <b>Categorie</b>.<br>";
     }
 
     return $msg;

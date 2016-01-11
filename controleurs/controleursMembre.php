@@ -46,12 +46,12 @@ class controleursMembre extends controleursSuper {
             $userConnectAdmin = $this->userConnectAdmin();
 
           } else {
-            $msg .= "Erreur, vos ID sont éronnés.";
+            $msg .= "Erreur, vos ID sont éronnés.<br>";
           }
         }
 
       } else {
-        $msg .= "Une erreur est survenue lors de votre demande";
+        $msg .= "Une erreur est survenue lors de votre demande.<br>";
       }
     }
 
@@ -263,7 +263,7 @@ class controleursMembre extends controleursSuper {
           $sujet = htmlentities($_POST['sujet']);
           $message = htmlentities($_POST['message']);
 
-          $message .= '<br>De la part de '.$emailContact;
+          $message .= '<br><br>De la part de '.$emailContact;
 
           $pdo = new modelesMembre();
           $emailAdmin = $pdo->recupMailAdmin();
@@ -274,7 +274,7 @@ class controleursMembre extends controleursSuper {
 
         }
       } else {
-        $msg .= 'Une erreur est survenue lors de votre demande.';
+        $msg .= 'Une erreur est survenue lors de votre demande.<br>';
       }
     }
 

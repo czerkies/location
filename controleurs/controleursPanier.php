@@ -149,7 +149,7 @@ class controleursPanier extends controleursSuper {
       // Vérification que les CGV on été acceptés
       if(empty($_POST['cgv'])){
 
-        $msg .= 'Vous devez accepter les conditions général d\'utilisation.';
+        $msg .= 'Vous devez accepter les conditions général d\'utilisation.<br>';
 
       } else {
 
@@ -264,8 +264,7 @@ class controleursPanier extends controleursSuper {
               <td colspan="8">Sur un motant total de '.$prixTotal.' €, une réduction de '.$diffTotalPromo.' € a été appliqué grâce au code promo : "'.$code_promo.'".</td>
             </tr>';
           }
-        // Mettre les différents montant.
-
+          
         $message .= '
         </tbody>
         </table>';
