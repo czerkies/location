@@ -63,7 +63,7 @@
           <p class="cel wp25">
             <?php if($value['id_membre'] != NULL) {echo $value['id_membre']; } else {echo '<em>Membre supprimé</em>';} ?>
           </p>
-          <p class="cel wp25"><?= $value['montant']; ?></p>
+          <p class="cel wp25"><?= $value['montant']; ?> €</p>
           <p class="cel wp25 pict"><img src="<?= RACINE_SITE; ?>pict/det.png" alt="Voir la commande en détails"></p>
         </a>
       </li>

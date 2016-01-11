@@ -40,7 +40,7 @@ class modelesCommande extends modelesSuper {
   // ********** Affichages de toutes les commandes Admin ********** //
   public function lesCommandesAdmin(){
 
-    $donnees = $this->connect_central_bdd()->query("SELECT * FROM commande ORDER BY id_commande");
+    $donnees = $this->connect_central_bdd()->query("SELECT * FROM commande ORDER BY id_commande DESC");
 
     $commandes = $donnees->fetchAll(PDO::FETCH_ASSOC);
 
