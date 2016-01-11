@@ -56,13 +56,13 @@ class controleursSalles extends controleursSuper {
 
 
           } else {
-            $msg .= "L'extension de la photo n'est pas valide. (Extensions acceptées: png, gif, jpg, jpeg).";
+            $msg .= "L'extension de la photo n'est pas valide. (Extensions acceptées: png, gif, jpg, jpeg).<br>";
           }
         }
         if(empty($msg)){
 
           foreach ($_POST as $key => $value){
-            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+            $_POST[$key] = htmlspecialchars($value, ENT_QUOTES);
           }
           extract($_POST);
 
@@ -187,7 +187,7 @@ class controleursSalles extends controleursSuper {
         if(empty($msg)){
 
           foreach ($_POST as $key => $value){
-            $_POST[$key] = htmlentities($value, ENT_QUOTES);
+            $_POST[$key] = htmlspecialchars($value, ENT_QUOTES);
           }
           extract($_POST);
 

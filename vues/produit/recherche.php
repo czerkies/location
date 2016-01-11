@@ -2,7 +2,8 @@
   <h2>Zone de recherche</h2>
   <form action="" method="post">
     <div class="form-group date">
-      <?= $date->champs_date('recherche_date', '', NULL, 'Recherche par date'); ?>
+      <?= $date->champs_date('recherche_date', '', NULL, 'Salles disponibles à partir du'); ?>
+      <em>Toutes les salles disponibles à partir de la date sélectionné.</em>
     </div>
     <div class="form-group">
       <label for="categorie">Rechercher par categorie</label>
@@ -14,10 +15,12 @@
           </option>
         <?php } ?>
       </select>
+      <em>Choisissez votre catégorie de salle ici.</em>
     </div>
     <div class="form-group large">
-      <label for="keyword">Mot clef :</label>
+      <label for="keyword">Mot-clef :</label>
       <input type="text" name="keyword" id="keyword" placeholder="Mot clef" value="<?php if(isset($_POST['keyword'])) echo $_POST['keyword']; ?>" autofocus>
+      <em>Précisez votre recherche par mot-clef (Ville, Pays ou Titre).</em>
     </div>
     <input type="submit" value="Rechercher">
   </form>
