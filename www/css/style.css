@@ -397,7 +397,7 @@ form.validation{
   transform:translateY(2px);
 }
 .produit .description{
-  padding-bottom:20px;
+  padding:20px 10px;
   margin-bottom:10px;
   border-bottom:1px solid #735d6d;
 }
@@ -407,7 +407,7 @@ form.validation{
 .produit .image_overflow{
   width:100%;
   height:275px;
-  margin:0 0 5px;
+  margin:0;
   padding:0;
   overflow:hidden;
 }
